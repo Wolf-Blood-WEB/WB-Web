@@ -1,0 +1,614 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="page-title-play">Wolfblood - Gameplay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji" rel="stylesheet">
+    <link rel="stylesheet" href="Loader.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #1a202c;
+            --card-color: rgba(45, 55, 72, 0.85);
+            --text-color: #e2e8f0;
+            --header-color: #ffffff;
+            --accent-color: #e53e3e;
+            --accent-hover-color: #fc8181;
+            --font-header: 'Lora', serif;
+            --font-body: 'Nunito Sans', 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
+            --team-village: #27ae60;
+            --team-wolf: #c0392b;
+            --team-solo: #7f8c8d;
+            --team-cultist: #2980b9;
+            --team-support: #f39c12;
+        }
+
+        @keyframes animateGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-forest.png');
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 101;
+        }
+            header h1 {
+                font-family: var(--font-header);
+                font-size: 3rem;
+                color: var(--header-color);
+                text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
+            }
+            header p {
+                font-size: 1.1rem;
+                color: #a0aec0;
+            }
+
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 102;
+        }
+        .dropdown-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+            .dropdown-toggle:hover {
+                background-color: var(--accent-color);
+                border-color: var(--accent-color);
+                color: var(--header-color);
+            }
+            .dropdown-toggle .arrow {
+                font-size: 0.7rem;
+                transition: transform 0.3s ease;
+            }
+
+        .language-dropdown.open .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        .language-dropdown.open .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+            .dropdown-menu a:hover {
+                background-color: var(--accent-color);
+                color: var(--header-color);
+            }
+
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+            nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                font-weight: 600;
+                padding: 8px 15px;
+                border-radius: 6px;
+                transition: background-color 0.3s ease;
+            }
+                nav a:hover, nav a:focus {
+                    background-color: var(--accent-color);
+                    color: var(--header-color);
+                }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--card-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+            main h2 {
+                font-family: var(--font-header);
+                color: var(--header-color);
+                margin-bottom: 25px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid var(--accent-color);
+                font-size: 2.2rem;
+                text-align: center;
+            }
+
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .tab-button {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-color);
+            background-color: transparent;
+            border: 2px solid #4a5568;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+            .tab-button:hover {
+                transform: translateY(-2px);
+            }
+            .tab-button.objectives {
+                border-color: var(--team-village);
+                color: var(--team-village);
+            }
+                .tab-button.objectives.active {
+                    background-color: var(--team-village);
+                    color: var(--header-color);
+                    box-shadow: 0 0 15px var(--team-village);
+                }
+
+            .tab-button.phases {
+                border-color: var(--team-solo);
+                color: var(--team-solo);
+            }
+                .tab-button.phases.active {
+                    background-color: var(--team-solo);
+                    color: var(--header-color);
+                    box-shadow: 0 0 15px var(--team-solo);
+                }
+
+            .tab-button.strategy {
+                border-color: var(--team-cultist);
+                color: var(--team-cultist);
+            }
+                .tab-button.strategy.active {
+                    background-color: var(--team-cultist);
+                    color: var(--header-color);
+                    box-shadow: 0 0 15px var(--team-cultist);
+                }
+
+            .tab-button.rules {
+                border-color: var(--team-support);
+                color: var(--team-support);
+            }
+                .tab-button.rules.active {
+                    background-color: var(--team-support);
+                    color: var(--header-color);
+                    box-shadow: 0 0 15px var(--team-support);
+                }
+
+            .tab-button.betrayal {
+                border-color: var(--team-wolf);
+                color: var(--team-wolf);
+            }
+                .tab-button.betrayal.active {
+                    background-color: var(--team-wolf);
+                    color: var(--header-color);
+                    box-shadow: 0 0 15px var(--team-wolf);
+                }
+
+        .tab-content {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+            .tab-content.hidden {
+                display: none;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .tab-content h3 {
+            font-family: var(--font-header);
+            color: var(--header-color);
+            font-size: 1.5rem;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .tab-content h4 {
+            font-family: var(--font-header);
+            color: #a0aec0;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
+        .tab-content p {
+            margin-bottom: 15px;
+        }
+        .tab-content ul {
+            list-style-position: inside;
+            padding-left: 10px;
+            margin-top: 20px;
+        }
+        .tab-content li {
+            margin-bottom: 10px;
+        }
+        .group-link {
+            display: flex;
+            align-items: center;
+            padding: 20px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--header-color);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            background-size: 300% 300%;
+            animation: animateGradient 15s ease infinite;
+            background-image: linear-gradient(45deg, #c0392b, #e74c3c, #e53e3e, #c0392b);
+        }
+            .group-link:hover {
+                transform: scale(1.02);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            }
+
+        .group-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--header-color);
+            object-fit: cover;
+            flex-shrink: 0;
+            background-color: #fff;
+        }
+        .group-text {
+            flex-grow: 1;
+            margin-right: 25px;
+            text-align: right;
+        }
+            .group-text h3 {
+                font-family: var(--font-header);
+                font-size: 1.4rem;
+                font-weight: 700;
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+            .group-text p {
+                font-size: 1rem;
+                font-weight: 600;
+                color: var(--text-color);
+                opacity: 0.8;
+                margin: 5px 0 0 0;
+            }
+            .group-text .group-subtitle {
+                font-size: 0.9rem;
+                font-style: italic;
+                font-weight: 400;
+                opacity: 0.7;
+                margin-bottom: 5px;
+            }
+
+        .channel-tag {
+            font-size: 0.8rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            background-color: var(--header-color);
+            color: var(--team-wolf);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+        .group-link-rules {
+            display: flex;
+            align-items: center;
+            padding: 20px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--header-color);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            background-size: 300% 300%;
+            animation: animateGradient 15s ease infinite;
+            background-image: linear-gradient(45deg, #d35400, var(--team-support), #f1c40f, var(--team-support));
+        }
+            .group-link-rules:hover {
+                transform: scale(1.02);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            }
+            .group-link-rules .channel-tag {
+                background-color: var(--header-color);
+                color: var(--team-support);
+            }
+            .group-link-rules .group-text {
+                flex-grow: 1;
+                margin-right: 25px;
+                text-align: right;
+            }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #a0aec0;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        .emoji {
+            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+        .figure-background {
+            position: fixed;
+            top: 0;
+            height: 100%;
+            z-index: 1;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0.22;
+            pointer-events: none;
+        }
+            .figure-background.left {
+                left: 0;
+                background-position: left center;
+            }
+            .figure-background.right {
+                right: 0;
+                background-position: right center;
+            }
+
+        .nebula-background {
+            position: fixed;
+            top: 0;
+            height: 100%;
+            z-index: 1;
+            background-position: center center;
+            background-size: cover;
+            pointer-events: none;
+            left: calc(50% - 450px);
+            width: 900px;
+            opacity: 0.15;
+            filter: blur(4px);
+        }
+    </style>
+
+</head>
+<body>
+    <div class="nebula-background"></div>
+    <div class="figure-background left"></div>
+    <div class="figure-background right"></div>
+
+    <div class="content-wrapper">
+
+        <header>
+            <div class="language-dropdown">
+                <button class="dropdown-toggle">
+                    <span id="selected-lang-flag">🇬🇧</span>
+                    <span id="selected-lang-code">EN</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" data-lang="en">🇬🇧 English</a>
+                    <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+                    <a href="#" data-lang="es">🇪🇸 Español</a>
+                    <a href="#" data-lang="fr">🇫🇷 Français</a>
+                    <a href="#" data-lang="it">🇮🇹 Italiano</a>
+                    <a href="#" data-lang="id">🇮🇩 Bahasa Indonesia</a>
+                    <a href="#" data-lang="ph">🇵🇭 Filipino</a>
+                    <a href="#" data-lang="ar">🇸🇦 العربية</a>
+                </div>
+            </div>
+
+            <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
+            <p data-key="header-subtitle-play">Playing Guide</p>
+        </header>
+
+        <nav>
+            <a href="Home.Page.html" data-key="nav-home">Home</a>
+            <a href="Oynanış.html" data-key="nav-how-to-play">How to Play?</a>
+            <a href="Roller.html" data-key="nav-roles">Roles</a>
+            <a href="Bot-Mechanics.html" data-key="nav-bot-mechanics">Bot Mechanics</a>
+            <a href="Güncellemeler.html" data-key="nav-news">News & Updates</a>
+            <a href="Gruplar.html" data-key="nav-groups">Groups</a>
+            <a href="Hakkımızda.html" data-key="nav-about">About Us</a>
+            <a href="İletişim.html" data-key="nav-contact">Contact with Us</a>
+        </nav>
+
+        <main>
+            <h2 data-key="play-main-title">Gameplay 🐺</h2>
+
+            <div class="tab-container">
+                <button class="tab-button objectives active" onclick="showTab('tab-objectives', this)" data-key="play-tab-objectives">Roles & Objectives</button>
+                <button class="tab-button phases" onclick="showTab('tab-phases', this)" data-key="play-tab-phases">Game Phases</button>
+                <button class="tab-button strategy" onclick="showTab('tab-strategy', this)" data-key="play-tab-strategy">Strategy & Tips</button>
+                <button class="tab-button rules" onclick="showTab('tab-rules', this)" data-key="play-tab-rules">General Rules</button>
+                <button class="tab-button betrayal" onclick="showTab('tab-betrayal', this)" data-key="play-tab-betrayal">Betrayal & Cases</button>
+            </div>
+
+            <div class="tab-content-wrapper">
+
+                <div id="tab-objectives" class="tab-content">
+                    <p data-key="play-obj-p1">Wolfblood is a digital version of the classic "Werewolf" game, played via a Telegram bot. This game combines elements of strategy, cooperation, and hidden identities, and can be played with a minimum of 5 people. Players take on different roles, and each person's goal is to ensure their group survives and to eliminate their opponents.</p>
+                    <h3 data-key="play-obj-h3">Roles and Objectives</h3>
+                    <h4 data-key="play-obj-h4-1">1. Villagers 👨‍🌾:</h4>
+                    <p data-key="play-obj-p2">The primary objective of the villagers is to uncover the elements of evil in the village and neutralize them through lynching. During this process, careful observation, logical discussion, and analyzing the behavior of other players are crucial. Villagers can only eliminate wolves or other evil roles with accurate guesses.</p>
+                    <h4 data-key="play-obj-h4-2">2. Wolves 🐺:</h4>
+                    <p data-key="play-obj-p3">The goal of the wolves is to equal or exceed the number of villagers. They move secretly during the night, attempting to neutralize villagers. Strategy and cooperation are very important for the wolves, as one wrong move can lead to a decrease in their pack size and a loss of the game.</p>
+                    <h4 data-key="play-obj-h4-3">3. Solo Evils 🎭:</h4>
+                    <p data-key="play-obj-p4">Some roles are called "solo evils," and their objective is to survive on their own. These players do not side with either the villagers or the wolves; their strategies are entirely self-serving. Solo evils aim to survive until the end of the game by manipulating other players and acting with caution.</p>
+                </div>
+
+                <div id="tab-phases" class="tab-content hidden">
+                    <h3 data-key="play-phase-h3">Game Phases</h3>
+                    <h4 data-key="play-phase-h4-1">1. Night (Action Phase) 🌙:</h4>
+                    <p data-key="play-phase-p1">During the night phase, roles with special abilities become active. As the wolves secretly choose their victims, some special roles can also use their abilities. This phase takes place in complete silence, and the players' actions are hidden from others.</p>
+                    <h4 data-key="play-phase-h4-2">2. Day (Discussion Phase) ☀️:</h4>
+                    <p data-key="play-phase-p2">When day arrives, villagers and other roles discuss what happened during the night, evaluate clues, and debate who is suspicious. This phase highlights strategic and persuasive skills; the right analysis can determine the fate of the game.</p>
+                    <h4 data-key="play-phase-h4-3">3. Lynch (Hanging Phase) ⚖️:</h4>
+                    <p data-key="play-phase-p3">Following the discussions, the villagers and some other roles decide to eliminate a player from the game by lynching them. Lynching is a critical step to reduce the evil in the village, but wrong decisions can make the job easier for the wolves and evil roles.</p>
+                </div>
+
+                <div id="tab-strategy" class="tab-content hidden">
+                    <h3 data-key="play-strat-h3">Strategy and Tips</h3>
+                    <ul>
+                        <li data-key="play-strat-li1">Players should carefully watch the behavior of others and adjust their strategies accordingly.</li>
+                        <li data-key="play-strat-li2">While wolves maintain secrecy, villagers should gain an advantage through cooperation and logical deduction.</li>
+                        <li data-key="play-strat-li3">Solo evil roles must be careful and patient to manipulate everyone.</li>
+                    </ul>
+                    <p data-key="play-strat-p1">The game offers a dynamic experience that combines logic, communication, and strategy at every stage. Wolfblood is full of different strategies and surprises in every round. Players hiding their identities, forming alliances, and trying to outsmart the opposing side make the game both exciting and challenging.</p>
+                </div>
+
+                <div id="tab-rules" class="tab-content hidden">
+                    <h3 data-key="play-rules-h3">General Rules</h3>
+                    <p data-key="play-rules-p1">To ensure a fair and enjoyable game for everyone, all players must adhere to the following rules:</p>
+                    <ul>
+                        <li data-key="play-rules-li1"><b>No Cheating:</b> Using multiple accounts (multi-accounting) in a single game is strictly forbidden.</li>
+                        <li data-key="play-rules-li2"><b>No Gamethrowing / Betrayal:</b> You must play to achieve your role's win condition. Intentionally helping another team win is not allowed (see "Betrayal & Cases" tab for details).</li>
+                        <li data-key="play-rules-li3"><b>Respect All Players:</b> Harassment, flooding, spamming, personal insults, or any form of toxic behavior will not be tolerated.</li>
+                        <li data-key="play-rules-li4"><b>No External Communication:</b> Do not share game-related information (like your role, who you targeted, or screenshots) with other players outside of the main game chat (e.t., in private messages), unless your role (like Mason or Werewolf) allows it.</li>
+                        <li data-key="play-rules-li5"><b>Follow Admin/Mod Instructions:</b> Bot Staff and Moderators are here to help. Please respect their decisions.</li>
+                    </ul>
+                    <a href="https://t.me/wolfbloodrules" class="group-link-rules" target="_blank">
+                        <div class="group-text">
+                            <h3 data-key="play-rules-link-h3">Wolfblood Global Rules<span class="channel-tag">Channel</span></h3>
+                            <p class="group-subtitle" data-key="play-rules-link-p1">Global rules for all Wolfblood groups.</p>
+                            <p data-key="play-rules-link-p2">Click to view the channel ➔</p>
+                        </div>
+                        <img src="image/WB.Global.Rules.jpg" alt="Global Rules Logo" class="group-logo">
+                    </a>
+                </div>
+
+                <div id="tab-betrayal" class="tab-content hidden">
+                    <h3 data-key="play-betrayal-h3">Betrayal & Gamethrowing</h3>
+                    <p data-key="play-betrayal-p1"><b>Definition:</b> "Betrayal" (also known as gamethrowing) is the act of intentionally and knowingly acting against your own team's victory conditions to help an opposing team win.</p>
+
+                    <h4 data-key="play-betrayal-h4-1">Examples of Betrayal:</h4>
+                    <ul>
+                        <li data-key="play-betrayal-li1">A <b>Villager</b> refusing to vote for a confirmed Werewolf.</li>
+                        <li data-key="play-betrayal-li2">A <b>Seer</b> publicly revealing the identity of a crucial village role (like the Guardian Angel or Gunner) to the wolves.</li>
+                        <li data-key="play-betrayal-li3">A <b>Werewolf</b> intentionally refusing to attack a villager to help the village team win.</li>
+                        <li data-key="play-betrayal-li4">A <b>Solo Role</b> (like Serial Killer) who stops killing to help the village lynch the last wolf.</li>
+                        <li data-key="play-betrayal-li5">Any player sharing screenshots or private role information to prove their identity to an opposing team.</li>
+                    </ul>
+
+                    <h4 data-key="play-betrayal-h4-2">Consequences:</h4>
+                    <p data-key="play-betrayal-p2">Betrayal ruins the game for all players. Reported and confirmed cases of betrayal will result in disciplinary action, which may include a warning, removal from the group, a temporary ban, or a permanent ban from all Wolfblood groups.</p>
+
+                    <a href="https://t.me/wolfbloodbetrayal" class="group-link" target="_blank">
+                        <div class="group-text">
+                            <h3 data-key="play-betrayal-link-h3">Betrayal Case Channel<span class="channel-tag">Channel</span></h3>
+                            <p class="group-subtitle" data-key="play-betrayal-link-p1">Report or review betrayal cases here.</p>
+                            <p data-key="play-betrayal-link-p2">Click to view the channel ➔</p>
+                        </div>
+                        <img src="https://placehold.co/100x100/c0392b/ffffff?text=RULES" alt="Betrayal Logo" class="group-logo">
+                    </a>
+                </div>
+
+            </div>
+        </main>
+
+        <footer>
+            <p data-key="footer-text">© 2025 Wolfblood Team - All Rights Reserved.</p>
+        </footer>
+
+        <script>
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+
+            function showTab(tabId, clickedButton) {
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                tabButtons.forEach(button => {
+                    button.classList.remove('active');
+                });
+                const targetContent = document.getElementById(tabId);
+                if (targetContent) {
+                    targetContent.classList.remove('hidden');
+                }
+                if (clickedButton) {
+                    clickedButton.classList.add('active');
+                }
+            }
+            document.addEventListener('DOMContentLoaded', () => {
+                showTab('tab-objectives', document.querySelector('.tab-button.objectives'));
+            });
+        </script>
+    </div>
+
+    <script src="Loader.js" defer></script>
+    <script src="Translate.js" defer></script>
+</body>
+</html>

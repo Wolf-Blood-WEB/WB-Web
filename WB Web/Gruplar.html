@@ -1,0 +1,541 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title  data-key="page-title-groups">Wolfblood - Gruplar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji" rel="stylesheet">
+    <link rel="stylesheet" href="Loader.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #1a202c;
+            --card-color: rgba(45, 55, 72, 0.85);
+            --text-color: #e2e8f0;
+            --header-color: #ffffff;
+            --accent-color: #e53e3e;
+            --font-header: 'Lora', serif;
+            --font-body: 'Nunito Sans', 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
+        }
+
+        @keyframes animateGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-forest.png');
+            color: var(--text-color);
+            line-height: 1.7;
+            position: relative;
+            z-index: 101;
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 102;
+        }
+
+        .dropdown-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+            .dropdown-toggle:hover {
+                background-color: var(--accent-color);
+                border-color: var(--accent-color);
+                color: var(--header-color);
+            }
+
+            .dropdown-toggle .arrow {
+                font-size: 0.7rem;
+                transition: transform 0.3s ease;
+            }
+
+        .language-dropdown.open .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+
+        .language-dropdown.open .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+            .dropdown-menu a:hover {
+                background-color: var(--accent-color);
+                color: var(--header-color);
+            }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+            header h1 {
+                font-family: var(--font-header);
+                font-size: 3rem;
+                color: var(--header-color);
+                text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
+            }
+            header p {
+                font-size: 1.1rem;
+                color: #a0aec0;
+            }
+
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+            nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                font-weight: 600;
+                padding: 8px 15px;
+                border-radius: 6px;
+                transition: background-color 0.3s ease;
+            }
+
+                nav a:hover, nav a:focus {
+                    background-color: var(--accent-color);
+                    color: var(--header-color);
+                }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+            main h1 {
+                font-family: var(--font-header);
+                color: var(--header-color);
+                font-size: 2.2rem;
+                text-align: center;
+                margin-bottom: 30px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid var(--accent-color);
+            }
+
+        .group-list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .group-link {
+            display: flex;
+            align-items: center;
+            padding: 20px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--header-color);
+            transition: all 0.3s ease;
+            background-size: 300% 300%;
+            animation: animateGradient 15s ease infinite;
+            background-image: linear-gradient(45deg, #1a202c, #2d3748, #4a5568, #2d3748);
+        }
+
+            .group-link:hover {
+                transform: scale(1.02);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            }
+            .group-link.grad-1 {
+                background-image: linear-gradient(45deg, #00c6ff, #0072ff, #00f2fe, #00c6ff);
+            }
+            .group-link.grad-2 {
+                background-image: linear-gradient(45deg, #ff9a00, #ff6a00, #ffb347, #ff9a00);
+            }
+            .group-link.grad-3 {
+                background-image: linear-gradient(45deg, #ff007f, #ff00ff, #b721ff, #8e2de2);
+            }
+            .group-link.grad-4 {
+                background-image: linear-gradient(45deg, #00ff87, #60efff, #17ead9, #00ff87);
+            }
+            .group-link.grad-5 {
+                background-image: linear-gradient(45deg, #ff3cac, #784ba0, #2b86c5, #ff3cac);
+            }
+            .group-link.grad-6 {
+                background-image: linear-gradient(45deg, #ff512f, #f09819, #ff9966, #ff512f);
+            }
+            .group-link.grad-7 {
+                background-image: linear-gradient(45deg, #40e0d0, #ff8c00, #ff0080, #40e0d0);
+            }
+
+        .group-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--header-color);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .group-text {
+            flex-grow: 1;
+            margin-left: 25px;
+        }
+
+            .group-text h3 {
+                font-family: var(--font-header);
+                font-size: 1.4rem;
+                font-weight: 700;
+            }
+
+        .group-subtitle {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-color);
+            opacity: 0.7;
+            margin-top: 2px;
+            font-style: italic;
+        }
+        .group-join {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--header-color);
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        .channel-tag {
+            font-size: 0.8rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            background-color: var(--accent-color);
+            color: var(--header-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+
+        .group-link:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+            .group-link:nth-child(even) .group-text {
+                margin-left: 0;
+                margin-right: 25px;
+                text-align: right;
+            }
+            .group-link:nth-child(even) .channel-tag {
+                margin-left: 0;
+                margin-right: 10px;
+            }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #a0aec0;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            .group-link, .group-link:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+            }
+            .group-logo {
+                margin-bottom: 15px;
+            }
+            .group-text, .group-link:nth-child(even) .group-text {
+                margin: 0;
+                text-align: center;
+            }
+        }
+        .emoji {
+            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <div class="language-dropdown">
+                <button class="dropdown-toggle">
+                    <span id="selected-lang-flag">🇬🇧</span>
+                    <span id="selected-lang-code">EN</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" data-lang="en">🇬🇧 English</a>
+                    <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+                    <a href="#" data-lang="es">🇪🇸 Español</a>
+                    <a href="#" data-lang="fr">🇫🇷 Français</a>
+                    <a href="#" data-lang="it">🇮🇹 Italiano</a>
+                    <a href="#" data-lang="id">🇮🇩 Bahasa Indonesia</a>
+                    <a href="#" data-lang="ph">🇵🇭 Filipino</a>
+                    <a href="#" data-lang="ar">🇸🇦 العربية</a>
+                </div>
+            </div>
+            <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
+            <p data-key="header-subtitle-groups">Groups</p>
+        </header>
+
+        <nav>
+            <a href="Home.Page.html" data-key="nav-home">Home</a>
+            <a href="Oynanış.html" data-key="nav-how-to-play">How to Play?</a>
+            <a href="Roller.html" data-key="nav-roles">Roles</a>
+            <a href="Bot-Mechanics.html" data-key="nav-bot-mechanics">Bot Mechanics</a>
+            <a href="Güncellemeler.html" data-key="nav-news">News & Updates</a>
+            <a href="Gruplar.html" data-key="nav-groups">Groups</a>
+            <a href="Hakkımızda.html" data-key="nav-about">About Us</a>
+            <a href="İletişim.html" data-key="nav-contact">Contact with Us</a>
+        </nav>
+
+        <main>
+            <h1 data-key="groups-main-title">Groups & Channels</h1>
+
+            <div class="group-list-container">
+
+                <a href="https://t.me/wolfbloodofficial" class="group-link grad-1" target="_blank">
+                    <img src="image/WB.EN.OFC.jpg" alt="EN Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-en-title">Wolfblood Official EN</h3>
+                        <p class="group-subtitle" data-key="groups-en-desc">Official group for English language players.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfblood_en" class="group-link grad-1" target="_blank">
+                    <img src="image/WB.EN.Buletin.jpg" alt="EN Buletin Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-en-bulletin-title">Wolfblood Official EN Buletin<span class="channel-tag">Channel</span></h3>
+                        <p class="group-subtitle" data-key="groups-en-bulletin-desc">Announcement channel for the EN Official group.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfblood_id" class="group-link grad-2" target="_blank">
+                    <img src="image/WB.indo.OFC.jpg" alt="ID Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-id-title">Wolfblood Official ID</h3>
+                        <p class="group-subtitle" data-key="groups-id-desc">Official group for Indonesian language players.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfbloodindonesia" class="group-link grad-2" target="_blank">
+                    <img src="image/WB.indo.Buletin.jpg" alt="ID Buletin Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-id-bulletin-title">Wolfblood Official ID Buletin<span class="channel-tag">Channel</span></h3>
+                        <p class="group-subtitle" data-key="groups-id-bulletin-desc">Announcement channel for the ID Official group.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfblood_fr" class="group-link grad-3" target="_blank">
+                    <img src="https://placehold.co/100x100/e74c3c/ffffff?text=FR" alt="FR Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-fr-title">Wolfblood Official FR</h3>
+                        <p class="group-subtitle" data-key="groups-fr-desc">Official group for French language players.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfbloodfrench" class="group-link grad-3" target="_blank">
+                    <img src="image/WB.FR.Buletin.jpg" alt="FR Buletin Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-fr-bulletin-title">Wolfblood Official FR Buletin<span class="channel-tag">Channel</span></h3>
+                        <p class="group-subtitle" data-key="groups-fr-bulletin-desc">Announcement channel for the FR Official group.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfblood_ph" class="group-link grad-4" target="_blank">
+                    <img src="image/WB.PH.OFC.jpg" alt="PH Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-ph-title">Wolfblood Official PH</h3>
+                        <p class="group-subtitle" data-key="groups-ph-desc">Official group for Filipino language players.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfbloodphilippines" class="group-link grad-4" target="_blank">
+                    <img src="image/WB.PH.Buletin.jpg" alt="PH Buletin Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-ph-bulletin-title">Wolfblood Official PH Buletin<span class="channel-tag">Channel</span></h3>
+                        <p class="group-subtitle" data-key="groups-ph-bulletin-desc">Announcement channel for the PH Official group.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfblooditalian" class="group-link grad-5" target="_blank">
+                    <img src="https://placehold.co/100x100/e67e22/ffffff?text=IT" alt="IT Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-it-title">Wolfblood Official IT</h3>
+                        <p class="group-subtitle" data-key="groups-it-desc">Official group for Italian language players.</p>
+                        <p class="group-join" data-key="groups-click-to-join">Katılmak için tıkla ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/WolfBloodLupus" class="group-link grad-5" target="_blank">
+                    <img src="https://placehold.co/100x100/e67e22/ffffff?text=IT" alt="IT Buletin Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-it-bulletin-title">Wolfblood Official IT Buletin<span class="channel-tag">Channel</span></h3>
+                        <p class="group-subtitle" data-key="groups-it-bulletin-desc">Announcement channel for the IT Official group.</p>
+                        <p class="group-join" data-key="groups-click-to-join">Katılmak için tıkla ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfblood_ar" class="group-link grad-6" target="_blank">
+                    <img src="https://placehold.co/100x100/f1c40f/000000?text=AR" alt="AR Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-ar-title">Wolfblood Official AR</h3>
+                        <p class="group-subtitle" data-key="groups-ar-desc">Official group for Arabic language players.</p>
+                        <p class="group-join" data-key="groups-click-to-join">Katılmak için tıkla ➔</p>
+                    </div>
+                </a>
+
+                <a href="#" class="group-link grad-6" target="_blank">
+                    <img src="https://placehold.co/100x100/f1c40f/000000?text=AR" alt="AR Buletin Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-ar-bulletin-title">Wolfblood Official AR Buletin<span class="channel-tag">Channel</span></h3>
+                        <p class="group-subtitle" data-key="groups-ar-bulletin-desc">Announcement channel for the AR Official group.</p>
+                        <p class="group-join" data-key="groups-click-to-join">Katılmak için tıkla ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfblood_es" class="group-link grad-7" target="_blank">
+                    <img src="https://placehold.co/100x100/94d2bd/000000?text=ES" alt="ES Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-es-title">Wolfblood Official ES</h3>
+                        <p class="group-subtitle" data-key="groups-es-desc">Official group for Spanish language players.</p>
+                        <p class="group-join" data-key="groups-click-to-join">Katılmak için tıkla ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfbloodspanish" class="group-link grad-7" target="_blank">
+                    <img src="image/WB.ES.Buletin.jpg" alt="ES Buletin Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-es-bulletin-title">Wolfblood Official ES Buletin<span class="channel-tag">Channel</span></h3>
+                        <p class="group-subtitle" data-key="groups-es-bulletin-desc">Announcement channel for the ES Official group.</p>
+                        <p class="group-join" data-key="groups-click-to-join">Katılmak için tıkla ➔</p>
+                    </div>
+                </a>
+
+
+                <a href="https://t.me/wolfbloodnews" class="group-link" target="_blank">
+                    <img src="image/WB.News.jpg" alt="News Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-news-title">Wolfblood News<span class="channel-tag">Channel</span></h3>
+                        <p class="group-subtitle" data-key="groups-news-desc">Main announcement channel for all updates.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfbloodrules" class="group-link" target="_blank">
+                    <img src="image/WB.Global.Rules.jpg" alt="Rules Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-rules-title">Wolfblood Global Rules<span class="channel-tag">Channel</span></h3>
+                        <p class="group-subtitle" data-key="groups-rules-desc">Global rules for all Wolfblood groups.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wolfbloodsupport" class="group-link" target="_blank">
+                    <img src="image/WB.Support.jpg" alt="Rules Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-support-title">Wolfblood Support</h3>
+                        <p class="group-subtitle" data-key="groups-support-desc">Support group for bot relevant issiues and concerns.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/wwquickers" class="group-link" target="_blank">
+                    <img src="image/WB.Quickers.jpg" alt="Rules Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-quickers-title">Werewolf Quickers</h3>
+                        <p class="group-subtitle" data-key="groups-quickers-desc">For short and chill games.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/WerewolfLounge" class="group-link" target="_blank">
+                    <img src="image/WB.Lounge.jpg" alt="Rules Logo" class="group-logo">
+                    <div class="group-text">
+                        <h3 data-key="groups-lounge-title">Werewolf Lounge </h3>
+                        <p class="group-subtitle" data-key="groups-lounge-desc">For off-chat and table games.</p>
+                        <p data-key="groups-click-to-join">Click to Join ➔</p>
+                    </div>
+                </a>
+
+            </div>
+        </main>
+
+        <footer>
+            <p data-key="footer-text">© 2025 Wolfblood Team - All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script src="Loader.js" defer></script>
+    <script src="Translate.js" defer></script>
+
+</body>
+</html>

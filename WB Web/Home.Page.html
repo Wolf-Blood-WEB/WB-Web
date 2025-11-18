@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="page-title-home">Wolfblood - Home Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji" rel="stylesheet">
+    <link rel="stylesheet" href="Loader.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #1a202c;
+            --card-color: rgba(45, 55, 72, 0.85);
+            --text-color: #e2e8f0;
+            --header-color: #ffffff;
+            --accent-color: #e53e3e;
+            --accent-hover-color: #fc8181;
+            --font-header: 'Lora', serif;
+            --font-body: 'Nunito Sans', 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-forest.png');
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 101;
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 101;
+        }
+        .dropdown-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+            .dropdown-toggle:hover {
+                background-color: var(--accent-color);
+                border-color: var(--accent-color);
+                color: var(--header-color);
+            }
+            .dropdown-toggle .arrow {
+                font-size: 0.7rem;
+                transition: transform 0.3s ease;
+            }
+        .language-dropdown.open .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        .language-dropdown.open .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+            .dropdown-menu a:hover {
+                background-color: var(--accent-color);
+                color: var(--header-color);
+            }
+            header h1 {
+                font-family: var(--font-header);
+                font-size: 3rem;
+                color: var(--header-color);
+                text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
+            }
+            header p {
+                font-size: 1.1rem;
+                color: #a0aec0;
+            }
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+            nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                font-weight: 600;
+                padding: 8px 15px;
+                border-radius: 6px;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+                nav a:hover, nav a:focus {
+                    background-color: var(--accent-color);
+                    color: var(--header-color);
+                }
+
+        .character-art {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            width: 20vw;
+            object-fit: cover;
+            opacity: 0.45;
+            pointer-events: none;
+            z-index: 0;
+        }
+            .character-art.left {
+                left: 0;
+            }
+            .character-art.right {
+                right: 0;
+                transform: scaleX(-1);
+            }
+
+        @media (max-width: 1400px) {
+            .character-art {
+                display: none;
+            }
+        }        
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--card-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-content h2 {
+            font-family: var(--font-header);
+            font-size: 2.5rem;
+            color: var(--header-color);
+            margin-bottom: 20px;
+        }
+        .hero-content p {
+            font-size: 1.15rem;
+            color: var(--text-color);
+            margin-bottom: 30px;
+        }
+        .hero-button {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--header-color);
+            background-color: var(--accent-color);
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(229, 62, 62, 0.4);
+            transition: all 0.3s ease;
+        }
+            .hero-button:hover {
+                background-color: var(--accent-hover-color);
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(229, 62, 62, 0.6);
+            }
+
+        .divider {
+            border: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 40px auto;
+        }
+        .features-section {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .feature-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            flex-basis: 200px;
+        }
+            .feature-card span {
+                font-size: 2.5rem;
+            }
+            .feature-card h3 {
+                font-family: var(--font-header);
+                font-size: 1.2rem;
+                color: var(--header-color);
+                margin: 10px 0;
+            }
+            .feature-card p {
+                font-size: 0.9rem;
+                color: #a0aec0;
+            }
+
+        .how-to-start h2 {
+            font-family: var(--font-header);
+            font-size: 1.8rem;
+            color: var(--header-color);
+            margin-bottom: 20px;
+        }
+        .how-to-start ol {
+            list-style-type: none;
+            counter-reset: step-counter;
+            padding: 0;
+        }
+        .how-to-start li {
+            counter-increment: step-counter;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+            .how-to-start li::before {
+                content: counter(step-counter);
+                font-family: var(--font-header);
+                font-size: 1.5rem;
+                font-weight: 700;
+                background-color: var(--accent-color);
+                color: var(--header-color);
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                margin-right: 15px;
+                flex-shrink: 0;
+            }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #a0aec0;
+            background-color: rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        @media (max-width: 1400px) {
+            .character-art {
+                display: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .features-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            .feature-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            main {
+                margin: 20px 10px;
+                padding: 20px;
+            }
+        }
+        .emoji {
+            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="content-wrapper">
+
+        <img src="image/alpha_wolf.jpg" class="character-art left" alt="Alpha Wolf">
+        <img src="image/cultist_hunter.jpg" class="character-art right" alt="Cultist Hunter">
+
+        <header>
+                <div class="language-dropdown">
+
+                    <button class="dropdown-toggle">
+                        <span id="selected-lang-flag">🇬🇧</span>
+                        <span id="selected-lang-code">EN</span>
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" data-lang="en">🇬🇧 English</a>
+                        <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+                        <a href="#" data-lang="es">🇪🇸 Español</a>
+                        <a href="#" data-lang="fr">🇫🇷 Français</a>
+                        <a href="#" data-lang="it">🇮🇹 Italiano</a>
+                        <a href="#" data-lang="id">🇮🇩 Bahasa Indonesia</a>
+                        <a href="#" data-lang="ph">🇵🇭 Filipino</a>
+                        <a href="#" data-lang="ar">🇸🇦 العربية</a>
+                    </div>
+                </div>
+                <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
+                <p data-key="header-subtitle">A Game of Deception & Survival</p>
+        </header>
+
+        <nav>
+            <a href="Home.Page.html" data-key="nav-home">Home</a>
+            <a href="Oynanış.html" data-key="nav-how-to-play">How to Play?</a>
+            <a href="Roller.html" data-key="nav-roles">Roles</a>
+            <a href="Bot-Mechanics.html" data-key="nav-bot-mechanics">Bot Mechanics</a>
+            <a href="Güncellemeler.html" data-key="nav-news">News & Updates</a>
+            <a href="Gruplar.html" data-key="nav-groups">Groups</a>
+            <a href="Hakkımızda.html" data-key="nav-about">About Us</a>
+            <a href="İletişim.html" data-key="nav-contact">Contact with Us</a>            
+        </nav>
+
+        <main>
+            <div class="hero-content">
+                <h2 data-key="hero-title">Welcome to the Village</h2>
+                <p data-key="hero-description">Wolfblood is the ultimate Turkish Werewolf experience on Telegram. Dive into a thrilling game of strategy and survival with hundreds of unique roles and diverse game modes.</p>
+                <a href="https://t.me/wolfbloodbot" class="hero-button" target="_blank" data-key="hero-button">Join the Hunt ➔</a>
+            </div>
+
+            <hr class="divider">
+
+            <div class="features-section">
+                <div class="feature-card">
+                    <span>🎭</span>
+                    <h3 data-key="feature-1-title">Hundreds of Roles</h3>
+                    <p data-key="feature-1-desc">Discover unique roles, from the humble Villager to the powerful Alpha Wolf.</p>
+                </div>
+                <div class="feature-card">
+                    <span>🎮</span>
+                    <h3 data-key="feature-2-title">Dynamic Game Modes</h3>
+                    <p data-key="feature-2-desc">Experience different modes like Treasure, Ranked, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <span>👥</span>
+                    <h3 data-key="feature-3-title">Active Community</h3>
+                    <p data-key="feature-3-desc">Join thousands of players in active groups and compete on the leaderboards.</p>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="how-to-start">
+                <h2 data-key="start-title">How to Start</h2>
+                <ol>
+                    <li data-key="start-step-1">Start the @wolfbloodbot on Telegram</li>
+                    <li data-key="start-step-2">Add the bot to a group chat or use /grouplist to see active groups</li>
+                    <li data-key="start-step-3">Type /startgame and let the hunt begin!</li>
+                </ol>
+            </div>
+        </main>
+
+        <footer>
+            <p data-key="footer-text">© 2025 Wolfblood Team - All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script src="Loader.js" defer></script>
+    <script src="Translate.js" defer></script>
+</body>
+</html>

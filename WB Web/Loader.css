@@ -1,0 +1,132 @@
+﻿:root {
+    --bg-color: #1a202c;
+    --card-color: rgba(45, 55, 72, 0.85);
+    --text-color: #e2e8f0;
+    --header-color: #ffffff;
+    --accent-color: #e53e3e;
+    --accent-hover-color: #fc8181;
+    --font-header: 'Lora', serif;
+    --font-body: 'Nunito Sans', sans-serif;
+    --team-cultist: #2980b9;
+    --liquid-fill-color: #3498db;
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --galaxy-color-1: #0d1b2a;
+    --galaxy-color-2: #1b263b;
+    --galaxy-color-3: #415a77;
+    --galaxy-color-4: #63b3ed;
+}
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 99999;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+    visibility: visible;
+}
+    #loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+#galaxy-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.loader-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.loader-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2d3748 0%, #1a202c 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: pulse 2s infinite ease-in-out;
+}
+.loader-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    animation: glow 3s infinite alternate ease-in-out;
+}
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #2b6cb0;
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px #63b3ed;
+    }
+}
+
+@keyframes glow {
+    from {
+        filter: drop-shadow(0 0 5px #4299e1);
+    }
+    to {
+        filter: drop-shadow(0 0 15px #2c5282);
+    }
+}
+
+#loading-text {
+    font-size: 1.1rem;
+    color: #e2e8f0;
+    margin-top: 15px;
+}
+#hint-button {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: #a0aec0;
+    font-style: italic;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+    #hint-button:hover {
+        background: var(--card-color);
+        color: var(--header-color);
+        transform: translate(-50%, -2px);
+        border-color: var(--header-color);
+    }
+
+.content-wrapper {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
+}
+    .content-wrapper.visible {
+        opacity: 1;
+        visibility: visible;
+    }

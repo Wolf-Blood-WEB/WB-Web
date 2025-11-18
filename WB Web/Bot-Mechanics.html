@@ -1,0 +1,2425 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="page-title-mech">Wolfblood - Bot Mechanics</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="Loader.css">
+
+    <style>
+        :root {
+            --team-village: #27ae60;
+            --team-wolf: #c0392b;
+            --team-solo: #7f8c8d;
+            --team-cultist: #2980b9;
+            --team-purple: #9b59b6 
+            --font-body: 'Nunito Sans', 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-forest.png');
+            color: var(--text-color);
+            line-height: 1.7;
+            position: relative;
+            z-index: 101;
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 102;
+        }
+        .dropdown-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+            .dropdown-toggle:hover {
+                background-color: var(--accent-color);
+                border-color: var(--accent-color);
+                color: var(--header-color);
+            }
+            .dropdown-toggle .arrow {
+                font-size: 0.7rem;
+                transition: transform 0.3s ease;
+            }
+
+        .language-dropdown.open .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        .language-dropdown.open .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+            .dropdown-menu a:hover {
+                background-color: var(--accent-color);
+                color: var(--header-color);
+            }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 101;
+        }
+            header h1 {
+                font-family: var(--font-header);
+                font-size: 3rem;
+                color: var(--header-color);
+                text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
+            }
+            header p {
+                font-size: 1.1rem;
+                color: #a0aec0;
+            }
+
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+            nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                font-weight: 600;
+                padding: 8px 15px;
+                border-radius: 6px;
+                transition: background-color 0.3s ease;
+            }
+                nav a:hover, nav a:focus {
+                    background-color: var(--accent-color);
+                    color: var(--header-color);
+                }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--card-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+            main > p.intro-text {
+                text-align: center;
+                font-size: 1.1rem;
+                color: #a0aec0;
+                max-width: 800px;
+                margin: 0 auto 30px auto;
+            }
+            main h2 {
+                font-family: var(--font-header);
+                color: var(--header-color);
+                margin-bottom: 25px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid var(--accent-color);
+                font-size: 2.2rem;
+                text-align: center;
+            }
+
+        .main-tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .main-tab-button {
+            font-family: var(--font-header);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            background-color: transparent;
+            border: 2px solid;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+            .main-tab-button:hover {
+                transform: translateY(-2px);
+                color: var(--header-color);
+            }
+
+        #btn-balancing {
+            border-color: var(--team-village);
+            color: var(--team-village);
+        }
+            #btn-balancing:hover, #btn-balancing.active {
+                background-color: var(--team-village);
+                color: var(--header-color);
+                box-shadow: 0 0 15px var(--team-village);
+            }
+
+        #btn-score {
+            border-color: var(--team-solo);
+            color: var(--team-solo);
+        }
+            #btn-score:hover, #btn-score.active {
+                background-color: var(--team-solo);
+                color: var(--header-color);
+                box-shadow: 0 0 15px var(--team-solo);
+            }
+
+        #btn-calculator {
+            border-color: var(--team-cultist);
+            color: var(--team-cultist);
+        }
+            #btn-calculator:hover, #btn-calculator.active {
+                background-color: var(--team-cultist);
+                color: var(--header-color);
+                box-shadow: 0 0 15px var(--team-cultist);
+            }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+            .tab-content.active {
+                display: block;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .tab-content h3 {
+            font-family: var(--font-header);
+            color: var(--header-color);
+            font-size: 1.5rem;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        .tab-content h4 {
+            font-family: var(--font-header);
+            color: var(--team-purple);
+            font-size: 1.3rem;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--team-purple);
+            text-align: left;
+        }
+        .score-col h4 {
+            font-family: var(--font-header);
+            font-size: 1.2rem;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            margin-top: 0;
+            text-align: left;
+        }
+        
+        .tab-content h4.team-header {
+            position: relative;
+            overflow: hidden;
+            display: block;
+            padding: 16px 20px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-family: var(--font-header);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.2);
+            transition: color 0.4s ease, text-shadow 0.4s ease;
+        }
+            .tab-content h4.team-header:hover {
+                color: var(--header-color);
+                text-shadow: none;
+            }
+            .tab-content h4.team-header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+                z-index: -1;
+            }
+            .tab-content h4.team-header:hover::before {
+                transform: scaleX(1);
+            }
+
+        h4.team-header-village {
+            color: var(--team-village);
+            border: 2px solid var(--team-village);
+            text-shadow: 0 0 2px #fff, 0 0 6px var(--team-village);
+        }
+            h4.team-header-village::before {
+                background: var(--team-village);
+            }
+
+        h4.team-header-wolf {
+            color: var(--team-wolf);
+            border: 2px solid var(--team-wolf);
+            text-shadow: 0 0 2px #fff, 0 0 6px var(--team-wolf);
+        }
+            h4.team-header-wolf::before {
+                background: var(--team-wolf);
+            }
+
+        h4.team-header-solo {
+            color: var(--team-solo);
+            border: 2px solid var(--team-solo);
+            text-shadow: 0 0 2px #fff, 0 0 6px var(--team-solo);
+        }
+            h4.team-header-solo::before {
+                background: var(--team-solo);
+            }
+
+        h4.team-header-cultist {
+            color: var(--team-cultist);
+            border: 2px solid var(--team-cultist);
+            text-shadow: 0 0 2px #fff, 0 0 6px var(--team-cultist);
+        }
+            h4.team-header-cultist::before {
+                background: var(--team-cultist);
+            }
+
+        .score-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: rgba(0,0,0,0.1);
+            border: 1px solid var(--team-purple);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+            .score-table th, .score-table td {
+                padding: 12px 15px;
+                text-align: left;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            .score-table thead {
+                background-color: var(--team-purple);
+            }
+            .score-table th {
+                font-family: var(--font-header);
+                color: var(--header-color);
+                font-size: 1.1rem;
+                border-bottom: 1px solid rgba(0,0,0,0.3);
+            }
+
+            .score-table tbody tr:last-child td {
+                border-bottom: none;
+            }
+            .score-table code {
+                font-family: 'Courier New', Courier, monospace;
+                background: #1a202c;
+                padding: 2px 5px;
+                border-radius: 4px;
+                font-weight: 700;
+                color: var(--text-color);
+            }
+            .score-table td:first-child {
+                font-size: 1.2rem;
+                text-align: center;
+            }
+
+        .filter-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .filter-buttons button {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-color);
+            background-color: transparent;
+            border: 2px solid #4a5568;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 5px;
+        }
+
+            .filter-buttons button:hover {
+                transform: translateY(-2px);
+            }
+            .filter-buttons button.active {
+                background-color: var(--team-solo);
+                border-color: var(--team-solo);
+                color: var(--header-color);
+            }
+            .filter-buttons button[data-team="Village"].active {
+                background-color: var(--team-village);
+                border-color: var(--team-village);
+            }
+            .filter-buttons button[data-team="Wolf"].active {
+                background-color: var(--team-wolf);
+                border-color: var(--team-wolf);
+            }
+            .filter-buttons button[data-team="Solo"].active {
+                background-color: var(--team-solo);
+                border-color: var(--team-solo);
+            }
+            .filter-buttons button[data-team="Cult"].active {
+                background-color: var(--team-cultist);
+                border-color: var(--team-cultist);
+            }
+
+        #roleSearchInput {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background-color: rgba(0,0,0,0.2);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+            .data-table th, .data-table td {
+                padding: 12px 15px;
+                border-bottom: 1px solid var(--glass-border);
+                text-align: left;
+            }
+            .data-table th {
+                font-family: var(--font-header);
+                color: var(--header-color);
+                cursor: pointer;
+            }
+                .data-table th:hover {
+                    color: var(--accent-hover-color);
+                }
+            .data-table .notes-col {
+                font-style: italic;
+                color: #a0aec0;
+                font-size: 0.9rem;
+            }
+
+        .sub-tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .sub-tab-button {
+            font-family: var(--font-body);
+            font-weight: 600;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: #a0aec0;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+            .sub-tab-button.active {
+                background: var(--team-solo);
+                color: var(--header-color);
+                border-color: var(--team-solo);
+            }
+        .sub-tab-content {
+            display: none;
+        }
+            .sub-tab-content.active {
+                display: block;
+            }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .score-col {
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 20px;
+        }
+            .score-col h4 {
+                font-family: var(--font-header);
+                font-size: 1.2rem;
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+                margin-top: 0;
+                text-align: left;
+                color: var(--header-color);
+                border-bottom: 1px solid var(--glass-border);
+            }
+            .score-col ul {
+                list-style: none;
+                padding: 0;
+            }
+            .score-col li {
+                margin-bottom: 10px;
+                font-size: 1rem;
+            }
+
+        .bonus-col {
+            border-top: 3px solid var(--glass-border);
+        }
+            .bonus-col li {
+                color: var(--text-color);
+            }
+        .penalty-col {
+            border-top: 3px solid var(--glass-border);
+        }
+            .penalty-col li {
+                color: var(--text-color);
+            }
+
+        .score-col li.has-tooltip {
+            position: relative;
+        }
+        .tooltip-trigger {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--team-cultist);
+            cursor: pointer;
+            padding: 0 5px;
+            border-radius: 50%;
+            text-shadow: 0 0 6px var(--team-cultist), 0 0 10px var(--team-cultist);
+            transition: all 0.3s ease;
+        }
+
+            .tooltip-trigger:hover {
+                background-color: var(--team-cultist);
+                color: var(--header-color);
+                text-shadow: none;
+            }
+
+        .tooltip-bubble {
+            display: none;
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            background-color: #1a202c;
+            border: 1px solid var(--team-cultist);
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            font-size: 0.9rem;
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+
+            .tooltip-bubble.active {
+                display: block;
+                animation: fadeIn 0.3s ease;
+            }
+
+            .tooltip-bubble strong {
+                color: var(--header-color);
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .tooltip-bubble code {
+                font-size: 0.9rem;
+                color: var(--team-village);
+            }
+
+                .tooltip-bubble code.penalty {
+                    color: var(--team-wolf);
+                }
+
+        .moving-arrow {
+            display: inline-block;
+            font-weight: 700;
+            color: var(--header-color);
+            margin: 0 4px;
+            animation: move-right 1.5s ease-in-out infinite;
+        }
+
+        @keyframes move-right {
+            0% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(4px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .calculator-wrapper {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+        .calculator-inputs {
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 20px;
+        }
+            .calculator-inputs label {
+                display: block;
+                font-weight: 600;
+                color: #a0aec0;
+                margin-bottom: 5px;
+                font-size: 0.9rem;
+            }
+            .calculator-inputs select {
+                width: 100%;
+                padding: 10px;
+                border-radius: 6px;
+                border: 1px solid var(--glass-border);
+                background-color: #1a202c;
+                color: var(--text-color);
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+
+        .calculator-results {
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 20px;
+        }
+            .calculator-results h4 {
+                font-family: var(--font-header);
+                color: var(--header-color);
+                font-size: 1.2rem;
+                margin-top: 0;
+                margin-bottom: 15px;
+            }
+
+        #result-base-score, #result-clan-factor, #result-final-score {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--header-color);
+            margin-bottom: 10px;
+        }
+            #result-base-score span, #result-clan-factor span, #result-final-score span {
+                color: var(--team-cultist);
+            }
+
+        #result-notes {
+            font-style: italic;
+            color: #a0aec0;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--glass-border);
+        }
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(5, 1fr);
+            gap: 1px;
+            background-color: var(--glass-border);
+            border: 1px solid var(--glass-border);
+            margin-top: 20px;
+        }
+        .heatmap-cell {
+            background-color: #2d3748;
+            padding: 8px;
+            font-size: 0.8rem;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .heatmap-header {
+            background-color: #1a202c;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        .heatmap-cell.highlight {
+            background-color: var(--team-cultist);
+            color: var(--header-color);
+            font-weight: 700;
+            box-shadow: 0 0 10px var(--team-cultist);
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #a0aec0;
+            background-color: rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        @media (max-width: 900px) {
+            .calculator-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .filter-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filter-buttons {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 600px) {
+            .score-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .emoji {
+            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <div class="language-dropdown">
+                <button class="dropdown-toggle">
+                    <span id="selected-lang-flag"><span class="emoji">🇬🇧</span></span>
+                    <span id="selected-lang-code">EN</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" data-lang="en"><span class="emoji">🇬🇧</span> English</a>
+                    <a href="#" data-lang="tr"><span class="emoji">🇹🇷</span> Türkçe</a>
+                    <a href="#" data-lang="es"><span class="emoji">🇪🇸</span> Español</a>
+                    <a href="#" data-lang="fr"><span class="emoji">🇫🇷</span> Français</a>
+                    <a href="#" data-lang="it"><span class="emoji">🇮🇹</span> Italiano</a>
+                    <a href="#" data-lang="id"><span class="emoji">🇮🇩</span> Bahasa Indonesia</a>
+                    <a href="#" data-lang="ph"><span class="emoji">🇵🇭</span> Filipino</a>
+                    <a href="#" data-lang="ar"><span class="emoji">🇸🇦</span> العربية</a>
+                </div>
+            </div>
+            <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
+            <p data-key="header-subtitle-mech">Bot Mechanics</p>
+        </header>
+
+        <nav>
+            <a href="Home.Page.html" data-key="nav-home">Home</a>
+            <a href="Oynanış.html" data-key="nav-how-to-play">How to Play?</a>
+            <a href="Roller.html" data-key="nav-roles">Roles</a>
+            <a href="Bot-Mechanics.html" data-key="nav-bot-mechanics">Bot Mechanics</a>
+            <a href="Güncellemeler.html" data-key="nav-news">News & Updates</a>
+            <a href="Gruplar.html" data-key="nav-groups">Groups</a>
+            <a href="Hakkımızda.html" data-key="nav-about">About Us</a>
+            <a href="İletişim.html" data-key="nav-contact">Contact with Us</a>
+        </nav>
+
+        <main>
+            <h2 data-key="mech-main-title">The Wolfblood Algorithm</h2>
+
+            <p class="intro-text" data-key="mech-main-desc">
+                Welcome to the core of Wolfblood. This page details the game's internal logic, from role balancing to the complex scoring functions that determine group rankings. Explore the tabs below to understand how the algorithm works.
+            </p>
+
+            <div class="main-tab-container">
+                <button id="btn-balancing" class="main-tab-button" onclick="showMainTab('tab-balancing', this)" data-key="mech-tab-balancing">Role Balancing</button>
+                <button id="btn-score" class="main-tab-button" onclick="showMainTab('tab-score', this)" data-key="mech-tab-score">Score Mechanics</button>
+                <button id="btn-calculator" class="main-tab-button" onclick="showMainTab('tab-calculator', this)" data-key="mech-tab-calculator">Group Point Calculator</button>
+            </div>
+
+            <div id="tab-balancing" class="tab-content">
+                <h3 data-key="mech-bal-title">Role Balancing Points (BP)</h3>
+
+                <div class="filter-controls">
+                    <div class="filter-buttons">
+                        <button class="active" onclick="filterTable(this, 'all')" data-team="all" data-key="mech-bal-btn-all">All</button>
+                        <button onclick="filterTable(this, 'Village')" data-team="Village" data-key="mech-bal-btn-village">Village</button>
+                        <button onclick="filterTable(this, 'Wolf')" data-team="Wolf" data-key="mech-bal-btn-wolf">Wolf</button>
+                        <button onclick="filterTable(this, 'Solo')" data-team="Solo" data-key="mech-bal-btn-solo">Solo</button>
+                        <button onclick="filterTable(this, 'Cult')" data-team="Cult" data-key="mech-bal-btn-cult">Cult</button>
+                    </div>
+                    <input type="text" id="roleSearchInput" onkeyup="filterTable(null, null)" placeholder="Search role or note..." data-key-placeholder="mech-bal-search-placeholder">
+                </div>
+
+                <table class="data-table" id="roleBalanceTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)" data-key="mech-bal-th-role">Role Name</th>
+                            <th onclick="sortTable(1)" data-key="mech-bal-th-team">Team</th>
+                            <th onclick="sortTable(2)" data-key="mech-bal-th-bp">Balance Point (BP) ▾</th>
+                            <th data-key="mech-bal-th-notes">Exceptions / Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-team="Wolf">
+                            <td data-key="mech-role-alpha">Alpha Wolf ⚡️</td>
+                            <td data-key="mech-team-wolf">Wolf</td>
+                            <td>14</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Wolf">
+                            <td data-key="mech-role-lycan">Lycan 🐺🌝</td>
+                            <td data-key="mech-team-wolf">Wolf</td>
+                            <td>12</td>
+                            <td class="notes-col" data-key="mech-note-lycan">If Seer 👳 exist in the game: 14</td>
+                        </tr>
+                        <tr data-team="Wolf">
+                            <td data-key="mech-role-cub">WolfCub 🐶</td>
+                            <td data-key="mech-team-wolf">Wolf</td>
+                            <td>10</td>
+                            <td class="notes-col" data-key="mech-note-cub">If any Ally (🧜/🔮) or additional Wolf 🐺 exist: 12</td>
+                        </tr>
+                        <tr data-team="Wolf">
+                            <td data-key="mech-role-snow">Snow Wolf 🐺☃️</td>
+                            <td data-key="mech-team-wolf">Wolf</td>
+                            <td>12</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Wolf">
+                            <td data-key="mech-role-shadow">Shadow Wolf 🐺🌚</td>
+                            <td data-key="mech-team-wolf">Wolf</td>
+                            <td>12</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Wolf">
+                            <td data-key="mech-role-conjurer">Conjurer Wolf 🐺✨</td>
+                            <td data-key="mech-team-wolf">Wolf</td>
+                            <td>12</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Wolf">
+                            <td data-key="mech-role-illusionist">Illusionist Wolf 🐺🪄</td>
+                            <td data-key="mech-team-wolf">Wolf</td>
+                            <td>11</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Wolf">
+                            <td data-key="mech-role-wolf">Werewolf 🐺</td>
+                            <td data-key="mech-team-wolf">Wolf</td>
+                            <td>10</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Wolf">
+                            <td data-key="mech-role-rogue">Rogue Wolf 🐺🧧</td>
+                            <td data-key="mech-team-wolf">Wolf</td>
+                            <td>10</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Wolf">
+                            <td data-key="mech-role-poseidon">Poseidon 🧜</td>
+                            <td data-key="mech-team-wolf">Wolf</td>
+                            <td>9</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Solo">
+                            <td data-key="mech-role-sk">Serial Killer 🔪</td>
+                            <td data-key="mech-team-solo">Solo</td>
+                            <td>8</td>
+                            <td class="notes-col" data-key="mech-note-sk">If there are other bad players in games larger than 7: 6</td>
+                        </tr>
+                        <tr data-team="Solo">
+                            <td data-key="mech-role-arso">Arsonist 🔥</td>
+                            <td data-key="mech-team-solo">Solo</td>
+                            <td>8</td>
+                            <td class="notes-col" data-key="mech-note-arso">If there are other bad players in games larger than 7: 6</td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-doctor">Doctor 🧑‍⚕️</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>8</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-ga">Guardian Angel 👼</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>7</td>
+                            <td class="notes-col" data-key="mech-note-ga">If Arsonist 🔥 exist in the game: 8</td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-detective">Detective 🕵️</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>7</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-seer">Seer 👳</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>7</td>
+                            <td class="notes-col" data-key="mech-note-seer">If Lycan 🐺🌝 or Wolfman 👱🌚 exist in the game: 5</td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-harlot">Harlot 💋</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>6</td>
+                            <td class="notes-col" data-key="mech-note-harlot">If any Wolf 🐺, Serial Killer 🔪 or Cultist 👤 are not exist in the game: 2</td>
+                        </tr>
+                        <tr data-team="Wolf">
+                            <td data-key="mech-role-sorcerer">Sorcerer 🔮</td>
+                            <td data-key="mech-team-wolf">Wolf</td>
+                            <td>6</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-chemist">Chemist 🧪</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>6</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-sandman">Sandman 💤</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>6</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-appseer">Apprentice Seer 🙇</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>6</td>
+                            <td class="notes-col" data-key="mech-note-appseer">If Seer 👳 exist in the game: 7</td>
+                        </tr>
+                        <tr data-team="Cult">
+                            <td data-key="mech-role-cultist">Cultist 👤</td>
+                            <td data-key="mech-team-cult">Cult</td>
+                            <td>6</td>
+                            <td class="notes-col" data-key="mech-note-cultist">According to number (n) of player who inmune (0%): 6 - n<br>According to number (n) of Cult member: 6 + n</td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-gunner">Gunner 🔫</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>6</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Solo">
+                            <td data-key="mech-role-tanner">Tanner 👺</td>
+                            <td data-key="mech-team-solo">Solo</td>
+                            <td>5</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-hunter">Town Hunter  🎯</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>5</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-oracle">Oracle 🌀</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>5</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-troublemaker">Troublemaker 🤯</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>5</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-snitch">Snitch 🦜</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>5</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-blacksmith">Blacksmith ⚒️</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>5</td>
+                            <td class="notes-col" data-key="mech-note-blacksmith">If there is no any Wolf 🐺 in the game: 4</td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-ch">Cultist Hunter 💂</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>5</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-beholder">Beholder 👁</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>4</td>
+                            <td class="notes-col" data-key="mech-note-beholder">If Seer 👳 exist in the game: 6</td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-mayor">Mayor 🎖</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>4</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-gravedigger">Grave Digger ☠️</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>4</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-pawn">Pawn ♟</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>4</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-wiseelder">Wise Elder 📚</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>4</td>
+                            <td class="notes-col" data-key="mech-note-wiseelder">If there is no any Wolf 🐺 in the game: 1</td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-fool">Fool 🃏</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>3</td>
+                            <td class="notes-col" data-key="mech-note-fool">If the game is consist 6 or less players: 5</td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-drunk">Drunk 🍻</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>3</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-prince">Prince 👑</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>3</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-boss">Boss 🎩</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>3</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-pacifist">Pacifist ☮️</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>3</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-soldier">Soldier 🪖</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>3</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-miner">Miner ⛏️</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>3</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-mason">Mason 👷</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>2</td>
+                            <td class="notes-col" data-key="mech-note-mason">According to number (n) of masons: 2 + n</td>
+                        </tr>
+                        <tr data-team="Solo">
+                            <td data-key="mech-role-doppel">Doppelganger 🎭</td>
+                            <td data-key="mech-team-solo">Solo</td>
+                            <td>2</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-augur">Augur 🦅</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>2</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-preacher">Preacher 🛐</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>2</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-villager">Villager 👱</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>1</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-wolfman">Wolfman 👱🌚</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>1C</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-clumsy">Clumsy Guy 🤕</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>-1</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Solo">
+                            <td data-key="mech-role-thief">Thief 😈</td>
+                            <td data-key="mech-team-solo">Solo</td>
+                            <td>-1</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Solo">
+                            <td data-key="mech-role-slave">Slave 😵‍💫</td>
+                            <td data-key="mech-team-solo">Solo</td>
+                            <td>-1</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-cupid">Cupid 🏹</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>-2</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-cursed">Cursed 😾</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>-2</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-wildchild">Wild Child 👶</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>-3</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-traitor">Traitor 🖕</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>-5</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-skeleton">Skeleton 💀</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>2</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                        <tr data-team="Village">
+                            <td data-key="mech-role-executioner">Executioner 🦸‍♂️</td>
+                            <td data-key="mech-team-village">Village</td>
+                            <td>4</td>
+                            <td class="notes-col"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="tab-score" class="tab-content">
+                <h3 data-key="mech-score-title">Game Score Mechanics</h3>
+
+                <div class="sub-tab-container">
+                    <button class="sub-tab-button" onclick="showSubTab('standard-points', this)" data-key="mech-score-tab-std">Standard Points</button>
+                    <button class="sub-tab-button" onclick="showSubTab('role-specific-points', this)" data-key="mech-score-tab-role">Role-Specific Points</button>
+                </div>
+
+                <div id="standard-points" class="sub-tab-content">
+                    <h4 data-key="mech-score-league-title">League Rank Penalties</h4>
+                    <table class="score-table">
+                        <thead>
+                            <tr>
+                                <th data-key="mech-score-th-league">League</th>
+                                <th data-key="mech-score-th-range">Point Range</th>
+                                <th data-key="mech-score-th-penalty">Penalty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>🐾</td><td>1000 – 2499</td><td><code>0</code></td></tr>
+                            <tr><td>🍀</td><td>2500 – 3499</td><td><code>0</code></td></tr>
+                            <tr><td>🍂</td><td>3500 – 4999</td><td><code>-1</code></td></tr>
+                            <tr><td>🌵</td><td>5000 – 6499</td><td><code>-1</code></td></tr>
+                            <tr><td>⚡️</td><td>6500 – 7499</td><td><code>-2</code></td></tr>
+                            <tr><td>🗡️</td><td>7500 – 8999</td><td><code>-2</code></td></tr>
+                            <tr><td>⚔️</td><td>9000 – 9999</td><td><code>-3</code></td></tr>
+                            <tr><td>🏆</td><td>10000 – 19999</td><td><code>-3</code></td></tr>
+                            <tr><td>🪐</td><td>20000 – 29999</td><td><code>-4</code></td></tr>
+                            <tr><td>🚀</td><td>30000 – 39999</td><td><code>-4</code></td></tr>
+                            <tr><td>🛰️</td><td>39999 – 40000</td><td><code>-5</code></td></tr>
+                            <tr><td>🛸</td><td>50000+</td><td><code>-5</code></td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="score-grid">
+                        <div class="score-col bonus-col">
+                            <h4 data-key="mech-score-bonus-title">Bonus Points (Standard)</h4>
+                            <ul>
+                                <li data-key="mech-score-bonus1"><code>+1</code> Surviving Time Bonus (20-40min) either Lose or Win</li>
+                                <li data-key="mech-score-bonus2"><code>+1</code> Surviving Time Bonus (20-40min) either Lose or Win</li>
+                                <li data-key="mech-score-bonus3"><code>+1</code> Surviving Time Bonus (20-40min) either Lose or Win</li>
+                            </ul>
+                        </div>
+                        <div class="score-col penalty-col">
+                            <h4 data-key="mech-score-penalty-title">Penalty Points (Standard)</h4>
+                            <ul>
+                                <li data-key="mech-score-penalty1"><code>-3</code> AFK Penalty either Lose or Win</li>
+                                <li data-key="mech-score-penalty2"><code>-4</code> AFK Penalty for 💂 Cultist Hunter & ⚡️ Alpha Wolf either Lose or Win</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 data-key="mech-score-team-base-title">Team Base Points</h4>
+                    <table class="score-table">
+                        <thead>
+                            <tr>
+                                <th data-key="mech-score-th-team">Team</th>
+                                <th data-key="mech-score-th-win">Win Base Score</th>
+                                <th data-key="mech-score-th-loss">Loss Base Score</th>
+                                <th data-key="mech-score-th-early">Early Death Bonus (on Loss)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-key="mech-score-team-village"><b>Village Side</b></td>
+                                <td><code>+8</code></td>
+                                <td><code>-4</code></td>
+                                <td data-key="mech-score-early-village">
+                                    Early die (5-9p) at Day 1 (+3)<br>
+                                    Early die (10-21p) at Day 1-2 (+3)<br>
+                                    Early die (22-35p) at Day 1-2-3 (+3)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-key="mech-score-team-wolves"><b>Werewolves</b></td>
+                                <td><code>(Player Count / Wolf Count) + 5</code></td>
+                                <td><code>Solo Wolf (-2) / More than 2 (-4)</code></td>
+                                <td data-key="mech-score-early-wolves">
+                                    For Solo Wolf (0)<br>
+                                    More than 1 Wolf (+2)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-key="mech-score-team-ally"><b>Ally</b></td>
+                                <td><code>(Player Count / Wolf Count) + 6</code></td>
+                                <td><code>-3</code></td>
+                                <td data-key="mech-score-early-ally">
+                                    Early die (+2)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-key="mech-score-team-killers"><b>Solo Killers (🔪//🔥)</b></td>
+                                <td><code>(Player Count + 9) / -2</code></td>
+                                <td><code>-3</code></td>
+                                <td data-key="mech-score-early-na">
+                                    N/A
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-key="mech-score-team-tanner"><b>Tanner</b></td>
+                                <td><code>(Player Count + 4) / -3</code></td>
+                                <td><code>-3</code></td>
+                                <td data-key="mech-score-early-tanner">
+                                    Early die (+2)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-key="mech-score-team-solo"><b>Solo Roles</b></td>
+                                <td data-key="mech-score-win-solo">
+                                    <code>
+                                        Doppelganger 🎭: Depends on their role model.<br>
+                                        Thief 😈: Never win.<br>
+                                        Slave 😵‍💫 (+7)
+                                    </code>
+                                </td>
+                                <td data-key="mech-score-loss-solo">
+                                    <code>
+                                        Doppelganger 🎭 (-1)<br>
+                                        Thief 😈 (-1)<br>
+                                        Slave 😵‍💫 (-3)
+                                    </code>
+                                </td>
+                                <td data-key="mech-score-early-solo">
+                                    Early die (+2)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-key="mech-score-team-cultist"><b>Cultist</b></td>
+                                <td><code>+7</code></td>
+                                <td><code>-4</code></td>
+                                <td data-key="mech-score-early-cultist">
+                                    Early die (+2)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div id="role-specific-points" class="sub-tab-content">
+                    <input type="text" id="roleSpecificSearchInput" onkeyup="filterRoleSpecificPoints()" placeholder="Search role-specific points..." style="width: 100%; padding: 10px 15px; border-radius: 8px; border: 1px solid var(--glass-border); background-color: rgba(0,0,0,0.2); color: var(--text-color); font-family: var(--font-body); font-size: 1rem; margin-bottom: 20px;" data-key-placeholder="mech-spec-search-placeholder">
+
+                    <h4 class="team-header team-header-village" data-key="mech-spec-title-village">Village Team</h4>
+                    <div class="score-grid">
+                        <div class="score-col bonus-col">
+                            <h4 data-key="mech-spec-bonus-village">Bonus Points (Village)</h4>
+                            <ul class="role-point-list">
+                                <li data-key="mech-spec-v-b1"><code>{+1}</code> <b>💂 Cultist Hunter</b> <span class="moving-arrow">—»</span> <b>Hunt any Cult 👤</b></li>
+                                <li data-key="mech-spec-v-b2"><code>{+1}</code> <b>👳 Seer</b> <span class="moving-arrow">—»</span> <b>Find any bad rol</b></li>
+                                <li data-key="mech-spec-v-b3"><code>{+3}</code> <b>💋 Harlot</b> <span class="moving-arrow">—»</span> <b>Visit any werewolf 🐺 // Serial Killer 🔪</b></li>
+                                <li data-key="mech-spec-v-b4"><code>{+1}</code> <b>💋 Harlot</b> <span class="moving-arrow">—»</span> <b>Detect any Cultist 👤</b></li>
+                                <li data-key="mech-spec-v-b5"><code>{+4}</code> <b>👼 Guardian Angel</b> <span class="moving-arrow">—»</span> <b>Save a life</b></li>
+                                <li data-key="mech-spec-v-b6"><code>{+1}</code> <b>👼 Guardian Angel</b> <span class="moving-arrow">—»</span> <b>Clean a house</b></li>
+                                <li data-key="mech-spec-v-b7"><code>{+1}</code> <b>🕵️ Detective</b> <span class="moving-arrow">—»</span> <b>Find any bad rol</b></li>
+                                <li data-key="mech-spec-v-b8"><code>{+3}</code> <b>🔫 Gunner</b> <span class="moving-arrow">—»</span> <b>Shoot any bad rol</b></li>
+                                <li data-key="mech-spec-v-b9"><code>{+2}</code> <b>🧪 Chemist</b> <span class="moving-arrow">—»</span> <b>Kill any bad rol</b></li>
+                                <li data-key="mech-spec-v-b10"><code>{+1}</code> <b>🧑‍⚕️ Doctor</b> <span class="moving-arrow">—»</span> <b>Revive any player</b></li>
+                                <li data-key="mech-spec-v-b11"><code>{+2}</code> <b>🛐 Preacher</b> <span class="moving-arrow">—»</span> <b>Detect Killer</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-b12"><code>{+1}</code> <b>♟ Pawn</b> <span class="moving-arrow">—»</span> <b>Sacrifice yourself for Helpers</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-v-b13"><code>{+2}</code> <b>♟ Pawn</b> <span class="moving-arrow">—»</span> <b>Sacrifice yourself for Cultist Hunter 💂‍♀️</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-b14"><code>{+1}</code> <b>🪖 Soldier</b> <span class="moving-arrow">—»</span> <b>Save any Helpers</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-v-b15"><code>{+2}</code> <b>🪖 Soldier</b> <span class="moving-arrow">—»</span> <b>Save Cultist Hunter 💂‍♀️</b></li>
+                                <li data-key="mech-spec-v-b16"><code>{+5}</code> <b>🎖 Mayor</b> <span class="moving-arrow">—»</span> <b>Win when only 2 players remain</b></li>
+                                <li data-key="mech-spec-v-b17"><code>{+3}</code> <b>💀 Skeleton</b> <span class="moving-arrow">—»</span> <b>Dodge any bad rol</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-b18"><code>{+1}</code> <b>☠️ Grave Digger</b> <span class="moving-arrow">—»</span> <b>When any bad rol fall your tumb</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-hint">Hint:</strong>
+                                        <p data-key="mech-spec-v-b18-tip">When Grave Digger stole any roles among them, they also can benefit from the bonus and penalty points.</p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-v-b19"><code>{+3}</code> <b>🎯 Hunter</b> <span class="moving-arrow">—»</span> <b>Defeat any Werewolf 🐺 during night attack</b></li>
+                                <li data-key="mech-spec-v-b20"><code>{+3}</code> <b>🎯 Hunter</b> <span class="moving-arrow">—»</span> <b>Kill any bad role at lynch</b></li>
+                                <li data-key="mech-spec-v-b21"><code>{+3}</code> <b>📚 Wise Elder</b> <span class="moving-arrow">—»</span> <b>Defend Werewolf 🐺 attack</b></li>
+                                <li data-key="mech-spec-v-b22"><code>{+2}</code> <b>🍻 Drunk</b> <span class="moving-arrow">—»</span> <b>Eaten by any Werewolf 🐺</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-b23"><code>{+1}</code> <b>🤕 Clumsy Guy</b> <span class="moving-arrow">—»</span> <b>Manage to be eaten // killed</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-hint">Hint:</strong>
+                                        <p data-key="mech-spec-v-b23-tip">Lynching yourself is not working. You must be killed by any bad roles.</p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-v-b24"><code>{+2}</code> <b>😨 Depressive</b> <span class="moving-arrow">—»</span> <b>Kill randomly any bad role</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-b25"><code>{+1}</code> <b>Lynch Bad Roles</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-exceptions">Exceptions:</strong>
+                                        <p data-key="mech-spec-v-b25-tip"><code>Tanner 👺</code><br>The roles at the above are not included to bonus. Lynching those roles are not counted as +1 point!</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="score-col penalty-col">
+                            <h4 data-key="mech-spec-penalty-village">Penalty Points (Village)</h4>
+                            <ul class="role-point-list">
+                                <li data-key="mech-spec-v-p1"><code>{-2}</code> <b>💂 Cultist Hunter</b> <span class="moving-arrow">—»</span> <b>Hunt Serial Killer 🔪</b></li>
+                                <li data-key="mech-spec-v-p2"><code>{-4}</code> <b>💂 Cultist Hunter</b> <span class="moving-arrow">—»</span> <b>Die as AFK</b></li>
+                                <li data-key="mech-spec-v-p3"><code>{-2}</code> <b>💋 Harlot</b> <span class="moving-arrow">—»</span> <b>Die during stay at home</b></li>
+                                <li data-key="mech-spec-v-p4"><code>{-2}</code> <b>👼 Guardian Angel</b> <span class="moving-arrow">—»</span> <b>Protect any Werewolf 🐺 // Serial Killer 🔪</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-p5"><code>{-2}</code> <b>🔫 Gunner</b> <span class="moving-arrow">—»</span> <b>Kill Cultist Hunter 💂‍♀️ // any Helpers // Wise Elder 📚</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-p6"><code>{-1}</code> <b>🔫 Gunner</b> <span class="moving-arrow">—»</span> <b>Kill any Revealed role</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-revealed">Revealed Roles:</strong>
+                                        <p data-key="mech-spec-tip-revealed-list">
+                                            • Gunner 🔫<br>
+                                            • Mayor🎖<br>
+                                            • Blacksmith ⚒️<br>
+                                            • Prince 👑<br>
+                                            • Pacifist ☮️<br>
+                                            • Sandman 💤<br>
+                                            • Troublemaker 🤯<br>
+                                            • Chemist 🧪<br>
+                                            • Doctor 🧑‍⚕️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-p7"><code>{-2}</code> <b>🧪 Chemist</b> <span class="moving-arrow">—»</span> <b>Kill Cultist Hunter 💂‍♀️ // any Helpers // Wise Elder 📚</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-p8"><code>{-1}</code> <b>🧪 Chemist</b> <span class="moving-arrow">—»</span> <b>Kill any revealed role</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-revealed">Revealed Roles:</strong>
+                                        <p data-key="mech-spec-tip-revealed-list">
+                                            • Gunner 🔫<br>
+                                            • Mayor🎖<br>
+                                            • Blacksmith ⚒️<br>
+                                            • Prince 👑<br>
+                                            • Pacifist ☮️<br>
+                                            • Sandman 💤<br>
+                                            • Troublemaker 🤯<br>
+                                            • Chemist 🧪<br>
+                                            • Doctor 🧑‍⚕️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-p9"><code>{-1}</code> <b>🪖 Soldier</b> <span class="moving-arrow">—»</span> <b>Lynch Cultist Hunter 💂‍♀️ // any Helpers</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-v-p10"><code>{-2}</code> <b>🪖 Soldier</b> <span class="moving-arrow">—»</span> <b>Save any bad roles</b></li>
+                                <li data-key="mech-spec-v-p11"><code>{-1}</code> <b>♟ Pawn</b> <span class="moving-arrow">—»</span> <b>Protect Serial Killer 🔪</b></li>
+                                <li data-key="mech-spec-v-p12"><code>{-2}</code> <b>☮️ Pacifist</b> <span class="moving-arrow">—»</span> <b>Not saving themselves at lynch</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-p13"><code>{-2}</code> <b>💀 Skeleton</b> <span class="moving-arrow">—»</span> <b>Dodge Cultist Hunter 💂‍♀️ // any Helpers</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-p14"><code>{-2}</code> <b>🎯 Hunter</b> <span class="moving-arrow">—»</span> <b>Kill Cultist Hunter 💂‍♀️ // any Helpers // Wise Elder 📚</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-p15"><code>{-1}</code> <b>🎯 Hunter</b> <span class="moving-arrow">—»</span> <b>Kill any Revealed role</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-revealed">Revealed Roles:</strong>
+                                        <p data-key="mech-spec-tip-revealed-list">
+                                            • Gunner 🔫<br>
+                                            • Mayor🎖<br>
+                                            • Blacksmith ⚒️<br>
+                                            • Prince 👑<br>
+                                            • Pacifist ☮️<br>
+                                            • Sandman 💤<br>
+                                            • Troublemaker 🤯<br>
+                                            • Chemist 🧪<br>
+                                            • Doctor 🧑‍⚕️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-v-p16"><code>{-1}</code> <b>📚 Wise Elder</b> <span class="moving-arrow">—»</span> <b>Die at second Werewolf 🐺 attack</b></li>
+                                <li data-key="mech-spec-v-p17"><code>{-1}</code> <b>👷 Mason</b> <span class="moving-arrow">—»</span> <b>Lynching Mason partner</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-v-p18"><code>{-1}</code> <b>Lynch Cultist Hunter 💂 or Revealed Role</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-revealed">Revealed Roles:</strong>
+                                        <p data-key="mech-spec-tip-revealed-list">
+                                            • Gunner 🔫<br>
+                                            • Mayor🎖<br>
+                                            • Blacksmith ⚒️<br>
+                                            • Prince 👑<br>
+                                            • Pacifist ☮️<br>
+                                            • Sandman 💤<br>
+                                            • Troublemaker 🤯<br>
+                                            • Chemist 🧪<br>
+                                            • Doctor 🧑‍⚕️
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="team-header team-header-wolf" data-key="mech-spec-title-wolf">Wolf Team</h4>
+                    <div class="score-grid">
+                        <div class="score-col bonus-col">
+                            <h4 data-key="mech-spec-bonus-wolf">Bonus Points (Wolf)</h4>
+                            <ul class="role-point-list">
+                                <li data-key="mech-spec-w-b1"><code>{+8}</code> <b>⚡️ Alpha Wolf</b> <span class="moving-arrow">—»</span> <b>Infect Serial Killer 🔪</b></li>
+                                <li data-key="mech-spec-w-b2"><code>{+7}</code> <b>⚡️ Alpha Wolf</b> <span class="moving-arrow">—»</span> <b>Infect Harlot 💋</b></li>
+                                <li data-key="mech-spec-w-b3"><code>{+4}</code> <b>⚡️ Alpha Wolf</b> <span class="moving-arrow">—»</span> <b>Infect Wise Elder 📚</b></li>
+                                <li data-key="mech-spec-w-b4"><code>{+3}</code> <b>⚡️ Alpha Wolf</b> <span class="moving-arrow">—»</span> <b>Infect Cultist Hunter 💂</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-w-b5"><code>{+2}</code> <b>⚡️ Alpha Wolf</b> <span class="moving-arrow">—»</span> <b>Infect Helper's</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-w-b6"><code>{+1}</code> <b>⚡️ Alpha Wolf</b> <span class="moving-arrow">—»</span> <b>Infect any Role</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-w-b7"><code>{+2}</code> <b>🐺✨ Conjurer Wolf</b> <span class="moving-arrow">—»</span> <b>Lynch Helper's</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-w-b8"><code>{+2}</code> <b>🐺❄️ Snow Wolf</b> <span class="moving-arrow">—»</span> <b>Freeze Helper's</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-w-b9"><code>{+1}</code> <b>🐺❄️ Snow Wolf</b> <span class="moving-arrow">—»</span> <b>Freeze any Night Action Role</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-nightroles">Night Action Roles:</strong>
+                                        <p data-key="mech-spec-tip-nightroles-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Fool 🃏<br>
+                                            • Cultist Hunter 💂<br>
+                                            • Oracle 🌀<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-w-b10"><code>{+2}</code> <b>🐶 Wolf Cub</b> <span class="moving-arrow">—»</span> <b>Give two attack</b></li>
+                                <li data-key="mech-spec-w-b11"><code>{+4}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Eat Serial Killer</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-w-b12"><code>{+2}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Eat Helper's</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-w-b13"><code>{+1}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Find Cursed 😾</b></li>
+                                <li data-key="mech-spec-w-b14"><code>{+1}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Kill Wild Child's 👶 role Model</b></li>
+                                <li data-key="mech-spec-w-b15"><code>{+1}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Kill Grave Digger ☠️ by accidentally</b></li>
+                                <li data-key="mech-spec-w-b16"><code>{+1}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Every 4 eating</b></li>
+                                <li data-key="mech-spec-w-b17"><code>{+1}</code> <b>🔮 Sorcerer</b> <span class="moving-arrow">—»</span> <b>Find any Wolf 🐺</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-w-b18"><code>{+1}</code> <b>🔮 Sorcerer</b> <span class="moving-arrow">—»</span> <b>Detect Helper's</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-w-b19"><code>{+1}</code> <b>🔮 Sorcerer</b> <span class="moving-arrow">—»</span> <b>Discover Poseidon 🧜</b></li>
+                                <li data-key="mech-spec-w-b20"><code>{+1}</code> <b>🔱 Poseidon</b> <span class="moving-arrow">—»</span> <b>Kill Cultist Hunter 💂</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-w-b21"><code>{+1}</code> <b>🔱 Poseidon</b> <span class="moving-arrow">—»</span> <b>Kill Helper's</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-w-b22"><code>{+2}</code> <b>🔱 Poseidon</b> <span class="moving-arrow">—»</span> <b>Kill Tanner 👺</b></li>
+                                <li data-key="mech-spec-w-b23"><code>{+2}</code> <b>🔱 Poseidon</b> <span class="moving-arrow">—»</span> <b>Kill Cultist 👤</b></li>
+                                <li data-key="mech-spec-w-b24"><code>{+4}</code> <b>🔱 Poseidon</b> <span class="moving-arrow">—»</span> <b>Kill Arsonist 🔥 // Serial Killer 🔪</b></li>
+                            </ul>
+                        </div>
+                        <div class="score-col penalty-col">
+                            <h4 data-key="mech-spec-penalty-wolf">Penalty Points (Wolf)</h4>
+                            <ul class="role-point-list">
+                                <li data-key="mech-spec-w-p1"><code>{-4}</code> <b>⚡️ Alpha Wolf</b> <span class="moving-arrow">—»</span> <b>Die as AFK</b></li>
+                                <li data-key="mech-spec-w-p2"><code>{-1}</code> <b>🐺✨ Conjurer Wolf</b> <span class="moving-arrow">—»</span> <b>Lynch Ally (🧜/🔮) // Werewolf 🐺</b></li>
+                                <li data-key="mech-spec-w-p3"><code>{-2}</code> <b>🐺❄️ Snow Wolf</b> <span class="moving-arrow">—»</span> <b>Freeze Sorcerer 🔮</b></li>
+                                <li data-key="mech-spec-w-p4"><code>{-1}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Defeat by Town Hunter 🎯</b></li>
+                                <li data-key="mech-spec-w-p5"><code>{-1}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Eat Drunk 🍻 // Wise Elder 📚</b></li>
+                                <li data-key="mech-spec-w-p6"><code>{-1}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Fell a tumb</b></li>
+                                <li data-key="mech-spec-w-p7"><code>{-1}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Blocked by GA 👼</b></li>
+                                <li data-key="mech-spec-w-p8"><code>{-1}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Eat Sorcerer 🔮 // Poseidon 🧜</b></li>
+                                <li data-key="mech-spec-w-p9"><code>{-1}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Try to eat Serial Killer 🔪 and die</b></li>
+                                <li data-key="mech-spec-w-p10"><code>{-1}</code> <b>All Werewolves</b> <span class="moving-arrow">—»</span> <b>Empty to Arsonist 🔥 // Harlot 💋</b></li>
+                                <li data-key="mech-spec-w-p11"><code>{-1}</code> <b>🔮 Sorcerer</b> <span class="moving-arrow">—»</span> <b>Lynching teammates</b></li>
+                                <li data-key="mech-spec-w-p12"><code>{-1}</code> <b>🔱 Poseidon</b> <span class="moving-arrow">—»</span> <b>Lynching teammates</b></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="team-header team-header-solo" data-key="mech-spec-title-solo">Solo Team</h4>
+                    <div class="score-grid">
+                        <div class="score-col bonus-col">
+                            <h4 data-key="mech-spec-bonus-solo">Bonus Points (Solo)</h4>
+                            <ul class="role-point-list">
+                                <li data-key="mech-spec-s-b1"><code>{+1}</code> <b>🔥 Arsonist</b> <span class="moving-arrow">—»</span> <b>Burn Drunk 🍻</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-s-b2"><code>{+2}</code> <b>🔥 Arsonist</b> <span class="moving-arrow">—»</span> <b>Burn any Helpers // Town Hunter 🎯</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-s-b3"><code>{+1}</code> <b>🔥 Arsonist</b> <span class="moving-arrow">—»</span> <b>Every 4 burning</b></li>
+                                <li data-key="mech-spec-s-b4"><code>{+1}</code> <b>🔥 Arsonist</b> <span class="moving-arrow">—»</span> <b>Burn Cult 👤 // Werewolves 🐺</b></li>
+                                <li data-key="mech-spec-s-b5"><code>{+2}</code> <b>🔥 Arsonist</b> <span class="moving-arrow">—»</span> <b>Burn Alpha ⚡️</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-s-b6"><code>{+1}</code> <b>🔪 Serial Killer</b> <span class="moving-arrow">—»</span> <b>Stab any Helpers</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-s-b7"><code>{+1}</code> <b>🔪 Serial Killer</b> <span class="moving-arrow">—»</span> <b>When Werewolves 🐺 attack to Serial Killer 🔪 and they die</b></li>
+                                <li data-key="mech-spec-s-b8"><code>{+1}</code> <b>🔪 Serial Killer</b> <span class="moving-arrow">—»</span> <b>When Arsonist 🔥 attacks to Serial Killer 🔪 and they die</b></li>
+                                <li data-key="mech-spec-s-b9"><code>{+1}</code> <b>🔪 Serial Killer</b> <span class="moving-arrow">—»</span> <b>When Cultist Hunter 💂 // Cult 👤 attack to Serial Killer 🔪 and they die</b></li>
+                                <li data-key="mech-spec-s-b10"><code>{+1}</code> <b>🔪 Serial Killer</b> <span class="moving-arrow">—»</span> <b>When Guardian Angel 👼 // Harlot 💋 // Chemist 🧪 attack to Serial Killer 🔪 and they die</b></li>
+                                <li data-key="mech-spec-s-b11"><code>{+1}</code> <b>🔪 Serial Killer</b> <span class="moving-arrow">—»</span> <b>Kill Grave Digger ☠️ by accidentaly</b></li>
+                                <li data-key="mech-spec-s-b12"><code>{+1}</code> <b>🔪 Serial Killer</b> <span class="moving-arrow">—»</span> <b>Every 4 stabbing</b></li>
+                                <li data-key="mech-spec-s-b13"><code>{+1}</code> <b>😵‍💫 Slave</b> <span class="moving-arrow">—»</span> <b>Lynch Your Main Target</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-s-b14"><code>{+1}</code> <b>😵‍💫 Slave</b> <span class="moving-arrow">—»</span> <b>Lynch Yourself</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-info">Info:</strong>
+                                        <p data-key="mech-spec-s-b14-tip">This bonus will be active if 😵‍💫 Slave lost their target and manage to lynch themselves for winning.</p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-s-b15"><code>{+2}</code> <b>😵‍💫 Slave</b> <span class="moving-arrow">—»</span> <b>Lynch the "Revealed Role" Target</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-revealed">Revealed Roles:</strong>
+                                        <p data-key="mech-spec-tip-revealed-list">
+                                            • Gunner 🔫<br>
+                                            • Mayor🎖<br>
+                                            • Blacksmith ⚒️<br>
+                                            • Prince 👑<br>
+                                            • Pacifist ☮️<br>
+                                            • Sandman 💤<br>
+                                            • Troublemaker 🤯<br>
+                                            • Chemist 🧪<br>
+                                            • Doctor 🧑‍⚕️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-s-b16"><code>{+3}</code> <b>😵‍💫 Slave</b> <span class="moving-arrow">—»</span> <b>Lynch Culitst Hunter 💂 // Helpers Target</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-s-b17"><code>{+4}</code> <b>😵‍💫 Slave</b> <span class="moving-arrow">—»</span> <b>Lynch any Werewolf 🐺 // Ally (🔮/🧜) Target</b></li>
+                                <li data-key="mech-spec-s-b18"><code>{+5}</code> <b>😵‍💫 Slave</b> <span class="moving-arrow">—»</span> <b>Lynch Serial Killer 🔪 // Arsonist 🔥 Target</b></li>
+                                <li data-key="mech-spec-s-b19"><code>{+7}</code> <b>😵‍💫 Slave</b> <span class="moving-arrow">—»</span> <b>Lynch Tanner 👺 Target</b></li>
+                                <li data-key="mech-spec-s-b20"><code>{+3}</code> <b>👺 Tanner</b> <span class="moving-arrow">—»</span> <b>Get lynch at last 3-player</b></li>
+                                <li data-key="mech-spec-s-b21"><code>{+4}</code> <b>👺 Tanner</b> <span class="moving-arrow">—»</span> <b>Get lynch during Cult 👤 majority</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-s-b22"><code>{+7}</code> <b>👺 Tanner</b> <span class="moving-arrow">—»</span> <b>Get lynch when remaining players bad</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-badroles">Bad Roles:</strong>
+                                        <p data-key="mech-spec-tip-badroles-list">
+                                            • any Werewolf 🐺<br>
+                                            • Serial Killer 🔪<br>
+                                            • Arsonist 🔥<br>
+                                            • Cult 👤<br>
+                                            • Ally (🔮/🧜)<br>
+                                            • Tanner 👺
+                                        </p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-s-b23"><code>{-}</code> <b>Doppelganger 🎭</b> <span class="moving-arrow">—»</span><b>The role does not have any Bonus point at anywhere. Their Bonus points are variable according to their Role Model.</b></li>
+                                <li data-key="mech-spec-s-b24"><code>{-}</code> <b>Thief 😈</b> <span class="moving-arrow">—»</span><b>The role does not have any Bonus point at anywhere. Their Bonus points are variable according to their Next Stolen Role.</b></li>
+                            </ul>
+                        </div>
+                        <div class="score-col penalty-col">
+                            <h4 data-key="mech-spec-penalty-solo">Penalty Points (Solo)</h4>
+                            <ul class="role-point-list">
+                                <li data-key="mech-spec-s-p1"><code>{-1}</code> <b>🔥 Arsonist</b> <span class="moving-arrow">—»</span> <b>When they try to Town Hunter 🎯 and die.</b></li>
+                                <li data-key="mech-spec-s-p2"><code>{-1}</code> <b>🔥 Arsonist</b> <span class="moving-arrow">—»</span> <b>When they try to Serial Killer 🔪 and die.</b></li>
+                                <li data-key="mech-spec-s-p3"><code>{-1}</code> <b>🔥 Arsonist</b> <span class="moving-arrow">—»</span> <b>When they burn Culitst Hunter 💂 at first</b></li>
+                                <li data-key="mech-spec-s-p4"><code>{-1}</code> <b>🔥 Arsonist</b> <span class="moving-arrow">—»</span> <b>Fell a tumb</b></li>
+                                <li data-key="mech-spec-s-p5"><code>{-1}</code> <b>🔪 Serial Killer</b> <span class="moving-arrow">—»</span> <b>When they kill Culitst Hunter 💂 at first</b></li>
+                                <li data-key="mech-spec-s-p6"><code>{-1}</code> <b>🔪 Serial Killer</b> <span class="moving-arrow">—»</span> <b>When they try to Town Hunter 🎯 and shot by them.</b></li>
+                                <li data-key="mech-spec-s-p7"><code>{-1}</code> <b>🔪 Serial Killer</b> <span class="moving-arrow">—»</span> <b>Fell a tumb</b></li>
+                                <li data-key="mech-spec-s-p8"><code>{-}</code> <b>Doppelganger 🎭</b> <span class="moving-arrow">—»</span><b>The role does not have any Penalty point at anywhere. Their Penalty points are variable according to their Role Model.</b></li>
+                                <li data-key="mech-spec-s-p9"><code>{-}</code> <b>Thief 😈</b> <span class="moving-arrow">—»</span><b>The role does not have any Penalty point at anywhere. Their Penalty points are variable according to their Next Stolen Role.</b></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="team-header team-header-cultist" data-key="mech-spec-title-cult">Cultist Team</h4>
+                    <div class="score-grid">
+                        <div class="score-col bonus-col">
+                            <h4 data-key="mech-spec-bonus-cult">Bonus Points (Cultist)</h4>
+                            <ul class="role-point-list">
+                                <li data-key="mech-spec-c-b1"><code>{+1}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Convience a player</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-c-b2"><code>{+2}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Convience a Helper</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-helpers">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-helpers-list">
+                                            • Seer 👳<br>
+                                            • Detective🕵️‍♂️<br>
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Preacher 🛐<br>
+                                            • Miner ⛏️<br>
+                                            • Pawn ♟️
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-c-b3"><code>{+2}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Convience an Ally</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-allies">Allies:</strong>
+                                        <p data-key="mech-spec-tip-allies-list">
+                                            • Sorcerer 🔮<br>
+                                            • Poseidon 🧜
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-c-b4"><code>{+2}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Convience Resisting role</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-resisting">Helpers:</strong>
+                                        <p data-key="mech-spec-tip-resisting-list">
+                                            • Judge 🧑‍⚖️<br>
+                                            • Mayor 🎖<br>
+                                            • Chemist 🧪<br>
+                                            • Gunner 🔫<br>
+                                            • Grave Digger ☠️<br>
+                                            • Hunter 🎯<br>
+                                        </p>
+                                        <p data-key="mech-spec-c-b4-tip1">According to auto-cv mechanic, the roles can dodge the auto-cv even cultists are majority. That’s why the roles are categorized as resisting roles.<br></p>
+                                        <p data-key="mech-spec-c-b4-tip2">Auto-cult situation will not counting. Cultists must try by themselves.</p>
+                                    </div>
+                                </li>
+                                <li data-key="mech-spec-c-b5"><code>{+3}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Convience Tanner 👺</b></li>
+                                <li data-key="mech-spec-c-b6"><code>{+5}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Convience Boss 🎩</b></li>
+                                <li data-key="mech-spec-c-b7"><code>{+2}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Lynch Cultist Hunter 💂 at Majority</b></li>
+                                <li data-key="mech-spec-c-b8"><code>{+4}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Lynch Cultist Hunter 💂 at Minority</b></li>
+                            </ul>
+                        </div>
+                        <div class="score-col penalty-col">
+                            <h4 data-key="mech-spec-penalty-cult">Penalty Points (Cultist)</h4>
+                            <ul class="role-point-list">
+                                <li data-key="mech-spec-c-p1"><code>{-2}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Try Cultist Hunter 💂</b></li>
+                                <li data-key="mech-spec-c-p2"><code>{-1}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Serial Killer 🔪</b></li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-c-p3"><code>{-1}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Try Werewolves 🐺</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-tip">Tip:</strong>
+                                        <p data-key="mech-spec-c-p3-tip">If the Werewolves 🐺 stayed home and meanwhile any Cult 👤 member try to visit them, it cause of newest Cultist 👤 member death. The Penalty apply on that condition.</p>
+                                    </div>
+                                </li>
+                                <li class="has-tooltip">
+                                    <span data-key="mech-spec-c-p4"><code>{-1}</code> <b>👤 Cultist</b> <span class="moving-arrow">—»</span> <b>Empty House</b></span>
+                                    <span class="tooltip-trigger">(*)</span>
+                                    <div class="tooltip-bubble">
+                                        <strong data-key="mech-spec-tip-nothome">Not Home Roles:</strong>
+                                        <p data-key="mech-spec-tip-nothome-list">
+                                            • Harlot 💋<br>
+                                            • Guardian Angel 👼<br>
+                                            • Arsonist 🔥
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="tab-calculator" class="tab-content">
+                <h3 data-key="mech-calc-title">Group Point Calculator</h3>
+                <div class="calculator-wrapper">
+
+                    <div class="calculator-inputs">
+                        <h4 data-key="mech-calc-inputs-title">Simulation Inputs</h4>
+
+                        <label for="selectPlayerCount" data-key="mech-calc-label-players">1. Select Player Count</label>
+                        <select id="selectPlayerCount" onchange="calculateGroupPoints()">
+                            <option value="5-20" data-key="mech-calc-opt-players1">5 - 20 Players</option>
+                            <option value="21-40" data-key="mech-calc-opt-players2">21 - 40 Players</option>
+                            <option value="41-60" data-key="mech-calc-opt-players3">41 - 60 Players</option>
+                            <option value="61-80" data-key="mech-calc-opt-players4">61 - 80 Players</option>
+                            <option value="81-100" data-key="mech-calc-opt-players5">81 - 100 Players</option>
+                        </select>
+
+                        <label for="selectGameTime" data-key="mech-calc-label-time">2. Select Game Time</label>
+                        <select id="selectGameTime" onchange="calculateGroupPoints()">
+                            <option value="<5" data-key="mech-calc-opt-time1">≤ 5 minute</option>
+                            <option value="5-30" data-key="mech-calc-opt-time2">Between 5 - 30 minute</option>
+                            <option value=">=30" data-key="mech-calc-opt-time3">≥ 30 minute</option>
+                            <option value="<20" data-key="mech-calc-opt-time4">≤ 20 minute</option>
+                            <option value="20-40" data-key="mech-calc-opt-time5">Between 20 - 40 minute</option>
+                            <option value="40-60" data-key="mech-calc-opt-time6">Between 40 - 60 minute</option>
+                            <option value=">=60" data-key="mech-calc-opt-time7">≥ 60 minute</option>
+                            <option value="<60" data-key="mech-calc-opt-time8">≤ 60 minute</option>
+                            <option value="60-80" data-key="mech-calc-opt-time9">Between 60 - 80 minute</option>
+                            <option value="80-100" data-key="mech-calc-opt-time10">Between 80 - 100 minute</option>
+                            <option value=">=100" data-key="mech-calc-opt-time11">≥ 100 minute</option>
+                            <option value="<80" data-key="mech-calc-opt-time12">≤ 80 minute</option>
+                            <option value="80-110" data-key="mech-calc-opt-time13">Between 80 - 110 minute</option>
+                            <option value=">=110" data-key="mech-calc-opt-time14">≥ 110 minute</option>
+                            <option value="<90" data-key="mech-calc-opt-time15">≤ 90 minute</option>
+                            <option value="90-120" data-key="mech-calc-opt-time16">Between 90 - 120 minute</option>
+                            <option value=">=120" data-key="mech-calc-opt-time17">≥ 120 minute</option>
+                        </select>
+
+                        <label for="selectRoleType" data-key="mech-calc-label-team">3. Select Winning Team (for Factor)</label>
+                        <select id="selectRoleType" onchange="calculateGroupPoints()">
+                            <option value="village" data-key="mech-calc-opt-team1">Village Team (Green Factor)</option>
+                            <option value="wolf" data-key="mech-calc-opt-team2">Wolf Team (Red Factor)</option>
+                            <option value="solo" data-key="mech-calc-opt-team3">Solo Role (Black Factor)</option>
+                        </select>
+
+                        <label for="inputBaseScore" data-key="mech-calc-label-base">4. Enter Team Base Score</label>
+                        <input type="number" id="inputBaseScore" value="8" onkeyup="calculateGroupPoints()" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--glass-border); background-color: #1a202c; color: var(--text-color); font-size: 1rem; margin-bottom: 15px;">
+
+                        <label for="inputClanMembers" data-key="mech-calc-label-clan">5. Enter Winning Clan Members</label>
+                        <input type="number" id="inputClanMembers" value="1" onkeyup="calculateGroupPoints()" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--glass-border); background-color: #1a202c; color: var(--text-color); font-size: 1rem; margin-bottom: 15px;">
+
+                    </div>
+
+                    <div class="calculator-results">
+                        <h4 data-key="mech-calc-results-title">Simulation Results</h4>
+                        <div id="result-team-base"><span data-key="mech-calc-res-base">Team Base Score</span>: <span>8</span></div>
+                        <div id="result-time-factor"><span data-key="mech-calc-res-timefactor">Time/Player Factor</span>: <span>N/A</span></div>
+                        <div id="result-clan-members"><span data-key="mech-calc-res-clan">Winning Clan Members</span>: <span>1</span></div>
+                        <div id="result-clan-factor"><span data-key="mech-calc-res-clanfactor">Clan Factor</span>: <span>x1.00</span></div>
+                        <div id="result-final-score" style="margin-top: 15px; border-top: 2px solid var(--team-cultist); padding-top: 10px;"><span data-key="mech-calc-res-final">Final Group Score</span>: <span>N/A</span></div>
+                        <p id="result-notes" style="margin-top: 10px; padding-top: 10px;" data-key="mech-calc-res-formula">
+                            Final Score = (Team Base Score) * (Winning Clan Members) * (Time/Player Factor)
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="heatmap-grid" id="heatmap">
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-tl">Time / Players</div>
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-p1">5-20</div>
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-p2">21-40</div>
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-p3">41-60</div>
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-p4">61-80</div>
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-p5">81-100</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t1">≤ 5 min</div>
+                    <div class="heatmap-cell" data-time="<5" data-players="5-20">x0.5, x2.25, x2.5</div>
+                    <div class="heatmap-cell" data-time="<5" data-players="21-40">x17 (👺)</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t2">5 - 30 min</div>
+                    <div class="heatmap-cell" data-time="5-30" data-players="5-20">x0.75, x4, x11</div>
+                    <div class="heatmap-cell" data-time="5-30" data-players="21-40">x19 (👺)</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t3">≥ 30 min</div>
+                    <div class="heatmap-cell" data-time=">=30" data-players="5-20">x1, x5, x24</div>
+                    <div class="heatmap-cell" data-time=">=30" data-players="21-40">x21 (👺)</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t4">≤ 20 min</div>
+                    <div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time="<20" data-players="21-40">x1, 4.25, x28</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t5">20 - 40 min</div>
+                    <div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time="20-40" data-players="21-40">x1.25, 4.75, x36</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t6">40 - 60 min</div>
+                    <div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time="40-60" data-players="21-40">x1.5, x5.5, x48</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t7">≥ 60 min</div>
+                    <div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time=">=60" data-players="21-40">x1.75, x6, x64</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t8">≤ 60 min</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time="<60" data-players="41-60">x1.75, x6, x65</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t9">60 - 80 min</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time="60-80" data-players="41-60">x2, x7, x75</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t10">80 - 100 min</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time="80-100" data-players="41-60">x2.25, x8, x92</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t11">≥ 100 min</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time=">=100" data-players="41-60">x2.5, x9, x104</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t12">≤ 80 min</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time="<80" data-players="61-80">x2.5, x11, x120</div>
+                    <div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t13">80 - 110 min</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time="80-110" data-players="61-80">2.75, x12, x140</div>
+                    <div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t14">≥ 110 min</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time=">=110" data-players="61-80">x3, x14, x155</div>
+                    <div class="heatmap-cell">-</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t15">≤ 90 min</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time="<90" data-players="81-100">x3, x15, x175</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t16">90 - 120 min</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time="90-120" data-players="81-100">x3.5, x16, x200</div>
+
+                    <div class="heatmap-cell heatmap-header" data-key="mech-calc-hm-header-t17">≥ 120 min</div>
+                    <div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div><div class="heatmap-cell">-</div>
+                    <div class="heatmap-cell" data-time=">=120" data-players="81-100">x4, x17, x225</div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer>
+            <p data-key="footer-text">© 2025 Wolfblood Team - All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script src="Loader.js" defer></script>
+    <script src="Translate.js" defer></script>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                initializeMechanicsPage();
+            }, 50);
+        });
+
+        function initializeMechanicsPage() {
+            try {
+                const firstSubTab = document.querySelector('.sub-tab-button');
+                if (firstSubTab) {
+                    ;
+                }
+                const firstSubTabContent = document.getElementById('standard-points');
+                if (firstSubTabContent) {
+                }
+                sortTable(2);
+                calculateGroupPoints();
+            } catch (e) {
+                console.error("Bot-Mechanics.html başlatılırken hata:", e);
+            }
+        }
+
+        function showMainTab(tabId, clickedButton) {
+            if (!clickedButton) return;
+            const isAlreadyActive = clickedButton.classList.contains('active');
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.main-tab-button').forEach(btn => btn.classList.remove('active'));
+
+            if (!isAlreadyActive) {
+                document.getElementById(tabId).classList.add('active');
+                clickedButton.classList.add('active');
+            }
+        }
+        function showSubTab(subTabId, clickedButton) {
+            if (!clickedButton) return;
+            const isAlreadyActive = clickedButton.classList.contains('active');
+            document.querySelectorAll('.sub-tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.sub-tab-button').forEach(btn => btn.classList.remove('active'));
+            if (!isAlreadyActive) {
+                document.getElementById(subTabId).classList.add('active');
+                clickedButton.classList.add('active');
+            }
+        }
+        let currentFilter = 'all';
+        let currentSearch = '';
+        function filterTable(button, filter) {
+            const searchInput = document.getElementById('roleSearchInput');
+            const table = document.getElementById('roleBalanceTable');
+            if (!table) return;
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            if (button) {
+                currentFilter = filter;
+                document.querySelectorAll('.filter-buttons button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            }
+            currentSearch = searchInput.value.toLowerCase().trim();
+            const isSearchEmpty = currentSearch === '';
+
+            for (let i = 0; i < rows.length; i++) {
+                const team = rows[i].dataset.team;
+                const roleName = rows[i].cells[0].textContent.toLowerCase();
+                const note = rows[i].cells[3].textContent.toLowerCase();
+                const teamMatch = (currentFilter === 'all' || team === currentFilter);
+                const searchMatch = isSearchEmpty || (roleName.includes(currentSearch) || note.includes(currentSearch));
+                if (teamMatch && searchMatch) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+
+        function sortTable(columnIndex) {
+            const table = document.getElementById('roleBalanceTable');
+            if (!table) return;
+
+            let rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            switching = true;
+            dir = "desc";
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+
+                    if (!x || !y) continue;
+                    let xVal, yVal;
+
+                    if (columnIndex === 2) {
+                        xVal = Number(x.innerHTML);
+                        yVal = Number(y.innerHTML);
+                    } else {
+                        xVal = x.innerHTML.toLowerCase();
+                        yVal = y.innerHTML.toLowerCase();
+                    }
+                    if (dir == "asc") {
+                        if (xVal > yVal) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (xVal < yVal) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "desc") {
+                        dir = "asc";
+                        switching = true;
+                    }
+                }
+            }
+            const headers = table.getElementsByTagName('th');
+            for (let h = 0; h < headers.length; h++) {
+                headers[h].innerHTML = headers[h].innerHTML.replace(' ▾', '').replace(' ▴', '');
+            }
+            headers[columnIndex].innerHTML += (dir === 'desc' ? ' ▾' : ' ▴');
+        }
+
+        function calculateGroupPoints() {
+            const playerCountEl = document.getElementById('selectPlayerCount');
+            const gameTimeEl = document.getElementById('selectGameTime');
+            const roleTypeEl = document.getElementById('selectRoleType');
+            const baseScoreEl = document.getElementById('inputBaseScore');
+            const clanMembersEl = document.getElementById('inputClanMembers');
+
+            if (!playerCountEl || !gameTimeEl || !roleTypeEl || !baseScoreEl || !clanMembersEl) return;
+
+            const playerCount = playerCountEl.value;
+            const gameTime = gameTimeEl.value;
+            const roleType = roleTypeEl.value;
+            const baseScore = parseFloat(baseScoreEl.value) || 0;
+            const winningMembers = parseInt(clanMembersEl.value) || 0;
+
+            let villageMulti = 0;
+            let wolfMulti = 0;
+            let soloMulti = 0;
+
+            if (playerCount === "5-20") {
+                if (gameTime === "<5") { villageMulti = 0.5; wolfMulti = 2.25; soloMulti = 2.5; }
+                else if (gameTime === "5-30") { villageMulti = 0.75; wolfMulti = 4; soloMulti = 11; }
+                else if (gameTime === ">=30") { villageMulti = 1; wolfMulti = 5; soloMulti = 24; }
+            } else if (playerCount === "21-40") {
+                if (gameTime === "<5") { soloMulti = 17; } // Sadece Tanner (👺)
+                else if (gameTime === "5-30") { soloMulti = 19; } // Sadece Tanner (👺)
+                else if (gameTime === ">=30") { soloMulti = 21; } // Sadece Tanner (👺)
+                else if (gameTime === "<20") { villageMulti = 1; wolfMulti = 4.25; soloMulti = 28; }
+                else if (gameTime === "20-40") { villageMulti = 1.25; wolfMulti = 4.75; soloMulti = 36; }
+                else if (gameTime === "40-60") { villageMulti = 1.5; wolfMulti = 5.5; soloMulti = 48; }
+                else if (gameTime === ">=60") { villageMulti = 1.75; wolfMulti = 6; soloMulti = 64; }
+            } else if (playerCount === "41-60") {
+                if (gameTime === "<60") { villageMulti = 1.75; wolfMulti = 6; soloMulti = 65; }
+                else if (gameTime === "60-80") { villageMulti = 2; wolfMulti = 7; soloMulti = 75; }
+                else if (gameTime === "80-100") { villageMulti = 2.25; wolfMulti = 8; soloMulti = 92; }
+                else if (gameTime === ">=100") { villageMulti = 2.5; wolfMulti = 9; soloMulti = 104; }
+            } else if (playerCount === "61-80") {
+                if (gameTime === "<80") { villageMulti = 2.5; wolfMulti = 11; soloMulti = 120; }
+                else if (gameTime === "80-110") { villageMulti = 2.75; wolfMulti = 12; soloMulti = 140; }
+                else if (gameTime === ">=110") { villageMulti = 3; wolfMulti = 14; soloMulti = 155; }
+            } else if (playerCount === "81-100") {
+                if (gameTime === "<90") { villageMulti = 3; wolfMulti = 15; soloMulti = 175; }
+                else if (gameTime === "90-120") { villageMulti = 3.5; wolfMulti = 16; soloMulti = 200; }
+                else if (gameTime === ">=120") { villageMulti = 4; wolfMulti = 17; soloMulti = 225; }
+            }
+
+            let timeFactor = 0;
+            let factorText = "Time/Player Factor: ";
+
+            if (roleType === 'solo') {
+                timeFactor = soloMulti;
+                if (playerCount === "21-40" && (gameTime === "<5" || gameTime === "5-30" || gameTime === ">=30")) {
+                    factorText = `Factor (Tanner 👺 <span style="color:var(--team-solo)">${soloMulti}</span>): `;
+                } else {
+                    factorText = `Factor (Solo <span style="color:var(--team-solo)">${soloMulti}</span>): `;
+                }
+            } else if (roleType === 'wolf') {
+                timeFactor = wolfMulti;
+                factorText = `Factor (Wolf <span style="color:var(--team-wolf)">${wolfMulti}</span>): `;
+            } else {
+                timeFactor = villageMulti;
+                factorText = `Factor (Village <span style="color:var(--team-village)">${villageMulti}</span>): `;
+            }
+
+            let clanFactor = 1.0;
+            let finalClanFactorNote = "Rule: Default factor.";
+
+            if (playerCount === "41-60") {
+                if (winningMembers > 35) {
+                    clanFactor = 0.8;
+                    finalClanFactorNote = `Rule: 41-60 Players & >35 Members. Factor x0.8 applied.`;
+                } else {
+                    finalClanFactorNote = `Rule: 41-60 Players. No member count factor.`;
+                }
+            }
+            else if (playerCount === "61-80") {
+                finalClanFactorNote = "Rule: 61-80 Players (Blue Field). ";
+                if (winningMembers > 45) {
+                    clanFactor = 0.6;
+                    finalClanFactorNote += `>45 Members. Factor x0.6 applied.`;
+                }
+                else if (roleType === 'solo') {
+                    clanFactor = 0.8;
+                    finalClanFactorNote += `Solo Role. Factor x0.8 applied.`;
+                }
+                else if (roleType === 'wolf') {
+                    if (winningMembers > 12) {
+                        clanFactor = 0.7;
+                        finalClanFactorNote += `Wolf Team (>12 Members). Factor x0.7 applied.`;
+                    }
+                    else if (winningMembers >= 10 && winningMembers <= 12) {
+                        clanFactor = 0.8;
+                        finalClanFactorNote += `Wolf Team (10-12 Members). Factor x0.8 applied.`;
+                    }
+                }
+            }
+            else if (playerCount === "81-100") {
+                finalClanFactorNote = "Rule: 81-100 Players (Orange Field). ";
+                if (winningMembers > 55) {
+                    clanFactor = 0.4;
+                    finalClanFactorNote += `>55 Members. Factor x0.4 applied.`;
+                }
+                else if (roleType === 'solo') {
+                    clanFactor = 0.6;
+                    finalClanFactorNote += `Solo Role. Factor x0.6 applied.`;
+                }
+                else if (roleType === 'wolf') {
+                    if (winningMembers > 17) {
+                        clanFactor = 0.4;
+                        finalClanFactorNote += `Wolf Ornament (>17 Members). Factor x0.4 applied.`;
+                    }
+                    else if (winningMembers >= 14 && winningMembers <= 16) {
+                        clanFactor = 0.45;
+                        finalClanFactorNote += `Wolf Ornament (14-16 Members). Factor x0.45 applied.`;
+                    }
+                    else if (winningMembers >= 12 && winningMembers <= 14) {
+                        clanFactor = 0.5;
+                        finalClanFactorNote += `Wolf Ornament (12-14 Members). Factor x0.5 applied.`;
+                    }
+                }
+            }
+            else {
+                finalClanFactorNote = "Rule: No special clan factor for this player count.";
+            }
+            const finalScore = baseScore * winningMembers * timeFactor * clanFactor;
+
+            if (timeFactor === 0) {
+                document.getElementById('result-team-base').innerHTML = `Team Base Score: <span>${baseScore}</span>`;
+                document.getElementById('result-time-factor').innerHTML = 'Time/Player Factor: <span>N/A</span>';
+                document.getElementById('result-clan-members').innerHTML = `Winning Clan Members: <span>${winningMembers}</span>`;
+                document.getElementById('result-clan-factor').innerHTML = 'Clan Factor: <span>N/A</span>';
+                document.getElementById('result-final-score').innerHTML = 'Final Group Score: <span>N/A</span>';
+                document.getElementById('result-notes').innerText = 'Selected combination is not valid (e.g., 5-20 players with 60-80 min game) OR this team has no multiplier for this slot (see 👺).';
+                highlightCell(null, null);
+            } else {
+                document.getElementById('result-team-base').innerHTML = `Team Base Score: <span>${baseScore.toFixed(2)}</span>`;
+                document.getElementById('result-time-factor').innerHTML = `${factorText}<span>${timeFactor.toFixed(2)}</span>`;
+                document.getElementById('result-clan-members').innerHTML = `Winning Clan Members: <span>${winningMembers}</span>`;
+                document.getElementById('result-clan-factor').innerHTML = `Clan Factor: <span>x${clanFactor.toFixed(2)}</span>`;
+                document.getElementById('result-final-score').innerHTML = `Final Group Score: <span>${finalScore.toFixed(2)}</span>`;
+                document.getElementById('result-notes').innerText = `Formula: (Base) * (Members) * (Time Factor) * (Clan Factor). ${finalClanFactorNote}`;
+                highlightCell(gameTime, playerCount);
+            }
+        }
+
+        function highlightCell(time, players) {
+            document.querySelectorAll('.heatmap-cell').forEach(cell => cell.classList.remove('highlight'));
+            if (time && players) {
+                const selector = `.heatmap-cell[data-time="${time}"][data-players="${players}"]`;
+                const cell = document.querySelector(selector);
+                if (cell) {
+                    cell.classList.add('highlight');
+                }
+            }
+        }
+
+        function filterRoleSpecificPoints() {
+            const input = document.getElementById('roleSpecificSearchInput');
+            const filter = input.value.toLowerCase().trim();
+            const lists = document.querySelectorAll('#role-specific-points .role-point-list');
+
+            if (!lists.length) return;
+
+            lists.forEach(list => {
+                const items = list.getElementsByTagName('li');
+                let itemsVisible = false;
+
+                for (let i = 0; i < items.length; i++) {
+                    const li = items[i];
+                    const txtValue = li.textContent || li.innerText;
+                    if (txtValue.toLowerCase().includes(filter)) {
+                        li.style.display = "";
+                        itemsVisible = true;
+                    } else {
+                        li.style.display = "none";
+                    }
+                }
+            });
+        }
+
+        function closeAllTooltips() {
+            document.querySelectorAll('.tooltip-bubble.active').forEach(bubble => {
+                bubble.classList.remove('active');
+            });
+        }
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('tooltip-trigger')) {
+                const bubble = event.target.nextElementSibling;
+                const isAlreadyActive = bubble.classList.contains('active');
+                closeAllTooltips();
+                if (!isAlreadyActive) {
+                    bubble.classList.add('active');
+                }
+            }
+            else if (event.target.closest('.tooltip-bubble')) {
+                return;
+            }
+            else {
+                closeAllTooltips();
+            }
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,873 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="page-title-roles">Wolfblood - Hakkımızda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji" rel="stylesheet">
+    <link rel="stylesheet" href="Loader.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #1a202c;
+            --card-color: rgba(45, 55, 72, 0.95);
+            --text-color: #e2e8f0;
+            --header-color: #ffffff;
+            --font-header: 'Lora', serif;
+            --font-body: 'Nunito Sans', 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
+            --color-roles: #e53e3e;
+            --color-store: #2980b9;
+            --color-items: #27ae60;
+            --color-donations: #f39c12;
+            --electric-green: #00ff41;
+            --electric-red: #ff1a1a;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes shockwave-green {
+            0% {
+                box-shadow: 0 0 5px var(--electric-green), inset 0 0 5px var(--electric-green);
+                border-color: var(--electric-green);
+            }
+            50% {
+                box-shadow: 0 0 20px var(--electric-green), inset 0 0 10px var(--electric-green);
+                border-color: #ccffcc;
+            }
+            100% {
+                box-shadow: 0 0 5px var(--electric-green), inset 0 0 5px var(--electric-green);
+                border-color: var(--electric-green);
+            }
+        }
+
+        @keyframes shockwave-red {
+            0% {
+                box-shadow: 0 0 5px var(--electric-red), inset 0 0 5px var(--electric-red);
+                border-color: var(--electric-red);
+            }
+            50% {
+                box-shadow: 0 0 20px var(--electric-red), inset 0 0 10px var(--electric-red);
+                border-color: #ffcccc;
+            }
+            100% {
+                box-shadow: 0 0 5px var(--electric-red), inset 0 0 5px var(--electric-red);
+                border-color: var(--electric-red);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-forest.png');
+            color: var(--text-color);
+            line-height: 1.7;
+            position: relative;
+            z-index: 101;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 102;
+        }
+
+        .dropdown-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+            .dropdown-toggle:hover {
+                background-color: var(--color-roles);
+                border-color: var(--color-roles);
+                color: var(--header-color);
+            }
+
+            .dropdown-toggle .arrow {
+                font-size: 0.7rem;
+                transition: transform 0.3s ease;
+            }
+
+        .language-dropdown.open .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+
+        .language-dropdown.open .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+            .dropdown-menu a:hover {
+                background-color: var(--color-roles);
+                color: var(--header-color);
+            }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+            header h1 {
+                font-family: var(--font-header);
+                font-size: 3rem;
+                color: var(--header-color);
+                text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
+            }
+
+            header p {
+                font-size: 1.1rem;
+                color: #a0aec0;
+            }
+
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+            nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                font-weight: 600;
+                padding: 8px 15px;
+                border-radius: 6px;
+                transition: background-color 0.3s ease;
+            }
+
+                nav a:hover, nav a:focus {
+                    background-color: var(--color-roles);
+                    color: var(--header-color);
+                }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--card-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .team-section-wrapper {
+            margin-bottom: 50px;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .team-title {
+            font-family: var(--font-header);
+            color: var(--header-color);
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        .personel-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 320px;
+            height: 420px;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            border-radius: 12px;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 20px;
+            background-color: var(--bg-color);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 40px;
+            gap: 15px;
+        }
+
+        .kadir-card .flip-card-front,
+        .kadir-card .flip-card-back {
+            animation: shockwave-green 1.5s infinite alternate;
+        }
+
+        .ismet-card .flip-card-front,
+        .ismet-card .flip-card-back {
+            animation: shockwave-red 1.5s infinite alternate;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+            justify-content: flex-start;
+            padding-top: 50px;
+        }
+
+        .flip-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+            .flip-icon:hover {
+                background: rgba(255,255,255,0.3);
+                transform: scale(1.1);
+            }
+
+            .flip-icon svg {
+                width: 20px;
+                height: 20px;
+                fill: var(--text-color);
+            }
+
+        .personel-unvan {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 15px;
+        }
+        .personel-resim-wrapper {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .personel-resmi {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--header-color);
+        }
+
+        .kadir-card .personel-unvan {
+            color: var(--electric-green);
+            font-weight: bold;
+        }
+
+        .ismet-card .personel-unvan {
+            color: var(--electric-red);
+            font-weight: bold;
+        }
+
+        .personel-bilgi h3 {
+            font-family: var(--font-header);
+            font-size: 1.5rem;
+            color: var(--header-color);
+            margin-bottom: 5px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .personel-bilgi h3 a {
+                text-decoration: none;
+                color: inherit;
+            }
+        .titles-wrapper {
+            width: 100%;
+            height: 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            margin-top: 5px;
+        }
+        .personel-unvan {
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin: 0;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+
+            .personel-unvan .emoji {
+                margin-right: 5px;
+                font-size: 1rem;
+            }
+
+        .back-content {
+            text-align: left;
+            width: 100%;
+        }
+
+        .back-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        .mini-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--header-color);
+        }
+
+        .back-name h4 {
+            font-family: var(--font-header);
+            color: var(--header-color);
+            font-size: 1.2rem;
+        }
+
+        .back-desc {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        #appreciation-intro h2 {
+            font-family: var(--font-header);
+            color: var(--header-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-roles);
+            font-size: 2.2rem;
+            text-align: center;
+        }
+
+        #appreciation-intro h4 {
+            font-family: var(--font-header);
+            color: var(--color-roles);
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        #appreciation-intro a {
+            color: var(--color-roles);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+            #appreciation-intro a:hover {
+                text-decoration: underline;
+            }
+
+        hr {
+            border: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 30px 0;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .arrow-button {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 2px solid;
+            padding: 15px 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+        }
+
+        .btn-roles {
+            border-color: var(--color-roles);
+            color: var(--color-roles);
+        }
+        .btn-store {
+            border-color: var(--color-store);
+            color: var(--color-store);
+        }
+        .btn-items {
+            border-color: var(--color-items);
+            color: var(--color-items);
+        }
+        .btn-donations {
+            border-color: var(--color-donations);
+            color: var(--color-donations);
+        }
+        .arrow-button:hover {
+            transform: scale(1.03);
+            color: var(--header-color);
+        }
+        .btn-roles:hover, .btn-roles.active {
+            background-color: var(--color-roles);
+        }
+        .btn-store:hover, .btn-store.active {
+            background-color: var(--color-store);
+        }
+        .btn-items:hover, .btn-items.active {
+            background-color: var(--color-items);
+        }
+        .btn-donations:hover, .btn-donations.active {
+            background-color: var(--color-donations);
+        }
+        .about-section {
+            display: none;
+            padding: 25px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid;
+            border-top-width: 3px;
+            animation: fadeIn 0.5s ease;
+        }
+            .about-section.active {
+                display: block;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #new-roles {
+            border-color: var(--color-roles);
+        }
+        #store {
+            border-color: var(--color-store);
+        }
+        #items {
+            border-color: var(--color-items);
+        }
+        #donations {
+            border-color: var(--color-donations);
+        }
+
+        .about-section h2, .about-section h3 {
+            font-family: var(--font-header);
+            color: var(--header-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid;
+        }
+
+        #new-roles h2 {
+            border-color: var(--color-roles);
+        }
+        #store h2 {
+            border-color: var(--color-store);
+        }
+        #items h2 {
+            border-color: var(--color-items);
+        }
+        #donations h2 {
+            border-color: var(--color-donations);
+        }
+        .about-section ul {
+            padding-left: 30px;
+        }
+        .about-section li {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 800px) {
+            .button-container {
+                grid-template-columns: 1fr;
+            }
+            .arrow-button {
+                clip-path: none;
+                padding-right: 25px;
+            }
+            .personel-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #a0aec0;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .emoji {
+            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <div class="language-dropdown">
+                <button class="dropdown-toggle">
+                    <span id="selected-lang-flag">🇬🇧</span>
+                    <span id="selected-lang-code">EN</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" data-lang="en">🇬🇧 English</a>
+                    <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+                    <a href="#" data-lang="es">🇪🇸 Español</a>
+                    <a href="#" data-lang="fr">🇫🇷 Français</a>
+                    <a href="#" data-lang="it">🇮🇹 Italiano</a>
+                    <a href="#" data-lang="id">🇮🇩 Bahasa Indonesia</a>
+                    <a href="#" data-lang="ph">🇵🇭 Filipino</a>
+                    <a href="#" data-lang="ar">🇸🇦 العربية</a>
+                </div>
+            </div>
+            <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
+            <p data-key="header-subtitle-roles">About Us</p>
+        </header>
+
+        <nav>
+            <a href="Home.Page.html" data-key="nav-home">Home</a>
+            <a href="Oynanış.html" data-key="nav-how-to-play">How to Play?</a>
+            <a href="Roller.html" data-key="nav-roles">Roles</a>
+            <a href="Bot-Mechanics.html" data-key="nav-bot-mechanics">Bot Mechanics</a>
+            <a href="Güncellemeler.html" data-key="nav-news">News & Updates</a>
+            <a href="Gruplar.html" data-key="nav-groups">Groups</a>
+            <a href="Hakkımızda.html" data-key="nav-about">About Us</a>
+            <a href="İletişim.html" data-key="nav-contact">Contact with Us</a>
+        </nav>
+
+        <main>
+
+            <div class="team-section-wrapper">
+                <h3 class="team-title" data-key="about-team-title">Development Team</h3>
+                <div class="personel-grid">
+
+                    <div class="flip-card kadir-card" id="card-kadir">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="flip-icon" onclick="flipCard('card-kadir')">
+                                    <svg viewBox="0 0 24 24"><path d="M19,8l-4,4h3c0,3.31-2.69,6-6,6c-1.01,0-1.97-0.25-2.8-0.7l-1.46,1.46C8.97,19.54,10.43,20,12,20c4.42,0,8-3.58,8-8h3L19,8z M6,12c0-3.31,2.69-6,6-6c1.01,0,1.97,0.25,2.8,0.7l1.46-1.46C15.03,4.46,13.57,4,12,4c-4.42,0-8,3.58-8,8H1l4,4l4-4H6z" /></svg>
+                                </div>
+                                <div class="personel-resim-wrapper">
+                                    <img class="personel-resmi" src="image/sticker.webp" alt="Bot Owner">
+                                </div>
+                                <div class="personel-bilgi">
+                                    <h3 data-key="staff-kadir-name"><a href="https://t.me/kediben" target="_blank">Kadir Bayar</a></h3>
+
+                                    <div class="titles-wrapper">
+                                        <span class="personel-unvan" data-key="staff-kadir-founder">Founder</span>
+                                        <span class="personel-unvan" data-key="staff-kadir-dev">Main Developer</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="flip-icon" onclick="flipCard('card-kadir')">
+                                    <svg viewBox="0 0 24 24"><path d="M19,8l-4,4h3c0,3.31-2.69,6-6,6c-1.01,0-1.97-0.25-2.8-0.7l-1.46,1.46C8.97,19.54,10.43,20,12,20c4.42,0,8-3.58,8-8h3L19,8z M6,12c0-3.31,2.69-6,6-6c1.01,0,1.97,0.25,2.8,0.7l1.46-1.46C15.03,4.46,13.57,4,12,4c-4.42,0-8,3.58-8,8H1l4,4l4-4H6z" /></svg>
+                                </div>
+                                <div class="back-content">
+                                    <div class="back-header">
+                                        <img class="mini-img" src="image/sticker.webp" alt="Kadir Small">
+                                        <div class="back-name">
+                                            <h4>Kadir Bayar</h4>
+                                            <span style="color: var(--electric-green); font-size: 0.8rem;">Owner</span>
+                                        </div>
+                                    </div>
+                                    <p class="back-desc" data-key="staff-kadir-desc">The founder and lead developer of the bot. The person who initiated the Wolfblood project and defined its core vision. Makes all strategic decisions regarding the bot's future and growth.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card ismet-card" id="card-ismet">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="flip-icon" onclick="flipCard('card-ismet')">
+                                    <svg viewBox="0 0 24 24"><path d="M19,8l-4,4h3c0,3.31-2.69,6-6,6c-1.01,0-1.97-0.25-2.8-0.7l-1.46,1.46C8.97,19.54,10.43,20,12,20c4.42,0,8-3.58,8-8h3L19,8z M6,12c0-3.31,2.69-6,6-6c1.01,0,1.97,0.25,2.8,0.7l1.46-1.46C15.03,4.46,13.57,4,12,4c-4.42,0-8,3.58-8,8H1l4,4l4-4H6z" /></svg>
+                                </div>
+                                <div class="personel-resim-wrapper">
+                                    <img class="personel-resmi" src="image/i.uygur.jpg" alt="Web Developer">
+                                </div>
+                                <div class="personel-bilgi">
+                                    <h3 data-key="staff-ismet-name"><a href="https://t.me/Halfcelse" target="_blank">İsmet Uygur</a></h3>
+
+                                    <div class="titles-wrapper">
+                                        <span class="personel-unvan" data-key="staff-ismet-job-web">Web Developer</span>
+                                        <span class="personel-unvan" data-key="staff-ismet-job-role">Role Designer</span>
+                                        <span class="personel-unvan" data-key="staff-ismet-job-debug">Debugger & Tester</span>
+                                        <span class="personel-unvan">
+                                            <span class="emoji">🇹🇷</span><span data-key="staff-ismet-job-trans">Translator</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="flip-icon" onclick="flipCard('card-ismet')">
+                                    <svg viewBox="0 0 24 24"><path d="M19,8l-4,4h3c0,3.31-2.69,6-6,6c-1.01,0-1.97-0.25-2.8-0.7l-1.46,1.46C8.97,19.54,10.43,20,12,20c4.42,0,8-3.58,8-8h3L19,8z M6,12c0-3.31,2.69-6,6-6c1.01,0,1.97,0.25,2.8,0.7l1.46-1.46C15.03,4.46,13.57,4,12,4c-4.42,0-8,3.58-8,8H1l4,4l4-4H6z" /></svg>
+                                </div>
+                                <div class="back-content">
+                                    <div class="back-header">
+                                        <img class="mini-img" src="image/i.uygur.jpg" alt="Ismet Small">
+                                        <div class="back-name">
+                                            <h4>İsmet Uygur</h4>
+                                            <span style="color: var(--electric-red); font-size: 0.8rem;">Tech. Support</span>
+                                        </div>
+                                    </div>
+                                    <p class="back-desc" data-key="staff-ismet-desc1">Responsible for the visual design of the website and frontend development processes. Codes all necessary page layouts and user interfaces. Generate necessary roles and modes according to the demand.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="appreciation-intro">
+                <h2 data-key="about-main-title">APPRECIATION PAGE 🕊️</h2>
+                <p data-key="about-intro-p1">Wolfblood bot was developed in May 2022 and was mainly inspired by @werewolfbot, a fantastic creation by Para, the Father of the Telegram Werewolf Game and the original developer of the bot. We will be forever grateful to Para for inventing and coding this game.</p>
+                <p data-key="about-intro-p2">🤝 We would also like to thank Para and the entire GreyWolf Development Team for keeping the original bot running since 2016.</p>
+                <p data-key="about-intro-p3">🙏 We would also like to take this opportunity to thank everyone who has helped us in the Wolf Blood Community, not just limited to our developer Kadir {📟}, Core Team {🪽}, Translators {✍️}, Moderators {💠}, Donors {💵}, Sponsors {💎}, and to our beloved Players {🐾} who have shown unending love and support for the bot.</p>
+                <br>
+                <h4 data-key="about-ideas-title">Role and Feature Ideas:</h4>
+                <ul>
+                    <li data-key="about-ideas-li1">Most of our ideas for new roles are originally our own, while some are adapted from Wolvesville and GreyWolf role suggestions.</li>
+                    <li data-key="about-ideas-li2">The rest of the roles are from the original Werewolf Bot.</li>
+                    <li data-key="about-ideas-li3">Meanwhile, all feature ideas came from the Core Team and Wolf Blood players who have reached out to us through @wolfbloodsupport and @wolfbloodadminbot.</li>
+                </ul>
+                <p data-key="about-ideas-p1">Please see the following links for reference:</p>
+                <p><a href="https://github.com/GreyWolfDev/Werewolf/issues/141" target="_blank" data-key="about-ideas-link1">🔗 Role Suggestion</a></p>
+                <p><a href="https://github.com/GreyWolfDev/Werewolf/issues/501" target="_blank" data-key="about-ideas-link2">🔗 Role List Suggestion</a></p>
+            </div>
+
+            <hr>
+
+            <div class="button-container">
+                <button class="arrow-button btn-roles" onclick="showSection('new-roles', this)" data-key="about-btn-roles">New Roles & Game Modes</button>
+                <button class="arrow-button btn-store" onclick="showSection('store', this)" data-key="about-btn-store">Store</button>
+                <button class="arrow-button btn-items" onclick="showSection('items', this)" data-key="about-btn-items">Items</button>
+                <button class="arrow-button btn-donations" onclick="showSection('donations', this)" data-key="about-btn-donations">Donations</button>
+            </div>
+
+            <div id="new-roles" class="about-section">
+                <h2 data-key="about-roles-title">New Roles & Game Modes</h2>
+                <p data-key="about-roles-p1">Wolfblood is constantly evolving, and we're excited to introduce a fresh batch of roles and innovative game modes to keep the gameplay thrilling and unpredictable.</p>
+                <h3 data-key="about-roles-h3-1">New Roles</h3>
+                <ul>
+                    <li data-key="about-role-boss">Boss 🎩</li>
+                    <li data-key="about-role-skeleton">Skeleton 💀</li>
+                    <li data-key="about-role-miner">Miner ⛏️</li>
+                    <li data-key="about-role-executioner">Executioner 🦸‍♂</li>
+                    <li data-key="about-role-informant">Informant 🦜</li>
+                    <li data-key="about-role-pawn">Pawn ♟</li>
+                    <li data-key="about-role-commando">Commando 🪖</li>
+                    <li data-key="about-role-preacher">Preacher 🛐</li>
+                    <li data-key="about-role-shadowolf">Shadow Wolf 🐺🌚</li>
+                    <li data-key="about-role-jugglerwolf">Juggler Wolf 🐺✨</li>
+                    <li data-key="about-role-tricksterwolf">Trickster Wolf 🐺🧧</li>
+                    <li data-key="about-role-illusionistwolf">Illusionist Wolf 🐺🪄</li>
+                    <li data-key="about-role-poseidon">Poseidon 🧜</li>
+                    <li data-key="about-role-slave">Slave 😵‍💫</li>
+                </ul>
+                <h3 data-key="about-roles-h3-2">New Game Modes</h3>
+                <p data-key="about-roles-p-love">
+                    Love Mode: Are you ready for some romance? In this mode, every player is in love. On the first night, your lover will be chosen, and you'll find out who they are the next day. This mode is exclusive to games with an even number of players (e.g., 6, 8, 10).
+                </p>
+                <p data-key="about-roles-p-custom">
+                    Simplified Custom Mode: Starting a custom game is now easier than ever. You can simply specify the number of roles you want to add, and the bot will do the rest. For example, instead of typing /startcustom 🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪, you can now just use /startcustom 9🔪. This feature currently works for adding up to 9 of each role at a time.
+                </p>
+                <p data-key="about-roles-p-treasure">
+                    Treasure Mode: This mode is a spin on the standard ranked game with an enhanced point system that scales with the number of players. You'll earn more points for your victories and get a chance to win mystery boxes. These boxes contain temporary rewards like Player Tags, Temporary Emojis, ForceStart Tokens, and Jersey Numbers. At the end of the game, a few players are randomly selected to receive one of these prizes for 3 to 7 days.
+                </p>
+            </div>
+
+            <div id="store" class="about-section">
+                <h2 data-key="about-store-title">Wolfblood Store 🛍️🛒</h2>
+                <p data-key="about-store-p1">The Wolfblood Store is where players can enhance their gaming experience with various in-game items. The primary currency is WB Mint (🪙), earned simply by playing.</p>
+                <h3 data-key="about-store-h3-1">Store Items:</h3>
+                <p data-key="about-store-p2">
+                    ◽️ Wolf Blood Currency (WB Mint):
+                    How to earn Mint? Simply by playing a game. It will be given to players randomly by the bot based on the number of players in the game.
+                </p>
+                <ul>
+                    <li data-key="about-store-li1">1 🪙 = 10-19 players</li>
+                    <li data-key="about-store-li2">2 🪙 = 29 players</li>
+                    <li data-key="about-store-li3">... and so on up to 10 🪙 at 100 players.</li>
+                </ul>
+                <p data-key="about-store-p3">
+                    ◽️ Emoji Fragments (🧩):
+                    Fragments enable players to create custom emojis. The emoji store has been updated to offer both temporary (1 week, 1 month, 1 year) and permanent emojis.
+                </p>
+                <p data-key="about-store-p4">
+                    ◽️ Role Vouchers (🪪):
+                    These encourage players to try out different roles and diversify their gameplay. Prices vary per role (Basic, Advance, Expert, and Pro).
+                </p>
+                <p data-key="about-store-p5">
+                    ◽️ FS (ForceStart) Tokens (⭐️):
+                    Allow players to /forcestart a game without being an admin. You can purchase 1 FS Token for 5 Mints.
+                </p>
+                <p data-key="about-store-p6">
+                    ◽️ Gifting & Transfer Fees (🔂):
+                    The fee for the /transfer command has been set to 5 Mints. This command can be used only once a day, while /gift has unlimited usage.
+                </p>
+                <p data-key="about-store-p7">
+                    ✅ Telegram Stars (⭐️): You can now use Telegram Stars to purchase a wide range of items, including temporary emojis, custom GIFs, Mints, custom messages, and role vouchers.
+                </p>
+                <h3 data-key="about-store-h3-2">Commands:</h3>
+                <ul>
+                    <li data-key="about-store-li4">▪️/profile - Here you can see a list of all items available in your WB Wallet.</li>
+                    <li data-key="about-store-li5">▪️/store - Use this command to buy items from our store.</li>
+                </ul>
+            </div>
+
+            <div id="items" class="about-section">
+                <h2 data-key="about-items-title">Wolfblood Items ✨</h2>
+                <p data-key="about-items-p1">Discover unique items that give you a strategic advantage in the game.</p>
+                <p data-key="about-items-p2">🌱 Fake Name Ticket [🎭]: Use the /fakename command to set a fake name that the bot will use throughout the game. Confuse your opponents and gain an edge!</p>
+                <p data-key="about-items-p3">🌱 ForceJoin Token [💪]: With this token, you can force another player to join the game.</p>
+                <p data-key="about-items-p4">🌱 Bonus Points Ticket [🎰]: Activate this ticket to multiply your points by x2, helping you level up your gameplay.</p>
+                <p data-key="about-items-p5">🌱 Fake Role Ticket [🔖]: Use the /fakerole command to set a fake role. Once activated, your role will appear as the fake role, hiding your real one for a single game. Get ready to have some fun and confuse everyone!</p>
+            </div>
+
+            <div id="donations" class="about-section">
+                <h2 data-key="about-donations-title">Donations 🎁</h2>
+                <p data-key="about-donations-p1">We are grateful for all donations that help support the bot's development. Donors receive special features to show our appreciation.</p>
+                <h3 data-key="about-donations-h3-1">Donation Features:</h3>
+                <p data-key="about-donations-p2">✔️ Player Tags: Donors can now set a custom 3-letter tag to display their VIP status in the community. For example: [PRO] Wolf Blood.</p>
+                <p data-key="about-donations-p3">✔️ Emoji Identifiers: Donors receive an updated emoji based on their donation amount:</p>
+                <ul>
+                    <li data-key="about-donations-li1">💵 $5 - $49</li>
+                    <li data-key="about-donations-li2">💶 $50 - $99</li>
+                    <li data-key="about-donations-li3">💷 $100 and above</li>
+                </ul>
+                <p data-key="about-donations-p4">✔️ Special Message [📝]: With a donation level above $50, you can use the /specialmessage command to set a custom message that appears randomly at the end of the game if you win.</p>
+                <p data-key="about-donations-p5">✔️ Custom GIFs: Donors who contribute $10 or more can set custom GIFs to be displayed in-game.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p data-key="footer-text">© 2025 Wolfblood Team - All Rights Reserved.</p>
+        </footer>
+    </div>
+    <script>
+        function showSection(sectionId, clickedButton) {
+            document.querySelectorAll('.about-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.button-container button').forEach(button => {
+                button.classList.remove('active');
+            });
+            clickedButton.classList.add('active');
+        }
+
+        function flipCard(cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.toggle('flipped');
+        }
+    </script>
+    <script src="Loader.js" defer></script>
+    <script src="Translate.js" defer></script>
+</body>
+</html>

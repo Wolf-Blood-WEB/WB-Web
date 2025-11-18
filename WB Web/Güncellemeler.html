@@ -1,0 +1,1663 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="page-title-updates">Wolfblood - Güncellemeler</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji" rel="stylesheet">
+    <link rel="stylesheet" href="Loader.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #1a202c;
+            --card-color: rgba(45, 55, 72, 0.85);
+            --text-color: #e2e8f0;
+            --header-color: #ffffff;
+            --accent-color: #e53e3e;
+            --accent-hover-color: #fc8181;
+            --font-header: 'Lora', serif;
+            --font-body: 'Nunito Sans', 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-forest.png');
+            color: var(--text-color);
+            line-height: 1.7;
+            position: relative;
+            z-index: 101;
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 102;
+        }
+        .dropdown-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+            .dropdown-toggle:hover {
+                background-color: var(--accent-color);
+                border-color: var(--accent-color);
+                color: var(--header-color);
+            }
+            .dropdown-toggle .arrow {
+                font-size: 0.7rem;
+                transition: transform 0.3s ease;
+            }
+
+        .language-dropdown.open .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        .language-dropdown.open .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+            .dropdown-menu a:hover {
+                background-color: var(--accent-color);
+                color: var(--header-color);
+            }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+            header h1 {
+                font-family: var(--font-header);
+                font-size: 3rem;
+                color: var(--header-color);
+                text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
+            }
+            header p {
+                font-size: 1.1rem;
+                color: #a0aec0;
+            }
+
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+            nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                font-weight: 600;
+                padding: 8px 15px;
+                border-radius: 6px;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+                nav a:hover, nav a:focus {
+                    background-color: var(--accent-color);
+                    color: var(--header-color);
+                    outline: none;
+                }
+
+        main {
+            max-width: none;
+            padding: 40px 4%;
+            margin: 0 auto;
+        }
+            main h1 {
+                font-family: var(--font-header);
+                color: var(--header-color);
+                font-size: 2.2rem;
+                text-align: center;
+                margin-bottom: 25px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid var(--accent-color);
+            }
+
+        .update-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .update-card {
+            background-color: var(--card-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 25px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-family: var(--font-header);
+            color: var(--header-color);
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-bottom: 3px solid var(--accent-color);
+        }
+            .update-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+                border-color: var(--accent-hover-color);
+            }
+
+        .update-content-storage {
+            display: none;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+            .modal-overlay.visible {
+                display: flex;
+                opacity: 1;
+                transform: scale(1);
+            }
+        .modal-content {
+            background-color: var(--bg-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+            .modal-close:hover {
+                color: var(--accent-color);
+            }
+
+        .modal-body {
+            padding: 30px 40px;
+        }
+            .modal-body h4 {
+                color: var(--accent-hover-color);
+                font-family: var(--font-header);
+                font-size: 1.3rem;
+                margin-top: 15px;
+                margin-bottom: 10px;
+            }
+            .modal-body ul {
+                list-style-type: none;
+                padding-left: 10px;
+            }
+            .modal-body li {
+                margin-bottom: 10px;
+            }
+            .modal-body strong {
+                color: var(--header-color);
+            }
+            .modal-body .footer-links {
+                text-align: center;
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                font-size: 0.9rem;
+                color: #a0aec0;
+            }
+                .modal-body .footer-links a {
+                    color: var(--accent-hover-color);
+                    text-decoration: none;
+                    display: block;
+                    margin-bottom: 5px;
+                }
+                    .modal-body .footer-links a:hover {
+                        text-decoration: underline;
+                    }
+        @media (max-width: 1024px) {
+            .update-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 640px) {
+            .update-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #a0aec0;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        .emoji {
+            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <div class="language-dropdown">
+                <button class="dropdown-toggle">
+                    <span id="selected-lang-flag">🇬🇧</span>
+                    <span id="selected-lang-code">EN</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" data-lang="en">🇬🇧 English</a>
+                    <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+                    <a href="#" data-lang="es">🇪🇸 Español</a>
+                    <a href="#" data-lang="fr">🇫🇷 Français</a>
+                    <a href="#" data-lang="it">🇮🇹 Italiano</a>
+                    <a href="#" data-lang="id">🇮🇩 Bahasa Indonesia</a>
+                    <a href="#" data-lang="ph">🇵🇭 Filipino</a>
+                    <a href="#" data-lang="ar">🇸🇦 العربية</a>
+                </div>
+            </div>
+            <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
+            <p data-key="header-subtitle-updates">Updates</p>
+        </header>
+
+        <nav>
+            <a href="Home.Page.html" data-key="nav-home">Home</a>
+            <a href="Oynanış.html" data-key="nav-how-to-play">How to Play?</a>
+            <a href="Roller.html" data-key="nav-roles">Roles</a>
+            <a href="Bot-Mechanics.html" data-key="nav-bot-mechanics">Bot Mechanics</a>
+            <a href="Güncellemeler.html" data-key="nav-news">News & Updates</a>
+            <a href="Gruplar.html" data-key="nav-groups">Groups</a>
+            <a href="Hakkımızda.html" data-key="nav-about">About Us</a>
+            <a href="İletişim.html" data-key="nav-contact">Contact with Us</a>
+        </nav>
+
+        <main>
+            <h1 data-key="updates-main-title">Updates</h1>
+
+            <div class="update-grid">
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-27-title">🔔 [UPDATE 27] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-27-h1">🆒 NEW COMMANDS:</h4>
+                            <p data-key="updates-27-p1"><strong>🎀 /stars</strong> - This command unlocks exclusive WB items and features using Telegram Stars ⭐️to level up your gameplay 💊.</p>
+                            <p data-key="updates-27-p2"><strong>🎀 /gift</strong> - Surprise your special someone with an exclusive WB item! 🎁 You can use this command to send a gift using Telegram stars⭐️.</p>
+
+                            <h4 data-key="updates-27-h2">🆕 ROLE EDITS:</h4>
+                            <p data-key="updates-27-p3"><strong>✔️ Executioner 🦸</strong></p>
+                            <p data-key="updates-27-p4">Once per game, the Executioner can choose 2 players during the day. Villagers must vote to execute and eliminate one of them.</p>
+                            <p data-key="updates-27-p5"><strong>✔️ Jinx 🥸</strong></p>
+                            <p data-key="updates-27-p6">Jinx can no longer take the life of another player upon death.</p>
+                            <p data-key="updates-27-p7"><strong>✔️ Skeleton 💀</strong></p>
+                            <p data-key="updates-27-p8">Once the Skeleton is dead, the "Haunt" button will pop-up in his bot PM asking if he wants to spook someone. Whenever he clicks the button (Yes --- Even in day phase), options will appear in his bot PM and the chosen player will have their abilities blocked during that phase of the game.</p>
+                            <p data-key="updates-27-p9"><strong>✔️ Arsonist 🔥</strong></p>
+                            <p data-key="updates-27-p10">The Fire does melt the Ice 🔥🧊 : Arsonist is no longer vulnerable to Snow Wolf (🐺☃️).</p>
+
+                            <h4 data-key="updates-27-h3">👑 STORE UPDATE !!!</h4>
+                            <ul>
+                                <li data-key="updates-27-li1">✅ Emoji store has been updated. Now you can purchase temporary emojis (1 week, 1 month, 1 year), as well as the permanent emojis.</li>
+                                <li data-key="updates-27-li2">✅ All fees of /transfer menu has been set to 5 Mints. However, this command can be used only once a day, while /gift command has unlimited usage.</li>
+                            </ul>
+
+                            <h4 data-key="updates-27-h4">🔄 OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-27-li3">✔️ Bonus Points and Rank Balance Points have been revised and edited accordingly for a fair gameplay.</li>
+                                <li data-key="updates-27-li4">✔️ New achievements have been added to the game.</li>
+                                <li data-key="updates-27-li5">✔️ /smite, /extend and /forcestart commands are now supported for Anonymous Admins as well.</li>
+                                <li data-key="updates-27-li6">✔️ Several bugs have been fixed.</li>
+                                <li data-key="updates-27-li7">✔️ Rank mode approval system has been updated allowing non-approved groups to resubmit a request after some time. Due to this change, already approved groups may have to go through the approval process again.</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-27-f1">📝 Feel free to contact us at @wolfbloodhelpbot to report bugs and for more info.</p>
+                                <p data-key="updates-27-f2">🐺 @wolfbloodnews x @wolfbloodbot</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-26-title">🔔 [UPDATE 26] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-26-h1">🆕 NEW ROLES:</h4>
+                            <p data-key="updates-26-p1"><strong>⚜️Jinx 🥸 [50%]</strong></p>
+                            <p data-key="updates-26-p2">• Jinx is the village’s walking calamity. Even the gentlest choice he make seems cursed to go awry. His persistent bad luck causes his action choices to show up as "?" in the bot. Anyone who visits him at night will suffer from the misfortune for 1 day. If Jinx is lynched, the bad luck will reach its peak and take the life of another player who voted for him.</p>
+
+                            <p data-key="updates-26-p3"><strong>⚜️Illusionist Wolf 🐺🪄[0%] - 7 players and ></strong></p>
+                            <p data-key="updates-26-p4">• Illusionist wolf has been edited and re-activated. At the beginning of the game, you will be told a random villager role. If seer checks you, they’ll see that fake role instead of your true self. And here’s the twist: if you get lynched, the unlucky villager tied to your illusion goes down with you! If that villager’s already out of the game, you get to pick a new target to share your fate.</p>
+
+                            <p data-key="updates-26-p5"><strong>⚜️Snitch 🦜[100%] - 7 players and ></strong></p>
+                            <p data-key="updates-26-p6">• Snitch has been updated and re-activated. Snitch is the nosiest resident in the entire village. His passion for gossip has led him to learn everyone’s hidden truths. On his final breath, snitch can make any player reveal their identity by snitching on their deepest darkest secret. Additionally, if the wolves dare to attack Snitch, there’s a 25% chance that one wolf’s identity gets revealed.</p>
+
+                            <h4 data-key="updates-26-h2">🧡 NEW WB ITEMS:</h4>
+                            <p data-key="updates-26-p7"><strong>🌱FakeRole Ticket [🔖] :</strong></p>
+                            <p data-key="updates-26-p8">FakeRole tickets can be used to set a Fake Role for you using /fakerole command. Once you activate the ticket, your role will show up as the fake role you set, hiding your real role for one game. Get ready to have some fun and confuse everyone 😎</p>
+
+                            <h4 data-key="updates-26-h3">💡 OTHER UPDATES:</h4>
+                            <ul>
+                                <li>
+                                    <span data-key="updates-26-li1">✅ New command : /items</span>
+                                    <p style="margin-top: 5px; margin-bottom: 5px;" data-key="updates-26-p9">• You can check your WolfBlood Items using this command.</p>
+                                </li>
+                                <li>
+                                    <span data-key="updates-26-li2">✅ Rank emojis:</span>
+                                    <p style="margin-top: 5px; margin-bottom: 5px;" data-key="updates-26-p10">• Some rank emojis have been changed.</p>
+                                    <p style="margin-top: 5px; margin-bottom: 5px;" data-key="updates-26-p11">
+                                        🐾 1000 - 2499<br>
+                                        ☘️ 2500 - 3499<br>
+                                        🍂 3500 - 4999<br>
+                                        🍁 5000 - 6499<br>
+                                        🌾 6500 - 7499<br>
+                                        🪁 7500 - 8999<br>
+                                        ⚔️ 9000 - 9999<br><br>
+                                        🏆 10000 - 19999<br>
+                                        🪐 20000 - 29999<br>
+                                        🚀 30000 - 39999<br>
+                                        🕹 39999 - 40000<br>
+                                        🛸 50K
+                                    </p>
+                                </li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-26-f1">✔️ Feel free to contact us at @wolfbloodhelpbot to report bugs and for more info.</p>
+                                <p data-key="updates-26-f2">🐺 @wolfbloodnews x @wolfbloodbot</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-25-title">🔔 [UPDATE 25] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-25-h1">🔄 EDITED ROLES:</h4>
+                            <p data-key="updates-25-p1"><strong>⚜️Chemist 🧪</strong></p>
+                            <p data-key="updates-25-p2">• Chemist role has been updated. On the first night, Chemist prepare 4 potions: 2 are deadly poisons and 2 are harmless painkillers. He can choose a target to give one of each, leaving them to decide their own fate! If a bad role die from the poison, chemist receive 2 extra potions. After visiting someone, he will have to wait 1 day before visiting another player.</p>
+
+                            <p data-key="updates-25-p3"><strong>⚜️Pawn ♟️</strong></p>
+                            <p data-key="updates-25-p4">• Pawn has been revised. Pawn now can protect their target from Serial Killer too. Additionally, if pawn choose to protect wolf, there is a 50% chance pawn dies. However if pawn visit Serial Killer, he will die instantly.</p>
+
+                            <p data-key="updates-25-p5"><strong>⚜️Grave Digger ☠️</strong></p>
+                            <p data-key="updates-25-p6">• Grave Digger has been modified. Grave digger now possess a one-time ability to use any talent from newly dead villagers for 1 day.</p>
+
+                            <p data-key="updates-25-p7"><strong>⚜️Rogue Wolf 🐺🧧</strong></p>
+                            <p data-key="updates-25-p8">• Rogue Wolf has been revised. Rogue wolf can't swap identities anymore. But instead, he now has the chance to impersonate another player. When rogue wolf is dead or checked, his role will be seen as his target's. If the target has a revealing ability, rogue wolf can imitate the action, but it will be ineffective. <a href="http://t.me/WolfBlood_ENG_bot?start=personal_-1001566685416_rogue" target="_blank">More details...</a></p>
+
+                            <h4 data-key="updates-25-h2">🆕 NEW WB ITEMS:</h4>
+                            <p data-key="updates-25-p9"><strong>🌱FakeName Ticket [🎭] :</strong></p>
+                            <p data-key="updates-25-p10">• FakeName tickets can be used to set a Fake Name for you using /fakename command. Bot will use the Fake Name you set throughout the game. Confuse your opponents and gain an edge in the game! 💥</p>
+
+                            <p data-key="updates-25-p11"><strong>🌱ForceJoin Token [💪] :</strong></p>
+                            <p data-key="updates-25-p12">• With ForceJoin token, you can add another player to the game by force.</p>
+
+                            <p data-key="updates-25-p13"><strong>🌱Bonus Points Ticket [🎰] :</strong></p>
+                            <p data-key="updates-25-p14">• Level up your game with our Bonus Points ticket! Activate this ticket to multiply your points by x2, giving you the boost you need to take your gameplay to the next level.</p>
+
+                            <h4 data-key="updates-25-h3">💎 NEW DONATION PERKS</h4>
+                            <p data-key="updates-25-p15"><strong>✔️Special Message [📝] :</strong></p>
+                            <p data-key="updates-25-p16">• With a donation level above 50, you can now set a special custom message using /specialmessage which appears randomly at the end of the game if you win.</p>
+
+                            <h4 data-key="updates-25-h4">➖ OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-25-li1">1️⃣Several bugs have been fixed, including the issue with WolfCub not granting two eats and some wolves being unable to eat. Additionally, new role arrangements and roles will be introduced in the near future.</li>
+                                <li data-key="updates-25-li2">2️⃣Clumsy Wolf (🐺🤕) has been removed.</li>
+                                <li data-key="updates-25-li3">3️⃣Judge (🧑‍⚖) and Depressive (😨) roles have been temporarily disabled.</li>
+                                <li data-key="updates-25-li4">4️⃣Chemist (🧪) and Grave Digger (☠️) now appear in games only with 7 or more players while Preacher (🛐) and Pawn (♟️) can appear in games with any playercount.</li>
+                                <li data-key="updates-25-li5">5️⃣Roles such as Doctor (🧑‍⚕️), Chemist (🧪), Skeleton (💀) and Gunner (🔫) earn 1 extra action for every 40 people.</li>
+                                <li data-key="updates-25-li6">6️⃣When several players visit the miner's target during the night phase, only one visitor will be affected by the miner each night.</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-25-f1">✔️ Feel free to contact us at @WolfBloodHelpBot to report bugs and for more info.</p>
+                                <p data-key="updates-25-f2">🐺 @wolfbloodnews x @wolfbloodbot</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-store1-title">🏪 WOLF BLOOD STORE 🏪</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <p data-key="updates-store1-p1">We have opened the Wolf Blood Store 🏪this month where you can buy different <a href="https://t.me/wolfbloodnews/83" target="_blank">Wolf Blood Items</a> 👈 to enhance your gameplay.</p>
+                            <p data-key="updates-store1-p2">Instead of using real money, you will need to use [🪙] Mint to buy items. It is also the means of exchange.</p>
+
+                            <p data-key="updates-store1-p3">
+                                ➡️How to get [🪙] Mint? By simply playing a game.<br>
+                                ➡️You can check your collected items via <strong>/profile@wolfbloodbot</strong>.<br>
+                                ➡️While you can buy items by sending <strong>/store@wolfbloodbot</strong>.<br>
+                                ➡️<a href="https://t.me/wolfbloodnews/83" target="_blank">Click here</a> to see more details about Wolf Blood Items.<br>
+                                ➡️Keep on supporting the bot via <strong>/donate@wolfbloodbot</strong> ⭐️⭐️
+                            </p>
+
+                            <p data-key="updates-store1-p4">The advantage of Wolf Blood items is that there is not just one item to choose from. We have the following:</p>
+
+                            <p data-key="updates-store1-p5"><strong>[🧩] Emoji Fragments</strong> - Helps you create permanent emojis which appears next to the player’s name. Example Wolf Blood {🐺}.</p>
+                            <p data-key="updates-store1-p6"><strong>[💫] FS (ForceStart) Tokens</strong> - Allows you to use the /forcestart command in any group with @wolfbloodbot without being an admin.</p>
+                            <p data-key="updates-store1-p7"><strong>[🪪] Role Voucher</strong> - This allows players to obtain specific game roles in games by activating them. Similar to tickets from another bot.</p>
+
+                            <p data-key="updates-store1-p8">In addition to this, you can also <strong>/transfer@wolfbloodbot</strong> your items to your friends or favorite players.</p>
+
+                            <ul>
+                                <li data-key="updates-store1-li1">🇺🇸 <a href="https://t.me/wolfbloodofficial" target="_blank">Wolf Blood Official</a></li>
+                                <li data-key="updates-store1-li2">🇮🇩 <a href="https://t.me/wolfblood_id" target="_blank">Wolf Blood Indonesia</a></li>
+                                <li data-key="updates-store1-li3">🇸🇦 <a href="https://t.me/+3abLW97J2V5jZWE1" target="_blank">Wolf Blood Arabic</a></li>
+                                <li data-key="updates-store1-li4">🇵🇭 <a href="https://t.me/+vXfnGFII1zk3YjI1" target="_blank">Wolf Blood Philippines</a></li>
+                                <li data-key="updates-store1-li5">🇫🇷 <a href="https://t.me/+va2BmyyAz5wyMjZl" target="_blank">Wolf Blood French</a></li>
+                                <li data-key="updates-store1-li6">🇮🇹 <a href="https://t.me/+t3FhedNZ5vA5MjM1" target="_blank">Wolf Blood Italian</a></li>
+                                <li data-key="updates-store1-li7">🇪🇸 <a href="https://t.me/+Bamr5wNvfMw0MDM1" target="_blank">Wolf Blood Spanish</a></li>
+                            </ul>
+
+                            <ul>
+                                <li data-key="updates-store1-li8">🎁 <a href="https://t.me/wolfblood_en/662" target="_blank">Win Telegram Premium</a></li>
+                                <li data-key="updates-store1-li9">🏆 <a href="https://t.me/wolfbloodindonesia/61" target="_blank">Win $10 GIF and cash prizes</a></li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-store1-f1">🐺@wolfbloodbot x @wolfbloodsupport</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-store2-title">✨ WB STORE 🛍️🛒</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <p data-key="updates-store2-p1">
+                                <strong>◽️Wolf Blood Currency: 🪙 or WB Mint</strong><br>
+                                ▫️How to earn Mint? Simply by playing a game. It will be given to players randomly by the bot.
+                            </p>
+
+                            <p data-key="updates-store2-p2"><strong>▫️Mint Eligibility: 1 Mint each per player</strong></p>
+                            <p data-key="updates-store2-p3">
+                                1 🪙 = 10-19 players<br>
+                                2 🪙 = 29 players<br>
+                                3 🪙 = 39 players<br>
+                                4 🪙 = 49 players<br>
+                                5 🪙 = 59 players<br>
+                                6 🪙 = 69 players<br>
+                                7 🪙 = 79 players<br>
+                                8 🪙 = 89 players<br>
+                                9 🪙 = 99 players<br>
+                                10 🪙 = 100 players
+                            </p>
+
+                            <p data-key="updates-store2-p4"><strong>◽️Wolf Blood Merchandise:</strong></p>
+                            <p data-key="updates-store2-p5">
+                                <strong>◽️Role Vouchers 🪪</strong> - This encourages players to try out different roles and diversify their gameplay.<br>
+                                ▫️How to earn Vouchers: Buy using Mints<br>
+                                ▫️Prices: Price varies per Role (Basic, Advance, Expert and Pro).
+                            </p>
+
+                            <p data-key="updates-store2-p6">
+                                <strong>◽️Emoji Fragments 🧩</strong> - Enable players to create emojis based on the emojis available on the store.<br>
+                                ▫️How to earn Fragments: Buy using Mints<br>
+                                ▫️Prices: Price varies per emoji; 3 Fragments for 1 Mint.
+                            </p>
+
+                            <p data-key="updates-store2-p7">
+                                <strong>◽️FS (ForceStart) Tokens ⭐️</strong> - Allow players to /forcestart a game without being an admin in any groups with @wolfbloodbot.<br>
+                                ▫️How to earn FS Tokens: Buy using Mints<br>
+                                ▫️Prices: 1 FS Tokens for 5 Mints.
+                            </p>
+
+                            <p data-key="updates-store2-p8">
+                                <strong>◽️WB Gifting or Transfer Fees 🔂</strong>- Let the players transfer their items to another Wolf Blood players. Use /transfer command to do this action.<br>
+                                ▫️Prices: Varies per items.
+                            </p>
+
+                            <p data-key="updates-store2-p9"><strong>◾️Others:</strong></p>
+                            <p data-key="updates-store2-p10"><strong>▪️/profile</strong> - Here you can see the list of all store items available in your WB Wallet.</p>
+                            <p data-key="updates-store2-p11">
+                                Example:<br>
+                                [🪙] Mint - 1<br>
+                                [🪪] Vouchers - 2<br>
+                                [💪] FS Tokens - 3<br>
+                                [🧩] Fragments - 45
+                            </p>
+
+                            <p data-key="updates-store2-p12"><strong>▪️/store</strong> - This is the command to buy items from our Wolf Blood Store.</p>
+
+                            <p data-key="updates-store2-p13">
+                                <strong>▪️Role Inventory 🛅</strong><br>
+                                Activate and deactivate your role vouchers from here.
+                            </p>
+
+                            <div class="footer-links">
+                                <p data-key="updates-store2-f1">🐺@wolfbloodnetworks x @wolfbloodbot</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-donate-title">📣 DONATION & NEWS 📣</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <p data-key="updates-donate-p1">💜 <a href="https://t.me/wolfbloodbot" target="_blank">WolfBlood bot’s</a> /donation command has been disabled as we adjust to the new in-app’s currency called <a href="https://telegram.org/blog/telegram-stars" target="_blank">Telegram Stars</a>. You can continue to donate and support us via the following:</p>
+                            <p data-key="updates-donate-p2">
+                                💎 TON - UQBQGFqESesVW8PA_C8_1Q65mbOYHo0pn8ZN3-uT39plLiyP<br>
+                                💎 Paypal - risenroses@yahoo.com
+                            </p>
+
+                            <p data-key="updates-donate-p3">✅ Do you want to win 1 year of Telegram Premium 🎁 and other prizes? Check the below link more details 🤩🤩</p>
+                            <p data-key="updates-donate-p4">🔗 <a href="https://t.me/WolfBlood_En/662" target="_blank">https://t.me/WolfBlood_En/662</a></p>
+
+                            <p data-key="updates-donate-p5">💡We are in need for active Translators who can help us translate all files into your own language through the crowdin project. Those who become translators will earn the {✍️} emoji from us. We are looking for volunteers who can work with us on a permanent basis on translations. People who want to do this can contact us via @wolfbloodadminbot or support group so that you’ll be included in the Translation group. From there you can contact our admins 24/7 and learn how to translate.</p>
+                            <ul data-key="updates-donate-ul1">
+                                <li>» Azerbaijan 🇦🇿</li>
+                                <li>» Uzbek 🇺🇿</li>
+                                <li>» German 🇩🇪</li>
+                                <li>» Filipino 🇵🇭</li>
+                                <li>» Chinese 🇨🇳</li>
+                                <li>» Brazilian 🇧🇷</li>
+                                <li>» Spanish 🇪🇸</li>
+                            </ul>
+                            <p data-key="updates-donate-p6">🔗 <a href="https://crowdin.com/project/wolf-blood" target="_blank">https://crowdin.com/project/wolf-blood</a></p>
+
+                            <p data-key="updates-donate-p7">🔥On top of this, we are sharing the Official Groups of other Languages under Wolf Blood 🐾 We are looking for moderators who can help us grow these communities. Please send us your application through @wolfbloodadminbot.</p>
+                            <ul data-key="updates-donate-ul2">
+                                <li>🐾 <a href="https://t.me/wolfblood_id" target="_blank">WB || Official Indo group</a> 🇮🇩</li>
+                                <li>🐾 <a href="https://t.me/wolfblood_es" target="_blank">WB || Official Spanish group</a> 🇪🇸</li>
+                                <li>🐾 WB || Official French group 🇮🇹</li>
+                                <li>🐾 WB || Official Italian group 🇫🇷</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-donate-f1">🌕 @wolfbloodnews x @wolfbloodsupport</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-24-title">🔔 [UPDATE 24] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-24-h1">🆕 NEW ROLE:</h4>
+                            <p data-key="updates-24-p1"><strong>⚜️ Slave 😵‍💫 [100%]</strong> - 7 players and ></p>
+                            <p data-key="updates-24-p2">You don't side with any team in the village. Your sole purpose is to deliver the target given to you into the merciless hands of justice. You will be randomly given a target by the bot who has disturbed the peace of the village and your goal is to have them lynched. If your target dies for any reason other than lynching, you must despair and get yourself lynched. You win the game when your target is lynched but the game continues.</p>
+                            <h4 data-key="updates-24-h2">🔄 EDITED ROLE:</h4>
+                            <p data-key="updates-24-p3"><strong>⚜️ Depressive 😨</strong></p>
+                            <p data-key="updates-24-p4">You will not be seen as lowly villager anymore. The pain you have experienced in the past have turned you into a gloomy and hopeless person. However, this hopelessness holds a dark power that can affect others in the village. If you are killed by lynching, one of the players who voted against you will fall under the curse of your despair and lose their abilities.</p>
+                            <h4 data-key="updates-24-h3">🔖 OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-24-li1">1️⃣ Fixed the issue where some roles sometimes (automatically) selects for other players even though they did not (Cult Team...etc)</li>
+                                <li data-key="updates-24-li2">2️⃣ The Astronomer role has been temporarily removed.</li>
+                                <li data-key="updates-24-li3">3️⃣ Stats menu has been renewed. Now you may be able to view all your statistics with a single command via the /stats. Commands such as Social, Myteam, Myemoji are included in this command.</li>
+                                <li data-key="updates-24-li4">4️⃣ Fixed the issue with the buttons of Judge, Executioner and Skeleton.</li>
+                            </ul>
+                            <div class="footer-links">
+                                <p data-key="updates-24-f1">✔️ Please note that you can assist us with translating or updating the language files in your native language by clicking the button below.</p>
+                                <p data-key="updates-24-f2">✔️ Feel free to reach our Team at @wolfbloodsupport to report bugs or suggest new features.</p>
+                                <p data-key="updates-24-f3">🐺 @wolfbloodnews | @wolfbloodbot</p>
+                                <p data-key="updates-24-f4"><a href="https://t.me/wolfbloodnews/71" target="_blank">Telegram’da Gör</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-roles1-title">🔄 ROLE UPDATES ⤴️</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <p data-key="updates-roles1-p1"><strong>⚜️Astronomer 🔭</strong></p>
+                            <p data-key="updates-roles1-p2">• Astronomer role has been updated. Now, the Astronomer will determine the count of players who performed actions the previous night. If certain roles are idle, skipped or unsuccessful in the action , they will not be part of the count.</p>
+
+                            <p data-key="updates-roles1-p3"><strong>⚜️Clumsy Wolf 🐺🤕</strong></p>
+                            <p data-key="updates-roles1-p4">• Clumsy Wolf has been revised. When Clumsy Wolf uses it's ability, all the players including wolves will become clumsy causing votes to go wrong by 50%.</p>
+
+                            <p data-key="updates-roles1-p5"><strong>⚜️Shadow Wolf 🐺🌚</strong></p>
+                            <p data-key="updates-roles1-p6">• Shadow Wolf role has been modified. When he uses his ability, votes will appear as "?" in the bot, but will be visible in the group. This does not affect on wolfpack allowing them to see who they are voting. Also, the list of players on the bot will be shuffled randomly during lynching phase, for everyone.</p>
+
+                            <p data-key="updates-roles1-p7"><strong>⚜️Doctor 🧑‍⚕️</strong></p>
+                            <p data-key="updates-roles1-p8">• The Doctor's role has been revised. Now, he has a 100% chance of revieving a player. In games with 20 - 40 players, the Doctor can revive 2 players while in larger games of 40 or more players, he can revive 3. However this ability cannot be used two times in a row .</p>
+
+                            <h4 data-key="updates-roles1-h1">➖ OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-roles1-li1">✔️Kronos [⏱] and Fog Wolf [🐺🌪] have been removed.</li>
+                                <li data-key="updates-roles1-li2">✔️Some bugs have been fixed such as lovers being able to communicate from the start of the game and bot not being able to pin game message.</li>
+                                <li data-key="updates-roles1-li3">✔️Teams will also have group rank emojis based on certain point ranges.</li>
+                                <li data-key="updates-roles1-li4">✔️Achievements are now displayed in each person's language. New achievements will be added in future updates.</li>
+                                <li data-key="updates-roles1-li5">✔️Playtime per week will now only appear in minutes on stats.</li>
+                                <li>
+                                    <span data-key="updates-roles1-li6">✔️The custom game now supports text inputs as well. Simply list the correct role names separated by commas, similar to how you would with emojis.<br></span>
+                                    &nbsp; &nbsp; &nbsp; Example:<br>
+                                    /startcustom seer,prince,mayor,arsonist
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-23-title">🔔 [UPDATE 23] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-23-h1">🆕 NEW GROUP RANKING SYSTEM - TEAMS !</h4>
+                            <p data-key="updates-23-p1">We've revamped the Group Ranking System to ensure fairness for everyone. Say hello to the new 'Teams' system...</p>
+                            <h4 data-key="updates-23-h2">🆕 NEW COMMANDS</h4>
+                            <p data-key="updates-23-p2"><strong>/createteam :</strong> Create your team with a unique name that stands out!...</p>
+                            <p data-key="updates-23-p3"><strong>/jointeam :</strong> Use this command to join a team!...</p>
+                            <p data-key="updates-23-p4"><strong>/leaveteam :</strong> You can leave your current team.</p>
+                            <p data-key="updates-23-p5"><strong>/topteams :</strong> Find out the top teams of the season...</p>
+                            <p data-key="updates-23-p6"><strong>/groupprofile :</strong> This will provide information such as team points...</p>
+                            <p data-key="updates-23-p7"><strong>/groupstats :</strong> Get a list of players in the team...</p>
+                            <p data-key="updates-23-p8"><strong>/myteam :</strong> This command allow users to see which team they are a member of...</p>
+                            <h4 data-key="updates-23-h3">🆕 GAME MODE : TREASURE</h4>
+                            <ul>
+                                <li>
+                                    <span data-key="updates-23-li1">Treasure mode is similar to the standard ranked mode...</span>
+                                    <ul>
+                                        <li data-key="updates-23-li2">Player Tags</li>
+                                        <li data-key="updates-23-li3">Temporary Emojis</li>
+                                        <li data-key="updates-23-li4">Forcestart Tokens</li>
+                                        <li data-key="updates-23-li5">Jersey Numbers</li>
+                                    </ul>
+                                </li>
+                                <li data-key="updates-23-li6">At the end of the game, some players are randomly selected...</li>
+                                <li data-key="updates-23-li7"><strong>Forcestart Tokens:</strong> Forcestart tokens allow non-admin users to initiate the game...</li>
+                            </ul>
+                            <p data-key="updates-23-p9">🌿 Treasure mode is exclusive and designed for special Wolf Blood events. 🌱</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-22-title">🔔 [UPDATE 22] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-22-h1">🆕 NEW ROLES:</h4>
+                            <p data-key="updates-22-p1"><strong>⚜️Kronos ⏱ [40%] - 6 players and ></strong><br>Kronos, the master of time, can accelerate the game...</p>
+                            <p data-key="updates-22-p2"><strong>⚜️Astronomer 🔭 [50%] - 7 players and ></strong><br>The Astronomer watches over the village at night...</p>
+                            <p data-key="updates-22-p3"><strong>⚜️Executioner 🦸‍♂️ [60%] - 8 players and ></strong><br>The Executioner controls the lynching process...</p>
+                            <h4 data-key="updates-22-h2">🆕 NEW COMMAND:</h4>
+                            <p data-key="updates-22-p4"><strong>/role:</strong> Use this command to search for roles...</p>
+                            <h4 data-key="updates-22-h3">🔖OTHER CHANGES:</h4>
+                            <ul>
+                                <li>
+                                    <span data-key="updates-22-li1">✔️Rank Penalty | Points<br></span>
+                                    &nbsp;0 »&nbsp; 🐾 1000 - 1499&nbsp;&nbsp;<br>
+                                    -1 »&nbsp; 🪁 1500 - 2000&nbsp;<br>
+                                    -2 » 🍂 2000 - 2499&nbsp;<br>
+                                    -2 » ☘️ 2500 - 2999&nbsp;<br>
+                                    -3 » 🦕 3000 - 3499&nbsp;<br>
+                                    -3 » 🚀 3500 - 3999<br>
+                                    -4 » 🛟 4000 - 4499&nbsp;<br>
+                                    -4 » 🎗 4500 - 4999<br>
+                                    -5 » 🏆 5000+
+                                </li>
+                                <li data-key="updates-22-li2">✔️Games now start with a minimum of 4 players.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-21-title">🔔 [UPDATE 21] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <p data-key="updates-21-p1">Happy New Year Wolf Blood Community! 🥳💥</p>
+
+                            <h4 data-key="updates-21-h1">🆕 NEW ROLES:</h4>
+                            <p data-key="updates-21-p2"><strong>⚜️Depressive 😨 [100 %] - 7 players and ></strong></p>
+                            <p data-key="updates-21-p3">• Unaware of his consciousness due to his mental illness and he perceives himself as a mere peasant. If any player attempts to vote for him during the lynching phase, he becomes depressed and recklessly kills a random player who voted for him. Realizing his actions, he will commit suicide the next night as he was overwhelmed by unbearable pain.</p>
+
+                            <p data-key="updates-21-p4"><strong>⚜️Conjurer Wolf 🐺✨ [0%]</strong></p>
+                            <p data-key="updates-21-p5">• A wolf with hidden and dark abilities that when used, causes the death of the player with the fewest votes in lynching, not the one with the most.</p>
+
+                            <p data-key="updates-21-p6"><strong>⚜️Soldier 🪖 [40%] - 7 players and ></strong></p>
+                            <p data-key="updates-21-p7">• A covert leader in the village. He is capable of redirecting the entire vote from one player to another if the chosen player is lynched by the villagers.</p>
+
+                            <h4 data-key="updates-21-h2">🔄 ROLE UPDATES:</h4>
+                            <p data-key="updates-21-p8"><strong>⚜️Rogue Wolf 🐺🎴</strong></p>
+                            <p data-key="updates-21-p9">• He now possess the ability to swap identities of 2 players, one from wolf pack and one from villagers until end of the game. If the swapped players die in any manner, their roles will appear as exchanged.</p>
+
+                            <h4 data-key="updates-21-h3">🔖OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-21-li1">✔️Nightmare, Mute, and Illusionist Wolf have been removed.</li>
+                                <li data-key="updates-21-li2">✔️Pawn role has been re-enabled.</li>
+                                <li data-key="updates-21-li3">✔️All card designs has been renewed which is accessible via the sticker package through the below link.</li>
+                                <li data-key="updates-21-li4">🔗 <a href="https://t.me/addstickers/wolfbloodbot" target="_blank">https://t.me/addstickers/wolfbloodbot</a></li>
+                                <li data-key="updates-21-li5">✔️Revised bonus and penalty points.</li>
+                                <li data-key="updates-21-li6">✔️Group admins can use /remlink for grouplist management.</li>
+                                <li data-key="updates-21-li7">✔️Use /social command to view your social stats.</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-21-f1">Report any update-related errors with the /rep command for review and correction‼️</p>
+                                <p data-key="updates-21-f2">ℹ️ Also, last call for those who haven't grabbed the $5 gift package. Only 15 days left before it reverts to the original price. Hurry up and donate now!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-20-title">🔔 [UPDATE 20] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-20-h1">NEW ROLES 🐾</h4>
+                            <p data-key="updates-20-p1"><strong>⚜️Spirit Seer [40%] - 7 players and ></strong></p>
+                            <p data-key="updates-20-p2">Spirit seer 👁️‍🗨️: This role can spy on dead players to determine who killed them. Every night, the Spirit Seer selects one dead player and one living player to see if the living player caused the death of the dead player. If the Seer chooses a villager who is innocent, he will retreat to rest and cannot use the ability for 1 day.</p>
+
+                            <p data-key="updates-20-p3"><strong>⚜️Miner [80%] - 7 players and ></strong></p>
+                            <p data-key="updates-20-p4">Miner ⛏️: The Miner can dig tunnels into villagers' houses each night. This surprises players with night actions, causing them to go to a different house. The Miner cannot dig a tunnel for the same person consecutively. Targets won’t realize they’ve landed in a different house.</p>
+
+                            <p data-key="updates-20-p5"><strong>⚜️Pawn [60%] - 6 player and ></strong></p>
+                            <p data-key="updates-20-p6">Pawn ♟️: The Pawn is an honorable soldier who sacrifices themselves to protect villagers from night attacks. If the person he is protecting is visited by wolves, the Pawn dies by sacrificing himself. If the serial killer visits the same player whom the pawn is visiting, both the Pawn and the protected person will die.</p>
+
+                            <h4 data-key="updates-20-h2">EDITED ROLE 🐾</h4>
+                            <p data-key="updates-20-p7"><strong>⚜️Shadow Wolf 🐺🌑:</strong></p>
+                            <p data-key="updates-20-p8">The Shadow Wolf's ability has been changed. When using the shadow ability, all lynch votes will be seen as "?". Villagers will see all players as "?" during lynching time, except for the wolf team who will still see the true identity of their target.</p>
+
+                            <h4 data-key="updates-20-h3">Other Changes❗</h4>
+                            <ul>
+                                <li data-key="updates-20-li1">✔️The Judge role has been modified. When the Judge reveals a player to the villagers, they will not be informed of the Judge’s own identity.</li>
+                                <li data-key="updates-20-li2">✔️The Preacher role now appears in games with 6 people.</li>
+                                <li data-key="updates-20-li3">✔️The starting message in the GameTags command can now be customized.</li>
+                                <li data-key="updates-20-li4">✔️Bonus points have been revamped to provide clear information on where and under what conditions you get bonuses.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-19-title">🔔 [UPDATE 19] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-19-h1">⭐NEW COMMANDS:</h4>
+                            <p data-key="updates-19-p1"><strong>🆕 /rep command:</strong> Report bugs directly to the developers by typing "/rep" followed by the reason when you see any error in the game. Example usage: '/rep lynch error'.</p>
+                            <p data-key="updates-19-p2"><strong>🆕 /gameban command:</strong> Ban a person from participating in group games using this command. Banned players will be unable to join any games in your group for a specified period of time or until the ban is lifted. Specify the ban duration with time units like hours (h), minutes (m), or days (d). If no duration is specified, the ban is indefinite. Example usage: '/gameban @kediben 5h' to ban the player for 5 hours.</p>
+                            <p data-key="updates-19-p3"><strong>🆕 /remgameban command:</strong> Unban a previously banned person from playing in your group using this command.</p>
+                            <p data-key="updates-19-p4"><strong>🆕 /myemojis command:</strong> Enable or disable emojis, including rank emojis. Customize which emojis will appear using this command.</p>
+                            <p data-key="updates-19-p5"><strong>🆕 /showgametag:</strong> With this command, you can easily join or leave the tag list for a group. Once you join, the bot will continuously tag you, even if you haven't played any games. When you leave, you will no longer receive any tags. You can use the same command to both join and leave.</p>
+
+                            <h4 data-key="updates-19-h2">❕ OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-19-li1">👺/config command: A new setting which allows you to activate the gametags command for everyone to use. If desired, it can be turned off.</li>
+                                <li data-key="updates-19-li2">👺The showrank command has been moved to the /myemojis command.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-18-title">🔔 [UPDATE 18] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-18-h1">NEW COMMAND:🎮</h4>
+                            <p data-key="updates-18-p1">🆕 Group admins now have access to the /gametags command, allowing them to send tags to all players who have played in the last two games. This command is exclusive to group admins.</p>
+                            <p data-key="updates-18-p2">🆕 Players using the "/nextgame" feature are now included in the tag list when using the "gametags" command.</p>
+
+                            <h4 data-key="updates-18-h2">BUG FIXES: 🛠</h4>
+                            <ul>
+                                <li data-key="updates-18-li1">🔧 Resolved the issue where the werewolf was able to kill the arsonist {🐺❌🔥}. This issue no longer occurs.</li>
+                                <li data-key="updates-18-li2">🔧Fixed the situation where nothing happened when the Preacher-selected player was killed.</li>
+                                <li data-key="updates-18-li3">🔧Added a new setting called "Delete game messages." Enabling this option automatically clears old messages of a failed and cancelled game. Make sure to update the settings using the /config command to use this feature.</li>
+                                <li data-key="updates-18-li4">🔧Removed the StartGame command.</li>
+                                <li data-key="updates-18-li5">🔧The "/claims" and "/claim" commands can now only be used during an active ongoing game.</li>
+                                <li data-key="updates-18-li6">🔧The claims command now displays the names of players who have not claimed in the list.</li>
+                                <li data-key="updates-18-li7">🔧Fixed the issue where cards appeared in Amnesia languages.</li>
+                                <li data-key="updates-18-li8">🔧Players can now choose to display cards or not in the menu settings.</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-18-f1">💻 Please report bugs to the @wolfbloodsupport group 💻</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-17-title">🔔 [UPDATE 17] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-17-h1">REVISED ROLES:</h4>
+                            <p data-key="updates-17-p1">The roles of Preacher, Judge, and Illusionist have been modified. The Mortician, Analyst, and Protester roles have been removed.</p>
+                            <p data-key="updates-17-p2">New roles coming soon !</p>
+
+                            <p data-key="updates-17-p3"><strong>🐺🪄 Illusionist Wolf [0%]</strong></p>
+                            <p data-key="updates-17-p4">You are a wolf with magical abilities. When you are about to die by lynching, you can use your dark magic to redirect the lynch vote to another player. However, you only have 20 seconds to cast your spells before your death so you must hurry, and when you do, your true identity will be revealed to everyone. 6 > Players</p>
+
+                            <p data-key="updates-17-p5"><strong>🛐 Preacher [30%]</strong></p>
+                            <p data-key="updates-17-p6">During the night, you can pray for a player. If the player you prayed for is killed, you will learn the identity of their killer and their role. However, they will also discover your identity. This ability can be used starting from the second night. 6 > Players</p>
+
+                            <p data-key="updates-17-p7"><strong>🧑‍⚖️ Judge [50%]</strong></p>
+                            <p data-key="updates-17-p8">You have the authority to judge the villagers. During the night, you can select a player to judge. The trial will last for one day. When the next day begins, you can choose to either execute and kill the suspect or reveal their role to the village. 6 > Players</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-16p-title">🔔 [UPDATE 16+] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-16p-h1">NEW ROLES :</h4>
+                            <p data-key="updates-16p-p1"><strong>🐺🌪 Fog Wolf [%0]</strong></p>
+                            <p data-key="updates-16p-p2">
+                                When you vote for a player, you can secretly choose to vote for another player. No one will be able to see whom you are lynching because you are surrounded by smoke. You can trick the villagers with fake lynch votes. You will have 2 lynch options. The first time you vote, the village will see it, but it will not be counted. Your second vote will be counted.<br>
+                                7 > Players
+                            </p>
+
+                            <p data-key="updates-16p-p3"><strong>🧜 Poseidon [%40]</strong></p>
+                            <p data-key="updates-16p-p4">
+                                Once per game, you can kill a random player on the village team by unleashing a tsunami. When you decide to release a tsunami, the village will be notified that a tsunami is approaching, but your identity will not be revealed.<br>
+                                7 > Players
+                            </p>
+
+                            <p data-key="updates-16p-p5"><strong>🧑‍⚖️ Judge [%50]</strong></p>
+                            <p data-key="updates-16p-p6">
+                                Every day, you can pass judgment on the people of the village to determine if they have killed someone during the night. If the player has committed a murder, the entire village will be informed and the player will be exposed. If the player did not kill anyone, you will leave the village. You cannot pass judgment again for 1 day. Only 2 trials are allowed.<br>
+                                6 > Players
+                            </p>
+
+                            <h4 data-key="updates-16p-h2">Other Changes :</h4>
+                            <ul>
+                                <li>
+                                    <span data-key="updates-16p-li1">Some rank emojis have been changed. Accordingly, the new emojis are as follows:</span>
+                                    <p style="margin-top: 5px; margin-bottom: 5px;" data-key="updates-16p-p7">
+                                        - 🐾 1000<br>
+                                        - 🍃 2000<br>
+                                        - 🌠 3000<br>
+                                        - 🚀 4000<br>
+                                        - 🏆 5000<br>
+                                        - 🏆 [6K] 6000 > ∞
+                                    </p>
+                                    <p data-key="updates-16p-p8">After reaching 6000 points, your emoji level will increase based on the number of points you have.</p>
+                                </li>
+                                <li data-key="updates-16p-li2">The bugs in the weekly tournament system have been fixed, and it now starts from minute zero. You will earn your emoji based on the number of hours you played on Monday.</li>
+                                <li data-key="updates-16p-li3">😵‍💫 Idiot role has been removed. Another bot developer reached out to us claiming that they were the first to use this role. In respect to their request and our policy of not copying roles from other bots, we have removed it.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-16-title">🔔 [UPDATE 16] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-16-h1">Tournament System Change</h4>
+                            <p data-key="updates-16-p1">We have made changes to the tournament system, and the old tournament system has been removed.</p>
+                            <p data-key="updates-16-p2">Starting now, the top 3 players who accumulate the most playing time each week will win emoji reward. The playing time of each player will be calculated. If your playing time in one week is:</p>
+                            <p data-key="updates-16-p3">
+                                10 hours or more: 🥇<br>
+                                8 hours or more: 🥈<br>
+                                6 hours or more: 🥉<br>
+                                you will win the emoji reward.
+                            </p>
+                            <p data-key="updates-16-p4">
+                                You can check your playing time using the "/stats" command.<br>
+                                This update will take effect starting from Monday.
+                            </p>
+
+                            <h4 data-key="updates-16-h2">Other Changes:</h4>
+                            <ul>
+                                <li data-key="updates-16-li1">- The roles Mage 🧙, Guardian Wolf 🐺🛡, Criminal 🔨, and Snitch 🦜 have been removed.</li>
+                                <li data-key="updates-16-li2">- We are committed to removing roles that our players dislike and that disrupt the game balance. Instead, we will be adding new, more enjoyable roles.</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-16-f1">New roles will be introduced on Monday!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-15-title">🔔 [UPDATE 15] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-15-h1">NEW ROLES :</h4>
+                            <p data-key="updates-15-p1">
+                                <strong>🐺🛡 Guardian Wolf.</strong> You are the Guardian Wolf. You can protect the werewolves on your team from being lynched. At night you can choose a teammate and the wolf you choose will be protected from being lynched the next day. This can only be done 2 times per game, but if you successfully protect 1 teammate, your ability will not be used again.<br>
+                                Cult conversion chance: 0%<br>
+                                Players needed : 8 >
+                            </p>
+
+                            <p data-key="updates-15-p2">
+                                <strong>🔬 Analyst.</strong> You are the Analyst. Through your research in the village, you have discovered an ability. Now you can instantly restore any ability used by a player. This can be done once per game and cannot be used on the first night. You should be careful because this ability also works on werewolves.<br>
+                                Cult conversion chance: 40%<br>
+                                Players needed : 6 >
+                            </p>
+
+                            <h4 data-key="updates-15-h2">NEW COMMANDS:</h4>
+                            <p data-key="updates-15-p3"><strong>/groupmembers :</strong> Group admins can now see the entire list of players included in the group ranking. When they use this command within the group to see which players are included in the total score, the full list of players will be sent. Wolf Blood bot is never cheated and all information is transparently displayed</p>
+                            <p data-key="updates-15-p4"><strong>/mygroups :</strong> Now players can choose which groups they belong to and which groups they can share their points with using this command. This way they can unsubscribe from the lists of groups they don't want to be included in.</p>
+
+                            <h4 data-key="updates-15-h3">OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-15-li1">- Masons can now also talk to other players in the mason team via private chat.</li>
+                                <li data-key="updates-15-li2">- Fixed an issue with confusion in private chat.</li>
+                                <li data-key="updates-15-li3">- Fixed an issue where some werewolves were not receiving an infected message when the alpha wolf infected the player.</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-15-f1">- Please report it to @wolfbloodsupport when you find bugs with new roles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-14-title">🔔 [UPDATE 14] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <p data-key="updates-14-p1">
+                                The bot continues to update itself every day to enhance the gaming experience.<br>
+                                Once again, a great update that improves the quality of the game is now available.
+                            </p>
+
+                            <h4 data-key="updates-14-h1">💬 PRIVATE CHATS :</h4>
+                            <p data-key="updates-14-p2">
+                                Now, if you are part of the wolf or cult team, you can chat with your team members privately via the bot.<br>
+                                After the game starts, all messages you send to the bot will be forwarded to your team members.
+                            </p>
+
+                            <h4 data-key="updates-14-h2">🐾 BOT NOW AVAILABLE TO EVERYONE :</h4>
+                            <p data-key="updates-14-p3">
+                                Now, anyone can add the bot to their group. The bot has been activated for group addition.<br>
+                                Groups that want to try out the bot's new features and have a great gaming experience can now add the bot directly to their group and start playing games.<br>
+                                However, they need to meet certain requirements. The groups must have more than 70 members, and the bot must have permissions to delete messages, ban users, pin messages, and add users.<br>
+                                Once you have these permissions, you can start playing games immediately.<br>
+                                Have fun!
+                            </p>
+
+                            <h4 data-key="updates-14-h3">🕹 CUSTOM MODE NOW VERY EASY :</h4>
+                            <p data-key="updates-14-p4">
+                                When players wanted to open a custom mode game, writing roles one by one and side by side posed a great challenge.<br>
+                                For example, to add 10 roles, you had to write 10 emojis side by side. But now, there is a much easier method.<br>
+                                Before writing the role, you can write how many you want next to it.<br>
+                                This way, the specified number of roles will be added automatically.<br>
+                                For example: '/startcustom 9🔪,9🎯' Starting the game is now much easier. It is currently operating in the 0-9 range.
+                            </p>
+
+                            <h4 data-key="updates-14-h4">NEW ROLE:</h4>
+                            <p data-key="updates-14-p5">
+                                <strong>👂 Listener.</strong> You are the Listener. Your ears can pick up sounds around you very well, and you can hear what other players are saying to each other.<br>
+                                You can hear what the Wolf or Cult team are talking about.<br>
+                                However, you cannot hear who said what and what the Alpha Wolf said.<br>
+                                Cult conversion chance: 65%<br>
+                                Players needed : 8
+                            </p>
+
+                            <div class="footer-links">
+                                <p data-key="updates-14-f1">The update is still in the testing phase. If you find any bugs, please let us know immediately via the @wolfbloodsupport group so we can fix them.</p>
+                                <p data-key="updates-14-f2">The bot will continue with brand new updates very soon.</p>
+                                <p data-key="updates-14-f3">Have fun everyone!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-13-title">🔔 [UPDATE 13] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-13-h1">TOURNAMENTS!</h4>
+                            <p data-key="updates-13-p1">
+                                Are you ready for a brand new adventure?<br>
+                                Throughout the year, one player will win an emoji every month during the tournaments!<br>
+                                The tournament will continue from the 1st to the 30th of each month.<br>
+                                The total points earned at the end of each game will be added up as the monthly score, and the player with the highest score at the end of the month will win the emoji.<br>
+                                Monthly tournament scores start at 0, and points earned at the end of each game are added.<br>
+                                In addition, there is also a monthly group list.<br>
+                                At the end of each month, the top group in the monthly tournament can choose one player from their own group to win an emoji.
+                            </p>
+                            <p data-key="updates-13-p2">
+                                This month's tournament begins today.<br>
+                                However, in the other months, all points will be reset on March 1st, and a new tournament will begin.
+                            </p>
+                            <p data-key="updates-13-p3">
+                                The emoji to be given at the end of this month's tournament is:<br>
+                                {🪄}
+                            </p>
+                            <p data-key="updates-13-p4">You can check the monthly player list and your own ranking with the /tournament command.</p>
+                            <p data-key="updates-13-p5">You can also view the monthly group list with the /tournamentgroup command.</p>
+
+                            <h4 data-key="updates-13-h2">NEW COMMANDS :</h4>
+                            <p data-key="updates-13-p6"><strong>/lastseen:</strong> With this command, you can now see when was the last time you played a game in the used group.</p>
+
+                            <h4 data-key="updates-13-h3">NEW ROLES :</h4>
+                            <p data-key="updates-13-p7">
+                                <strong>🧑‍⚕️ Doctor.</strong> You try to revive the player who died the night before every morning. If you choose not to revive the player who died the night before, you cannot revive the same player the next day. You can only revive players who died the night before. Your chance of revival is 70%.<br>
+                                Cult conversion chance: 60%<br>
+                                Players needed : 7 >
+                            </p>
+
+                            <p data-key="updates-13-p8">
+                                <strong>📣 Protester.</strong> You don't like the presence of bad roles in the village and can start a protest once in the game. As a result, all votes for the day will be hidden, and the votes of the bad roles will be considered invalid.<br>
+                                Cult conversion chance: 20%<br>
+                                Players needed : 6 >
+                            </p>
+
+                            <p data-key="updates-13-p9">
+                                <strong>🛐 Sacrifice.</strong> You sacrifice yourself for the sake of the villagers. You can choose to redirect all attacks towards yourself for one night. This means that if a player was supposed to die that night, you will die instead. This ability can only be- used once per game. If there are no attacks, the ability is wasted.<br>
+                                Cult conversion chance: 70%<br>
+                                Players needed : 5
+                            </p>
+
+                            <h4 data-key="updates-13-h4">EDITED ROLE:</h4>
+                            <p data-key="updates-13-p10"><strong>👴🏻 Mortician.</strong> You deal with the funerals of the villagers. Every night, you can select one player. If that player dies that night, you reveal 3 possible suspects who may have killed them.</p>
+
+                            <h4 data-key="updates-13-h5">OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-13-li1">- Fixed an issue with the Gambler win condition.</li>
+                                <li data-key="updates-13-li2">- Spiritualist and Goat roles have been removed.</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-13-f1">- Please report it to @wolfbloodsupport when you find bugs with new roles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-12-title">🔔 [UPDATE 12] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-12-h1">NEW ROLES:</h4>
+                            <p data-key="updates-12-p1">
+                                <strong>💀 Skeleton.</strong> Continues to live after death. Can block the abilities and voting of any player for 1 day. Can use the ability whenever you want after death, but it can only be done once.<br>
+                                Cult conversion chance: 40%<br>
+                                Players needed : 5
+                            </p>
+
+                            <p data-key="updates-12-p2">
+                                <strong>🔨 Criminal.</strong> A regular villager, but when the Serial Killer attacks he, he kill them and take their knife, becoming the new Serial Killer.<br>
+                                Cult conversion chance: 20%<br>
+                                Players needed : 6 >
+                            </p>
+
+                            <p data-key="updates-12-p3">
+                                <strong>🎲 Gambler.</strong> Gambler is a solo player. At night, he tries to predict who will be lynched the next day. If he correctly predicts two lynchings, he wins the game.<br>
+                                Cult conversion chance: 10%<br>
+                                Players needed : 7 >
+                            </p>
+
+                            <p data-key="updates-12-p4">
+                                <strong>🐺🤐 Mute Wolf.</strong> He do not like noise during the day. He can mute all players once during the game. The silence will continue until the end of the day and lynching stage. He cannot use their first night ability.<br>
+                                Cult conversion chance: 0%<br>
+                                Players needed : 7 >
+                            </p>
+
+                            <h4 data-key="updates-12-h2">NEW COMMANDS:</h4>
+                            <p data-key="updates-12-p5"><strong>/claim :</strong> Command allows you to keep a list of roles claimed by everyone in the game. It is very easy to use. After the claim command, write the role you claim and send it. Then you can use the Claims command to view this list. Example usage: "/claim mason".</p>
+                            <p data-key="updates-12-p6"><strong>/claims :</strong> Command can be used to see a list of roles. With this command, you can see the roles written with the claim command. The list is automatically cleared when the game starts and it shows the number of users who have not written their role during the game.</p>
+
+                            <h4 data-key="updates-12-h3">OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-12-li1">- Some balance changes have been made. Some roles that broke the balance and caused the game to end quickly have been removed.</li>
+                                <li data-key="updates-12-li2">- The problem of not being able to see the wolf team when the cursed ww turns or the traitor turns has been solved.</li>
+                                <li data-key="updates-12-li3">- The number of people some roles will appear has been changed. You can see which role appears in how many people from the pinned message.</li>
+                                <li data-key="updates-12-li4">- Barbarian, Messenger, Trapper, Spy roles have been removed.</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-12-f1">- Please report it to @wolfbloodsupport when you find bugs with new roles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-11-title">🔔 [UPDATE 11] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-11-h1">NEW COMMANDS</h4>
+                            <p data-key="updates-11-p1">
+                                <strong>/topgroup</strong><br>
+                                <strong>/groupstats</strong>
+                            </p>
+                            <p data-key="updates-11-p2">
+                                With this update, the "top groups" feature has been added to the game to increase competition between groups.<br>
+                                Also, you no longer need to use any commands to be included in the leaderboard. Everything is automatically created by the bot when a new member joins your group, and it is also automatically removed from the leaderboard when a player leaves your group.<br>
+                                Also, a player can join more than one group and will be included in the stats of that group.<br>
+                                Note: To ensure fair competition between groups, the calculation of group points is based on the sum of the points of players with 1200 points and more.
+                            </p>
+
+                            <p data-key="updates-11-p3"><strong>/topgroup :</strong> With this command you can see the top 10 groups in the score list.</p>
+
+                            <p data-key="updates-11-p4"><strong>/groupstats :</strong> With this command you can see the top 10 players in your group.</p>
+
+                            <h4 data-key="updates-11-h2">HALLOWEEN EVENT</h4>
+                            <p data-key="updates-11-p5">
+                                The store is open from today! We would like to thank everyone who participated in our Halloween event.<br>
+                                Now you can spend the coins you earned using the /store command. The emojis you buy will be automatically added next to your name.<br>
+                                The store will be available for use for a period of 1 week. The coins will be removed from the game as our Halloween event has ended.<br>
+                                Our event will resume soon.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-10-title">🔔 [UPDATE 10] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-10-h1">NEW ROLES:</h4>
+                            <p data-key="updates-10-p1">
+                                <strong>📖 Messenger.</strong> He can set 1 person as a target every 2 nights. When the messenger dies, the role of his target will be shown to a random person in the game. This person could also be a werewolf.<br>
+                                Cult conversion chance: 60%<br>
+                                Players needed : 6 >
+                            </p>
+
+                            <p data-key="updates-10-p2">
+                                <strong>💪 Barbarian.</strong> He is quite irritable because of his anger against wolves. He can show his rage to everyone at any moment. When the barbarian shows this ability, the daytime phase will be skipped to be able to lynch the wolves immediately, and the lynching phase will last 15 seconds.<br>
+                                Cult conversion chance: 30%<br>
+                                Players needed : 5
+                            </p>
+
+                            <p data-key="updates-10-p3">
+                                <strong>👾 Trapper.</strong> He sets up traps for villagers and execute them. But if the executed player belongs to the village team, the trapper will be executed with him. If he does not belong to the village team, the player dies. This ability can only be used 2 times.<br>
+                                Cult conversion chance: 80%<br>
+                                Players needed : 7 >
+                            </p>
+
+                            <p data-key="updates-10-p4">
+                                <strong>🐉 Illusionist Wolf.</strong> Initially, he is a normal werewolf, but when other wolf die, he can take his abilities.<br>
+                                Cult conversion chance: 0%<br>
+                                Players needed : 7 >
+                            </p>
+
+                            <h4 data-key="updates-10-h2">OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-10-li1">- The endgame design has been changed.</li>
+                                <li data-key="updates-10-li2">- Now 1 more person will be given coins after every 10 people.</li>
+                                <li data-key="updates-10-li3">- Added some new gifs.</li>
+                                <li data-key="updates-10-li4">- Agent, Missionary, Junior Wolf roles have been removed.</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-10-f1">- Please report it to @wolfbloodsupport when you find bugs with new roles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-9-title">🔔 [UPDATE 9] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-9-h1">HALLOWEEN SPECIAL EVENT! 🎃🦇</h4>
+                            <p data-key="updates-9-p1">
+                                We are so excited to present our new and first event to you. This special event also introduces a new cool piece to the game.<br>
+                                WB Coins 🪙 is in the game now!
+                            </p>
+
+                            <p data-key="updates-9-p2"><strong>So what are these coins for?</strong></p>
+                            <p data-key="updates-9-p3">At the end of each game, 1 random person selected by the bot will win 1 Coin 🪙. You can find out how many coins you have with the stats command. This event will last exactly 1 month, at the end of it, you can buy special emojis for your name from our new store, where you can exchange the coins you have collected with the /store command.</p>
+                            <p data-key="updates-9-p4">One day before Halloween, the store will be opened and you will be able to spend your coins.</p>
+                            <p data-key="updates-9-p5">You can see which emojis are available for purchase and how many coins you need to earn with the /store command.</p>
+
+                            <div class="footer-links">
+                                <p data-key="updates-9-f1">
+                                    Now go back to the game and start collecting coins!<br>
+                                    Good Luck to Everyone. Boooooooooh 👻
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-9-dupe-title">🔔 [UPDATE 9] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-9-dupe-h1">HALLOWEEN SPECIAL EVENT! 🎃🦇</h4>
+                            <p data-key="updates-9-dupe-p1">
+                                We are so excited to present our new and first event to you. This special event also introduces a new cool piece to the game.<br>
+                                WB Coins 🪙 is in the game now!
+                            </p>
+
+                            <p data-key="updates-9-dupe-p2"><strong>So what are these coins for?</strong></p>
+                            <p data-key="updates-9-dupe-p3">At the end of each game, 1 random person selected by the bot will win 1 Coin 🪙. You can find out how many coins you have with the stats command. This event will last exactly 1 month, at the end of it, you can buy special emojis for your name from our new store, where you can exchange the coins you have collected with the /store command.</p>
+                            <p data-key="updates-9-dupe-p4">One day before Halloween, the store will be opened and you will be able to spend your coins.</p>
+                            <p data-key="updates-9-dupe-p5">You can see which emojis are available for purchase and how many coins you need to earn with the /store command.</p>
+
+                            <div class="footer-links">
+                                <p data-key="updates-9-dupe-f1">
+                                    Now go back to the game and start collecting coins!<br>
+                                    Good Luck to Everyone. Boooooooooh 👻
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-7-title">🔔 [UPDATE 7] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-7-h1">NEW ROLES:</h4>
+                            <p data-key="updates-7-p1">
+                                <strong>🧒🏻 Naughty Boy.</strong> He's a very spoiled and prankish child. On the first night in the game you can choose 2 players to change their roles and their roles change. If he does not change anyone's role, he will continue to play as a normal villager.<br>
+                                Cult conversion chance: 60%<br>
+                                Players needed : 5
+                            </p>
+
+                            <p data-key="updates-7-p2">
+                                <strong>🤲 Preacher.</strong> He is someone who loves the villagers a lot and prays for them when they die. When one person from the village team is lynched and dies, the preacher gets an extra vote. When he chooses to use his talent, he apply all his voting rights during the lynching. This can only be done 1 time.<br>
+                                Cult conversion chance: 30%<br>
+                                Players needed : 6 >
+                            </p>
+
+                            <p data-key="updates-7-p3">
+                                <strong>👴🏻 Mortician.</strong> He deals with the villagers funerals. Night after night, he can choose a player who was killed and reveals 2 possible suspects. If he chooses a player who was killed by a serial killer, 3 suspects will appear.<br>
+                                Cult conversion chance: 40%<br>
+                                Players needed : 7 >
+                            </p>
+
+                            <p data-key="updates-7-p4">
+                                <strong>😵‍💫 Idiot.</strong> If the villagers choose to lynch him, he doesn’t die and his role will be revealed. His votes after this point will be considered invalid.<br>
+                                Cult conversion chance: 70%<br>
+                                Players needed : 6 >
+                            </p>
+
+                            <h4 data-key="updates-7-h2">OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-7-li1">- The liar role has been removed.</li>
+                                <li data-key="updates-7-li2">- The /startcustom mode has been added to the game.</li>
+                                <li data-key="updates-7-li3">
+                                    - Rank emojis have been changed. New emojis:<br>
+                                    🐾 1000 - 🌵 1400 - 🐥 1800 - 🪐 2200 - 🚀 2600 - 🐯 3000 -<br>
+                                    🌏 3400 - 🥇 3800 - 🏆 4000
+                                </li>
+                                <li data-key="updates-7-li4">- Added some new gifs. Changes have been made to old gifs.</li>
+                                <li data-key="updates-7-li5">- Changes have been made to the topscore command.</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-7-f1">- Please report it to @wolfbloodsupport when you find bugs with new roles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-6-title">🔔 [UPDATE 6] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-6-h1">ALL CHANGES:</h4>
+
+                            <p data-key="updates-6-p1">Edited Role Spy: The Spy role has been changed and now it works as follows.</p>
+                            <p data-key="updates-6-p2">
+                                <strong>🤵🏻‍♂️ Spy.</strong> He researches two players every night and determine if they belong to the same team. However, when he sees 2 players on the same team, he cannot use his skills the next night.<br>
+                                Players needed : 7 >
+                            </p>
+
+                            <ul>
+                                <li data-key="updates-6-li1">- All cards have been redesigned.</li>
+                                <li data-key="updates-6-li2">- Added Indonesian language to cards.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-5-title">🔔 [UPDATE 5] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-5-h1">NEW ROLES:</h4>
+                            <p data-key="updates-5-p1"><strong>🐺🌚 Shadow Wolf.</strong> He has a special ability, unlike ordinary werewolves. When he chooses to use this ability, he can hide all the votes once per game and double his team's votes. The votes of each wolf will be counted by 2 votes.</p>
+
+                            <p data-key="updates-5-p2"><strong>🐺🤕 Clumsy Wolf.</strong> He's working with the werewolves. But he was quite clumsy, and now he has managed to turn his clumsiness into a talent. He now votes independently of wolves, causing lynchings of his chosen players to go wrong by 80%.</p>
+
+                            <p data-key="updates-5-p3">
+                                <strong>🐺🐾 Nightmare Wolf.</strong> Among werewolves, this wolf was born with mystic skills. He has 2 abilities and can use them as he wants. But the abilities are limited.<br>
+                                1. Ability : 2 times per game can silence a player during the day, prevent him from speaking and voting.<br>
+                                2. Ability : 1 time per game can block all actions of a player during the night.
+                            </p>
+
+                            <p data-key="updates-5-p4">
+                                <strong>🤥 Liar.</strong> He has lied so much that he is now recognized as a liar by the village, and no one believes him. For this reason, his votes during the lynching have no validity and it will be counted as 0 votes.<br>
+                                Cult conversion chance: 100%<br>
+                                Players needed : 6 >
+                            </p>
+
+                            <p data-key="updates-5-p5"><strong>🐺🎴 Rogue Wolf.</strong> He can choose a player during the day. If this player dies for any reason, he will be seen as Rogue Wolf, and when the real rogue wolf dies, he will appear as the role of the selected player.</p>
+
+                            <h4 data-key="updates-5-h2">OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-5-li1">- Removed the Terrorist and Gorilla roles.</li>
+                            </ul>
+
+                            <div class="footer-links">
+                                <p data-key="updates-5-f1">- Please report it to @wolfbloodsupport when you find bugs with new roles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-4-title">🔔 [UPDATE 4] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-4-h1">NEW ROLES:</h4>
+                            <p data-key="updates-4-p1">
+                                <strong>👨🏻‍💼 Missionary. [Cultist Team]</strong> He's been the most respected member of the cult for a long time. Since he's been with the cult for a long time, he can now convince 1 person to enter the cult by 100%. He can only do this once, and the player he chooses will turn into a 100% cult. This is a good opportunity to transform people with a 0% conversion percentage that never believes. Still, he can't convert bad roles.<br>
+                                Players needed : 11
+                            </p>
+
+                            <p data-key="updates-4-p2">
+                                <strong>📡 Agent. [Cultist Team]</strong> The cult brainwashed him and made him serve them now. Before the cults converts, they'll ask him which player has what percentage of turning into a cult. Every night, his job is to find out what percentage a player has to join the cult and then inform the cult.<br>
+                                Players needed : 11
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-3-title">🔔 [UPDATE 3] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-3-h1">NEW ROLES:</h4>
+                            <p data-key="updates-3-p1">
+                                <strong>🐼 Panda.</strong> If he's killed in any way, he'll blow up before he dies and freeze all the villagers around him. The villagers can't perform night-time actions for a day. He must be protected at all costs.<br>
+                                Cult conversion chance: 75%<br>
+                                Players needed : 7 >
+                            </p>
+
+                            <p data-key="updates-3-p2">
+                                <strong>🦍 Gorilla.</strong> It is the strongest and most durable role in the village. When wolves attack the Gorilla, they could hurt it but they can’t kill it. The gorilla dies 1 day after being attacked.<br>
+                                Cult conversion chance: 30%<br>
+                                Players needed : 5
+                            </p>
+
+                            <h4 data-key="updates-3-h2">OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-3-li1">- The accuracy of the Spy role has been increased to 50%. 2 cultist hunter can be seen in games with more than 60 people. And some minor balance changes have been made.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-2-title">🔔 [UPDATE 2] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-2-h1">NEW ROLES:</h4>
+                            <p data-key="updates-2-p1">
+                                <strong>🤵🏻‍♂️ Spy.</strong> Each night he researches a player and determines whether that person has a good role or a bad role. However that information is only 30% accurate, because he lack of reliable sources.<br>
+                                Cult conversion chance: 30%<br>
+                                Players needed : 5
+                            </p>
+
+                            <p data-key="updates-2-p2">
+                                <strong>💣 Terrorist.</strong> This crazy guy blinded by his own twisted beliefs, puts mines on players at night without being seen. If he gets murdered by a serial killer or a wolf at night, all the mines will explode and will take their lifes with him. Loses when lynched.<br>
+                                Cult conversion chance: 40%<br>
+                                Players needed : 8 >
+                            </p>
+
+                            <h4 data-key="updates-2-h2">OTHER CHANGES:</h4>
+                            <ul>
+                                <li data-key="updates-2-li1">- Change for sorcerer: Now the sorcerer can see the roles of the players. However, he may see roles such as wolfman, traitor, lycan differently.</li>
+                                <li data-key="updates-2-li2">- Change in /rules command: The rules command now works in your own language.</li>
+                                <li data-key="updates-2-li3">- New command /gameguide: Thanks to it, you can find information about the game. For example, you can see which role will appear in how many people.</li>
+                                <li data-key="updates-2-li4">- Changes in some rank emojis: You can access to new emojis with the gameguide command.</li>
+                            </ul>
+
+                            <h4 data-key="updates-2-h3">NEW GROUP:</h4>
+                            <p data-key="updates-2-p3">Our official Spanish group has been opened today. You are free to click @wolfbloodofficial and join us in the group! Special events will be held soon.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-1-title">🔔 [UPDATE 1] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-1-h1">NEW ROLES:</h4>
+                            <p data-key="updates-1-p1">
+                                <strong>👲 Traveler :</strong> A traveler is a p3asant who l0v3s to trav3I. During his travels, he discovers a merchant and the merchant offers him the remaining 4 roles. The traveler chooses which role he wants to take and transforms into that role. If he doesn't like the roles, he can continue playing as a traveler.<br>
+                                Cult conversion chance: 60%<br>
+                                Players needed : 6 >
+                            </p>
+
+                            <p data-key="updates-1-p2">
+                                <strong>🎩 Boss :</strong> The boss hates the Cult and helps the village team to finish them off. Every night he is informed of how many people the Cult has.<br>
+                                Cult conversion chance: 10%<br>
+                                Players needed : 10 >
+                            </p>
+
+                            <p data-key="updates-1-p3">
+                                <strong>⏱ Time Lord :</strong> If the Time Lord dies, the day and night timers are significantly reduced. The day is reduced to a total of 60 seconds and the night to 30 seconds. Its effect will only last for 1 day.<br>
+                                Cult conversion chance: 50%<br>
+                                Players needed : 5
+                            </p>
+
+                            <h4 data-key="updates-1-h2">EDITED ROLE:</h4>
+                            <p data-key="updates-1-p4"><strong>Edited Role Snitch :</strong> The Snitch no longer chooses at the beginning of the game, but before his death. Note you have to be fast.</p>
+
+                            <h4 data-key="updates-1-h3">NEW GAME MODE:</h4>
+                            <p data-key="updates-1-p5">
+                                <strong>/STARTLOVE :</strong> Are you ready to experience romance? Then this mode is for you. Everyone is in love in this mode.<br>
+                                Note: Lovers are determined on the first night, but notification is made during the day. You'll find out who you're in love with in the daytime. Also, the game will only start with even numbers. (6-8-10..)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-0-title">🔔 [UPDATE] 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-0-h1">-NEW ROLES : Snitch 🦜</h4>
+                            <p data-key="updates-0-p1">
+                                The Snitch is a simple villager. It can choose a player during the first night and has the ability to reveal the role of the player to everyone if the snitch dies. But if the chosen player dies before the snitch, it will only be a simple villager.<br>
+                                👤 Cult Conversion Chance: 100%<br>
+                                Note: It is not a 120 second role, and can appear in an 8 player game
+                            </p>
+
+                            <h4 data-key="updates-0-h2">-Remove Role: Witch</h4>
+                            <p data-key="updates-0-p2">It was seen that the witch role could not provide support to the werewolves on the game balance. For this reason, the role will be strengthened. Temporarily removed from the game. Work on game balance continues.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="update-card" onclick="openModal(this)">
+                        <span class="update-title" data-key="updates-ranks-title">🔔 NEW ROLES & RANKS 🔔</span>
+                    </div>
+                    <div class="update-content-storage">
+                        <div class="update-content">
+                            <h4 data-key="updates-ranks-h1">- NEW ROLES OF WOLFBLOOD BOT</h4>
+                            <p data-key="updates-ranks-p1"><strong>🧙 Wizard</strong></p>
+                            <p data-key="updates-ranks-p2">Wizard : It is a neutral role until one dies from the spells. However, if a role from the village dies as a result of the spells, you will join the wolf team. It is recommended that you keep this role. During 1 day of voting, you will secretly confuse everyone and cause the death of a random person. If a villager dies as a result of random votes, you make an alliance with the wolves or you become a simple villager.</p>
+
+                            <p data-key="updates-ranks-p3"><strong>☭ Communist</strong></p>
+                            <p data-key="updates-ranks-p4">Communist. He wins only in the event of a tied lynching.</p>
+
+                            <h4 data-key="updates-ranks-h2">Ranks of @wolfbloodbot:</h4>
+                            <p data-key="updates-ranks-p5">
+                                🐾 1000-1200<br>
+                                🏋️ 1200-1400<br>
+                                🐥 1400-1600<br>
+                                🦕 1600-1800<br>
+                                ⚓️ 1800-2000<br>
+                                💯 2000-2200<br>
+                                💣 2200-2400<br>
+                                🥊 2400-2600<br>
+                                🥉 2600-2800<br>
+                                🥈 2800-3000<br>
+                                🥇 3000-3200<br>
+                                🏆 3200-∞
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <div id="modalOverlay" class="modal-overlay">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <div id="modalBody" class="modal-body">
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p data-key="footer-text">© 2025 Wolfblood Team - All Rights Reserved.</p>
+        </footer>
+    </div>
+
+
+
+    <script>
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalBody = document.getElementById('modalBody');
+
+        function openModal(cardElement) {
+            const contentStorage = cardElement.nextElementSibling;
+            if (contentStorage) {
+                modalBody.innerHTML = contentStorage.innerHTML;
+                modalOverlay.classList.add('visible');
+            }
+        }
+        function closeModal() {
+            modalOverlay.classList.remove('visible');
+        }
+        modalOverlay.addEventListener('click', (event) => {
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        });
+    </script>
+
+    <script src="Loader.js" defer></script>
+    <script src="Translate.js" defer></script>
+</body>
+</html>

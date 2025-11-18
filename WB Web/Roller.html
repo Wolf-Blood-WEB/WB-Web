@@ -1,0 +1,1424 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="page-title-roles">Wolfblood - Roller</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji" rel="stylesheet">
+    <link rel="stylesheet" href="Loader.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #1a202c;
+            --card-color: rgba(30, 41, 59, 0.9);
+            --text-color: #e2e8f0;
+            --header-color: #ffffff;
+            --accent-color: #e53e3e;
+            --font-header: 'Lora', serif;
+            --font-body: 'Nunito Sans', 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
+            --team-village: #27ae60;
+            --team-wolf: #c0392b;
+            --team-solo: #7f8c8d;
+            --team-cultist: #2980b9;
+        }
+
+        @keyframes electricGlow-green {
+            0% {
+                box-shadow: 0 0 4px var(--team-village), 0 0 8px var(--team-village);
+            }
+            50% {
+                box-shadow: 0 0 12px var(--team-village), 0 0 20px var(--team-village);
+            }
+            100% {
+                box-shadow: 0 0 4px var(--team-village), 0 0 8px var(--team-village);
+            }
+        }
+
+        @keyframes electricGlow-red {
+            0% {
+                box-shadow: 0 0 4px var(--team-wolf), 0 0 8px var(--team-wolf);
+            }
+            50% {
+                box-shadow: 0 0 12px var(--team-wolf), 0 0 20px var(--team-wolf);
+            }
+            100% {
+                box-shadow: 0 0 4px var(--team-wolf), 0 0 8px var(--team-wolf);
+            }
+        }
+
+        @keyframes electricGlow-gray {
+            0% {
+                box-shadow: 0 0 4px var(--team-solo), 0 0 8px var(--team-solo);
+            }
+            50% {
+                box-shadow: 0 0 12px var(--team-solo), 0 0 20px var(--team-solo);
+            }
+            100% {
+                box-shadow: 0 0 4px var(--team-solo), 0 0 8px var(--team-solo);
+            }
+        }
+
+        @keyframes electricGlow-blue {
+            0% {
+                box-shadow: 0 0 4px var(--team-cultist), 0 0 8px var(--team-cultist);
+            }
+            50% {
+                box-shadow: 0 0 12px var(--team-cultist), 0 0 20px var(--team-cultist);
+            }
+            100% {
+                box-shadow: 0 0 4px var(--team-cultist), 0 0 8px var(--team-cultist);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-forest.png');
+            color: var(--text-color);
+            line-height: 1.7;
+            position: relative;
+            z-index: 101;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 102;
+        }
+
+        .dropdown-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+            .dropdown-toggle:hover {
+                background-color: var(--accent-color);
+                border-color: var(--accent-color);
+                color: var(--header-color);
+            }
+
+            .dropdown-toggle .arrow {
+                font-size: 0.7rem;
+                transition: transform 0.3s ease;
+            }
+
+        .language-dropdown.open .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-10px);
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+
+        .language-dropdown.open .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+            .dropdown-menu a:hover {
+                background-color: var(--accent-color);
+                color: var(--header-color);
+            }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+            header h1 {
+                font-family: var(--font-header);
+                font-size: 3rem;
+                color: var(--header-color);
+                text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
+            }
+            header p {
+                font-size: 1.1rem;
+                color: #a0aec0;
+            }
+
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+            nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                font-weight: 600;
+                padding: 8px 15px;
+                border-radius: 6px;
+                transition: background-color 0.3s ease;
+            }
+
+                nav a:hover, nav a:focus {
+                    background-color: var(--accent-color);
+                    color: var(--header-color);
+                }
+
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--card-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+            main p {
+                margin-bottom: 20px;
+            }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+            .button-container button {
+                font-family: var(--font-body);
+                font-size: 1rem;
+                font-weight: 600;
+                color: var(--text-color);
+                background-color: transparent;
+                border: 2px solid #4a5568;
+                padding: 12px 25px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+                .button-container button:hover {
+                    transform: translateY(-2px);
+                }
+
+        #btn-Köy {
+            border-color: var(--team-village);
+            color: var(--team-village);
+        }
+            #btn-Köy:hover, #btn-Köy.active {
+                background-color: var(--team-village);
+                color: var(--header-color);
+                box-shadow: 0 0 15px var(--team-village);
+            }
+
+        #btn-Kurt {
+            border-color: var(--team-wolf);
+            color: var(--team-wolf);
+        }
+            #btn-Kurt:hover, #btn-Kurt.active {
+                background-color: var(--team-wolf);
+                color: var(--header-color);
+                box-shadow: 0 0 15px var(--team-wolf);
+            }
+
+        #btn-Solo {
+            border-color: var(--team-solo);
+            color: var(--team-solo);
+        }
+            #btn-Solo:hover, #btn-Solo.active {
+                background-color: var(--team-solo);
+                color: var(--header-color);
+                box-shadow: 0 0 15px var(--team-solo);
+            }
+        #btn-Tarikat {
+            border-color: var(--team-cultist);
+            color: var(--team-cultist);
+        }
+
+            #btn-Tarikat:hover, #btn-Tarikat.active {
+                background-color: var(--team-cultist);
+                color: var(--header-color);
+                box-shadow: 0 0 15px var(--team-cultist);
+            }
+
+        .role-section {
+            text-align: left;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+        }
+        .role-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .grid-divider {
+            grid-column: 1 / -1;
+            font-family: var(--font-header);
+            color: var(--header-color);
+            text-align: center;
+            margin: 20px 0 10px 0;
+            font-size: 1.8rem;
+        }
+            .grid-divider.sub {
+                font-size: 1.4rem;
+                color: #a0aec0;
+            }
+            .grid-divider.special {
+                font-size: 1.1rem;
+                color: var(--accent-hover-color);
+                letter-spacing: 1px;
+            }
+
+        .role-card {
+            background-color: #1a202c;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.3s ease;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+
+            .role-card.village {
+                animation-name: electricGlow-green;
+            }
+            .role-card.wolf {
+                animation-name: electricGlow-red;
+            }
+            .role-card.solo {
+                animation-name: electricGlow-gray;
+            }
+            .role-card.cultist {
+                animation-name: electricGlow-blue;
+            }
+            .role-card.static-card {
+                grid-column: 1 / -1;
+                cursor: default;
+                min-height: 0;
+            }
+
+                .role-card.static-card .card-face {
+                    display: block;
+                    text-align: left;
+                }
+                .role-card.static-card h5 {
+                    font-family: var(--font-header);
+                    color: var(--accent-hover-color);
+                    text-align: center;
+                    font-size: 1.2rem;
+                    margin-bottom: 15px;
+                }
+                .role-card.static-card p {
+                    margin-bottom: 8px;
+                }
+
+            .role-card:not(.static-card):hover {
+                transform: translateY(-5px);
+            }
+
+        .card-face {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .role-card[data-state="0"] .card-front {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 80px;
+        }
+        .role-card[data-state="1"] .card-desc {
+            display: block;
+        }
+        .role-card[data-state="2"] .card-note {
+            display: block;
+        }
+        .card-face .role-title {
+            font-weight: 700;
+            font-size: 1.2em;
+            color: #ffffff;
+            display: block;
+        }
+        .card-face .tarikat-rate {
+            font-size: 0.9em;
+            font-weight: 400;
+            color: #a0aec0;
+            display: block;
+        }
+        .card-face p {
+            font-size: 0.95rem;
+            text-align: left;
+            margin-bottom: 0;
+        }
+
+            .card-face .small-note, .card-face p.small-note {
+                display: block;
+                font-size: 0.9em;
+                font-style: italic;
+                color: #718096;
+                margin-top: 10px;
+                padding-top: 10px;
+                border-top: 1px dashed #4a5568;
+            }
+
+        .card-face span.small-note {
+            font-style: normal;
+            font-weight: bold;
+            color: var(--accent-hover-color);
+            vertical-align: super;
+            font-size: 0.8em;
+            padding: 0 2px;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #a0aec0;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        .emoji {
+            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="content-wrapper">
+        <header>
+            <div class="language-dropdown">
+                <button class="dropdown-toggle">
+                    <span id="selected-lang-flag">🇬🇧</span>
+                    <span id="selected-lang-code">EN</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" data-lang="en">🇬🇧 English</a>
+                    <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+                    <a href="#" data-lang="es">🇪🇸 Español</a>
+                    <a href="#" data-lang="fr">🇫🇷 Français</a>
+                    <a href="#" data-lang="it">🇮🇹 Italiano</a>
+                    <a href="#" data-lang="id">🇮🇩 Bahasa Indonesia</a>
+                    <a href="#" data-lang="ph">🇵🇭 Filipino</a>
+                    <a href="#" data-lang="ar">🇸🇦 العربية</a>
+                </div>
+            </div>
+            <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
+            <p data-key="header-subtitle-roles">Roles</p>
+        </header>
+
+        <nav>
+            <a href="Home.Page.html" data-key="nav-home">Home</a>
+            <a href="Oynanış.html" data-key="nav-how-to-play">How to Play?</a>
+            <a href="Roller.html" data-key="nav-roles">Roles</a>
+            <a href="Bot-Mechanics.html" data-key="nav-bot-mechanics">Bot Mechanics</a>
+            <a href="Güncellemeler.html" data-key="nav-news">News & Updates</a>
+            <a href="Gruplar.html" data-key="nav-groups">Groups</a>
+            <a href="Hakkımızda.html" data-key="nav-about">About Us</a>
+            <a href="İletişim.html" data-key="nav-contact">Contact with Us</a>
+        </nav>
+
+        <main>
+            <h2 data-key="roles-main-title">ROLES</h2>
+            <p data-key="roles-main-desc">
+                Wolf Blood is basically based on 3 teams. The Villagers, the Werewolves and the Solo Roles who go it alone.
+                Each team wins as a team by cooperating. The Village team must lynch and eliminate the Werewolves with unity and the right strategic moves.
+                The Wolf Pack can win by disguising their identities and convincing the villagers to believe them, eliminating each player.
+                Solo roles are on their own and have their own goals. Solo Killers, on the other hand, must eliminate all players in the game, regardless of team or role.
+                Click on the buttons to see the roles and detailed descriptions of each team.
+            </p>
+
+            <div class="button-container">
+                <button id="btn-Köy" onclick="showTeam('Köy', this)" data-key="roles-btn-village">Village Team</button>
+                <button id="btn-Kurt" onclick="showTeam('Kurt', this)" data-key="roles-btn-wolf">Werewolf Team</button>
+                <button id="btn-Solo" onclick="showTeam('Solo', this)" data-key="roles-btn-solo">Solo Roles</button>
+                <button id="btn-Tarikat" onclick="showTeam('Tarikat', this)" data-key="roles-btn-cult">Cultist</button>
+            </div>
+
+            <div id="Köy" class="role-section" style="display:none;">
+                <div class="role-card-grid">
+
+                    <h3 class="grid-divider" data-key="roles-v-title">1. VILLAGE TEAM</h3>
+                    <h4 class="grid-divider sub" data-key="roles-v-sub1">1.1. Standard Village Roles</h4>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-villager-title">Villager 👱</span>
+                            <span class="tarikat-rate" data-key="roles-v-villager-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-villager-desc">You are a humble villager destined to spend your days plowing and eating. The Villager role can appear more than once in a single game. As stated, this role has no function other than voting in the lynch.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-mason-title">Mason 👷</span>
+                            <span class="tarikat-rate" data-key="roles-v-mason-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-mason-desc">If there are other masons, you'll know who they are. Otherwise, you're no different from a simple villager. You must pay close attention to mason meetings. If someone doesn't show up, it could cause big problems!</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-clumsy-title">Clumsy Guy 🤕</span>
+                            <span class="tarikat-rate" data-key="roles-v-clumsy-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-clumsy-desc">You will try to vote, but with a 50% chance, you will vote for someone else instead of the person you intended. Still, you are part of the village team.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-wolfman-title">Wolfman 👱🌚</span>
+                            <span class="tarikat-rate" data-key="roles-v-wolfman-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-wolfman-desc">Because you spend most of your time in the woods where the real wolves are, the Seer will be confused and think you are a werewolf! You are an innocent villager, but your living standards are quite confusing for the other villagers…</p>
+                        </div>
+                    </div>
+
+                    <h4 class="grid-divider sub" data-key="roles-v-sub2">1.2. Revealable Roles</h4>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-gunner-title">Gunner 🔫</span>
+                            <span class="tarikat-rate" data-key="roles-v-gunner-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-gunner-desc">You have two bullets. During the day, you can choose to shoot another player. Everyone will hear the gunshot and know that you are the Gunslinger. You will have extra bullets depending on the number of players. You'll have more shots in larger games.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-blacksmith-title">Blacksmith ⚒️</span>
+                            <span class="tarikat-rate" data-key="roles-v-blacksmith-rate">Cult Conversion Rate: 60%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-blacksmith-desc">You are the village's metalworker. You have a small amount of silver dust, enough to prevent wolves from attacking for one night. During the day, you can choose to grind it into dust and spread it around the village. Other than that, you are just a villager.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-mayor-title">Mayor 🎖</span>
+                            <span class="tarikat-rate" data-key="roles-v-mayor-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-mayor-desc">Your vote during the lynch will count as two votes after you reveal yourself.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-prince-title">Prince 👑</span>
+                            <span class="tarikat-rate" data-key="roles-v-prince-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-prince-desc">You've escaped your boring and pampered life and spend most of your days with the villagers. If they try to lynch you, you will reveal your royal lineage, and the public will realize their mistake, so no one will be lynched.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-sandman-title">Sandman 💤</span>
+                            <span class="tarikat-rate" data-key="roles-v-sandman-rate">Cult Conversion Rate: 60%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-sandman-desc">Once per game, you can use your magical sand to put everyone into such a deep sleep that no one can perform their night action.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-troublemaker-title">Troublemaker 🤯</span>
+                            <span class="tarikat-rate" data-key="roles-v-troublemaker-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-troublemaker-desc">The village's angry teenager. One day you will get so mad that the village will lynch two people instead of one!</p>
+                        </div>
+                    </div>
+
+                    <h5 class="grid-divider special" data-key="roles-v-spec1">Wolfblood New Roles</h5>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-doctor-title">Doctor 🧑‍⚕️</span>
+                            <span class="tarikat-rate" data-key="roles-v-doctor-rate">Cult Conversion Rate: 60%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-doctor-desc">You can bring a player back to life with a single touch, and remember, in games with more players, you may get a chance to resurrect more than one.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="grid-divider sub" data-key="roles-v-sub3">1.3. Cultist Hunter and Helpers</h4>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-ch-title">Cultist Hunter 💂</span>
+                            <span class="tarikat-rate" data-key="roles-v-ch-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-ch-desc">You are the leader of the village. While this village is struggling against the dark creatures of the night, you will not allow corruption and will protect the unity of this village! Your goal is to visit players every night to find out if they are a cult member. The moment you detect cultists, you will take their lives. You cannot detect wolves, but if you visit the Serial Killer, you will die!</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-harlot-title">Harlot 💋</span>
+                            <span class="tarikat-rate" data-key="roles-v-harlot-rate">Cult Conversion Rate: 70%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-harlot-desc">You will choose a player to visit during the night and spend the night at someone else's house. If the player you visit is not a Wolf/Serial Killer, you will survive and be convinced that the people you visit are partially harmless. If you visit a Wolf or Serial Killer, or their targets, you will die. During visits, werewolves won't find you at home, but the same doesn't apply to the Serial Killer.</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-v-harlot-note">*Can survive even if visiting the Arsonist or Seer roles. They will see the Arsonist role as not at home but will think roles like Seer, Traitor, and Demon are harmless.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-seer-title">Seer 👳</span>
+                            <span class="tarikat-rate" data-key="roles-v-seer-rate">Cult Conversion Rate: 40%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-seer-desc">Every night you will choose a player and see their role. Some roles might confuse you, so you will need to be very careful with this role.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-ga-title">Guardian Angel 👼</span>
+                            <span class="tarikat-rate" data-key="roles-v-ga-rate">Cult Conversion Rate: 60%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-ga-desc">Every night, you will choose a player and protect them from possible attacks. If your target is attacked, you will save their life. If you try to protect a Werewolf, your chance of survival is 50%.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-detective-title">Detective 🕵️</span>
+                            <span class="tarikat-rate" data-key="roles-v-detective-rate">Cult Conversion Rate: 70%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-detective-desc">During the day, you will choose a player to determine their identity. When the time for lynching comes, the information of the player you chose will come to you. The werewolves have a 40% chance of detecting you.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="grid-divider sub" data-key="roles-v-sub4">1.4. Ally</h4>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-traitor-title">Traitor 🖕</span>
+                            <span class="tarikat-rate" data-key="roles-v-traitor-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-traitor-desc">You are no different from an ordinary villager until all living werewolves die. After all werewolves are dead, you will turn into a werewolf and continue to terrorize the village. The Seer can see you as a Villager or a Werewolf… It's completely up to chance.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-cursed-title">Cursed 😾</span>
+                            <span class="tarikat-rate" data-key="roles-v-cursed-rate">Cult Conversion Rate: 60%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-cursed-desc">You are no different from an ordinary villager until you are attacked by werewolves. When werewolves attack you, your curse will be triggered and you will immediately turn into a werewolf.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-wildchild-title">Wild Child 👶</span>
+                            <span class="tarikat-rate" data-key="roles-v-wildchild-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-wildchild-desc">On the first night, you will choose a role model for yourself. If your role model dies/is killed by any means, you will immediately turn into a werewolf.</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-v-wildchild-note">*The Wild Child role has a chance to appear in a game if the first night starts with 120 seconds. If the first night is 90 seconds, there is no chance for the Wild Child role to appear!</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-cupid-title">Cupid 🏹</span>
+                            <span class="tarikat-rate" data-key="roles-v-cupid-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-cupid-desc">A Goddess sent to Earth with a bow and two arrows. You can choose two players (including yourself) to make them fall in love forever. If one dies, the other also dies of grief. AFK deaths are an exception.</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-v-cupid-note">*The Eros role has a chance to appear in a game if the first night starts with 120 seconds. If the first night is 90 seconds, there is no chance for the Eros role to appear!</p>
+                        </div>
+                    </div>
+
+                    <h4 class="grid-divider sub" data-key="roles-v-sub5">1.5. Support Roles</h4>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-drunk-title">Drunk 🍻</span>
+                            <span class="tarikat-rate" data-key="roles-v-drunk-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-drunk-desc">You are no different from an ordinary villager. You just drink a lot, which causes the alcohol level in your blood to increase. If the wolves choose to eat you, they will not be able to attack the next night.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-beholder-title">Beholder 👁</span>
+                            <span class="tarikat-rate" data-key="roles-v-beholder-rate">Cult Conversion Rate: 50%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-beholder-desc">You will be told who the Seer is. You will be the one who knows if the Seer is in the game or not. You will also know when a new Seer comes.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-appseer-title">Apprentice Seer 🙇</span>
+                            <span class="tarikat-rate" data-key="roles-v-appseer-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-appseer-desc">For now, you are a simple villager. However, when the Seer dies, you will become the new Seer as their successor.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-wiseelder-title">Wise Elder 📚</span>
+                            <span class="tarikat-rate" data-key="roles-v-wiseelder-rate">Cult Conversion Rate: 30%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-wiseelder-desc">You can survive one werewolf attack - the same can't be said for a second time. If the Gunslinger, Alchemist, or Hunter targets you, they will lose their powers out of grief and turn into a normal villager.</p>
+                        </div>
+                    </div>
+
+                    <h5 class="grid-divider special" data-key="roles-v-spec2">[RE-DESIGN ROLES]</h5>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-gravedigger-title">Gravedigger ☠️</span>
+                            <span class="tarikat-rate" data-key="roles-v-gravedigger-rate">Cult Conversion Rate: 30%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-gravedigger-desc1">The dead stay dead, the living are with us. From the 2nd night onwards, you will dig graves for the dead players. Yes, even the worst ones deserve to be buried with honor! During the time you are burying the dead players, you will not be at home. Therefore, your visitors will either not find you at home or they will fall into one of the graves and die while trying to get to your house. Being outside has its benefits, as well as its drawbacks. By chance, you can be noticed and killed by werewolves or the Serial Killer.</p>
+                            <p data-key="roles-v-gravedigger-desc2">You can use the ability of one of the dead players once.</p>
+                        </div>
+                    </div>
+
+                    <h5 class="grid-divider special" data-key="roles-v-spec3">Wolfblood New Roles</h5>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-boss-title">Boss 🎩</span>
+                            <span class="tarikat-rate" data-key="roles-v-boss-rate">Cult Conversion Rate: 10%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-boss-desc">You have a strong hatred for cultists. Whenever you encounter a cult, you join their ranks by pretending to be one of them. However, the cultists are aware of your true identity and you secretly inform the village team of the number of cultists every night.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-skeleton-title">Skeleton 💀</span>
+                            <span class="tarikat-rate" data-key="roles-v-skeleton-rate">Cult Conversion Rate: 40%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-skeleton-desc">Even beyond the grave, your spirit will haunt the village! After you die, you will have a chance to block a player's abilities. You can make this choice at any time and it will block all of the player's actions for 1 day.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-miner-title">Miner ⛏️</span>
+                            <span class="tarikat-rate" data-key="roles-v-miner-rate">Cult Conversion Rate: 80%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-miner-desc">Every night, you dig tunnels to the villagers' homes. Thanks to the tunnels you dig, players with night actions will get confused and unknowingly go to a random house. You cannot dig the same player's house two nights in a row.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-executioner-title">Executioner 🦸‍♂</span>
+                            <span class="tarikat-rate" data-key="roles-v-executioner-rate">Cult Conversion Rate: 60%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-executioner-desc">The Executioner takes responsibility for the lynching process by showcasing extraordinary skills and challenging other villagers. When the Executioner's true identity is revealed, they take control by choosing two people from the village. The villagers must then use their votes to decide which of these two people will be executed. The person chosen by the majority will be executed.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="grid-divider sub" data-key="roles-v-sub6">1.6. Powerful Roles</h4>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-hunter-title">Hunter 🎯</span>
+                            <span class="tarikat-rate" data-key="roles-v-hunter-rate">Cult Conversion Rate: 50%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-hunter-desc">You can't sleep well and never go to bed without your rifle. If you die, you can choose someone else to kill. If you are attacked by a werewolf, you have a chance to defeat a werewolf, but you cannot choose to kill.</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-v-hunter-note">If you are attacked by a werewolf, your chance of winning is 30%. Your chance will increase by 20% for each additional werewolf. Also, if you are killed by the Serial Killer, you will have a chance to shoot someone, just like in a lynch.</p>
+                        </div>
+                    </div>
+
+                    <h5 class="grid-divider special" data-key="roles-v-spec4">[RE-DESIGN ROLES]</h5>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-chemist-title">Chemist 🧪</span>
+                            <span class="tarikat-rate" data-key="roles-v-chemist-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-chemist-desc1">You are a mad scientist who experiments on living things. On the first night, you prepare 4 potions, 2 of which are deadly poisons and 2 are harmless painkillers. You can choose a target to give them one of each and leave them to decide their own fate!</p>
+                            <p data-key="roles-v-chemist-desc2">If an evil role dies from the poison, you get 2 extra potions. After visiting someone, you must wait 1 day before visiting another player.</p>
+                        </div>
+                    </div>
+
+                    <h5 class="grid-divider special" data-key="roles-v-spec5">Wolfblood New Roles</h5>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-snitch-title">Snitch 🦜</span>
+                            <span class="tarikat-rate" data-key="roles-v-snitch-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-snitch-desc">The most curious resident of the entire village. Your passion for gossip has led you to learn everyone's hidden truths. In your last breath, you can expose any player's deepest, darkest secret, causing them to reveal their identity.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-pawn-title">Pawn ♟</span>
+                            <span class="tarikat-rate" data-key="roles-v-pawn-rate">Cult Conversion Rate: 60%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-pawn-desc">Every night, you will choose someone to protect. If your target is attacked, you will sacrifice yourself. If you try to protect a Wolf or Serial Killer, you will die.</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-v-pawn-note">You have no chance against the Serial Killer's target. They can kill both you and your target at the same time.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-soldier-title">Soldier 🪖</span>
+                            <span class="tarikat-rate" data-key="roles-v-soldier-rate">Cult Conversion Rate: 40%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-soldier-desc">When the sun rises, you can choose to save someone from the lynch votes. If the selected player is targeted for lynching and dies, you will have a one-time ability to redirect the lynch votes to another player of your choice.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="grid-divider sub" data-key="roles-v-sub7">1.7. Vision Roles</h4>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-fool-title">Fool 🃏</span>
+                            <span class="tarikat-rate" data-key="roles-v-fool-rate">Cult Conversion Rate: 40%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-fool-desc">The Fool is said to be a Seer… When they choose to see someone's role at night, they are told a random role.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-augur-title">Augur 🦅</span>
+                            <span class="tarikat-rate" data-key="roles-v-augur-rate">Cult Conversion Rate: 40%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-augur-desc">You have the power to see things, but you are quite different from a seer or oracle. You are someone who can see roles that are not in the village. You also won't see the same role twice!</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-oracle-title">Oracle 🌀</span>
+                            <span class="tarikat-rate" data-key="roles-v-oracle-rate">Cult Conversion Rate: 50%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-oracle-desc">Every night you can choose to look at someone, but you will only see what they are NOT. You will be given the role of someone else who is still alive in the game. So pay attention to which role is mentioned, as it means someone is still alive.</p>
+                        </div>
+                    </div>
+
+                    <h5 class="grid-divider special" data-key="roles-v-spec6">Wolfblood New Roles</h5>
+
+                    <div class="role-card village" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-v-preacher-title">Preacher 🛐</span>
+                            <span class="tarikat-rate" data-key="roles-v-preacher-rate">Cult Conversion Rate: 30%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-v-preacher-desc">You can pray for a player during the night. If the player you prayed for is killed, you will learn the identity and role of their killer. However, they will also learn your identity. This ability can be used from the second night onwards.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="Kurt" class="role-section" style="display:none;">
+                <div class="role-card-grid">
+                    <h3 class="grid-divider" data-key="roles-w-title">2. WOLF TEAM</h3>
+                    <h4 class="grid-divider sub" data-key="roles-w-sub1">2.1. Werewolves</h4>
+
+                    <div class="role-card wolf" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-w-werewolf-title">Werewolf 🐺</span>
+                            <span class="tarikat-rate" data-key="roles-w-werewolf-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-w-werewolf-desc">Every night you will choose someone to eat. Your goal is to manipulate the village folk, make them believe you, and to equalize the number of living players with the number of your wolf pack. Your goal is to create chaos in the village, eliminate all your enemies, and win!</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card wolf" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-w-alpha-title">Alpha Wolf ⚡️</span>
+                            <span class="tarikat-rate" data-key="roles-w-alpha-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-w-alpha-desc">You are the source of the trouble. Your bite is the cause of the curse that turns people into werewolves. Every night, you will choose a human to attack and kill, but as long as you are alive, there will be a 20% chance that your victim will turn into a werewolf.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card wolf" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-w-cub-title">Wolf Cub 🐶</span>
+                            <span class="tarikat-rate" data-key="roles-w-cub-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-w-cub-desc">You are very loved by the wolf pack. Like other wolves, you will choose a villager to attack and kill every night. If you are killed, your wolf pack will go crazy with rage and attack two people the next night. You'll still be dead, though.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card wolf" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-w-lycan-title">Lycan 🐺🌝</span>
+                            <span class="tarikat-rate" data-key="roles-w-lycan-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-w-lycan-desc">You are a wolf, but the Seer will be confused and see you as a villager.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card wolf" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-w-snow-title">Snow Wolf 🐺☃️</span>
+                            <span class="tarikat-rate" data-key="roles-w-snow-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-w-snow-desc">Every night, instead of following your pack to hunt someone, you wander alone to freeze someone, independent of the pack. The frozen person (if any) cannot use any night action. However, their victim will have some residual power the next night, so they cannot be frozen a second time in a row.</p>
+                        </div>
+                    </div>
+
+                    <h5 class="grid-divider special" data-key="roles-w-spec1">Wolfblood New Roles</h5>
+
+                    <div class="role-card wolf" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-w-shadow-title">Shadow Wolf 🐺🌚</span>
+                            <span class="tarikat-rate" data-key="roles-w-shadow-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-w-shadow-desc">Just like ordinary werewolves, you can kill someone every night. But you have a shadow ability that is different from all other wolves. When you use your abilities, shadows hide the villagers' votes as '?' on the bot, but they remain visible to the group. However, the ability does not affect the wolf group and allows them to see who they are lynching.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card wolf" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-w-conjurer-title">Conjurer Wolf 🐺✨</span>
+                            <span class="tarikat-rate" data-key="roles-w-conjurer-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-w-conjurer-desc">You have a secret ability. When you use it, the person with the fewest votes, not the most, will die in the lynch vote.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card wolf" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-w-rogue-title">Rogue Wolf 🐺🧧</span>
+                            <span class="tarikat-rate" data-key="roles-w-rogue-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-w-rogue-desc">You are known for your cunning and ability to impersonate another player. During the first night, you have the opportunity to choose a player to mimic. If you are checked by insightful roles or die, you will be known as the role you are mimicking. If the player you impersonated has any revealing ability, you can also mimic it. But remember that this will have no real effect.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card wolf" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-w-illusionist-title">Illusionist Wolf 🐺🪄</span>
+                            <span class="tarikat-rate" data-key="roles-w-illusionist-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-w-illusionist-desc1">You wear a mask made of lies… and it works.</p>
+                            <p data-key="roles-w-illusionist-desc2">When insightful roles check you, they see a random villager role, and yes, this role actually exists in the game. You know which one it is from the very beginning. If you are lynched, that poor soul is dragged to the grave with you. If they are already dead, you will choose a new target. Bend reality. Deceive the village. Take someone with you. You're not just a wolf, you are the show itself.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="grid-divider sub" data-key="roles-w-sub2">2.2. Werewolf Allies</h4>
+
+                    <div class="role-card wolf" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-w-sorcerer-title">Sorcerer 🔮</span>
+                            <span class="tarikat-rate" data-key="roles-w-sorcerer-rate">Cult Conversion Rate: 40%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-w-sorcerer-desc">You will ally with the creatures of the night instead of the villagers. At night, you will use your power to find wolves or insightful/dangerous roles like the Seer. You only win if the wolves win. Enjoy helping to destroy those miserable villagers.</p>
+                        </div>
+                    </div>
+
+                    <h5 class="grid-divider special" data-key="roles-w-spec2">Wolfblood New Roles</h5>
+
+                    <div class="role-card wolf" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-w-poseidon-title">Poseidon 🧜</span>
+                            <span class="tarikat-rate" data-key="roles-w-poseidon-rate">Cult Conversion Rate: 40%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-w-poseidon-desc">Once per game, you can kill a random player on the village team by unleashing a tsunami. When you decide to unleash a tsunami, the village will be notified that a tsunami is approaching but your identity will not be revealed.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="Solo" class="role-section" style="display:none;">
+                <div class="role-card-grid">
+                    <h3 class="grid-divider" data-key="roles-s-title">3. SOLO ROLES</h3>
+
+                    <div class="role-card solo" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-s-tanner-title">Tanner 👺</span>
+                            <span class="tarikat-rate" data-key="roles-s-tanner-rate">Cult Conversion Rate: 40%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-s-tanner-desc">Your goal is quite simple: to be lynched! Your masochistic feelings are at their peak and a specific source of pain drives you crazy! You only win the game if you are lynched, and everyone else loses. Any other way of dying is torture for you.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card solo" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-s-doppel-title">Doppelganger 🎭</span>
+                            <span class="tarikat-rate" data-key="roles-s-doppel-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-s-doppel-desc1">Legend says your ancestors were shapeshifters and could choose any form they wanted. You inherited some of their abilities. Choose a player, and when that player dies, you will take over their role. You can never win in your pure form! After you obtain the role of the player you chose, you will then serve the team to which that role belongs.</p>
+                            <p data-key="roles-s-doppel-desc2">You have no Cult Conversion rate. It will be determined by the conversion percentage of the role you choose.</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-s-doppel-note">*The Doppelganger role has a chance to appear in a game if the first night starts with 120 seconds. If the first night is 90 seconds, there is no chance for the Doppelganger role to appear!</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card solo" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-s-thief-title">Thief 😈</span>
+                            <span class="tarikat-rate" data-key="roles-s-thief-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-s-thief-desc1">The Thief is a role played in two modes.</p>
+                            <p data-key="roles-s-thief-desc2">The normal Thief chooses a target every night and steals their role. If they succeed in stealing the role, the target will lose their role and turn into a Villager.</p>
+                            <p data-key="roles-s-thief-desc3">In Endless Thief mode, this cycle continues. The Thief steals the role from their target, and the person who had their role stolen becomes the new Thief.</p>
+                        </div>
+                    </div>
+
+                    <h5 class="grid-divider special" data-key="roles-s-spec1">Solo Killers</h5>
+
+                    <div class="role-card solo" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-s-sk-title">Serial Killer 🔪</span>
+                            <span class="tarikat-rate" data-key="roles-s-sk-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-s-sk-desc">You're a psycho who just escaped from the local asylum. Your goal is for everyone else to die. Every night you can add a player's body to your collection. There is very little power that can stop you, you can prevail against everyone! To win, you must be the only one left alive.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card solo" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-s-arso-title">Arsonist 🔥</span>
+                            <span class="tarikat-rate" data-key="roles-s-arso-rate">Cult Conversion Rate: 0%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-s-arso-desc">Every night, you will visit houses to douse them with gasoline. You can either set your single target on fire the next night to kill them, or you can accumulate multiple victims for a mass slaughter and set them on fire. You only win the game if you are the last one left alive.</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-s-arso-note">*You will have extra gasoline during the day as long as there are no werewolves/Serial Killers left alive in the game.</p>
+                        </div>
+                    </div>
+
+                    <h5 class="grid-divider special" data-key="roles-s-spec2">Wolfblood New Roles</h5>
+
+                    <div class="role-card solo" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-s-slave-title">Slave 😵‍💫</span>
+                            <span class="tarikat-rate" data-key="roles-s-slave-rate">Cult Conversion Rate: 100%</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-s-slave-desc">You are not on the side of any team in the village. Your only goal is to deliver the target given to you into the cruel hands of justice (to lynch them). You must get your target lynched, believing that they disrupt the peace of the village. If your target dies for any reason other than lynching, you must fall into despair and try to get yourself lynched. If your target is lynched, you win the game.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="Tarikat" class="role-section" style="display:none;">
+                <div class="role-card-grid">
+                    <h3 class="grid-divider" data-key="roles-c-title">4. CULT</h3>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-cultist-title">Cultist 👤</span>
+                            <span class="tarikat-rate" data-key="roles-c-cultist-rate">N/A</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-cultist-desc">Each night, you can choose one player to try and convert to your cult. If all players still alive at the end of the game are Cultists, they will win.</p>
+                        </div>
+                    </div>
+
+                    <h5 class="grid-divider special" data-key="roles-c-spec1">Cult Conversion Rates & Conditions</h5>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-100-title">%100 Conversion</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-100-desc1">The roles listed below are directly inclined to convert to the Cult. Any attempt to convert them will result in them directly joining the Cult.</p>
+                            <p data-key="roles-c-100-desc2">✔️ Villager 👱<br>✔️ Drunk 🍻<br>✔️ Apprentice seer 🙇<br>✔️ Wolfman 👱🌚<br>✔️ Mason 👷<br>✔️ Clumsy guy 🤕<br>✔️ Troublemaker 🤯<br>✔️ Mayor 🎖<br>✔️ Prince 👑<br>✔️ Gunner 🔫<br>✔️ Cupid 🏹<br>✔️ Wild child 👶<br>✔️ Traitor 🖕<br>✔️ Depressive 😨<br>✔️ Chemist 👨‍🔬<br>✔️ Slave 😵‍💫<br>✔️ Snitch 🦜</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-80-title">%80 Conversion</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-80-desc1">The roles listed below have a high tendency to convert to the Cult. They show little 'faith'.</p>
+                            <p data-key="roles-c-80-desc2">✔️Pacifist ☮️<br>✔️Miner ⛏️</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-75-title">%75 Conversion</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-75-desc1">✔️Blacksmith ⚒️</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-70harlot-title">%70 Conversion (Harlot 💋)</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-70harlot-desc1">✔️Harlot 💋</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-c-70harlot-note">Note: The Harlot is not at home during their nightly visits. They are immune to Cult conversions while visiting. When they stay home, they have a 70% chance of being converted.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-70detective-title">%70 Conversion (Detective 🕵️)</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-70detective-desc1">✔️Detective 🕵️</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-60ga-title">%60 Conversion (GA 👼)</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-60ga-desc1">✔️Guardian angel 👼</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-c-60ga-note">Note: The Guardian Angel is not at home during their nightly visits. They are immune to Cult conversions while visiting. When they stay home, they have a 60% chance of being converted.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-60-title">%60 Conversion</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-60-desc1">The roles listed here are closer to the "High-Faith" class. They have a higher chance of resisting the Cult.</p>
+                            <p data-key="roles-c-60-desc2">✔️Sandman 💤<br>✔️Cursed 😾<br>✔️Pawn ♟<br>✔️Executioner 🦸‍♂</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-50hunter-title">%50 Conversion (Hunter 🎯)</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-50hunter-desc1">✔️Town hunter 🎯</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-c-50hunter-note">Note: The Town Hunter is clearly not fond of visitors. In the event of a Cultist visit, there is a 30% chance they will kill the visitor. If this is successful, the remaining 70% is split 50/50: either the Cultists succeed in converting them, or the Hunter resists and does not join the Cult.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-50-title">%50 Conversion</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-50-desc1">As you might guess, the roles on this list have a 50/50 chance of being converted. It's pure luck!</p>
+                            <p data-key="roles-c-50-desc2">✔️Beholder 👁<br>✔️Oracle 🌀</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-40-title">%40 Conversion</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-40-desc1">The roles on this list can be considered "Resistant". They will put up a strong fight against the Cult.</p>
+                            <p data-key="roles-c-40-desc2">✔️Seer 👳<br>✔️Fool 🃏<br>✔️Augur 🦅<br>✔️Tanner 👺<br>✔️Sorcerer 🔮<br>✔️Skeleton 💀<br>✔️Poseidon 🧜<br>✔️Soldier 🪖</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-30digger-title">%30 Conversion (Grave Digger ☠️)</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-30digger-desc1">✔️Grave digger ☠️</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-c-30digger-note">Note: The Grave Digger is not at home after the 2nd night as they're busy with the dead. The Cultists will either not find them at home or will die by falling into an open grave on their way.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-30-title">%30 Conversion</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-30-desc1">The players on this list are "High-Faith" roles. While their presence is a threat to the Cultists, they are the last ones to be targeted for conversion.</p>
+                            <p data-key="roles-c-30-desc2">✔️Wise elder 📚<br>✔️Preacher 🛐</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="false">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-10-title">%10 Conversion</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-10-desc1">✔️Boss 🎩</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-0immune-title">%0 Conversion (Immune)</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-0immune-desc1">✔️Doppelganger 🎭<br>✔️Thief 😈<br>✔️Cultist hunter 💂<br>✔️Serial killer 🔪<br>✔️Arsonist 🔥<br>Werewolves 🐺❓</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-c-0immune-note">Immune rollerin (Doppelganger, Cultist Hunter, SK, Arsonist, Werewolves) tamamının özel notları vardır. Detaylar için ilgili rolün kartına bakınız (bazıları burada listelenmiştir).</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-0doppel-title">%0 Conversion (Doppelganger 🎭)</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-0doppel-desc1">✔️Doppelganger 🎭</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-c-0doppel-note">Note: The Doppelganger is immune to Cultists until their role model dies and they take on a new role. After taking on a new role, their conversion rate changes based on that role.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-0ch-title">%0 Conversion (Cultist Hunter 💂)</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-0ch-desc1">✔️Cultist hunter 💂</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-c-0ch-note">Note: Immune to Cultists. Any attempt to convert them is fatal. If Cultists attempt to convert them, they will lose their newest member, and the Cultist Hunter will be made aware of the remaining number of cult members.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-0sk-title">%0 Conversion (Serial Killer 🔪)</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-0sk-desc1">✔️Serial killer 🔪</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-c-0sk-note">Note: Immune to Cultists. Any attempt to convert results in a absolute Cultist death.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-0arso-title">%0 Conversion (Arsonist 🔥)</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-0arso-desc1">✔️Arsonist 🔥</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-c-0arso-note">Note: Immune to Cultists. Cult members cannot find their target at home.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist" onclick="flipCard(this)" data-state="0" data-has-note="true">
+                        <div class="card-face card-front">
+                            <span class="role-title" data-key="roles-c-0wolf-title">%0 Conversion (Werewolves 🐺❓)</span>
+                        </div>
+                        <div class="card-face card-desc">
+                            <p data-key="roles-c-0wolf-desc1">Werewolves 🐺❓</p>
+                        </div>
+                        <div class="card-face card-note">
+                            <p class="small-note" data-key="roles-c-0wolf-note">Note: All types of Wolves are immune to Cultists. Cult members cannot find their target at home. If the Wolves do not attack (stay home), any attempted conversion will result in a absolute Cultist death.</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card cultist static-card">
+                        <div class="card-face">
+                            <h5 data-key="roles-c-autocv-title">👤🫂 AUTO-CV CONDITIONS/TERMS FOR CULT 🫂👤</h5>
+                            <p data-key="roles-c-autocv-p1">When cult members number will more than half of alive players number, the game will end as cult winning and everyone got auto-cv. Exceptions below; </p>
+                            <p data-key="roles-c-autocv-li1">➠ If Cultist Hunter 💂 alive </p>
+                            <p data-key="roles-c-autocv-li2">➠ If any Werewolf 🐺 / Serial Killer 🔪 / Arsonist 🔥 alive </p>
+                            <p data-key="roles-c-autocv-li3">➠ If Doppelgänger 🎭 ( 0% conversion rate with pure form) / Thief 😈 alive </p>
+                            <p data-key="roles-c-autocv-li4">➠ If Hunter 🎯 (harmful for visitors) alive </p>
+                            <p data-key="roles-c-autocv-li5">➠ If Grave Digger ☠️ (harmful for visitors) alive </p>
+                            <p data-key="roles-c-autocv-li6">➠ If Gunner 🔫 alive (with bullet(s), otherwise auto-cv can happen) </p>
+                            <p data-key="roles-c-autocv-li7">➠ If Mayor 🎖 exist and their vote can balance the numbers </p>
+                            <p data-key="roles-c-autocv-li8">➠ If Chemist 👨‍🔬 (potential killer) alive </p>
+                            <p data-key="roles-c-autocv-p-end">If these terms exist in current game, auto-cv can not happen. They must be killed or must cved if there is a chance.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <script>
+                function showTeam(team, clickedButton) {
+                    document.getElementById('Köy').style.display = 'none';
+                    document.getElementById('Kurt').style.display = 'none';
+                    document.getElementById('Solo').style.display = 'none';
+                    document.getElementById('Tarikat').style.display = 'none';
+
+                    const buttons = document.querySelectorAll('.button-container button');
+                    buttons.forEach(button => button.classList.remove('active'));
+
+                    document.getElementById(team).style.display = 'block';
+
+                    clickedButton.classList.add('active');
+                }
+
+                function flipCard(cardElement) {
+                    let currentState = parseInt(cardElement.dataset.state || 0);
+                    const hasNote = cardElement.dataset.hasNote === 'true';
+
+                    if (hasNote) {
+                        currentState = (currentState + 1) % 3;
+                    } else {
+                        currentState = (currentState + 1) % 2;
+                    }
+                    cardElement.dataset.state = currentState;
+                }
+            </script>
+
+        </main>
+
+        <footer>
+            <p data-key="footer-text">© 2025 Wolfblood Team - All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script src="Loader.js" defer></script>
+    <script src="Translate.js" defer></script>
+</body>
+</html>
