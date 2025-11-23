@@ -23,7 +23,6 @@
             --font-header: 'Lora', serif;
             --font-body: 'Nunito Sans', 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
         }
-
         @keyframes pulse {
             0%, 100% {
                 transform: scale(1);
@@ -32,7 +31,6 @@
                 transform: scale(1.05);
             }
         }
-
         @keyframes ping {
             0% {
                 transform: scale(0.5);
@@ -187,7 +185,7 @@
 
         .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
         .contact-card {
@@ -242,6 +240,12 @@
         }
         .support-bot .bot-image-wrapper::after {
             background-color: var(--team-cultist);
+        }
+        .admin-bot .bot-image {
+            border: 3px solid #9b59b6;
+        }
+        .admin-bot .bot-image-wrapper::after {
+            background-color: #9b59b6;
         }
         .contact-info h3 {
             font-family: var(--font-header);
@@ -372,7 +376,15 @@
                         <p data-key="contact-start-bot">Start the Bot ➔</p>
                     </div>
                 </a>
-
+                <a href="https://t.me/wolfbloodhelpbot" class="contact-card admin-bot" target="_blank">
+                    <div class="bot-image-wrapper">
+                        <img src="image/WB.Admin.jpg" alt="Admin Bot" class="bot-image">
+                    </div>
+                    <div class="contact-info">
+                        <h3 data-key="contact-admin-title">Admin Bot</h3>
+                    <p data-key="contact-start-bot">Start the Bot ➔</p>
+                    </div>
+                </a>
                 <a href="https://t.me/wolfbloodsupport" class="contact-card support-bot" target="_blank">
                     <div class="bot-image-wrapper">
                         <img src="image/WB.Support.jpg" alt="Destek Grubu" class="bot-image">
@@ -395,4 +407,5 @@
 </body>
 
 </html>
+
 
