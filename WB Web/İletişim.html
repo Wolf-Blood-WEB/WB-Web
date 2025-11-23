@@ -64,7 +64,6 @@
             right: 40px;
             z-index: 102;
         }
-
         .dropdown-toggle {
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-color);
@@ -80,13 +79,11 @@
             gap: 8px;
             transition: all 0.3s ease;
         }
-
             .dropdown-toggle:hover {
                 background-color: var(--accent-color);
                 border-color: var(--accent-color);
                 color: var(--header-color);
             }
-
             .dropdown-toggle .arrow {
                 font-size: 0.7rem;
                 transition: transform 0.3s ease;
@@ -95,7 +92,6 @@
         .language-dropdown.open .dropdown-toggle .arrow {
             transform: rotate(180deg);
         }
-
         .dropdown-menu {
             display: block;
             position: absolute;
@@ -111,13 +107,11 @@
             visibility: hidden;
             transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
         }
-
         .language-dropdown.open .dropdown-menu {
             opacity: 1;
             transform: translateY(0);
             visibility: visible;
         }
-
         .dropdown-menu a {
             display: block;
             padding: 10px 20px;
@@ -127,7 +121,6 @@
             transition: all 0.2s ease;
             white-space: nowrap;
         }
-
             .dropdown-menu a:hover {
                 background-color: var(--accent-color);
                 color: var(--header-color);
@@ -137,7 +130,6 @@
             padding: 40px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
             header h1 {
                 font-family: var(--font-header);
                 font-size: 3rem;
@@ -160,7 +152,6 @@
             z-index: 100;
             backdrop-filter: blur(5px);
         }
-
             nav a {
                 color: var(--text-color);
                 text-decoration: none;
@@ -209,7 +200,6 @@
             color: var(--header-color);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
             .contact-card:hover {
                 transform: translateY(-5px);
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
@@ -230,7 +220,6 @@
             z-index: 2;
             animation: pulse 2.5s infinite ease-in-out;
         }
-
         .bot-image-wrapper::after {
             content: '';
             position: absolute;
@@ -242,7 +231,6 @@
             z-index: 1;
             animation: ping 2s infinite cubic-bezier(0, 0, 0.2, 1);
         }
-
         .network-bot .bot-image {
             border: 3px solid var(--accent-color);
         }
@@ -263,7 +251,6 @@
             padding: 0;
             border: none;
         }
-
         .contact-info p {
             font-size: 1.1rem;
             font-weight: 600;
@@ -272,7 +259,6 @@
             margin: 0;
             transition: color 0.3s ease;
         }
-
         .contact-card:hover .contact-info p {
             opacity: 1;
             color: var(--accent-hover-color);
@@ -283,7 +269,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
         footer {
             text-align: center;
             padding: 25px;
@@ -294,6 +279,40 @@
             position: relative;
             z-index: 1;
         }
+        .neon-wave-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient( -45deg, #000000, #1e0536, #0f172a, #3b0764, #1d4ed8 );
+            background-size: 400% 400%;
+            animation: waveAnimation 15s ease infinite;
+            opacity: 1;
+        }
+        .neon-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        @keyframes waveAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
         .emoji {
             font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
         }
@@ -301,6 +320,8 @@
 
 </head>
 <body>
+    <div class="neon-wave-bg"></div>
+    <div class="neon-overlay"></div>
     <div class="content-wrapper">
         <header>
             <div class="language-dropdown">
@@ -374,3 +395,4 @@
 </body>
 
 </html>
+
