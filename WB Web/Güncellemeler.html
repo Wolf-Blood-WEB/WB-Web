@@ -292,6 +292,45 @@
             color: #a0aec0;
             background-color: rgba(0, 0, 0, 0.2);
         }
+        .neon-wave-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient( -45deg, #000000,
+            #1e0536,
+            #0f172a,
+            #3b0764,
+            #1d4ed8
+            );
+            background-size: 400% 400%;
+            animation: waveAnimation 15s ease infinite;
+            opacity: 1;
+        }
+        .neon-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        @keyframes waveAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
         .emoji {
             font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
         }
@@ -299,6 +338,8 @@
 
 </head>
 <body>
+    <div class="neon-wave-bg"></div>
+    <div class="neon-overlay"></div>
     <div class="content-wrapper">
         <header>
             <div class="language-dropdown">
@@ -1662,4 +1703,5 @@
     <script src="Translate.js" defer></script>
 </body>
 </html>
+
 
