@@ -295,7 +295,18 @@
             color: #a0aec0;
             background-color: rgba(0, 0, 0, 0.2);
         }
-
+        .page-background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('image/Gruplar-All.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6;
+        }
         @media (max-width: 600px) {
             .group-link, .group-link:nth-child(even) {
                 flex-direction: column;
@@ -316,6 +327,7 @@
 
 </head>
 <body>
+    <div class="page-background-image"></div>
     <div class="content-wrapper">
         <header>
             <div class="language-dropdown">
@@ -540,4 +552,5 @@
 
 </body>
 </html>
+
 
