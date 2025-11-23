@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-key="page-title-roles">Wolfblood - Hakkımızda</title>
+    <title data-key="page-title-about">Wolfblood - Hakkımızda</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/png" href="image/WB-Kopya.png">
@@ -80,14 +80,12 @@
             position: relative;
             z-index: 101;
         }
-
         .language-dropdown {
             position: absolute;
             top: 40px;
             right: 40px;
             z-index: 102;
         }
-
         .dropdown-toggle {
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-color);
@@ -103,13 +101,11 @@
             gap: 8px;
             transition: all 0.3s ease;
         }
-
             .dropdown-toggle:hover {
                 background-color: var(--color-roles);
                 border-color: var(--color-roles);
                 color: var(--header-color);
             }
-
             .dropdown-toggle .arrow {
                 font-size: 0.7rem;
                 transition: transform 0.3s ease;
@@ -118,7 +114,6 @@
         .language-dropdown.open .dropdown-toggle .arrow {
             transform: rotate(180deg);
         }
-
         .dropdown-menu {
             display: block;
             position: absolute;
@@ -134,13 +129,11 @@
             visibility: hidden;
             transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
         }
-
         .language-dropdown.open .dropdown-menu {
             opacity: 1;
             transform: translateY(0);
             visibility: visible;
         }
-
         .dropdown-menu a {
             display: block;
             padding: 10px 20px;
@@ -150,7 +143,6 @@
             transition: all 0.2s ease;
             white-space: nowrap;
         }
-
             .dropdown-menu a:hover {
                 background-color: var(--color-roles);
                 color: var(--header-color);
@@ -161,14 +153,12 @@
             padding: 40px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
             header h1 {
                 font-family: var(--font-header);
                 font-size: 3rem;
                 color: var(--header-color);
                 text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
             }
-
             header p {
                 font-size: 1.1rem;
                 color: #a0aec0;
@@ -186,7 +176,6 @@
             z-index: 100;
             backdrop-filter: blur(5px);
         }
-
             nav a {
                 color: var(--text-color);
                 text-decoration: none;
@@ -195,12 +184,22 @@
                 border-radius: 6px;
                 transition: background-color 0.3s ease;
             }
-
                 nav a:hover, nav a:focus {
                     background-color: var(--color-roles);
                     color: var(--header-color);
                 }
-
+        .page-background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('image/Hakkımızda-All.png');
+            background-size: 100% 100%;
+            background-position: center;
+            opacity: 0.5;
+        }
         main {
             max-width: 900px;
             margin: 40px auto;
@@ -210,13 +209,11 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         .team-section-wrapper {
             margin-bottom: 50px;
             padding: 20px;
             border-radius: 12px;
         }
-
         .team-title {
             font-family: var(--font-header);
             color: var(--header-color);
@@ -226,21 +223,18 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 10px;
         }
-
         .personel-grid {
             display: flex;
             justify-content: center;
             gap: 40px;
             flex-wrap: wrap;
         }
-
         .flip-card {
             background-color: transparent;
             width: 320px;
             height: 420px;
             perspective: 1000px;
         }
-
         .flip-card-inner {
             position: relative;
             width: 100%;
@@ -250,11 +244,9 @@
             transform-style: preserve-3d;
             border-radius: 12px;
         }
-
         .flip-card.flipped .flip-card-inner {
             transform: rotateY(180deg);
         }
-
         .flip-card-front, .flip-card-back {
             position: absolute;
             width: 100%;
@@ -272,23 +264,19 @@
             padding-top: 40px;
             gap: 15px;
         }
-
         .kadir-card .flip-card-front,
         .kadir-card .flip-card-back {
             animation: shockwave-green 1.5s infinite alternate;
         }
-
         .ismet-card .flip-card-front,
         .ismet-card .flip-card-back {
             animation: shockwave-red 1.5s infinite alternate;
         }
-
         .flip-card-back {
             transform: rotateY(180deg);
             justify-content: flex-start;
             padding-top: 50px;
         }
-
         .flip-icon {
             position: absolute;
             top: 15px;
@@ -305,12 +293,10 @@
             border: 1px solid rgba(255,255,255,0.3);
             transition: transform 0.3s, background 0.3s;
         }
-
             .flip-icon:hover {
                 background: rgba(255,255,255,0.3);
                 transform: scale(1.1);
             }
-
             .flip-icon svg {
                 width: 20px;
                 height: 20px;
@@ -332,7 +318,6 @@
             margin-bottom: 5px;
             position: relative;
         }
-
         .personel-resmi {
             width: 100%;
             height: 100%;
@@ -340,17 +325,14 @@
             object-fit: cover;
             border: 3px solid var(--header-color);
         }
-
         .kadir-card .personel-unvan {
             color: var(--electric-green);
             font-weight: bold;
         }
-
         .ismet-card .personel-unvan {
             color: var(--electric-red);
             font-weight: bold;
         }
-
         .personel-bilgi h3 {
             font-family: var(--font-header);
             font-size: 1.5rem;
@@ -361,7 +343,6 @@
             align-items: center;
             justify-content: center;
         }
-
             .personel-bilgi h3 a {
                 text-decoration: none;
                 color: inherit;
@@ -385,17 +366,14 @@
             display: flex;
             align-items: center;
         }
-
             .personel-unvan .emoji {
                 margin-right: 5px;
                 font-size: 1rem;
             }
-
         .back-content {
             text-align: left;
             width: 100%;
         }
-
         .back-header {
             display: flex;
             align-items: center;
@@ -404,7 +382,6 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 10px;
         }
-
         .mini-img {
             width: 60px;
             height: 60px;
@@ -412,19 +389,16 @@
             object-fit: cover;
             border: 2px solid var(--header-color);
         }
-
         .back-name h4 {
             font-family: var(--font-header);
             color: var(--header-color);
             font-size: 1.2rem;
         }
-
         .back-desc {
             font-size: 0.9rem;
             color: var(--text-color);
             line-height: 1.6;
         }
-
         #appreciation-intro h2 {
             font-family: var(--font-header);
             color: var(--header-color);
@@ -434,7 +408,6 @@
             font-size: 2.2rem;
             text-align: center;
         }
-
         #appreciation-intro h4 {
             font-family: var(--font-header);
             color: var(--color-roles);
@@ -442,30 +415,25 @@
             margin-top: 30px;
             margin-bottom: 15px;
         }
-
         #appreciation-intro a {
             color: var(--color-roles);
             font-weight: 600;
             text-decoration: none;
         }
-
             #appreciation-intro a:hover {
                 text-decoration: underline;
             }
-
         hr {
             border: 0;
             border-top: 1px solid rgba(255, 255, 255, 0.2);
             margin: 30px 0;
         }
-
         .button-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             margin: 30px 0;
         }
-
         .arrow-button {
             font-family: var(--font-body);
             font-size: 1rem;
@@ -556,7 +524,6 @@
             padding-bottom: 10px;
             border-bottom: 1px solid;
         }
-
         #new-roles h2 {
             border-color: var(--color-roles);
         }
@@ -606,6 +573,7 @@
 
 </head>
 <body>
+    <div class="page-background-image"></div>
     <div class="content-wrapper">
         <header>
             <div class="language-dropdown">
@@ -626,7 +594,7 @@
                 </div>
             </div>
             <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
-            <p data-key="header-subtitle-roles">About Us</p>
+            <p data-key="header-subtitle-about">About Us</p>
         </header>
 
         <nav>
@@ -873,3 +841,4 @@
 </body>
 
 </html>
+
