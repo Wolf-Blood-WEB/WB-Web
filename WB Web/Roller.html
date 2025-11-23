@@ -448,6 +448,29 @@
             color: #a0aec0;
             background-color: rgba(0, 0, 0, 0.2);
         }
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+        .figure-background {
+            position: fixed;
+            top: 0;
+            height: 100%;
+            z-index: 1;
+            width: 25%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 1;
+            pointer-events: none;
+        }
+        .figure-background.left {
+            left: 0;
+            background-position: center center;
+        }
+        .figure-background.right {
+            right: 0;
+            background-position: center center;
+        }
         .emoji {
             font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
         }
@@ -455,7 +478,8 @@
 
 </head>
 <body>
-
+    <div class="figure-background left" style="background-image: url('image/Roller-Left.png');"></div>
+    <div class="figure-background right" style="background-image: url('image/Roller-Right.png');"></div>
     <div class="content-wrapper">
         <header>
             <div class="language-dropdown">
@@ -1424,3 +1448,4 @@
 </body>
 
 </html>
+
