@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "☃️ Hint: A freezing cold is creeping in... Some won't wake up, and some will just be... frozen.",
         "🧑‍⚕️ Hint: Death is not always permanent. The Doctor may be near.",
         "⛏️ Hint: The paths are confusing tonight. Your visit might not land where you expect...",
-        "🦸‍♂ Hint: Justice is different today. The crowd can only vote 'Yes' or 'No'.",
+        "🦸‍♂ Hint: Justice is different today. The crowd can only vote among 2 people.",
         "🧪 Hint: Don't accept every potion offered. Some bring life, others bring poison.",
         "🦜 Hint: Some secrets are revealed even in death. The Snitch's last words are always revealing.",
         "✨ Hint: Watch the vote! The one with the fewest votes might be the one who dies...",
@@ -225,4 +225,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     */
+
 });
