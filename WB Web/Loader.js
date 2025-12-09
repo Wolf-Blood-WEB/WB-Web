@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "🍻 Hint: Even the village Drunk serves a purpose... especially as a bad meal for the wolves.",
         "👑 Hint: Some blood is too royal to be spilled by the mob. The lynch will fail.",
         "🎭 Hint: Some are born with no identity, only to steal the fate of another.",
-        "🛡️ Hint: The best defense is sometimes a sacrifice. Your guardian may die, but you will live.",
+        "♟ Hint: The best defense is sometimes a sacrifice. Your guardian may die, but you will live.",
         "🐺🌝 Hint: The enemy sometimes wears the face of a friend. Don't even trust the Seer's vision.",
         "☃️ Hint: A freezing cold is creeping in... Some won't wake up, and some will just be... frozen.",
         "🧑‍⚕️ Hint: Death is not always permanent. The Doctor may be near.",
@@ -227,3 +227,4 @@ document.addEventListener("DOMContentLoaded", () => {
     */
 
 });
+
