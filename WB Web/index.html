@@ -27,7 +27,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }        
+        }
         body {
             font-family: var(--font-body);
             background-color: var(--bg-color);
@@ -47,7 +47,7 @@
             position: absolute;
             top: 40px;
             right: 40px;
-            z-index: 101;
+            z-index: 1002;
         }
         .dropdown-toggle {
             background: rgba(255, 255, 255, 0.1);
@@ -63,6 +63,8 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 1003;
         }
             .dropdown-toggle:hover {
                 background-color: var(--accent-color);
@@ -73,6 +75,7 @@
                 font-size: 0.7rem;
                 transition: transform 0.3s ease;
             }
+
         .language-dropdown.open .dropdown-toggle .arrow {
             transform: rotate(180deg);
         }
@@ -87,13 +90,17 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
             opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
             transform: translateY(-10px);
             transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            z-index: 1000;
         }
         .language-dropdown.open .dropdown-menu {
             opacity: 1;
-            transform: translateY(0);
             visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
         }
         .dropdown-menu a {
             display: block;
@@ -108,16 +115,18 @@
                 background-color: var(--accent-color);
                 color: var(--header-color);
             }
-            header h1 {
-                font-family: var(--font-header);
-                font-size: 3rem;
-                color: var(--header-color);
-                text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
-            }
-            header p {
-                font-size: 1.1rem;
-                color: #a0aec0;
-            }
+
+        header h1 {
+            font-family: var(--font-header);
+            font-size: 3rem;
+            color: var(--header-color);
+            text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #a0aec0;
+        }
+
         nav {
             background: rgba(0, 0, 0, 0.2);
             display: flex;
@@ -142,7 +151,6 @@
                     background-color: var(--accent-color);
                     color: var(--header-color);
                 }
-
         .character-art {
             position: fixed;
             top: 0;
@@ -160,12 +168,11 @@
                 right: 0;
                 transform: scaleX(-1);
             }
-
         @media (max-width: 1400px) {
             .character-art {
                 display: none;
             }
-        }        
+        }
 
         main {
             max-width: 900px;
@@ -203,6 +210,7 @@
             letter-spacing: 1px;
             box-shadow: 0 5px 20px rgba(229, 62, 62, 0.4);
             transition: all 0.3s ease;
+            display: inline-block;
         }
             .hero-button:hover {
                 background-color: var(--accent-hover-color);
@@ -288,12 +296,59 @@
             position: relative;
             z-index: 1;
         }
-        @media (max-width: 1400px) {
-            .character-art {
-                display: none;
-            }
+
+        .emoji {
+            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
         }
+
         @media (max-width: 768px) {
+            header {
+                padding-top: 80px;
+                padding-bottom: 20px;
+            }
+                header h1 {
+                    font-size: 2rem;
+                    line-height: 1.2;
+                }
+            .language-dropdown {
+                top: 15px;
+                right: 15px;
+            }
+            .dropdown-toggle {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            nav {
+                position: sticky;
+                top: 0;
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding: 10px;
+                gap: 10px;
+                background: rgba(26, 32, 44, 0.98);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+                nav::-webkit-scrollbar {
+                    display: none;
+                }
+                nav a {
+                    flex: 0 0 auto;
+                    width: auto;
+                    white-space: nowrap;
+                    font-size: 0.85rem;
+                    background-color: rgba(255,255,255,0.05);
+                    border: 1px solid rgba(255,255,255,0.1);
+                    border-radius: 20px;
+                    padding: 8px 16px;
+                }
+
+            main {
+                margin: 20px 10px;
+                padding: 20px;
+            }
             .features-section {
                 flex-direction: column;
                 align-items: center;
@@ -302,16 +357,8 @@
                 width: 100%;
                 max-width: 300px;
             }
-            main {
-                margin: 20px 10px;
-                padding: 20px;
-            }
-        }
-        .emoji {
-            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
         }
     </style>
-
 </head>
 
 <body>
@@ -403,3 +450,4 @@
 </body>
 
 </html>
+
