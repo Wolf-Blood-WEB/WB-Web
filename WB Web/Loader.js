@@ -105,50 +105,48 @@ document.addEventListener("DOMContentLoaded", () => {
     initGalaxy();
     animateGalaxy();
 
-    const hints = [
-        "💡 Hint: Trust no one. Especially the quiet ones...",
-        "🐺 Hint: Wolves always hunt together. Don't leave the pack.",
-        "👁️ Hint: Someone is watching you tonight... Are they a friend, or a foe?",
-        "🔮 Hint: What the Seer sees might only be a piece of the truth.",
-        "🌙 Hint: The silence of the night hides the darkest secrets...",
-        "💡 Hint: The loudest one in the group often has the most to hide.",
-        "🗳️ Hint: When the lynch vote is over, it's not always just one person who dies...",
-        "🕊️ Hint: Even the most innocent-looking player can hide a dark secret.",
-        "🥀 Hint: A village divided will surely fall. Stick together.",
-        "🧑‍💻 Hint: Main DEV knows only coding. He can't see the roles in the game, or can he?",
-        "🦇 Hint: A Bat never sleep. They always watching you!",
-        "👺 Hint: Not everyone fears the lynch. Some... desire it.",
-        "💋 Hint: Being out at night is dangerous. The house you visit might be your last.",
-        "🔪 Hint: Wolves aren't the only problem. Some just want to watch the village burn.",
-        "👤 Hint: A single whisper can convert the most loyal villager. The cult grows in silence.",
-        "⚡️ Hint: A wolf's bite doesn't always mean death. Sometimes... it means family.",
-        "🔥 Hint: Some don't hunt. They just wait for the perfect moment... to set everyone ablaze.",
-        "💂 Hint: There's a hunter in the village, but they aren't looking for wolves... they're looking for the converted.",
-        "🔫 Hint: Justice isn't always decided by a vote. Sometimes, a bullet is faster.",
-        "🍻 Hint: Even the village Drunk serves a purpose... especially as a bad meal for the wolves.",
-        "👑 Hint: Some blood is too royal to be spilled by the mob. The lynch will fail.",
-        "🎭 Hint: Some are born with no identity, only to steal the fate of another.",
-        "♟ Hint: The best defense is sometimes a sacrifice. Your guardian may die, but you will live.",
-        "🐺🌝 Hint: The enemy sometimes wears the face of a friend. Don't even trust the Seer's vision.",
-        "☃️ Hint: A freezing cold is creeping in... Some won't wake up, and some will just be... frozen.",
-        "🧑‍⚕️ Hint: Death is not always permanent. The Doctor may be near.",
-        "⛏️ Hint: The paths are confusing tonight. Your visit might not land where you expect...",
-        "🦸‍♂ Hint: Justice is different today. The crowd can only vote among 2 people.",
-        "🧪 Hint: Don't accept every potion offered. Some bring life, others bring poison.",
-        "🦜 Hint: Some secrets are revealed even in death. The Snitch's last words are always revealing.",
-        "✨ Hint: Watch the vote! The one with the fewest votes might be the one who dies...",
-        "🪄 Hint: If you lynch an Illusionist, you might just drag an innocent soul to the grave with them.",
-        "😈 Hint: Don't get too comfortable with your powers. You might wake up as a simple Villager.",
-        "😵‍💫 Hint: You have only one goal: get them lynched. At any cost."
+    const hintKeys = [
+        "loader_hint_1", "loader_hint_2", "loader_hint_3", "loader_hint_4", 
+        "loader_hint_5", "loader_hint_6", "loader_hint_7", "loader_hint_8", 
+        "loader_hint_9", "loader_hint_10", "loader_hint_11", "loader_hint_12", 
+        "loader_hint_13", "loader_hint_14", "loader_hint_15", "loader_hint_16", 
+        "loader_hint_17", "loader_hint_18", "loader_hint_19", "loader_hint_20", 
+        "loader_hint_21", "loader_hint_22", "loader_hint_23", "loader_hint_24", 
+        "loader_hint_25", "loader_hint_26", "loader_hint_27", "loader_hint_28", 
+        "loader_hint_29", "loader_hint_30", "loader_hint_31", "loader_hint_32", 
+        "loader_hint_33", "loader_hint_34"
     ];
+
+    let loaderTranslations = {};
+    const currentLang = localStorage.getItem('lang') || 'en';
+
+    fetch(`./Languages/${currentLang}.json`)
+        .then(response => {
+            if (!response.ok) throw new Error("Lang file not found");
+            return response.json();
+        })
+        .then(data => {
+            loaderTranslations = data;
+            if (hintButton.textContent === "...") {
+                showNewHint();
+            }
+        })
+        .catch(err => {
+            console.error("Loader translation fetch failed:", err);
+            hintButton.textContent = "Loading..."; 
+        });
 
     let progress = 0;
     let hintsShown = false;
 
     const showNewHint = (e) => {
         if (e) e.preventDefault();
-        const randomHint = hints[Math.floor(Math.random() * hints.length)];
-        hintButton.textContent = randomHint;
+        const randomKey = hintKeys[Math.floor(Math.random() * hintKeys.length)];
+        if (loaderTranslations[randomKey]) {
+            hintButton.textContent = loaderTranslations[randomKey];
+        } else {
+            hintButton.textContent = "..."; 
+        }
     };
     showNewHint();
     hintButton.addEventListener('click', showNewHint);
@@ -183,48 +181,16 @@ document.addEventListener("DOMContentLoaded", () => {
             hintsShown = true;
             let i = 0;
             const showHintInterval = setInterval(() => {
-                // GÜVENLİK: Butonun hala var olduğunu kontrol et
                 if (i < hints.length && hintButton && loader.style.opacity !== "0") {
                     hintButton.style.opacity = 1;
-                    hintButton.textContent = hints[i++];
+                    const key = hintKeys[i++];
+                    if (loaderTranslations[key]) {
+                        hintButton.textContent = loaderTranslations[key];
+                    }
                 } else {
                     clearInterval(showHintInterval);
                 }
             }, 5000);
         }
     }, 30000);
-
-
-    /*
-    // --- SAYFADAN AYRILIRKEN (LİNKE TIKLANDIĞINDA) ---
-    // DÜZELTME: Bu bölüm, masaüstünde (file:///) sayfa geçişlerini
-    // engellediği için yorum satırı haline getirildi.
-    // Artık <nav> linkleri normal şekilde çalışacak.
-    
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            if (!href || href === '#' || href.startsWith('#') || link.target === '_blank') {
-                return;
-            }
-            e.preventDefault();
-            
-            let loader = document.getElementById('loader');
-            if (loader) {
-                loader.style.opacity = "1";
-            } else {
-                // Eğer loader yoksa (ki bu olmamalı), 
-                // güvenli olarak linke git
-                window.location.href = href;
-                return;
-            }
-            
-            setTimeout(() => {
-                window.location.href = href;
-            }, 500);
-        });
-    });
-    */
-
 });
-
