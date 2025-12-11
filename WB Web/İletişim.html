@@ -41,7 +41,6 @@
                 opacity: 0;
             }
         }
-
         * {
             margin: 0;
             padding: 0;
@@ -267,7 +266,6 @@
             opacity: 1;
             color: var(--accent-hover-color);
         }
-
         @media (max-width: 768px) {
             .contact-grid {
                 grid-template-columns: 1fr;
@@ -319,6 +317,72 @@
         }
         .emoji {
             font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
+        }
+        @media (max-width: 768px) {
+            header {
+                padding-top: 80px;
+                padding-bottom: 20px;
+            }
+                header h1 {
+                    font-size: 2rem;
+                    line-height: 1.2;
+                }
+
+            .language-dropdown {
+                top: 15px;
+                right: 15px;
+            }
+            .dropdown-toggle {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            nav {
+                position: sticky;
+                top: 0;
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding: 10px;
+                gap: 10px;
+                background: rgba(26, 32, 44, 0.98);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                z-index: 1000;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+                nav::-webkit-scrollbar {
+                    display: none;
+                }
+                nav a {
+                    flex: 0 0 auto;
+                    width: auto;
+                    white-space: nowrap;
+                    font-size: 0.85rem;
+                    background-color: rgba(255,255,255,0.05);
+                    border: 1px solid rgba(255,255,255,0.1);
+                    border-radius: 20px;
+                    padding: 8px 16px;
+                }
+
+            main {
+                margin: 20px 10px;
+                padding: 30px 20px;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .contact-card {
+                padding: 20px;
+            }
+            .neon-wave-bg {
+                animation: none;
+                background: linear-gradient(135deg, #0f172a, #1e0536);
+            }
+            .bot-image-wrapper {
+                width: 100px;
+                height: 100px;
+            }
         }
     </style>
 
@@ -407,5 +471,6 @@
 </body>
 
 </html>
+
 
 
