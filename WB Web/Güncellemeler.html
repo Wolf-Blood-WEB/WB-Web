@@ -334,8 +334,79 @@
         .emoji {
             font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
         }
-    </style>
+        @media (max-width: 768px) {
+            header {
+                padding-top: 80px;
+                padding-bottom: 20px;
+            }
+                header h1 {
+                    font-size: 2rem;
+                    line-height: 1.2;
+                }
 
+            .language-dropdown {
+                top: 15px;
+                right: 15px;
+            }
+            .dropdown-toggle {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            nav {
+                position: sticky;
+                top: 0;
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding: 10px;
+                gap: 10px;
+                background: rgba(26, 32, 44, 0.98);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                z-index: 1000;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+                nav::-webkit-scrollbar {
+                    display: none;
+                }
+                nav a {
+                    flex: 0 0 auto;
+                    width: auto;
+                    white-space: nowrap;
+                    font-size: 0.85rem;
+                    background-color: rgba(255,255,255,0.05);
+                    border: 1px solid rgba(255,255,255,0.1);
+                    border-radius: 20px;
+                    padding: 8px 16px;
+                }
+
+            main {
+                padding: 20px 15px;
+            }
+            .update-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .update-card {
+                padding: 20px;
+                font-size: 1.1rem;
+            }
+            .modal-content {
+                width: 95%;
+                max-height: 85vh;
+                margin: 10px;
+            }
+            .modal-body {
+                padding: 20px; 
+            }
+            .modal-close {
+                top: 5px;
+                right: 10px;
+                font-size: 2rem;
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="neon-wave-bg"></div>
@@ -1703,5 +1774,6 @@
     <script src="Translate.js" defer></script>
 </body>
 </html>
+
 
 
