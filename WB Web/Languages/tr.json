@@ -1182,7 +1182,7 @@
   "groups-es-desc": "İspanyolca konuşan oyuncular için resmi grup.",
   "groups-es-bulletin-title": "<span class='notranslate'>Wolfblood</span> Official ES Bulletin 📰<span class=\"channel-tag\">Kanal</span>",
   "groups-es-bulletin-desc": "ES Resmi grubu için duyuru kanalı.",
-  "groups-news-title": "<span class='notranslate'>Wolfblood</span> News<span class=\"channel-tag\">Channel</span>",
+  "groups-news-title": "<span class='notranslate'>Wolfblood</span> News<span class=\"channel-tag\">Kanal</span>",
   "groups-news-desc": "Tüm güncellemeler için ana duyuru kanalı.",
   "groups-rules-title": "<span class='notranslate'>Wolfblood</span> Global Rules<span class=\"channel-tag\">Kanal</span>",
   "groups-rules-desc": "Tüm <span class='notranslate'>Wolfblood</span> grupları için küresel kurallar.",
@@ -1311,5 +1311,6 @@
   "loader_hint_33": "😈 İpucu: Güçlerine çok alışma. Basit bir Köylü olarak uyanabilirsin.",
   "loader_hint_34": "😵‍💫 İpucu: Tek bir amacın var: onları linç ettirmek. Ne pahasına olursa olsun."
 }
+
 
 
