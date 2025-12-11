@@ -253,7 +253,6 @@
                 opacity: 1;
             }
         }
-
         .tab-content h3 {
             font-family: var(--font-header);
             color: var(--header-color);
@@ -281,8 +280,7 @@
             margin-bottom: 15px;
             margin-top: 0;
             text-align: left;
-        }
-        
+        }        
         .tab-content h4.team-header {
             position: relative;
             overflow: hidden;
@@ -417,7 +415,6 @@
             transition: all 0.3s ease;
             margin-right: 5px;
         }
-
             .filter-buttons button:hover {
                 transform: translateY(-2px);
             }
@@ -559,7 +556,6 @@
             text-shadow: 0 0 6px var(--team-cultist), 0 0 10px var(--team-cultist);
             transition: all 0.3s ease;
         }
-
             .tooltip-trigger:hover {
                 background-color: var(--team-cultist);
                 color: var(--header-color);
@@ -583,23 +579,19 @@
             color: #a0aec0;
             line-height: 1.6;
         }
-
             .tooltip-bubble.active {
                 display: block;
                 animation: fadeIn 0.3s ease;
             }
-
             .tooltip-bubble strong {
                 color: var(--header-color);
                 display: block;
                 margin-bottom: 5px;
             }
-
             .tooltip-bubble code {
                 font-size: 0.9rem;
                 color: var(--team-village);
             }
-
                 .tooltip-bubble code.penalty {
                     color: var(--team-wolf);
                 }
@@ -616,7 +608,6 @@
             0% {
                 transform: translateX(0);
             }
-
             50% {
                 transform: translateX(4px);
             }
@@ -624,7 +615,6 @@
                 transform: translateX(0);
             }
         }
-
         .calculator-wrapper {
             display: grid;
             grid-template-columns: 300px 1fr;
@@ -742,6 +732,100 @@
         }
         .emoji {
             font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
+        }
+        @media (max-width: 768px) {
+            header {
+                padding-top: 80px;
+                padding-bottom: 20px;
+            }
+                header h1 {
+                    font-size: 2rem;
+                    line-height: 1.2;
+                }
+
+            .language-dropdown {
+                top: 15px;
+                right: 15px;
+            }
+            .dropdown-toggle {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            nav {
+                position: sticky;
+                top: 0;
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding: 10px;
+                gap: 10px;
+                background: rgba(26, 32, 44, 0.98);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                z-index: 1000;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+                nav::-webkit-scrollbar {
+                    display: none;
+                }
+                nav a {
+                    flex: 0 0 auto;
+                    width: auto;
+                    white-space: nowrap;
+                    font-size: 0.85rem;
+                    background-color: rgba(255,255,255,0.05);
+                    border: 1px solid rgba(255,255,255,0.1);
+                    border-radius: 20px;
+                    padding: 8px 16px;
+                }
+            main {
+                margin: 20px 10px;
+                padding: 20px 10px;
+            }
+            .main-tab-container {
+                gap: 10px;
+            }
+            .main-tab-button {
+                flex: 1 1 100%;
+                text-align: center;
+                padding: 12px;
+            }
+            .score-table, .data-table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+            .calculator-wrapper {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .calculator-inputs, .calculator-results {
+                padding: 15px;
+            }
+            .heatmap-grid {
+                overflow-x: auto;
+                min-width: 100%;
+                grid-template-columns: 100px repeat(5, 60px);
+            }
+            .heatmap-cell {
+                font-size: 0.75rem;
+                padding: 5px;
+            }
+            .filter-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filter-buttons {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+                 .filter-buttons button {
+                        margin: 0;
+                        width: 100%;
+                }
         }
     </style>
 </head>
@@ -2436,5 +2520,6 @@
 </body>
 
 </html>
+
 
 
