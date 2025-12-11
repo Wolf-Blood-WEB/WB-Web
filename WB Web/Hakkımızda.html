@@ -26,7 +26,6 @@
             --electric-green: #00ff41;
             --electric-red: #ff1a1a;
         }
-
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -35,7 +34,6 @@
                 transform: rotate(360deg);
             }
         }
-
         @keyframes shockwave-green {
             0% {
                 box-shadow: 0 0 5px var(--electric-green), inset 0 0 5px var(--electric-green);
@@ -50,7 +48,6 @@
                 border-color: var(--electric-green);
             }
         }
-
         @keyframes shockwave-red {
             0% {
                 box-shadow: 0 0 5px var(--electric-red), inset 0 0 5px var(--electric-red);
@@ -65,7 +62,6 @@
                 border-color: var(--electric-red);
             }
         }
-
         * {
             margin: 0;
             padding: 0;
@@ -447,7 +443,6 @@
             text-align: center;
             clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
         }
-
         .btn-roles {
             border-color: var(--color-roles);
             color: var(--color-roles);
@@ -503,7 +498,6 @@
                 transform: translateY(0);
             }
         }
-
         #new-roles {
             border-color: var(--color-roles);
         }
@@ -516,7 +510,6 @@
         #donations {
             border-color: var(--color-donations);
         }
-
         .about-section h2, .about-section h3 {
             font-family: var(--font-header);
             color: var(--header-color);
@@ -542,7 +535,6 @@
         .about-section li {
             margin-bottom: 10px;
         }
-
         @media (max-width: 800px) {
             .button-container {
                 grid-template-columns: 1fr;
@@ -556,7 +548,6 @@
                 align-items: center;
             }
         }
-
         footer {
             text-align: center;
             padding: 25px;
@@ -565,12 +556,91 @@
             color: #a0aec0;
             background-color: rgba(0, 0, 0, 0.2);
         }
-
         .emoji {
             font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
         }
-    </style>
+        @media (max-width: 768px) {
+            header {
+                padding-top: 80px;
+                padding-bottom: 20px;
+            }
+                header h1 {
+                    font-size: 2rem;
+                    line-height: 1.2;
+                }
 
+            .language-dropdown {
+                top: 15px;
+                right: 15px;
+            }
+            .dropdown-toggle {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            nav {
+                position: sticky;
+                top: 0;
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding: 10px;
+                gap: 10px;
+                background: rgba(26, 32, 44, 0.98);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                z-index: 1000;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+                nav::-webkit-scrollbar {
+                    display: none;
+                }
+                nav a {
+                    flex: 0 0 auto;
+                    width: auto;
+                    white-space: nowrap;
+                    font-size: 0.85rem;
+                    background-color: rgba(255,255,255,0.05);
+                    border: 1px solid rgba(255,255,255,0.1);
+                    border-radius: 20px;
+                    padding: 8px 16px;
+                }
+
+            main {
+                margin: 20px 10px;
+                padding: 20px 15px;
+            }
+            .page-background-image {
+                display: none;
+            }
+            .personel-grid {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            .flip-card {
+                width: 100%;
+                max-width: 320px;
+            }
+            .button-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin: 20px 0;
+            }
+            .arrow-button {
+                clip-path: none;
+                padding: 15px;
+                width: 100%;
+                border-radius: 8px;
+                text-align: center;
+            }
+            .about-section {
+                padding: 15px;
+            }
+            .team-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="page-background-image"></div>
@@ -839,6 +909,7 @@
 </body>
 
 </html>
+
 
 
 
