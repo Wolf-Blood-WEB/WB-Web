@@ -179,6 +179,7 @@
         document.body.appendChild(bgSnow);
         startEmojiSnowfall();
     }
+
     function startEmojiSnowfall() {
         const snowContainer = document.createElement('div');
         Object.assign(snowContainer.style, {
@@ -192,6 +193,7 @@
             createFlake(snowContainer);
         }
     }
+
     function createFlake(container) {
         const flake = document.createElement('div');
         flake.innerHTML = "❄️";
