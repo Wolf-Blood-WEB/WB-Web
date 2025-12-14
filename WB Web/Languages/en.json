@@ -1172,7 +1172,7 @@
   "groups-ph-bulletin-desc": "Announcement channel for the PH Official group.",
   "groups-it-title": "🐾 <span class='notranslate'>Wolfblood</span> Official IT",
   "groups-it-desc": "Official group for Italian language players.",
-  "groups-it-bulletin-title": "🐾 <span class='notranslate'>Wolfblood</span> Official IT Buletin< span class=\"channel-tag\">Channel</span>",
+  "groups-it-bulletin-title": "<span class='notranslate'>Wolfblood</span> Official IT Bulletin 📰<span class=\"channel-tag\">Channel</span>",
   "groups-it-bulletin-desc": "Announcement channel for the IT Official group.",
   "groups-ar-title": "🐾 <span class='notranslate'>Wolfblood</span> Official AR",
   "groups-ar-desc": "Official group for Arabic language players.",
@@ -1312,5 +1312,6 @@
   "loader_hint_33": "😈 Hint: Don't get too comfortable with your powers. You might wake up as a simple Villager.",
   "loader_hint_34": "😵‍💫 Hint: You have only one goal: get them lynched. At any cost."
 }
+
 
 
