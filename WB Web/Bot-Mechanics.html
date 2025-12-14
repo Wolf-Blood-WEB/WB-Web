@@ -738,7 +738,7 @@
                 padding-top: 80px;
                 padding-bottom: 20px;
                 position: relative;
-                z-index: 2000;
+                z-index: 9999 !important;
             }
                 header h1 {
                     font-size: 2rem;
@@ -748,7 +748,7 @@
             .language-dropdown {
                 top: 15px;
                 right: 15px;
-                z-index: 4000 !important;
+                z-index: 1000 !important;
             }
             .dropdown-toggle {
                 padding: 6px 10px;
@@ -764,13 +764,13 @@
                 gap: 8px;
                 background: rgba(26, 32, 44, 0.98);
                 box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-                z-index: 1000;
+                z-index: 50 !important;
             }
                 nav::-webkit-scrollbar {
                     display: none;
                 }
                 nav a {
-                    flex: 1145%;
+                    flex: 1 1 45%;
                     width: auto;
                     text-align: center;
                     white-space: normal;
@@ -779,6 +779,8 @@
                     border: 1px solid rgba(255,255,255,0.1);
                     border-radius: 8px;
                     padding: 10px 5px;
+                    position: relative;
+                    z-index: auto;
                 }
             main {
                 margin: 20px 10px;
@@ -2522,6 +2524,7 @@
     <script src="Theme-Manager.js"></script>
 </body>
 </html>
+
 
 
 
