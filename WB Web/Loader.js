@@ -114,7 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
         "loader_hint_21", "loader_hint_22", "loader_hint_23", "loader_hint_24", 
         "loader_hint_25", "loader_hint_26", "loader_hint_27", "loader_hint_28", 
         "loader_hint_29", "loader_hint_30", "loader_hint_31", "loader_hint_32", 
-        "loader_hint_33", "loader_hint_34"
+        "loader_hint_33", "loader_hint_35", "loader_hint_36", "loader_hint_37", 
+        "loader_hint_38", "loader_hint_39", "loader_hint_40", "loader_hint_41", 
+        "loader_hint_42", "loader_hint_43", "loader_hint_44", "loader_hint_45", 
+        "loader_hint_46", "loader_hint_47", "loader_hint_48", "loader_hint_49", 
+        "loader_hint_50", "loader_hint_51", "loader_hint_52", "loader_hint_53", 
+        "loader_hint_54", "loader_hint_55"
     ];
 
     let loaderTranslations = {};
@@ -194,3 +199,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 30000);
 });
+
