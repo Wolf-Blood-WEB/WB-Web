@@ -1182,9 +1182,9 @@
     "groups-es-desc": "المجموعة الرسمية للاعبي اللغة الاسبانية.",
     "groups-es-bulletin-title": "🐾<span class='notranslate'>Wolfblood</span> Official ES | Buletin 📰<span class=\"channel-tag\">سلسلة</span>",
     "groups-es-bulletin-desc": "قناة إعلانية لمجموعة ES الرسمية.",
-    "groups-news-title": "<span class='notranslate'>Wolfblood</span> News 🐾<span class=\"channel-tag\">Channel</span>",
+    "groups-news-title": "<span class='notranslate'>Wolfblood</span> News 🐾<span class=\"channel-tag\">سلسلة</span>",
     "groups-news-desc": "قناة الإعلان الرئيسية لجميع التحديثات.",
-    "groups-rules-title": "🐾<span class='notranslate'>Wolfblood</span> Global Rules<span class=\"channel-tag\">Channel</span>",
+    "groups-rules-title": "🐾<span class='notranslate'>Wolfblood</span> Global Rules<span class=\"channel-tag\">سلسلة</span>",
     "groups-rules-desc": "القواعد العامة لجميع مجموعات <span class='notranslate'>Wolfblood</span>.",
     "groups-support-title": "<span class='notranslate'>Wolfblood</span> Support 🐾",
     "groups-support-desc": "مجموعة دعم للقضايا والمخاوف ذات الصلة بالبوت.",
@@ -1333,4 +1333,5 @@
     "loader_hint_54": "👶 تلميح: احمِ قدوتك جيدًا. إذا ماتوا، يتحول الطفل المتوحش البريء إلى وحش مفترس.",
     "loader_hint_55": "🙇 تلميح: التلميذ يصبح المعلم. عندما يسقط العراف، يتولى المتدرب الكرة البلورية."
 }
+
 
