@@ -137,7 +137,7 @@
   "roles-v-detective-title": "Dedektif 🕵️",
   "roles-v-detective-rate": "Tarikat Dönüşüm Oranı: 70%",
   "roles-v-detective-desc": "Gün içinde bir oyuncu seçerek kimliğini belirler. Linç zamanı geldiğinde seçtiği oyuncunun bilgileri ona ulaşır. Kurtadamların 🐺❓ onu tespit etme şansı %40'tır.",
-  "roles-v-sub4": "1.4. Müttefikler",
+  "roles-v-sub4": "1.4. Taraf Değiştirebilen Roller",
   "roles-v-traitor-title": "Hain 🖕",
   "roles-v-traitor-rate": "Tarikat Dönüşüm Oranı: 100%",
   "roles-v-traitor-desc": "Yaşayan tüm kurtadamlar ölene kadar sıradan bir köylüden farkı yoktur. Tüm kurtadamlar 🐺❓ öldükten sonra, bir kurtadama 🐺 dönüşür ve köyde terör estirmeye devam eder. Gözcü 👳 onu bir Köylü 👱 ya da bir Kurt Adam 🐺 olarak görebilir... Bu tamamen şansa bağlıdır.",
@@ -1332,4 +1332,5 @@
   "loader_hint_54": "👶 İpucu: Rol modelini iyi koru. Eğer ölürlerse, masum Vahşi Çocuk vahşi bir canavara dönüşür.",
   "loader_hint_55": "🙇 İpucu: Çırak usta olur. Gözcü düştüğünde, Gözcü Çırağı kristal küreyi devralır."
 }
+
 
