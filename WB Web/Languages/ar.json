@@ -1153,45 +1153,44 @@
     "page-title-groups": "Wolfblood - المجموعات والقنوات",
     "header-subtitle-groups": "المجموعات والقنوات",
     "groups-main-title": "المجموعات والقنوات",
-    "groups-en-title": "🐾<span class='notranslate'>دم الذئب</span> الرسمي || إن",
-    "groups-en-title": "<span class='notranslate'>Wolfblood</span> Official EN",
+    "groups-en-title": "🐾<span class='notranslate'>Wolfblood</span> Official || EN",
     "groups-en-desc": "المجموعة الرسمية للاعبي اللغة الإنجليزية.",
     "groups-click-to-join": "انقر للانضمام ➔",
-    "groups-en-bulletin-title": "<span class='notranslate'>Wolfblood</span> Official EN Buletin<span class=\"channel-tag\">Channel</span>",
+    "groups-en-bulletin-title": "🐾<span class='notranslate'>Wolfblood</span> Official EN | Buletin 📰<span class=\"channel-tag\">سلسلة</span>",
     "groups-en-bulletin-desc": "قناة اعلانات لمجموعة EN الرسمية.",
-    "groups-id-title": "<span class='notranslate'>Wolfblood</span> Official ID",
+    "groups-id-title": "🐾<span class='notranslate'>Wolfblood</span> Official || ID",
     "groups-id-desc": "المجمو الرسمية للاعبين اللغة ID الاندونيسية.",
-    "groups-id-bulletin-title": "<span class='notranslate'>Wolfblood</span> Official ID Buletin<span class=\"channel-tag\">Channel</span>",
+    "groups-id-bulletin-title": "🐾<span class='notranslate'>Wolfblood</span> Official ID | Buletin 📰<span class=\"channel-tag\">سلسلة</span>",
     "groups-id-bulletin-desc": "قناة الإعلان مجموعة الهوية ID الرسمية.",
-    "groups-fr-title": "<span class='notranslate'>Wolfblood</span> Official FR",
+    "groups-fr-title": "🐾<span class='notranslate'>Wolfblood</span> Official || FR",
     "groups-fr-desc": "المجموعة الرسمية للاعبي اللغة الفرنسية.",
-    "groups-fr-bulletin-title": "<span class='notranslate'>Wolfblood</span> Official FR Buletin<span class=\"channel-tag\">Channel</span>",
+    "groups-fr-bulletin-title": "🐾<span class='notranslate'>Wolfblood</span> Official FR | Buletin 📰<span class=\"channel-tag\">سلسلة</span>",
     "groups-fr-bulletin-desc": "قناة اعلانات لمجموعة FR الرسمية.",
-    "groups-ph-title": "<span class='notranslate'>Wolfblood</span> Official PH",
+    "groups-ph-title": "🐾<span class='notranslate'>Wolfblood</span> Official || PH",
     "groups-ph-desc": "المجموعة الرسمية للاعبين اللغة الفلبينية.",
-    "groups-ph-bulletin-title": "<span class='notranslate'>Wolfblood</span> Official PH Buletin<span class=\"channel-tag\">Channel</span>",
+    "groups-ph-bulletin-title": "🐾<span class='notranslate'>Wolfblood</span> Official PH | Buletin 📰<span class=\"channel-tag\">سلسلة</span>",
     "groups-ph-bulletin-desc": "قناة اعلانات لمجموعة PH الرسمية.",
-    "groups-it-title": "<span class='notranslate'>Wolfblood</span> Official IT",
+    "groups-it-title": "🐾<span class='notranslate'>Wolfblood</span> Official || IT",
     "groups-it-desc": "المجموعة الرسمية للاعبي اللغة الإيطالية.",
-    "groups-it-bulletin-title": "<span class='notranslate'>Wolfblood</span> Official IT Buletin<span class=\"channel-tag\">Channel</span>",
+    "groups-it-bulletin-title": "🐾<span class='notranslate'>Wolfblood</span> Official IT | Buletin 📰<span class=\"channel-tag\">سلسلة</span>",
     "groups-it-bulletin-desc": "قناة اعلانية لمجموعة IT Official.",
-    "groups-ar-title": "<span class='notranslate'>Wolfblood</span> Official AR",
+    "groups-ar-title": "🐾<span class='notranslate'>Wolfblood</span> Official || AR",
     "groups-ar-desc": "المجموعة الرسمية للاعبي اللغة العربية.",
-    "groups-ar-bulletin-title": "<span class='notranslate'>Wolfblood</span> Official AR Buletin<span class=\"channel-tag\">Channel</span>",
+    "groups-ar-bulletin-title": "🐾<span class='notranslate'>Wolfblood</span> Official AR | Buletin 📰<span class=\"channel-tag\">سلسلة</span>",
     "groups-ar-bulletin-desc": "قناة اعلانية لمجموعة AR الرسمية.",
-    "groups-es-title": "<span class='notranslate'>Wolfblood</span> Official ES",
+    "groups-es-title": "🐾<span class='notranslate'>Wolfblood</span> Official || ES",
     "groups-es-desc": "المجموعة الرسمية للاعبي اللغة الاسبانية.",
-    "groups-es-bulletin-title": "<span class='notranslate'>Wolfblood</span> Official ES Buletin<span class=\"channel-tag\">Channel</span>",
+    "groups-es-bulletin-title": "🐾<span class='notranslate'>Wolfblood</span> Official ES | Buletin 📰<span class=\"channel-tag\">سلسلة</span>",
     "groups-es-bulletin-desc": "قناة إعلانية لمجموعة ES الرسمية.",
-    "groups-news-title": "<span class='notranslate'>Wolfblood</span> News<span class=\"channel-tag\">Channel</span>",
+    "groups-news-title": "<span class='notranslate'>Wolfblood</span> News 🐾<span class=\"channel-tag\">Channel</span>",
     "groups-news-desc": "قناة الإعلان الرئيسية لجميع التحديثات.",
-    "groups-rules-title": "<span class='notranslate'>Wolfblood</span> Global Rules<span class=\"channel-tag\">Channel</span>",
+    "groups-rules-title": "🐾<span class='notranslate'>Wolfblood</span> Global Rules<span class=\"channel-tag\">Channel</span>",
     "groups-rules-desc": "القواعد العامة لجميع مجموعات <span class='notranslate'>Wolfblood</span>.",
-    "groups-support-title": "<span class='notranslate'>Wolfblood</span> Support",
+    "groups-support-title": "<span class='notranslate'>Wolfblood</span> Support 🐾",
     "groups-support-desc": "مجموعة دعم للقضايا والمخاوف ذات الصلة بالبوت.",
-    "groups-quickers-title": "Werewolf Quickers",
+    "groups-quickers-title": "Werewolf Quickers 🐺💨",
     "groups-quickers-desc": "للألعاب القصيرة والباردة.",
-    "groups-lounge-title": "Werewolf Lounge",
+    "groups-lounge-title": "Werewolf Lounge ||「🐺🎮」",
     "groups-lounge-desc": "لألعاب خارج الدردشة وألعاب الطاولة.",
     "page-title-about": "Wolfblood - من نحن",
     "header-subtitle-about": "معلومات عنا",
@@ -1334,3 +1333,4 @@
     "loader_hint_54": "👶 تلميح: احمِ قدوتك جيدًا. إذا ماتوا، يتحول الطفل المتوحش البريء إلى وحش مفترس.",
     "loader_hint_55": "🙇 تلميح: التلميذ يصبح المعلم. عندما يسقط العراف، يتولى المتدرب الكرة البلورية."
 }
+
