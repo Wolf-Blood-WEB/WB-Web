@@ -87,14 +87,28 @@
             background: var(--card-color);
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
+            max-height: 300px;
+            overflow-y: auto;
+            min-width: 180px;
             opacity: 0;
             visibility: hidden;
-            pointer-events: none;
             transform: translateY(-10px);
             transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
             z-index: 1000;
+        }
+        .dropdown-menu::-webkit-scrollbar {
+            width: 6px;
+        }
+        .dropdown-menu::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        .dropdown-menu::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        .dropdown-menu::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
         }
         .language-dropdown.open .dropdown-menu {
             opacity: 1;
@@ -322,6 +336,9 @@
                 padding: 6px 10px;
                 font-size: 0.8rem;
             }
+            .dropdown-menu {
+                max-height: 250px;
+            }
             nav {
                 position: relative;
                 top: 0;
@@ -375,7 +392,6 @@
 
         <header>
                 <div class="language-dropdown">
-
                     <button class="dropdown-toggle">
                         <span id="selected-lang-flag">🇬🇧</span>
                         <span id="selected-lang-code">EN</span>
@@ -389,7 +405,11 @@
                         <a href="#" data-lang="it">🇮🇹 Italiano</a>
                         <a href="#" data-lang="id">🇮🇩 Bahasa Indonesia</a>
                         <a href="#" data-lang="ph">🇵🇭 Filipino</a>
+                        <a href="#" data-lang="de">🇩🇪 Deutsch</a>
                         <a href="#" data-lang="ar">🇸🇦 العربية</a>
+                        <a href="#" data-lang="ru">🇷🇺 Русский</a>
+                        <a href="#" data-lang="jp">🇯🇵 日本語</a>
+                        <a href="#" data-lang="cn">🇨🇳 简体中文</a>
                     </div>
                 </div>
                 <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
@@ -455,6 +475,7 @@
     <script src="Theme-Manager.js"></script>
 </body>
 </html>
+
 
 
 
