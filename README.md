@@ -1,4 +1,4 @@
-# Wolf Blood 🐺
+# Wolf Blood 🐺🩸
 
 This is the official repository for the **Wolf Blood** web page. 
 
