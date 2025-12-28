@@ -823,7 +823,7 @@
   "updates-donate-ul1": "<li>» Азербайджан 🇦🇿</li><li>» Узбек 🇺🇿</li><li>» Немецкий 🇩🇪</li><li>» Филиппинский 🇵🇭</li><li>» Китайский 🇨🇳</li><li>» Бразильский 🇧🇷</li><li>» Испанский 🇪🇸</li>",
   "updates-donate-p6": "🔗 <a href=\"https://crowdin.com/project/wolf-blood\" target=\"_blank\">https://crowdin.com/project/wolf-blood</a>",
   "updates-donate-p7": "🔥Кроме того, мы делимся официальными группами других языков в рамках Wolf Blood 🐾 Мы ищем модераторов, которые могут помочь нам развивать эти сообщества. Пожалуйста, отправьте нам свою заявку через @<span class='notranslate'>Wolfblood</span>adminbot.",
-  "updates-donate-ul2": "<li>🐾 <a href=\"https://t.me/Wolfblood_id\" target=\"_blank\">ВБ || Официальная группа Индо</a> 🇮🇩</li><li>🐾 <a href=\"https://t.me/Wolfblood_es\" target=\"_blank\">WB || Официальная испанская группа</a> 🇪🇸</li><li>🐾 WB || Официальная французская группа 🇮🇹</li><li>🐾 WB || Официальная итальянская группа 🇫🇷</li>",
+  "updates-donate-ul2": "<li>🐾 <a href=\"https://t.me/Wolfblood_id\" target=\"_blank\">ВБ || Официальная группа Индо</a> 🇮🇩</li><li>🐾 <a href=\"https://t.me/Wolfblood_es\" target=\"_blank\">WB || Официальная испанская группа</a> 🇪🇸</li><li>🐾 WB || Официальная французская группа 🇫🇷</li><li>🐾 WB || Официальная итальянская группа 🇮🇹</li>",
   "updates-donate-f1": "🌕 @<span class='notranslate'>Wolfblood</span>новости x @<span class='notranslate'>Wolfblood</span>поддержка",
   "updates-24-title": "🔔 [ОБНОВЛЕНИЕ 24] 🔔",
   "updates-24-h1": "🆕 НОВАЯ РОЛЬ:",
@@ -1332,4 +1332,5 @@
   "loader_hint_53": "⚒ Подсказка: серебряная пыль — лучший щит. Кузнец может один раз отразить атаку волка.",
   "loader_hint_54": "👶 Подсказка: тщательно охраняйте образец для подражания. Если они умрут, невинный Дикий Дитя превратится в дикого зверя.",
   "loader_hint_55": "🙇 Подсказка: ученик становится мастером. Когда Провидец падает, Ученик берет хрустальный шар."
+
 }
