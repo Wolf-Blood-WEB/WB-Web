@@ -38,7 +38,6 @@
                 box-shadow: 0 0 4px var(--team-village), 0 0 8px var(--team-village);
             }
         }
-
         @keyframes electricGlow-red {
             0% {
                 box-shadow: 0 0 4px var(--team-wolf), 0 0 8px var(--team-wolf);
@@ -50,7 +49,6 @@
                 box-shadow: 0 0 4px var(--team-wolf), 0 0 8px var(--team-wolf);
             }
         }
-
         @keyframes electricGlow-gray {
             0% {
                 box-shadow: 0 0 4px var(--team-solo), 0 0 8px var(--team-solo);
@@ -62,7 +60,6 @@
                 box-shadow: 0 0 4px var(--team-solo), 0 0 8px var(--team-solo);
             }
         }
-
         @keyframes electricGlow-blue {
             0% {
                 box-shadow: 0 0 4px var(--team-cultist), 0 0 8px var(--team-cultist);
@@ -74,13 +71,11 @@
                 box-shadow: 0 0 4px var(--team-cultist), 0 0 8px var(--team-cultist);
             }
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: var(--font-body);
             background-color: var(--bg-color);
@@ -90,14 +85,12 @@
             position: relative;
             z-index: 101;
         }
-
         .language-dropdown {
             position: absolute;
             top: 40px;
             right: 40px;
             z-index: 102;
         }
-
         .dropdown-toggle {
             background: rgba(255, 255, 255, 0.1);
             color: var(--text-color);
@@ -113,7 +106,6 @@
             gap: 8px;
             transition: all 0.3s ease;
         }
-
             .dropdown-toggle:hover {
                 background-color: var(--accent-color);
                 border-color: var(--accent-color);
@@ -128,7 +120,6 @@
         .language-dropdown.open .dropdown-toggle .arrow {
             transform: rotate(180deg);
         }
-
         .dropdown-menu {
             display: block;
             position: absolute;
@@ -137,20 +128,34 @@
             background: var(--card-color);
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
+            max-height: 300px;
+            overflow-y: auto;
+            min-width: 180px;
             opacity: 0;
-            transform: translateY(-10px);
             visibility: hidden;
+            transform: translateY(-10px);
             transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            z-index: 1000;
         }
-
+        .dropdown-menu::-webkit-scrollbar {
+            width: 6px;
+        }
+        .dropdown-menu::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        .dropdown-menu::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        .dropdown-menu::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
         .language-dropdown.open .dropdown-menu {
             opacity: 1;
             transform: translateY(0);
             visibility: visible;
         }
-
         .dropdown-menu a {
             display: block;
             padding: 10px 20px;
@@ -160,7 +165,6 @@
             transition: all 0.2s ease;
             white-space: nowrap;
         }
-
             .dropdown-menu a:hover {
                 background-color: var(--accent-color);
                 color: var(--header-color);
@@ -194,7 +198,6 @@
             z-index: 100;
             backdrop-filter: blur(5px);
         }
-
             nav a {
                 color: var(--text-color);
                 text-decoration: none;
@@ -219,7 +222,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
         }
-
             main p {
                 margin-bottom: 20px;
             }
@@ -231,7 +233,6 @@
             margin: 30px 0;
             flex-wrap: wrap;
         }
-
             .button-container button {
                 font-family: var(--font-body);
                 font-size: 1rem;
@@ -491,6 +492,9 @@
                 right: 15px;
                 z-index: 1000 !important;
             }
+            .dropdown-menu {
+                max-height: 250px;
+            }
             .dropdown-toggle {
                 padding: 6px 10px;
                 font-size: 0.8rem;
@@ -574,7 +578,11 @@
                     <a href="#" data-lang="it">🇮🇹 Italiano</a>
                     <a href="#" data-lang="id">🇮🇩 Bahasa Indonesia</a>
                     <a href="#" data-lang="ph">🇵🇭 Filipino</a>
+                    <a href="#" data-lang="de">🇩🇪 Deutsch</a>
                     <a href="#" data-lang="ar">🇸🇦 العربية</a>
+                    <a href="#" data-lang="ru">🇷🇺 Русский</a>
+                    <a href="#" data-lang="jp">🇯🇵 日本語</a>
+                    <a href="#" data-lang="cn">🇨🇳 简体中文</a>
                 </div>
             </div>
             <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
@@ -1525,6 +1533,7 @@
     <script src="Theme-Manager.js"></script>
 </body>
 </html>
+
 
 
 
