@@ -3,7 +3,7 @@
 Thank you for your interest in improving our official page! 
 
 ### 🌍 Translation & Languages
-Our site currently supports **8 languages**. If you notice a typo, a grammatical error, or a phrase that doesn't sound quite right in your native language:
+Our site currently supports **12 languages**. If you notice a typo, a grammatical error, or a phrase that doesn't sound quite right in your native language:
 1. Locate the specific language file in the repository.
 2. Submit a **Pull Request** with the corrected text.
 3. Our team will review and deploy the update to the live site.
