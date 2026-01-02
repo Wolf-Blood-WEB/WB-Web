@@ -708,6 +708,26 @@
     "page-title-updates": "Wolfblood - التحديثات",
     "header-subtitle-updates": "الأخبار والمستجدات",
     "updates-main-title": "التحديثات",
+    "updates-mystery-title": "MYSTERY CHESTS",
+    "updates-mystery-h1": "Not Just in Treasure Games, Mysteries are hidden Everywhere!",
+    "updates-mystery-p1": "Have you tried many Treasure games but no luck😕 with Treasure rewards? Don’t worry! We've got you covered. Say hello to the \"Wolf Blood Mystery Chests 🎁\"!",
+    "updates-mystery-p2": "At the end of each game, random Non-AFK winners might unlock a mysterious WB Chest 💰 packed with exclusive WB Items. These chests can appear in Ranked, Chaos, and Normal game modes 🔐.",
+    "updates-mystery-h2": "❖ Mystery Chests you could earn:",
+    "updates-mystery-li1": "📦 Common Chest",
+    "updates-mystery-li2": "🎁 Rare Chest",
+    "updates-mystery-li3": "🏆🎁 Epic Chest",
+    "updates-mystery-li4": "🐉🎁 Legendary Chest",
+    "updates-mystery-li5": "🐲🎁 Mythical Chest",
+    "updates-mystery-li6": "🏛 Ancient Chest",
+    "updates-mystery-p3": "✨ And the VIP Chest 💎, which only shows up in Official Groups.",
+    "updates-mystery-h3": "✏️ Requirements for Mystery Chests to appear:",
+    "updates-mystery-req1": "🔜 At least 11 players in Chaos and Normal modes.",
+    "updates-mystery-req2": "🔜 At least 7 players in Ranked mode.",
+    "updates-mystery-req3": "🔜 Custom and Love games don’t count.",
+    "updates-mystery-req4": "🔜 AFK players are excluded.",
+    "updates-mystery-p4": "🎮 So, what are you waiting for? Let the fun begin! 🔥",
+    "updates-mystery-p5": "<strong>Every Game Could Hold Your Next Big Surprise!</strong>",
+    "updates-mystery-f1": "🐺@wolfbloodnews | @wolfbloodbot"
     "updates-27-title": "🔔[تحديث 27] 🔔",
     "updates-27-h1": "🆒 أوامر جديدة:",
     "updates-27-p1": "<strong>🎀 /stars</strong> - يفتح هذا الأمر عناصر وميزات WB الحصرية باستخدام Telegram Stars ⭐️ لرفع مستوى لعبك 💊.",
@@ -1333,6 +1353,7 @@
     "loader_hint_54": "👶 تلميح: احمِ قدوتك جيدًا. إذا ماتوا، يتحول الطفل المتوحش البريء إلى وحش مفترس.",
     "loader_hint_55": "🙇 تلميح: التلميذ يصبح المعلم. عندما يسقط العراف، يتولى المتدرب الكرة البلورية."
 }
+
 
 
 
