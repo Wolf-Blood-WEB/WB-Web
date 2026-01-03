@@ -708,6 +708,26 @@
   "page-title-updates": "Wolfblood - Mises à jour",
   "header-subtitle-updates": "Nouvelles et mises à jour",
   "updates-main-title": "Mises à jour",
+  "updates-mystery-title": "COFFRES MYSTÈRES",
+  "updates-mystery-h1": "Pas seulement dans les parties Trésor, les mystères sont cachés partout !",
+  "updates-mystery-p1": "Avez-vous essayé de nombreuses parties Trésor sans chance😕 avec les récompenses Trésor ? Ne vous inquiétez pas ! Nous avons ce qu'il vous faut. Dites bonjour aux \"Coffres Mystères Wolf Blood 🎁\" !",
+  "updates-mystery-p2": "À la fin de chaque partie, des gagnants aléatoires Non-AFK pourraient débloquer un mystérieux Coffre WB 💰 rempli d'objets WB exclusifs. Ces coffres peuvent apparaître dans les modes de jeu Classé (Ranked), Chaos et Normal 🔐.",
+  "updates-mystery-h2": "❖ Coffres Mystères que vous pourriez gagner :",
+  "updates-mystery-li1": "📦 Coffre Commun",
+  "updates-mystery-li2": "🎁 Coffre Rare",
+  "updates-mystery-li3": "🏆🎁 Coffre Épique",
+  "updates-mystery-li4": "🐉🎁 Coffre Légendaire",
+  "updates-mystery-li5": "🐲🎁 Coffre Mythique",
+  "updates-mystery-li6": "🏛 Coffre Ancien",
+  "updates-mystery-p3": "✨ Et le Coffre VIP 💎, qui n'apparaît que dans les Groupes Officiels.",
+  "updates-mystery-h3": "✏️ Conditions pour l'apparition des Coffres Mystères :",
+  "updates-mystery-req1": "🔜 Au moins 11 joueurs dans les modes Chaos et Normal.",
+  "updates-mystery-req2": "🔜 Au moins 7 joueurs en mode Classé.",
+  "updates-mystery-req3": "🔜 Les parties Personnalisées (Custom) et Amour (Love) ne comptent pas.",
+  "updates-mystery-req4": "🔜 Les joueurs AFK sont exclus.",
+  "updates-mystery-p4": "🎮 Alors, qu'attendez-vous ? Que le plaisir commence ! 🔥",
+  "updates-mystery-p5": "<strong>Chaque partie pourrait contenir votre prochaine grande surprise !</strong>",
+  "updates-mystery-f1": "🐺@wolfbloodnews | @wolfbloodbot"
   "updates-27-title": "🔔 [MISE À JOUR 27] 🔔",
   "updates-27-h1": "🆒 NOUVELLES COMMANDES :",
   "updates-27-p1": "<strong>🎀 /stars</strong> - Cette commande permet de débloquer des objets et des fonctionnalités exclusives de WB en utilisant les étoiles Telegram ⭐️to pour améliorer votre jeu 💊.",
@@ -1333,6 +1353,7 @@
   "loader_hint_54": "👶 Indice : Protégez bien votre modèle. S'il meurt, l'innocent Enfant Sauvage devient une bête féroce.",
   "loader_hint_55": "🙇 Indice : L'élève dépasse le maître. Quand la Voyante tombe, l'Apprenti s'empare de la boule de cristal."
 }
+
 
 
 
