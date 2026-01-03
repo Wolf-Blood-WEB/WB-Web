@@ -708,6 +708,26 @@
   "page-title-updates": "<span class='notranslate'>Wolfblood</span> - Actualizaciones",
   "header-subtitle-updates": "Noticias",
   "updates-main-title": "Actualizaciones",
+  "updates-mystery-title": "COFRES MISTERIOSOS",
+  "updates-mystery-h1": "¡No solo en las Partidas de Tesoro, los misterios están ocultos en todas partes!",
+  "updates-mystery-p1": "¿Has probado muchas partidas de Tesoro pero no has tenido suerte😕 con las recompensas? ¡No te preocupes! Te cubrimos las espaldas. ¡Saluda a los \"Cofres Misteriosos de Wolf Blood 🎁\"!",
+  "updates-mystery-p2": "Al final de cada partida, los ganadores aleatorios que no estén AFK podrían desbloquear un misterioso Cofre WB 💰 lleno de artículos exclusivos de WB. Estos cofres pueden aparecer en los modos de juego Ranked (Clasificatorio), Caos y Normal 🔐.",
+  "updates-mystery-h2": "❖ Cofres Misteriosos que podrías ganar:",
+  "updates-mystery-li1": "📦 Cofre Común",
+  "updates-mystery-li2": "🎁 Cofre Raro",
+  "updates-mystery-li3": "🏆🎁 Cofre Épico",
+  "updates-mystery-li4": "🐉🎁 Cofre Legendario",
+  "updates-mystery-li5": "🐲🎁 Cofre Mítico",
+  "updates-mystery-li6": "🏛 Cofre Ancestral",
+  "updates-mystery-p3": "✨ Y el Cofre VIP 💎, que solo aparece en Grupos Oficiales.",
+  "updates-mystery-h3": "✏️ Requisitos para que aparezcan los Cofres Misteriosos:",
+  "updates-mystery-req1": "🔜 Al menos 11 jugadores en modos Caos y Normal.",
+  "updates-mystery-req2": "🔜 Al menos 7 jugadores en modo Ranked.",
+  "updates-mystery-req3": "🔜 Las partidas Personalizadas (Custom) y de Amor (Love) no cuentan.",
+  "updates-mystery-req4": "🔜 Los jugadores AFK están excluidos.",
+  "updates-mystery-p4": "🎮 Entonces, ¿a qué esperas? ¡Que empiece la diversión! 🔥",
+  "updates-mystery-p5": "<strong>¡Cada partida podría contener tu próxima gran sorpresa!</strong>",
+    "updates-mystery-f1": "🐺@wolfbloodnews | @wolfbloodbot"
   "updates-27-title": "🔔 [ACTUALIZACIÓN 27] 🔔",
   "updates-27-h1": "🆒 NUEVOS COMANDOS:",
   "updates-27-p1": "<strong>🎀 /stars</strong> - Este comando desbloquea objetos y características exclusivas de WB usando Telegram Stars ⭐️to sube de nivel tu juego 💊.",
@@ -1333,6 +1353,7 @@
   "loader_hint_54": "👶 Pista: Protege bien al modelo a seguir. Si muere, el inocente Niño Salvaje se convierte en una bestia salvaje.",
   "loader_hint_55": "🙇 Pista: El alumno supera al maestro. Cuando el Vidente cae, el Aprendiz toma la bola de cristal."
 }
+
 
 
 
