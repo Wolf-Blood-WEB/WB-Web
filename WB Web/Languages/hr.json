@@ -708,6 +708,26 @@
   "page-title-updates": "Wolfblood - ažuriranja",
   "header-subtitle-updates": "Vijesti i ažuriranja",
   "updates-main-title": "Ažuriranja",
+  "updates-mystery-title": "MISTERIOZNE ŠKRINJE",
+  "updates-mystery-h1": "Ne samo u igrama s blagom, misteriji su skriveni svugdje!",
+  "updates-mystery-p1": "Jeste li isprobali mnogo igara s blagom, ali niste imali sreće😕 s nagradama? Ne brinite! Mi smo se pobrinuli za to. Pozdravite \"Wolf Blood Misteriozne Škrinje 🎁\"!",
+  "updates-mystery-p2": "Na kraju svake igre, nasumični pobjednici koji nisu AFK mogli bi otključati misterioznu WB Škrinju 💰 punu ekskluzivnih WB predmeta. Ove škrinje se mogu pojaviti u Rangiranom (Ranked), Kaos (Chaos) i Normalnom (Normal) načinu igre 🔐.",
+  "updates-mystery-h2": "❖ Misteriozne Škrinje koje možete osvojiti:",
+  "updates-mystery-li1": "📦 Obična Škrinja (Common Chest)",
+  "updates-mystery-li2": "🎁 Rijetka Škrinja (Rare Chest)",
+  "updates-mystery-li3": "🏆🎁 Epska Škrinja (Epic Chest)",
+  "updates-mystery-li4": "🐉🎁 Legendarna Škrinja (Legendary Chest)",
+  "updates-mystery-li5": "🐲🎁 Mitska Škrinja (Mythical Chest)",
+  "updates-mystery-li6": "🏛 Drevna Škrinja (Ancient Chest)",
+  "updates-mystery-p3": "✨ I VIP Škrinja 💎, koja se pojavljuje samo u Službenim Grupama.",
+  "updates-mystery-h3": "✏️ Uvjeti za pojavljivanje Misterioznih Škrinja:",
+  "updates-mystery-req1": "🔜 Najmanje 11 igrača u Chaos i Normal načinima.",
+  "updates-mystery-req2": "🔜 Najmanje 7 igrača u Ranked načinu.",
+  "updates-mystery-req3": "🔜 Prilagođene (Custom) i Ljubavne (Love) igre se ne računaju.",
+  "updates-mystery-req4": "🔜 AFK igrači su isključeni.",
+  "updates-mystery-p4": "🎮 Dakle, što čekate? Neka zabava počne! 🔥",
+  "updates-mystery-p5": "<strong>Svaka igra mogla bi sadržavati vaše sljedeće veliko iznenađenje!</strong>",
+  "updates-mystery-f1": "🐺@wolfbloodnews | @wolfbloodbot"
   "updates-27-title": "🔔 [AŽURIRANJE 27] 🔔",
   "updates-27-h1": "🆒 NOVE NAREDBE:",
   "updates-27-p1": "<strong>🎀 /stars</strong> - Ova naredba otključava ekskluzivne WB stavke i značajke pomoću Telegram Starsa ​​⭐️kako biste poboljšali svoje igranje 💊.",
@@ -1332,4 +1352,5 @@
   "loader_hint_53": "⚒ Savjet: Srebrna prašina je najbolji štit. Kovač može jednom izbjeći napad vuka.",
   "loader_hint_54": "👶 Savjet: Dobro čuvajte uzor. Ako umru, nevino Divlje dijete postaje divlja zvijer.",
   "loader_hint_55": "🙇 Savjet: Učenik postaje majstor. Kada Vidovnjak padne, Šegrt uzima kristalnu kuglu."
+
 }
