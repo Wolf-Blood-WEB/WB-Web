@@ -708,6 +708,26 @@
   "page-title-updates": "Wolfblood – Updates",
   "header-subtitle-updates": "Neuigkeiten und Updates",
   "updates-main-title": "Aktualisierungen",
+  "updates-mystery-title": "MYSTERY-TRUHEN",
+  "updates-mystery-h1": "Nicht nur in Schatzspielen, Geheimnisse sind überall versteckt!",
+  "updates-mystery-p1": "Hast du viele Schatzspiele ausprobiert, aber kein Glück😕 mit Schatzbelohnungen gehabt? Keine Sorge! Wir haben da etwas für dich. Sag Hallo zu den \"Wolf Blood Mystery-Truhen 🎁\"!",
+  "updates-mystery-p2": "Am Ende jedes Spiels können zufällige Nicht-AFK-Gewinner eine geheimnisvolle WB-Truhe 💰 freischalten, die vollgepackt ist mit exklusiven WB-Gegenständen. Diese Truhen können in den Spielmodi Rangliste (Ranked), Chaos und Normal erscheinen 🔐.",
+  "updates-mystery-h2": "❖ Mystery-Truhen, die du verdienen kannst:",
+  "updates-mystery-li1": "📦 Gewöhnliche Truhe (Common Chest)",
+  "updates-mystery-li2": "🎁 Seltene Truhe (Rare Chest)",
+  "updates-mystery-li3": "🏆🎁 Epische Truhe (Epic Chest)",
+  "updates-mystery-li4": "🐉🎁 Legendäre Truhe (Legendary Chest)",
+  "updates-mystery-li5": "🐲🎁 Mythische Truhe (Mythical Chest)",
+  "updates-mystery-li6": "🏛 Uralte Truhe (Ancient Chest)",
+  "updates-mystery-p3": "✨ Und die VIP-Truhe 💎, die nur in offiziellen Gruppen auftaucht.",
+  "updates-mystery-h3": "✏️ Voraussetzungen für das Erscheinen von Mystery-Truhen:",
+  "updates-mystery-req1": "🔜 Mindestens 11 Spieler in den Modi Chaos und Normal.",
+  "updates-mystery-req2": "🔜 Mindestens 7 Spieler im Ranglistenmodus (Ranked).",
+  "updates-mystery-req3": "🔜 Benutzerdefinierte (Custom) und Liebesspiele (Love) zählen nicht.",
+  "updates-mystery-req4": "🔜 AFK-Spieler sind ausgeschlossen.",
+  "updates-mystery-p4": "🎮 Also, worauf wartest du noch? Lass den Spaß beginnen! 🔥",
+  "updates-mystery-p5": "<strong>Jedes Spiel könnte deine nächste große Überraschung bereithalten!</strong>",
+  "updates-mystery-f1": "🐺@wolfbloodnews | @wolfbloodbot"
   "updates-27-title": "🔔 [UPDATE 27] 🔔",
   "updates-27-h1": "🆒 NEUE BEFEHLE:",
   "updates-27-p1": "<strong>🎀 /stars</strong> – Dieser Befehl schaltet exklusive WB-Gegenstände und -Funktionen mit Telegram Stars frei, um Ihr Gameplay zu verbessern 💊.",
@@ -1334,3 +1354,4 @@
   "loader_hint_55": "🙇 Hinweis: Der Schüler wird zum Meister. Wenn der Seher fällt, greift der Lehrling zur Kristallkugel."
 
 }
+
