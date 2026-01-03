@@ -708,6 +708,26 @@
     "page-title-updates": "Wolf Blood - Aggiornamenti",
     "header-subtitle-updates": "Notizie e aggiornamenti",
     "updates-main-title": "Aggiornamenti",
+    "updates-mystery-title": "BAULI MISTERIOSI",
+    "updates-mystery-h1": "Non solo nelle partite Tesoro, i misteri sono nascosti ovunque!",
+    "updates-mystery-p1": "Hai provato molte partite Tesoro ma senza fortuna😕 con le ricompense Tesoro? Non preoccuparti! Ci pensiamo noi. Saluta i \"Bauli Misteriosi di Wolf Blood 🎁\"!",
+    "updates-mystery-p2": "Alla fine di ogni partita, dei vincitori casuali Non-AFK potrebbero sbloccare un misterioso Baule WB 💰 pieno di oggetti esclusivi WB. Questi bauli possono apparire nelle modalità di gioco Classificata (Ranked), Caos e Normale 🔐.",
+    "updates-mystery-h2": "❖ Bauli Misteriosi che potresti guadagnare:",
+    "updates-mystery-li1": "📦 Baule Comune",
+    "updates-mystery-li2": "🎁 Baule Raro",
+    "updates-mystery-li3": "🏆🎁 Baule Epico",
+    "updates-mystery-li4": "🐉🎁 Baule Leggendario",
+    "updates-mystery-li5": "🐲🎁 Baule Mitico",
+    "updates-mystery-li6": "🏛 Baule Antico",
+    "updates-mystery-p3": "✨ E il Baule VIP 💎, che appare solo nei Gruppi Ufficiali.",
+    "updates-mystery-h3": "✏️ Requisiti per l'apparizione dei Bauli Misteriosi:",
+    "updates-mystery-req1": "🔜 Almeno 11 giocatori nelle modalità Caos e Normale.",
+    "updates-mystery-req2": "🔜 Almeno 7 giocatori nella modalità Classificata (Ranked).",
+    "updates-mystery-req3": "🔜 Le partite Personalizzate (Custom) e Amore (Love) non contano.",
+    "updates-mystery-req4": "🔜 I giocatori AFK sono esclusi.",
+    "updates-mystery-p4": "🎮 Allora, cosa state aspettando? Che il divertimento abbia inizio! 🔥",
+    "updates-mystery-p5": "<strong>Ogni Partita Potrebbe Custodire La Tua Prossima Grande Sorpresa!</strong>",
+    "updates-mystery-f1": "🐺@wolfbloodnews | @wolfbloodbot"
     "updates-27-title": "🔔 [AGGIORNAMENTO 27] 🔔",
     "updates-27-h1": "🆒 NUOVI COMANDI:",
     "updates-27-p1": "<strong>🎀 /stars</strong>: questo comando sblocca oggetti e funzionalità esclusivi di WB utilizzando Telegram Stars ⭐️per far salire di livello il tuo gameplay 💊.",
@@ -1333,5 +1353,6 @@
     "loader_hint_54": "👶 Indizio: Proteggi bene il modello di riferimento. Se muore, l'innocente Ragazzo Selvaggio diventa una bestia feroce.",
     "loader_hint_55": "🙇 Indizio: L'allievo supera il maestro. Quando il Veggente cade, l'Apprendista prende la sfera di cristallo."
 }
+
 
 
