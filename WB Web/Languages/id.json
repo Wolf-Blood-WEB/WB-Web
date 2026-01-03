@@ -708,6 +708,26 @@
   "page-title-updates": "Wolfblood - Pembaruan",
   "header-subtitle-updates": "Berita & Pembaruan",
   "updates-main-title": "Pembaruan",
+  "updates-mystery-title": "PETI MISTERIUS",
+  "updates-mystery-h1": "Bukan Hanya di Game Harta Karun, Misteri Tersembunyi di Mana Saja!",
+  "updates-mystery-p1": "Sudah mencoba banyak game Harta Karun tapi tidak beruntung😕 dengan hadiahnya? Jangan khawatir! Kami punya solusinya. Sambutlah \"Peti Misterius Wolf Blood 🎁\"!",
+  "updates-mystery-p2": "Di akhir setiap permainan, pemenang acak yang Tidak AFK mungkin membuka Peti WB misterius 💰 yang berisi Item WB eksklusif. Peti ini bisa muncul di mode permainan Peringkat (Ranked), Kekacauan (Chaos), dan Normal 🔐.",
+  "updates-mystery-h2": "❖ Peti Misterius yang bisa kamu dapatkan:",
+  "updates-mystery-li1": "📦 Peti Biasa (Common Chest)",
+  "updates-mystery-li2": "🎁 Peti Langka (Rare Chest)",
+  "updates-mystery-li3": "🏆🎁 Peti Epik (Epic Chest)",
+  "updates-mystery-li4": "🐉🎁 Peti Legendaris (Legendary Chest)",
+  "updates-mystery-li5": "🐲🎁 Peti Mistis (Mythical Chest)",
+  "updates-mystery-li6": "🏛 Peti Kuno (Ancient Chest)",
+  "updates-mystery-p3": "✨ Dan Peti VIP 💎, yang hanya muncul di Grup Resmi.",
+  "updates-mystery-h3": "✏️ Persyaratan agar Peti Misterius muncul:",
+  "updates-mystery-req1": "🔜 Setidaknya 11 pemain di mode Chaos dan Normal.",
+  "updates-mystery-req2": "🔜 Setidaknya 7 pemain di mode Ranked.",
+  "updates-mystery-req3": "🔜 Game Kustom (Custom) dan Cinta (Love) tidak dihitung.",
+  "updates-mystery-req4": "🔜 Pemain AFK dikecualikan.",
+  "updates-mystery-p4": "🎮 Jadi, tunggu apa lagi? Biarkan keseruan dimulai! 🔥",
+  "updates-mystery-p5": "<strong>Setiap Game Bisa Menyimpan Kejutan Besar Berikutnya Untukmu!</strong>",
+  "updates-mystery-f1": "🐺@wolfbloodnews | @wolfbloodbot"
   "updates-27-title": "🔔 [UPDATE 27] 🔔",
   "updates-27-h1": "🆒 PERINTAH BARU:",
   "updates-27-p1": "<strong>🎀 /stars</strong> - Perintah ini membuka item dan fitur WB eksklusif menggunakan Telegram Stars ⭐️to tingkatkan permainan Anda 💊.",
@@ -1333,5 +1353,6 @@
   "loader_hint_54": "👶 Petunjuk: Jaga panutan itu baik-baik. Jika mereka mati, Anak Liar yang polos akan menjadi binatang buas.",
   "loader_hint_55": "🙇 Petunjuk: Murid melampaui gurunya. Saat Pelihat jatuh, Magang mengambil alih bola kristal."
 }
+
 
 
