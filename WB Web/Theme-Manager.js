@@ -1,8 +1,11 @@
 (function () {
-    const forceChristmas = true;
+    const forceChristmas = false; 
     const today = new Date();
     const month = today.getMonth() + 1;
-    if (month === 12 || forceChristmas) {
+    const day = today.getDate();
+    const isDecember = (month === 12);
+    const isEarlyJan = (month === 1 && day <= 10);
+    if (forceChristmas || isDecember || isEarlyJan) {
         initWinterTheme();
     }
     function initWinterTheme() {
@@ -212,3 +215,4 @@
         container.appendChild(flake);
     }
 })();
+
