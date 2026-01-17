@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wolf Blood | Achievements</title>
     <style>
-        /* --- GLOBAL THEME --- */
         :root {
             --bg-dark: #121212;
             --bg-card: #1e1e1e;
@@ -14,15 +13,12 @@
             --text-dim: #a0a0a0;
             --accent-gold: #d4af37;
         }
-
         body {
             margin: 0;
             font-family: 'Segoe UI', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
         }
-
-        /* --- NAVIGATION --- */
         .wolf-nav {
             display: flex;
             justify-content: center;
@@ -32,7 +28,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             overflow-x: auto;
         }
-
         .nav-link {
             text-decoration: none;
             color: var(--text-dim);
@@ -43,32 +38,27 @@
             display: block;
             white-space: nowrap;
         }
-
             .nav-link:hover {
                 color: var(--wolf-red);
                 background-color: rgba(255, 255, 255, 0.05);
             }
-
             .nav-link.active {
                 color: var(--text-main);
                 background: linear-gradient(to top, rgba(138, 3, 3, 0.2), transparent);
                 border-bottom: 3px solid var(--wolf-red);
             }
 
-        /* --- TROPHY HEADER --- */
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
-
         .trophy-header {
             text-align: center;
             margin: 40px 0;
             border-bottom: 1px solid #333;
             padding-bottom: 30px;
         }
-
             .trophy-header h1 {
                 font-size: 3rem;
                 text-transform: uppercase;
@@ -84,7 +74,6 @@
             margin-top: 10px;
             font-size: 1.1rem;
         }
-
         .intro-box {
             background: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
             border: 1px solid #333;
@@ -96,16 +85,13 @@
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        /* --- ACHIEVEMENT LIST CONTAINER --- */
         .achievement-list {
             display: flex;
             flex-direction: column;
             gap: 15px;
             margin-bottom: 30px;
-            min-height: 400px; /* Prevents jumping when switching pages */
+            min-height: 400px;
         }
-
         .achv-card {
             background: #181818;
             border: 1px solid #333;
@@ -115,31 +101,26 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            transition: all 0.3s ease; /* Smooth transition */
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             animation: fadeIn 0.5s ease;
         }
-
-        /* Animation for switching pages */
         @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(10px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
         .achv-card:hover {
             transform: scale(1.02);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
             background: #202020;
         }
-
         .achv-card::after {
             content: "";
             position: absolute;
@@ -151,11 +132,9 @@
             transform: skewX(-25deg);
             transition: 0.5s;
         }
-
         .achv-card:hover::after {
             left: 150%;
         }
-
         .achv-icon {
             width: 60px;
             height: 60px;
@@ -168,24 +147,20 @@
             font-size: 1.8rem;
             flex-shrink: 0;
         }
-
         .achv-details {
             flex-grow: 1;
         }
-
         .achv-name {
             font-size: 1.2rem;
             font-weight: bold;
             color: var(--text-main);
             margin-bottom: 5px;
         }
-
         .achv-desc {
             color: #888;
             font-size: 0.95rem;
             line-height: 1.4;
         }
-
         .xp-badge {
             background: #333;
             color: var(--accent-gold);
@@ -195,15 +170,12 @@
             font-weight: bold;
             border: 1px solid var(--accent-gold);
         }
-
-        /* --- PAGINATION (The New Part) --- */
         .pagination {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-top: 40px;
         }
-
         .page-btn {
             background: #111;
             border: 1px solid #444;
@@ -216,13 +188,11 @@
             font-size: 1rem;
             transition: 0.3s;
         }
-
             .page-btn:hover {
                 background: #222;
                 border-color: var(--accent-gold);
                 color: var(--accent-gold);
             }
-
             .page-btn.active {
                 background: var(--accent-gold);
                 color: #000;
@@ -320,20 +290,16 @@
             ]
         };
 
-        // --- PAGE LOAD LOGIC ---
         document.addEventListener('DOMContentLoaded', () => {
-            loadPack(1); // Load Pack 1 by default
+            loadPack(1);
         });
 
-        // --- RENDER FUNCTION ---
         function loadPack(packNumber) {
             const container = document.getElementById('achievementList');
             const buttons = document.querySelectorAll('.page-btn');
 
-            // 1. Clear current list
             container.innerHTML = '';
 
-            // 2. Add new items
             const currentPack = packs[packNumber];
             if (currentPack) {
                 currentPack.forEach(achv => {
@@ -351,9 +317,7 @@
                 });
             }
 
-            // 3. Update Button Styles
             buttons.forEach(btn => {
-                // If button text matches packNumber, add 'active' class
                 if (parseInt(btn.innerText) === packNumber) {
                     btn.classList.add('active');
                 } else {
@@ -366,4 +330,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>
