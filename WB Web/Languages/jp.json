@@ -708,6 +708,26 @@
   "page-title-updates": "Wolfblood - アップデート",
   "header-subtitle-updates": "ニュースと最新情報",
   "updates-main-title": "アップデート",
+  "updates-mystery-title": "ミステリーチェスト",
+  "updates-mystery-h1": "トレジャーゲームだけじゃない、謎はどこにでも隠されている！",
+  "updates-mystery-p1": "トレジャーゲームをたくさん試したけど、報酬には恵まれなかった😕？心配無用！私たちにお任せください。「Wolf Blood ミステリーチェスト 🎁」の登場です！",
+  "updates-mystery-p2": "各ゲームの終了時、AFKではない（放置していない）ランダムな勝者が、限定WBアイテムが詰まった謎のWBチェスト💰をアンロックできるかもしれません。これらのチェストは、ランク (Ranked)、カオス (Chaos)、ノーマル (Normal) の各ゲームモード🔐で出現する可能性があります。",
+  "updates-mystery-h2": "❖ 獲得できるミステリーチェスト：",
+  "updates-mystery-li1": "📦 コモンチェスト (Common Chest)",
+  "updates-mystery-li2": "🎁 レアチェスト (Rare Chest)",
+  "updates-mystery-li3": "🏆🎁 エピックチェスト (Epic Chest)",
+  "updates-mystery-li4": "🐉🎁 レジェンダリーチェスト (Legendary Chest)",
+  "updates-mystery-li5": "🐲🎁 ミスティカルチェスト (Mythical Chest)",
+  "updates-mystery-li6": "🏛 エンシェントチェスト (Ancient Chest)",
+  "updates-mystery-p3": "✨ そして、公式グループにのみ出現するVIPチェスト💎。",
+  "updates-mystery-h3": "✏️ ミステリーチェストの出現条件：",
+  "updates-mystery-req1": "🔜 カオスおよびノーマルモードでは少なくとも11人のプレイヤー。",
+  "updates-mystery-req2": "🔜 ランクモードでは少なくとも7人のプレイヤー。",
+  "updates-mystery-req3": "🔜 カスタム (Custom) および ラブ (Love) ゲームはカウントされません。",
+  "updates-mystery-req4": "🔜 AFK（放置）プレイヤーは除外されます。",
+  "updates-mystery-p4": "🎮 さあ、何を待っていますか？楽しみましょう！🔥",
+  "updates-mystery-p5": "<strong>すべてのゲームに、次の大きなサプライズが待っているかもしれません！</strong>",
+  "updates-mystery-f1": "🐺@wolfbloodnews | @wolfbloodbot",
   "updates-27-title": "🔔【更新27】🔔",
   "updates-27-h1": "🆒 新しいコマンド:",
   "updates-27-p1": "<strong>🎀 /stars</strong> - このコマンドは、Telegram Stars ⭐️を使用して独占的な WB アイテムと機能のロックを解除し、ゲームプレイをレベルアップ 💊 します。",
@@ -1334,3 +1354,4 @@
   "loader_hint_55": "🙇 ヒント: 生徒がマスターになります。予言者が倒れると、見習いは水晶玉を取り上げます。"
 
 }
+
