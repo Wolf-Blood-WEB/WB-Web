@@ -708,6 +708,26 @@
   "page-title-updates": "Wolfblood - Mga Update",
   "header-subtitle-updates": "Mga Balita at Update",
   "updates-main-title": "Mga update",
+  "updates-mystery-title": "MYSTERY CHESTS",
+  "updates-mystery-h1": "Hindi Lang sa Treasure Games, May mga Misteryong Nakatago Kahit Saan!",
+  "updates-mystery-p1": "Sinubukan mo na ba ang maraming Treasure games pero minalas😕 sa Treasure rewards? Huwag mag-alala! Sagot namin kayo. Say hello sa \"Wolf Blood Mystery Chests 🎁\"!",
+  "updates-mystery-p2": "Sa pagtatapos ng bawat laro, ang mga random na Non-AFK winners ay maaaring makapag-unlock ng isang misteryosong WB Chest 💰 na puno ng exclusive WB Items. Ang mga chest na ito ay pwedeng lumabas sa Ranked, Chaos, at Normal game modes 🔐.",
+  "updates-mystery-h2": "❖ Mga Mystery Chest na pwede mong makuha:",
+  "updates-mystery-li1": "📦 Common Chest",
+  "updates-mystery-li2": "🎁 Rare Chest",
+  "updates-mystery-li3": "🏆🎁 Epic Chest",
+  "updates-mystery-li4": "🐉🎁 Legendary Chest",
+  "updates-mystery-li5": "🐲🎁 Mythical Chest",
+  "updates-mystery-li6": "🏛 Ancient Chest",
+  "updates-mystery-p3": "✨ At ang VIP Chest 💎, na lumalabas lang sa mga Official Groups.",
+  "updates-mystery-h3": "✏️ Mga kailangan para lumabas ang Mystery Chests:",
+  "updates-mystery-req1": "🔜 At least 11 players sa Chaos at Normal modes.",
+  "updates-mystery-req2": "🔜 At least 7 players sa Ranked mode.",
+  "updates-mystery-req3": "🔜 Hindi kasali ang Custom at Love games.",
+  "updates-mystery-req4": "🔜 Excluded ang mga AFK players.",
+  "updates-mystery-p4": "🎮 So, ano pang hinihintay niyo? Simulan na ang saya! 🔥",
+  "updates-mystery-p5": "<strong>Bawat Laro ay Pwedeng Magdala ng Iyong Susunod na Big Surprise!</strong>",
+  "updates-mystery-f1": "🐺@wolfbloodnews | @wolfbloodbot",
   "updates-27-title": "🔔 [UPDATE 27] 🔔",
   "updates-27-h1": "🆒 MGA BAGONG UTOS:",
   "updates-27-p1": "<strong>🎀 /stars</strong> - Ina-unlock ng command na ito ang mga eksklusibong item at feature ng WB gamit ang Telegram Stars ⭐️upang i-level up ang iyong gameplay 💊.",
@@ -1333,4 +1353,5 @@
   "loader_hint_54": "👶 Hint: Bantayan mabuti ang role model. Kung sila ay mamatay, ang inosenteng Wild Child ay magiging isang mabagsik na hayop.",
   "loader_hint_55": "🙇 Hint: Ang mag-aaral ay nagiging master. Kapag bumagsak ang Tagakita, kinuha ng Apprentice ang bolang kristal."
 }
+
 
