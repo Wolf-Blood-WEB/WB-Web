@@ -708,6 +708,26 @@
   "page-title-updates": "Wolfblood - Güncellemeler",
   "header-subtitle-updates": "Haberler & Güncellemeler",
   "updates-main-title": "Güncellemeler",
+  "updates-mystery-title": "GİZEMLİ SANDIKLAR",
+  "updates-mystery-h1": "Sadece Hazine Oyunlarında Değil, Gizemler Her Yerde Saklı!",
+  "updates-mystery-p1": "Çok sayıda Hazine oyunu denediniz ama Hazine ödülleri konusunda şansınız yaver gitmedi mi😕? Endişelenmeyin! Sizi düşündük. \"Wolf Blood Gizemli Sandıkları 🎁\"na merhaba deyin!",
+  "updates-mystery-p2": "Her oyunun sonunda, AFK olmayan rastgele kazananlar, özel WB Eşyalarıyla dolu gizemli bir WB Sandığının 💰 kilidini açabilir. Bu sandıklar Dereceli (Ranked), Kaos ve Normal oyun modlarında ortaya çıkabilir 🔐.",
+  "updates-mystery-h2": "❖ Kazanabileceğiniz Gizemli Sandıklar:",
+  "updates-mystery-li1": "📦 Yaygın Sandık (Common Chest)",
+  "updates-mystery-li2": "🎁 Nadir Sandık (Rare Chest)",
+  "updates-mystery-li3": "🏆🎁 Destansı Sandık (Epic Chest)",
+  "updates-mystery-li4": "🐉🎁 Efsanevi Sandık (Legendary Chest)",
+  "updates-mystery-li5": "🐲🎁 Mistik Sandık (Mythical Chest)",
+  "updates-mystery-li6": "🏛 Kadim Sandık (Ancient Chest)",
+  "updates-mystery-p3": "✨ Ve sadece Resmi Gruplarda görünen VIP Sandığı 💎.",
+  "updates-mystery-h3": "✏️ Gizemli Sandıkların görünmesi için gereksinimler:",
+  "updates-mystery-req1": "🔜 Kaos ve Normal modlarda en az 11 oyuncu.",
+  "updates-mystery-req2": "🔜 Dereceli (Ranked) modda en az 7 oyuncu.",
+  "updates-mystery-req3": "🔜 Özel (Custom) ve Aşk (Love) oyunları sayılmaz.",
+  "updates-mystery-req4": "🔜 AFK oyuncular hariç tutulur.",
+  "updates-mystery-p4": "🎮 Peki, ne bekliyorsunuz? Eğlence başlasın! 🔥",
+  "updates-mystery-p5": "<strong>Her Oyun Bir Sonraki Büyük Sürprizinizi Barındırabilir!</strong>",
+  "updates-mystery-f1": "🐺@wolfbloodnews | @wolfbloodbot",
   "updates-27-title": "🔔 [GÜNCELLEME 27] 🔔",
   "updates-27-h1": "🆒 YENİ KOMUTLAR:",
   "updates-27-p1": "<strong>🎀 /stars</strong> - Bu komut, oyun seviyenizi 💊 yükseltmek için Telegram Yıldızlarını ⭐️ kullanarak özel WB öğelerinin ve özelliklerinin kilidini açar.",
@@ -1332,6 +1352,7 @@
   "loader_hint_54": "👶 İpucu: Rol modelini iyi koru. Eğer ölürlerse, masum Vahşi Çocuk vahşi bir canavara dönüşür.",
   "loader_hint_55": "🙇 İpucu: Çırak usta olur. Gözcü düştüğünde, Gözcü Çırağı kristal küreyi devralır."
 }
+
 
 
 
