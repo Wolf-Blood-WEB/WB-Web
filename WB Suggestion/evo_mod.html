@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wolf Blood | EVO MOD</title>
     <style>
-        /* --- GLOBAL THEME --- */
         :root {
             --bg-dark: #121212;
             --bg-card: #1e1e1e;
@@ -13,19 +12,15 @@
             --text-main: #e0e0e0;
             --text-dim: #a0a0a0;
             --accent-gold: #d4af37;
-            /* NEW: MUTATION COLORS */
             --toxic-green: #39ff14;
             --toxic-dim: #1a4d0f;
         }
-
         body {
             margin: 0;
             font-family: 'Segoe UI', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
         }
-
-        /* --- NAVIGATION --- */
         .wolf-nav {
             display: flex;
             justify-content: center;
@@ -35,7 +30,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             overflow-x: auto;
         }
-
         .nav-link {
             text-decoration: none;
             color: var(--text-dim);
@@ -46,38 +40,33 @@
             display: block;
             white-space: nowrap;
         }
-
             .nav-link:hover {
                 color: var(--wolf-red);
                 background-color: rgba(255, 255, 255, 0.05);
             }
-
             .nav-link.active {
                 color: var(--text-main);
                 background: linear-gradient(to top, rgba(138, 3, 3, 0.2), transparent);
                 border-bottom: 3px solid var(--wolf-red);
             }
 
-        /* --- EVO HEADER --- */
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
-
         .evo-header {
             text-align: center;
             margin: 40px 0;
             border-bottom: 1px solid #333;
             padding-bottom: 30px;
         }
-
             .evo-header h1 {
                 font-size: 3rem;
                 color: var(--text-main);
                 text-transform: uppercase;
                 letter-spacing: 4px;
-                text-shadow: 0 0 10px var(--toxic-green); /* Neon Glow */
+                text-shadow: 0 0 10px var(--toxic-green);
             }
 
         .evo-subtitle {
@@ -86,7 +75,6 @@
             letter-spacing: 1px;
             font-size: 1.2rem;
         }
-
         .chaos-box {
             background: linear-gradient(145deg, #111, #0a1a0a);
             border: 1px solid var(--toxic-green);
@@ -98,19 +86,16 @@
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(57, 255, 20, 0.1);
         }
-
-        /* --- MUTATION GRID --- */
         .role-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 20px;
             padding-bottom: 50px;
         }
-
         .evo-card {
             background: #1a1a1a;
             border: 1px solid #333;
-            border-radius: 0 15px 0 15px; /* Sharp edges */
+            border-radius: 0 15px 0 15px;
             padding: 20px;
             text-align: center;
             cursor: pointer;
@@ -121,7 +106,6 @@
             position: relative;
             overflow: hidden;
         }
-
             .evo-card:hover {
                 transform: scale(1.05);
                 border-color: var(--toxic-green);
@@ -132,13 +116,10 @@
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
-
         .role-name {
             font-weight: bold;
             font-size: 1rem;
         }
-
-        /* Little DNA Icon on cards */
         .dna-mark {
             position: absolute;
             top: 5px;
@@ -146,8 +127,6 @@
             font-size: 0.8rem;
             opacity: 0.5;
         }
-
-        /* --- EVOLUTION MODAL (The Transformation Screen) --- */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -161,7 +140,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .modal-content {
             background-color: #000;
             border: 2px solid var(--toxic-green);
@@ -176,7 +154,6 @@
             display: flex;
             flex-direction: column;
         }
-
         .close-modal {
             position: absolute;
             top: 10px;
@@ -186,14 +163,10 @@
             cursor: pointer;
             z-index: 10;
         }
-
-        /* Evolution Split Layout */
         .evo-stage-container {
             display: flex;
             flex-wrap: wrap;
         }
-
-        /* Left Side: Base Form */
         .stage-base {
             flex: 1;
             padding: 30px;
@@ -202,8 +175,6 @@
             min-width: 250px;
             opacity: 0.7;
         }
-
-        /* Right Side: Evolved Form */
         .stage-evo {
             flex: 1;
             padding: 30px;
@@ -211,8 +182,6 @@
             min-width: 250px;
             position: relative;
         }
-
-        /* The Arrow between them */
         .evo-arrow {
             position: absolute;
             left: 50%;
@@ -230,23 +199,19 @@
             font-size: 1.5rem;
             color: var(--toxic-green);
         }
-
         @media (max-width: 600px) {
             .evo-stage-container {
                 flex-direction: column;
             }
-
             .stage-base {
                 border-right: none;
                 border-bottom: 1px solid #333;
             }
         }
-
         h2 {
             text-transform: uppercase;
             margin-bottom: 5px;
         }
-
         .evo-tag {
             background: var(--toxic-green);
             color: #000;
@@ -257,13 +222,11 @@
             display: inline-block;
             margin-bottom: 15px;
         }
-
         ul {
             padding-left: 20px;
             line-height: 1.6;
             color: #ccc;
         }
-
         li {
             margin-bottom: 8px;
         }
@@ -304,7 +267,7 @@
             </div>
 
             <div class="evo-card modal-trigger" data-modal-target="evoChemistModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">👨‍🔬</div><div class="role-name">EVO Chemist</div>
+                <div class="dna-mark">🧬</div><div class="role-emoji">🧪</div><div class="role-name">EVO Chemist</div>
             </div>
 
             <div class="evo-card modal-trigger" data-modal-target="evoMayorModal">
@@ -496,9 +459,9 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Drunk</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🍻</div>
+                    <h2>EVO Drunk</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🍻</div>
                     <p>You were simply a drunked villager, only affects werewolf. But now you will also affect your visitors.</p>
-                    <p style="font-size:0.9rem; margin-top:10px;">• Cultist Hunter 💂, Harlot 💋, Guardian Angel 👼, Chemist 👨‍🔬, Pawn ♟, Cultist 👤<br>The roles will get drunked and can not perform any action next night. If there are more than 1 cult, one of them will get drunked (newest member) but the other(s) will convert you.</p>
+                    <p style="font-size:0.9rem; margin-top:10px;">• Cultist Hunter 💂, Harlot 💋, Guardian Angel 👼, Chemist 🧪, Pawn ♟, Cultist 👤<br>The roles will get drunked and can not perform any action next night. If there are more than 1 cult, one of them will get drunked (newest member) but the other(s) will convert you.</p>
                 </div>
             </div>
         </div>
@@ -514,7 +477,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Apprentice</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🙇</div>
+                    <h2>EVO Apprentice</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🙇</div>
                     <p>Since you are a simple apprentice, when you take the seer place you will be stronger than him. You will learn from his mistakes.</p>
                     <p style="font-size:0.9rem; margin-top:10px;">• WolfMan 👱🌚, Traitor 🖕, Lycan 🐺🌝<br>These roles will not confuse you anymore. You will see them as who they are. Also you will be aware of Rogue Wolf 🐺🧧 trick. It will not confuse you.</p>
                 </div>
@@ -527,12 +490,12 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">👨‍🔬</div><div class="role-title">Chemist</div>
+                    <h2>Base Form</h2><div style="font-size:3rem;">🧪</div><div class="role-title">Chemist</div>
                     <p style="font-size:0.9rem;">You are the Chemist, a mad scientist experimenting on living beings. On the first night, you prepare 4 potions (2 poison, 2 harmless). You can choose a target to give one of each. If a bad role dies from poison, you get 2 extra potions. Must wait 1 day before visiting another player.</p>
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Chemist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪👨‍🔬</div>
+                    <h2>EVO Chemist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪</div>
                     <p>At first night, you prepare your elixir. 1 is poison, the other is just simple iced tea. The next night you will visit 2 people and you will not able to know who took the poison one.</p>
                     <p style="font-size:0.9rem;">The poison affect takes 2 nights. During that 2 nights if someone visit the poisoned person, they will die with him too. Be careful about Town Hunter 🎯 and Serial Killer 🔪. They might notice and kill you.</p>
                 </div>
@@ -550,7 +513,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Mayor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🎖</div>
+                    <h2>EVO Mayor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎖</div>
                     <p>After revealing himself, if any village role dies by lynching the mayor gets an extra vote.</p>
                     <ul style="font-size:0.9rem; text-align:left; color:#ccc;">
                         <li>If 1 village die, vote will be 3</li>
@@ -572,7 +535,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Mason</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪👷</div>
+                    <h2>EVO Mason</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👷</div>
                     <p>If you are not alone, for every mason member each all of you gain 10% faith against Cultist.</p>
                     <ul style="font-size:0.9rem; text-align:left; color:#ccc;">
                         <li>2 mason -> 90% CV rate</li>
@@ -596,7 +559,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Alpha Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪⚡️</div>
+                    <h2>EVO Alpha Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">⚡️</div>
                     <p>There is 25% infection chance.<br>Preacher can not detect him.<br>Skeleton will fail if try to block him.<br>Depressive will not manage to kill him.</p>
                 </div>
             </div>
@@ -613,7 +576,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Boss</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🎩</div>
+                    <h2>EVO Boss</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎩</div>
                     <p>After the Cultist Hunter is dead, you will become a new one.</p>
                 </div>
             </div>
@@ -630,7 +593,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Augur</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🦅</div>
+                    <h2>EVO Augur</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦅</div>
                     <p>When any vision roles die, you will be able to know their last vision.</p>
                 </div>
             </div>
@@ -647,7 +610,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Tanner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪👺</div>
+                    <h2>EVO Tanner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👺</div>
                     <p>If you die, you will win the game. No matter how you die (AFK exception as usual)!</p>
                 </div>
             </div>
@@ -664,7 +627,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Arsonist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🔥</div>
+                    <h2>EVO Arsonist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔥</div>
                     <p>You will douse one player every night. But when it is time to burn, you will have a change to also burn another player too which that player is under the victim’s name automatically. Visitors will burned no matter what they are!</p>
                 </div>
             </div>
@@ -681,7 +644,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Wolfman</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🧑🌚</div>
+                    <h2>EVO Wolfman</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧑🌚</div>
                     <p>You are a regular villager but as you know, seer confuses about you. They will see you as a werewolf. Meantime, you are side of village. Thus, if any wolf attacks you, you will fight back them! There is a reason for a “wolf” name in your name...</p>
                 </div>
             </div>
@@ -698,7 +661,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Lycan</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🐺🌝</div>
+                    <h2>EVO Lycan</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🌝</div>
                     <p>You are a regular wolf, but seer will recognize you as a villager. You will never harm Harlot/GA too when they visit you. You are not a just pretender. You are a good citizen :D</p>
                 </div>
             </div>
@@ -715,7 +678,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Cultist Hunter</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪💂</div>
+                    <h2>EVO Cultist Hunter</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💂</div>
                     <p>Your leadership is beyond the entire village. You will catch and hunt cultist every night. At the daytime all players must obey your lead. Pacifist ☮️, Blacksmith ⚒️, Prince 👑, Troublemaker 🤯 and Sandman 💤 will no exist in game. Because you already have their ability!</p>
                 </div>
             </div>
@@ -732,7 +695,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Cultist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪👤</div>
+                    <h2>EVO Cultist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👤</div>
                     <p>As a cultist, if you failed to convince your target you will not leave it like that. If the convince percentage fail, then two possibility will appear, you will leave them or retaliate and kill them! Join or die pure!</p>
                 </div>
             </div>
@@ -749,7 +712,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Shadow Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🐺🌚</div>
+                    <h2>EVO Shadow Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🌚</div>
                     <p>Your ability also effects the day and night actions too.</p>
                 </div>
             </div>
@@ -766,7 +729,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Snow Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🐺❄️</div>
+                    <h2>EVO Snow Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺❄️</div>
                     <p>Your target will not be able to talk or vote entire day. Perhaps, the cold is vulnerability for them... Maybe they will die as frozen!</p>
                 </div>
             </div>
@@ -783,7 +746,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Beholder</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪👁</div>
+                    <h2>EVO Beholder</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👁</div>
                     <p>Your true vision is beyond all magicians. You will not only know the seer, but you will also see everyone’s night action too. Interface to the game? I don’t think so... You will only be able to talk to your seer. Otherwise, sad for you and hope they will follow your lead during lynch phase.</p>
                 </div>
             </div>
@@ -800,7 +763,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Hunter</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🎯</div>
+                    <h2>EVO Hunter</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎯</div>
                     <p>Your whole life passed with servicing your people, to the citizens. But somehow, with some way they decide to kill you? Ungrateful pity living human! When you die choosing only one simple sinner for killing yourself is not enough! Make the massacre... Kill them all as much as you can... During the lynch, you will have a short time, and you are only able to choose whoever vote for you, and they will die with you!</p>
                 </div>
             </div>
@@ -817,7 +780,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Pawn</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪♟</div>
+                    <h2>EVO Pawn</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">♟</div>
                     <p>You are not alone in this fight! Like mason and villager, you may also appear in game more than one! 3 pawn built absolute defending, and no sacrifice require.</p>
                 </div>
             </div>
@@ -834,7 +797,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Slave</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪😵‍💫</div>
+                    <h2>EVO Slave</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">😵‍💫</div>
                     <p>You are a solo role. They thought your purpose is just lynching your target, but no way! When your assigned target will die, next one comes up but hey! No worries... From that the targets will die even they lynch someone else.</p>
                 </div>
             </div>
@@ -851,7 +814,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Poseidon</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🧜</div>
+                    <h2>EVO Poseidon</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧜</div>
                     <p>Your tsunami will drown several players. That could be even your allies!! Or serial killer/arsonist... Even the number of players who drown is also variable.</p>
                 </div>
             </div>
@@ -868,7 +831,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Sorcerer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🔮</div>
+                    <h2>EVO Sorcerer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔮</div>
                     <p>You will kill immediately when you detect any helper!!! Your dark magic will absorbe them.</p>
                 </div>
             </div>
@@ -885,7 +848,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Detective</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🕵️‍♂️</div>
+                    <h2>EVO Detective</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🕵️‍♂️</div>
                     <p>When you die, you will give a clue about your murderer at the same night!</p>
                 </div>
             </div>
@@ -902,7 +865,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Guardian Angel</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪👼</div>
+                    <h2>EVO Guardian Angel</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👼</div>
                     <p>You will have a chance to retaliate when they attack your target! Also, be realistic... Number of wolf's matter. You can't beat the entire pack or retaliate to them! Perhaps they will ripe you 😀</p>
                 </div>
             </div>
@@ -919,7 +882,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Clumsy Guy</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🤕</div>
+                    <h2>EVO Clumsy Guy</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🤕</div>
                     <p>You... You will literally sabotage all players vote by %50 chance during you are alive!</p>
                 </div>
             </div>
@@ -936,7 +899,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Seer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪👳</div>
+                    <h2>EVO Seer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👳</div>
                     <p>When you check someone you will receive 2 different role about your target. One is the correct and the other one will belong to someone else in the game. The hint is 1st role which have been told you is about your target.</p>
                 </div>
             </div>
@@ -953,7 +916,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Fool</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🃏</div>
+                    <h2>EVO Fool</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🃏</div>
                     <p>Your visions are still false, but when you check someone you will receive 2 different role about your target. Who knows, maybe one of them correct, maybe both of the vision are wrong!</p>
                 </div>
             </div>
@@ -970,7 +933,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Skeleton</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪💀</div>
+                    <h2>EVO Skeleton</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💀</div>
                     <p>After you die, you have a chance to block someone's ability and vote right. And then, you will resurrect yourself. If you die again, block someone - resurrect - die again. The loop is infinite. Death is not an end, it just a beggining!</p>
                 </div>
             </div>
@@ -987,7 +950,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Traitor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🖕</div>
+                    <h2>EVO Traitor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🖕</div>
                     <p>You will take the last werewolf's identity. Regardless of the type of the last wolf that died, you will start hunting directly with its abilities.</p>
                 </div>
             </div>
@@ -1004,7 +967,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Gunner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🔫</div>
+                    <h2>EVO Gunner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔫</div>
                     <p>You have 6 bullets in total. You may use them during the day or the night! You may also cover yourself with your bullets from incoming attacks.</p>
                 </div>
             </div>
@@ -1021,7 +984,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Harlot</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪💋</div>
+                    <h2>EVO Harlot</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💋</div>
                     <p>When you visit anyone, your target will not be able to take their night actions since you keep them busy! Bad roles also will be busy, you may die during visit them but still they will be busy with you.</p>
                 </div>
             </div>
@@ -1038,7 +1001,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Cursed</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪😾</div>
+                    <h2>EVO Cursed</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">😾</div>
                     <p>After you get bitten, you will become a werewolf. Your curse will continue with you in a different way. Your bite has a 25% infection rate for every attack. Yes, you will be the 2nd Alpha Wolf literally!</p>
                 </div>
             </div>
@@ -1055,7 +1018,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Doppelgänger</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🎭</div>
+                    <h2>EVO Doppelgänger</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎭</div>
                     <p>After a point, you will be able to murder your role model. You can't expect waiting for your role model to die in desperate. You are culpable of all your ancestors abilities. That means you can change your role model anytime, even after you get the role! But still you still have to service one team.</p>
                 </div>
             </div>
@@ -1072,7 +1035,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Cupid</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🏹</div>
+                    <h2>EVO Cupid</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🏹</div>
                     <p>You are not an architecture, you are a God. You will decide to bound people to each other. Whenever you want, you will decide to kill the couple immediately and find another proper couple for yourself or goodness of village (who believes that XD)</p>
                 </div>
             </div>
@@ -1089,7 +1052,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Wise Elder</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪📚</div>
+                    <h2>EVO Wise Elder</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">📚</div>
                     <p>You will survive every first attack. Werewolf, serial killer, gunner etc. No matter what it is. With your wisdom you can check players whether they are good or bad.</p>
                 </div>
             </div>
@@ -1106,7 +1069,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Wild Child</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪👶</div>
+                    <h2>EVO Wild Child</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👶</div>
                     <p>If your role model die, you will become wolfcub.</p>
                 </div>
             </div>
@@ -1123,7 +1086,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Rogue Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🐺🧧</div>
+                    <h2>EVO Rogue Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🧧</div>
                     <p>Until you die, every vision roles see their target as "Rogue Wolf 🐺🧧". Well... Desperately and by luck they must find you immediately for goodness of village.</p>
                 </div>
             </div>
@@ -1140,7 +1103,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Illusionist Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🐺🪄</div>
+                    <h2>EVO Illusionist Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🪄</div>
                     <p>You are a consumer but separated from the pack. You will eat individually. When they decide to lynch you, you will kill someone else by your choice. You will gain an extra lynch for your pack and eliminate extra citizen.</p>
                 </div>
             </div>
@@ -1157,7 +1120,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Snitch</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🦜</div>
+                    <h2>EVO Snitch</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦜</div>
                     <p>You will announce half of alive player's role. You might expose even helpers.</p>
                 </div>
             </div>
@@ -1174,7 +1137,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Conjurer Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🐺✨</div>
+                    <h2>EVO Conjurer Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺✨</div>
                     <p>Votes will be mixed up, and they thought the person get lynch who gets less vote. No matter what condition is, you are the one who will decide to get lynch. You will do that by a single vote. Your vote will be also hidden. All players though you vote someone else.</p>
                 </div>
             </div>
@@ -1191,7 +1154,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Executioner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🦸‍♂️</div>
+                    <h2>EVO Executioner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦸‍♂️</div>
                     <p>Put someone on trial. they will vote for target fate. If your target was innocent, then you will give another decide for who says "Yes" to lynch. Until you find the evil, it will continue.</p>
                 </div>
             </div>
@@ -1208,7 +1171,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Soldier</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🪖</div>
+                    <h2>EVO Soldier</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🪖</div>
                     <p>You will got your target back as a loyal soldier! Whoever try to hesitate kill your target, you will get them immediately! During day and night or lynch phase, any time you can cover your target back.</p>
                 </div>
             </div>
@@ -1225,7 +1188,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Preacher</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🛐</div>
+                    <h2>EVO Preacher</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🛐</div>
                     <p>You have been gifted by God. You will pray entire night for your target. Might have 50% chance to survive but even your target is die, you will know the murderer identity. Cult is weak against your worship. They will not succeed but they will also become a villager if the newest member try to convert you!</p>
                 </div>
             </div>
@@ -1242,7 +1205,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Serial Killer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🔪</div>
+                    <h2>EVO Serial Killer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔪</div>
                     <p>Do you want to know what evolution do you have? What can you be more? Simple, every night you get more victim from previous night. You will get a strike!</p>
                     <ul style="font-size:0.9rem; text-align:left; color:#ccc;">
                         <li>N1: Killed 1 player</li>
@@ -1266,7 +1229,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Miner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪⛏️</div>
+                    <h2>EVO Miner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">⛏️</div>
                     <p>Your diggings will be permanent until you die. You can not dig same person more than once in game. But... Since you may dig everyone's house, someone must die. Well that mean it is your turn and say goodbye to world. You can't dig for your house.</p>
                 </div>
             </div>
@@ -1283,7 +1246,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Doctor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🧑‍⚕️</div>
+                    <h2>EVO Doctor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧑‍⚕️</div>
                     <p>Do you remember the oath you took? The Hippocratic Oath. That's why you have to save every life you can. Even the bad guys... You can save life even they don't deserve. For the records, you will win according to how much life did you save from one side. If you save more village roles, you belongs to village. If you save more bad roles, you belongs to any villain</p>
                 </div>
             </div>
@@ -1300,7 +1263,7 @@
                 </div>
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Wolf Cub</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪🐶</div>
+                    <h2>EVO Wolf Cub</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐶</div>
                     <p>When you get killed somehow, next night the Wolf pack attacks 3 times. That furry can't be dodged by silver dust.</p>
                 </div>
             </div>
@@ -1310,4 +1273,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>
