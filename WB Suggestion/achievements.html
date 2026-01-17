@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Blood | Achievements</title>
+    <style>
+        /* --- GLOBAL THEME --- */
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --wolf-red: #8a0303;
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --accent-gold: #d4af37;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+        }
+
+        /* --- NAVIGATION --- */
+        .wolf-nav {
+            display: flex;
+            justify-content: center;
+            background-color: #000;
+            border-bottom: 3px solid var(--wolf-red);
+            padding: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            overflow-x: auto;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dim);
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: block;
+            white-space: nowrap;
+        }
+
+            .nav-link:hover {
+                color: var(--wolf-red);
+                background-color: rgba(255, 255, 255, 0.05);
+            }
+
+            .nav-link.active {
+                color: var(--text-main);
+                background: linear-gradient(to top, rgba(138, 3, 3, 0.2), transparent);
+                border-bottom: 3px solid var(--wolf-red);
+            }
+
+        /* --- TROPHY HEADER --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .trophy-header {
+            text-align: center;
+            margin: 40px 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 30px;
+        }
+
+            .trophy-header h1 {
+                font-size: 3rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                display: inline-block;
+                color: var(--accent-gold);
+                text-shadow: 0 0 15px rgba(212, 175, 55, 0.4), 2px 2px 0px #000;
+            }
+
+        .trophy-subtitle {
+            color: #888;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        .intro-box {
+            background: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
+            border: 1px solid #333;
+            color: #ccc;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 800px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* --- ACHIEVEMENT LIST CONTAINER --- */
+        .achievement-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+            min-height: 400px; /* Prevents jumping when switching pages */
+        }
+
+        .achv-card {
+            background: #181818;
+            border: 1px solid #333;
+            border-left: 5px solid var(--accent-gold);
+            border-radius: 6px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease; /* Smooth transition */
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Animation for switching pages */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .achv-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            background: #202020;
+        }
+
+        .achv-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-25deg);
+            transition: 0.5s;
+        }
+
+        .achv-card:hover::after {
+            left: 150%;
+        }
+
+        .achv-icon {
+            width: 60px;
+            height: 60px;
+            background: #000;
+            border-radius: 50%;
+            border: 2px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .achv-details {
+            flex-grow: 1;
+        }
+
+        .achv-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .achv-desc {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .xp-badge {
+            background: #333;
+            color: var(--accent-gold);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border: 1px solid var(--accent-gold);
+        }
+
+        /* --- PAGINATION (The New Part) --- */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .page-btn {
+            background: #111;
+            border: 1px solid #444;
+            color: #888;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+            .page-btn:hover {
+                background: #222;
+                border-color: var(--accent-gold);
+                color: var(--accent-gold);
+            }
+
+            .page-btn.active {
+                background: var(--accent-gold);
+                color: #000;
+                border-color: var(--accent-gold);
+                box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            }
+    </style>
+</head>
+<body>
+
+    <nav class="wolf-nav">
+        <a href="index.html" class="nav-link">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link active">🏆 Achievements</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="trophy-header">
+            <h1>Achievements</h1>
+            <p class="trophy-subtitle">🏅 Because dying horribly isn't the only way to be remembered. 🪦</p>
+
+            <div class="intro-box">
+                <p>
+                    <strong>Unlock rare conditions. Get medals. Earn bragging rights.</strong><br>
+                    This is where we honor the weird, the wild, and the downright ridiculous moments.<br>
+                    <em>Dying is temporary. Achievements are forever.</em>
+                </p>
+            </div>
+        </div>
+
+        <h2 style="margin-bottom:20px; border-bottom:1px solid #333; padding-bottom:10px;">🏆 Collection</h2>
+
+        <div id="achievementList" class="achievement-list"></div>
+
+        <div class="pagination">
+            <button class="page-btn active" onclick="loadPack(1)">1</button>
+            <button class="page-btn" onclick="loadPack(2)">2</button>
+            <button class="page-btn" onclick="loadPack(3)">3</button>
+            <button class="page-btn" onclick="loadPack(4)">4</button>
+            <button class="page-btn" onclick="loadPack(5)">5</button>
+            <button class="page-btn" onclick="loadPack(6)">6</button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- ACHIEVEMENT DATABASE ---
+        const packs = {
+            1: [
+                { emoji: "💊", name: "Antidepressant", desc: "As a Cultist Hunter, die because of voting depressive.", badge: "Rare" },
+                { emoji: "😈", name: "Heretic", desc: "As a Boss, convert into a Cultist at the first try and by an original Cult.", badge: "Epic" },
+                { emoji: "🤝", name: "Unexpected Alliance", desc: "As a Doctor, revive the Traitor!", badge: "Common" },
+                { emoji: "⛏️", name: "Dead End", desc: "As a Miner, dig into a WW/SK target and get killed by accident.", badge: "Unlucky" },
+                { emoji: "🎖️", name: "Rank Superiority", desc: "As a Soldier, save the Executioner's target and lynch the Executioner!", badge: "Legendary" }
+            ],
+            2: [
+                { emoji: "🦭", name: "Non-functional Seal", desc: "As a Mayor, get lynched because of Executioner decide...", badge: "Unlucky" },
+                { emoji: "🌊", name: "Furious Waves", desc: "As Poseidon, drown the Serial Killer, Arsonist, or Tanner.", badge: "Epic" },
+                { emoji: "😰", name: "Close Call", desc: "As Executioner, choose Alpha Wolf for lynch but village decides not to lynch him.", badge: "Rare" },
+                { emoji: "⚫", name: "Void", desc: "As an Astronomer, get 0 (zero) night action number.", badge: "Common" },
+                { emoji: "😺", name: "Future Cat", desc: "At the last 3, be with @kediben and win with him at the last lynch.", badge: "Special" }
+            ],
+            3: [
+                { emoji: "⚔️", name: "Internal Conflict", desc: "As Seer, check Cultist Hunter or Helpers switched by Rogue Wolf and cause their death.", badge: "Epic" },
+                { emoji: "👺", name: "Few but Effective", desc: "As a Tanner, get lynched when Conjurer Wolf acted.", badge: "Rare" },
+                { emoji: "♟️", name: "Unnoble Sacrifice", desc: "As a Pawn, sacrifice yourself for an Arsonist, Tanner, or Cultist.", badge: "Common" },
+                { emoji: "🤕", name: "Awkward Death", desc: "As Clumsy Guy, vote the Depressive by accident and die.", badge: "Funny" },
+                { emoji: "🪞", name: "Beyond the Line", desc: "As a Seer, see yourself!", badge: "Glitch" }
+            ],
+            4: [
+                { emoji: "🌫️", name: "Trickster", desc: "As Fog Wolf, at the last 3, vote the Town Hunter by fake vote and tie the lynch!", badge: "Legendary" },
+                { emoji: "🙈", name: "Blind Bandage", desc: "As Augur, see that all vision roles (seer, detective, etc.) don't exist in game.", badge: "Rare" },
+                { emoji: "📝", name: "Blacklist", desc: "As a regular player, stabbed at night 1 by any mod/dev of Wolfblood Community.", badge: "Unlucky" },
+                { emoji: "➿", name: "Loop Mayhem", desc: "As Miner, dig for someone and all action roles go to them with different targets.", badge: "Chaos" },
+                { emoji: "💀", name: "After Death", desc: "As Skeleton, dodge the Cultist Hunter when they visit the Serial Killer.", badge: "Epic" }
+            ],
+            5: [
+                { emoji: "🤢", name: "Unnoble", desc: "Be the Mayor at the last 2 and dodged by Skeleton. Disgusting!", badge: "Rare" },
+                { emoji: "⚔️", name: "Double-edged Sword", desc: "As Skeleton, block 2 different bad roles (regular wolves don't count).", badge: "Epic" },
+                { emoji: "🛐", name: "El-Mumin", desc: "Be the pure Preacher in Cultist game when CH is dead, and win the game alive.", badge: "Legendary" },
+                { emoji: "🚪", name: "Red Door", desc: "As Cultist Hunter, visit the Serial Killer twice and die. You never learn, do you?", badge: "Common" },
+                { emoji: "💔", name: "Betrayal Lover", desc: "As a couple, win the game alive when your partner is dead.", badge: "Cruel" }
+            ],
+            6: [
+                { emoji: "🚢", name: "Submarine", desc: "As Poseidon, drown the Depressive before they suicide.", badge: "Timing" },
+                { emoji: "😈", name: "Hypocrite Devil", desc: "As Slave, lose your target, make top 3 with Tanner, and win despite it.", badge: "Legendary" },
+                { emoji: "🫡", name: "Back-up", desc: "As a Pawn, sacrifice yourself for Soldier.", badge: "Honor" },
+                { emoji: "😵‍💫", name: "Awkward Conflict", desc: "As Clumsy Wolf, reveal ability and everyone votes wrong (except pack).", badge: "Chaos" },
+                { emoji: "💉", name: "Immortal She", desc: "As a Doctor, get revived by another Doctor.", badge: "Rare" },
+                { emoji: "💰", name: "S.O.E.", desc: "As a Thief, steal from Cultist Hunter (Time to get hierarchy).", badge: "Epic" }
+            ]
+        };
+
+        // --- PAGE LOAD LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPack(1); // Load Pack 1 by default
+        });
+
+        // --- RENDER FUNCTION ---
+        function loadPack(packNumber) {
+            const container = document.getElementById('achievementList');
+            const buttons = document.querySelectorAll('.page-btn');
+
+            // 1. Clear current list
+            container.innerHTML = '';
+
+            // 2. Add new items
+            const currentPack = packs[packNumber];
+            if (currentPack) {
+                currentPack.forEach(achv => {
+                    const card = document.createElement('div');
+                    card.className = 'achv-card';
+                    card.innerHTML = `
+                            <div class="achv-icon">${achv.emoji}</div>
+                            <div class="achv-details">
+                                <div class="achv-name">${achv.name}</div>
+                                <div class="achv-desc">${achv.desc}</div>
+                            </div>
+                            <div class="xp-badge">${achv.badge}</div>
+                        `;
+                    container.appendChild(card);
+                });
+            }
+
+            // 3. Update Button Styles
+            buttons.forEach(btn => {
+                // If button text matches packNumber, add 'active' class
+                if (parseInt(btn.innerText) === packNumber) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+    </script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

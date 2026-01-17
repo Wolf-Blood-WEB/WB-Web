@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Blood | Role Workshop</title>
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --wolf-red: #8a0303;
+            --moon-blue: #4a6fa5;
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --accent-gold: #d4af37;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+        }
+        h1, h2, h3 {
+            margin: 0;
+        }
+        .wolf-nav {
+            display: flex;
+            justify-content: center;
+            background-color: #000;
+            border-bottom: 3px solid var(--wolf-red);
+            padding: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            overflow-x: auto;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dim);
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: block;
+            white-space: nowrap;
+        }
+            .nav-link:hover {
+                color: var(--wolf-red);
+                background-color: rgba(255, 255, 255, 0.05);
+            }
+            .nav-link.active {
+                color: var(--text-main);
+                background: linear-gradient(to top, rgba(138, 3, 3, 0.2), transparent);
+                border-bottom: 3px solid var(--wolf-red);
+            }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at center, #2a0a0a, var(--bg-dark));
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+        }
+            .hero h1 {
+                font-size: 3rem;
+                color: var(--wolf-red);
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                text-shadow: 0 0 10px rgba(138, 3, 3, 0.7);
+            }
+            .hero p {
+                font-size: 1.2rem;
+                color: var(--text-dim);
+                margin-top: 10px;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .card {
+            background-color: var(--bg-card);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--wolf-red);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+            .card h2 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+                border-bottom: 1px solid #333;
+                padding-bottom: 10px;
+            }
+
+        .card-blue {
+            border-left-color: var(--moon-blue);
+        }
+        .card-gold {
+            border-left-color: var(--accent-gold);
+        }
+        .role-highlight {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .role-icon {
+            font-size: 4rem;
+            background: #000;
+            padding: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--wolf-red);
+        }
+        .btn {
+            background-color: var(--wolf-red);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+            .btn:hover {
+                background-color: #a80404;
+            }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px 0;
+            background-color: #000;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="wolf-nav">
+        <a href="index.html" class="nav-link active">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="hero">
+            <h1>Wolf Blood Workshop</h1>
+            <p>The official hub for role suggestions, feedback, and game evolution.</p>
+        </div>
+
+        <div class="dashboard-grid">
+
+            <div class="main-content">
+                <div class="card card-gold">
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="color:var(--accent-gold); font-weight:bold;">🔥 ROLE OF THE WEEK</span>
+                        <span style="color:#666;">By Kadir Bayar</span>
+                    </div>
+                    <div class="role-highlight">
+                        <div class="role-icon">🧛‍♂️</div>
+                        <div>
+                            <h2>The Blood Mage</h2>
+                            <p><strong>Ability:</strong> Can sacrifice 10% of their Cult Rate to revive a dead player as a Ghoul.</p>
+                            <p><em>"Power comes at a price..."</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-blue">
+                    <h2>📘 How This Workshop Works</h2>
+                    <ul style="line-height: 1.8; color: #ccc;">
+                        <li><strong>Browse Ideas:</strong> Click "Test Designs" above to see experimental roles.</li>
+                        <li><strong>Give Feedback:</strong> Upvote roles you want to see in the game.</li>
+                        <li><strong>Submit Your Own:</strong> Use the form on the right to send ideas directly to the Dev Team.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="card">
+                    <h2>📝 Suggest a Role</h2>
+                    <p style="font-size: 0.9rem; color: #aaa;">Got a crazy idea? Send it here.</p>
+
+                    <form id="suggestionForm">
+                        <label>Role Name & Emoji</label>
+                        <input type="text" id="roleName" placeholder="e.g., 👺 The Traitor" required>
+
+                        <label>Category</label>
+                        <select id="roleCategory">
+                            <option>Test Design</option>
+                            <option>Evo Mod</option>
+                            <option>Achievement</option>
+                            <option>Board Game</option>
+                            <option>Revisions</option>
+                            <option>Cult Rate</option>
+                        </select>
+
+                        <label>Short Description</label>
+                        <textarea id="roleAbility" rows="3" placeholder="What does it do?" required></textarea>
+
+                        <button type="submit" class="btn">Submit to Bot</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
