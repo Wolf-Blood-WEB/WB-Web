@@ -10,4 +10,4 @@ Wolf Blood is the primary digital home for our services and community. This repo
 * **İsmet Uygur**: Technical Support and Co-Designer.
 
 ## 🌍 Localization
-We currently support 8 languages. We value community input to ensure our translations are accurate and culturally relevant for everyone in the Wolf Blood ecosystem.
+We currently support 16 languages. We value community input to ensure our translations are accurate and culturally relevant for everyone in the Wolf Blood ecosystem.
