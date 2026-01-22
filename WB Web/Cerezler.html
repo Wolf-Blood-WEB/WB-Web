@@ -1,0 +1,501 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="page-title-cookies">Wolfblood - Cookie Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="image/WB-Kopya.png">    
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji" rel="stylesheet">    
+    <link rel="stylesheet" href="Loader.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #1a202c;
+            --card-color: rgba(45, 55, 72, 0.85);
+            --text-color: #e2e8f0;
+            --header-color: #ffffff;
+            --accent-color: #e53e3e;
+            --accent-hover-color: #fc8181;
+            --cyan: #06b6d4; 
+            --font-header: 'Lora', serif;
+            --font-body: 'Nunito Sans', 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-forest.png');
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 101;
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 1002;
+        }
+        .dropdown-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1003;
+        }
+        .dropdown-toggle:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--header-color);
+        }
+        .dropdown-toggle .arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+        .language-dropdown.open .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-height: 300px;
+            overflow-y: auto;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            z-index: 1000;
+        }
+        .language-dropdown.open .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .dropdown-menu a:hover {
+            background-color: var(--accent-color);
+            color: var(--header-color);
+        }
+        header h1 {
+            font-family: var(--font-header);
+            font-size: 3rem;
+            color: var(--header-color);
+            text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #a0aec0;
+        }
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav a:hover, nav a:focus {
+            background-color: var(--accent-color);
+            color: var(--header-color);
+        }
+        .character-art {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            width: 20vw;
+            object-fit: cover;
+            opacity: 0.45;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .character-art.left { left: 0; }
+        .character-art.right { right: 0; transform: scaleX(-1); }
+
+        @media (max-width: 1400px) {
+            .character-art { display: none; }
+        }
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--card-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        .page-title {
+            text-align: center;
+            font-family: var(--font-header);
+            color: var(--header-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 20px;
+            display: inline-block;
+        }
+        .last-updated {
+            text-align: center;
+            color: var(--cyan);
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        .section-title {
+            color: var(--cyan);
+            font-family: var(--font-header);
+            font-size: 1.5rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.3);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title::before {
+            content: '🍪';
+            display: inline-block;
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+        p { margin-bottom: 20px; }
+        ul { margin-bottom: 20px; padding-left: 25px; }
+        li { margin-bottom: 10px; }
+        strong { color: var(--header-color); }
+
+        .cookie-type {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 3px solid var(--cyan);
+            transition: transform 0.2s;
+        }        
+        .cookie-type:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .cookie-type h4 {
+            color: var(--header-color);
+            margin-bottom: 10px;
+            font-family: var(--font-header);
+            font-size: 1.2rem;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.85);
+            border-top: 3px solid var(--accent-color);
+            color: #a0aec0;
+            padding: 50px 20px 20px;
+            margin-top: 80px;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: var(--cyan);
+            border-color: var(--cyan);
+            color: #fff;
+            transform: translateY(-3px) rotate(10deg);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+        .footer-section h3 {
+            color: var(--header-color);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 10px;
+            font-family: var(--font-header);
+        }
+        .footer-links a {
+            display: block;
+            color: #a0aec0;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+        .footer-links a:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+        .footer-links a.active {
+            color: var(--cyan);
+            font-weight: bold;
+            pointer-events: none;
+        }
+        .footer-btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .footer-btn:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(229, 62, 62, 0.4);
+            transform: translateY(-2px);
+        }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+        .footer-decor {
+            position: absolute;
+            bottom: 0;
+            font-size: 8rem;
+            opacity: 0.05;
+            pointer-events: none;
+            filter: grayscale(100%);
+            z-index: 1;
+        }
+        .footer-bat { right: -10px; bottom: 10px; transform: rotate(15deg); }
+        .footer-cat { left: -10px; bottom: 10px; transform: scaleX(-1) rotate(15deg); }
+
+        .emoji { font-family: 'Noto Color Emoji', sans-serif !important; }
+
+        @media (max-width: 768px) {
+            header { padding-top: 80px; }
+            .language-dropdown { top: 15px; right: 15px; }
+            nav { justify-content: center; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content-wrapper">
+
+        <img src="image/alpha_wolf.jpg" class="character-art left" alt="Alpha Wolf">
+        <img src="image/cultist_hunter.jpg" class="character-art right" alt="Cultist Hunter">
+
+        <header>
+            <div class="language-dropdown">
+                <button class="dropdown-toggle">
+                    <span id="selected-lang-flag">🇬🇧</span>
+                    <span id="selected-lang-code">EN</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" data-lang="en">🇬🇧 English</a>
+                    <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+                    <a href="#" data-lang="de">🇩🇪 Deutsch</a>
+                    <a href="#" data-lang="cn">🇨🇳 简体中文</a>
+                </div>
+            </div>
+            <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
+            <p data-key="header-subtitle-cookies">Cookie Policy & Data Usage</p>
+        </header>
+
+        <nav>
+            <a href="index.html" data-key="nav-home">Home</a>
+            <a href="Oynanış.html" data-key="nav-how-to-play">How to Play?</a>
+            <a href="Roller.html" data-key="nav-roles">Roles</a>
+            <a href="Bot-Mechanics.html" data-key="nav-bot-mechanics">Bot Mechanics</a>
+            <a href="Güncellemeler.html" data-key="nav-news">News & Updates</a>
+            <a href="Gruplar.html" data-key="nav-groups">Groups</a>
+            <a href="Hakkımızda.html" data-key="nav-about">About Us</a>
+            <a href="İletişim.html" data-key="nav-contact">Contact with Us</a>
+        </nav>
+
+        <main>
+            <div style="text-align: center;">
+                <h2 class="page-title" data-key="cookie-title">Cookie Policy</h2>
+            </div>
+            <div class="last-updated" data-key="cookie-updated">Last Updated: January 26, 2026</div>
+
+            <p data-key="cookie-intro">This Cookie Policy explains how <strong>Wolfblood</strong> ("we", "us", or "our") uses cookies and similar technologies (such as Local Storage) to recognize you when you visit our website. It explains what these technologies are and why we use them.</p>
+
+            <h3 class="section-title" data-key="cookie-sec1-title">1. What are Cookies?</h3>
+            <p data-key="cookie-sec1-p1">Cookies are small data files that are placed on your computer or mobile device when you visit a website. They are widely used by website owners to make their websites work, or work more efficiently, as well as to provide reporting information.</p>
+            <p><em data-key="cookie-sec1-note">Important Note: The Wolfblood Telegram Bot itself does not place cookies on your device. This policy applies only to our official website.</em></p>
+
+            <h3 class="section-title" data-key="cookie-sec2-title">2. How We Use Cookies</h3>
+            <p data-key="cookie-sec2-intro">We use very limited cookies and local storage for specific purposes:</p>
+
+            <div class="cookie-type">
+                <h4 data-key="cookie-type-essential">⚙️ Essential / Functionality (Local Storage)</h4>
+                <p data-key="cookie-type-essential-desc">We use "Local Storage" to save your preferences so you don't have to reset them every time you visit.</p>
+                <ul>
+                    <li data-key="cookie-type-essential-li1"><strong>Language Preference:</strong> We store your selected language (e.g., 'en', 'tr') to automatically display the site in your preferred language.</li>
+                    <li data-key="cookie-type-essential-li2"><strong>Theme Data:</strong> If we introduce light/dark mode toggles, we store your visual preference.</li>
+                </ul>
+            </div>
+
+            <div class="cookie-type">
+                <h4 data-key="cookie-type-analytics">📊 Performance & Analytics</h4>
+                <p data-key="cookie-type-analytics-desc">We do <strong>not</strong> currently use third-party analytics cookies (like Google Analytics) to track your browsing history across other websites.</p>
+            </div>
+
+            <h3 class="section-title" data-key="cookie-sec3-title">3. Third Party Cookies</h3>
+            <p data-key="cookie-sec3-p1">Some pages on our website may display content from external providers, such as:</p>
+            <ul>
+                <li data-key="cookie-sec3-li1"><strong>YouTube:</strong> If we embed gameplay videos.</li>
+                <li data-key="cookie-sec3-li2"><strong>Telegram:</strong> For the "Login with Telegram" widget (if applicable in the future).</li>
+            </ul>
+            <p data-key="cookie-sec3-p2">To view this third-party content, you first have to accept their specific terms and conditions. This includes their cookie policies, which we have no control over.</p>
+
+            <h3 class="section-title" data-key="cookie-sec4-title">4. How to Control Cookies</h3>
+            <p data-key="cookie-sec4-p1">You have the right to decide whether to accept or reject cookies. You can set or amend your web browser controls to accept or refuse cookies. If you choose to reject cookies, you may still use our website, though your access to some functionality (like saved language settings) may be restricted.</p>
+            <p data-key="cookie-sec4-p2">Most browsers allow you to view, manage, delete, and block cookies for a website. Be aware that if you delete all cookies then any preferences you have set will be lost.</p>
+
+            <h3 class="section-title" data-key="cookie-sec5-title">5. Updates to this Policy</h3>
+            <p data-key="cookie-sec5-p1">We may update this Cookie Policy from time to time in order to reflect, for example, changes to the cookies we use or for other operational, legal, or regulatory reasons. Please therefore re-visit this Cookie Policy regularly to stay informed about our use of cookies and related technologies.</p>
+
+        </main>
+
+        <footer>
+            <div class="footer-decor footer-bat">🦇</div>
+            <div class="footer-decor footer-cat">🐈‍⬛</div>
+
+            <div class="footer-content">
+
+                <div class="footer-section">
+                    <h3>🐺 Wolf Blood</h3>
+                    <p data-key="footer-about">
+                        Telegram's most advanced Werewolf experience. A strategy game based on deception and survival.
+                    </p>
+
+                    <div class="social-links">
+                        <a href="#" class="social-icon" title="Telegram Channel">📢</a>
+                        <a href="#" class="social-icon" title="Support Group">💬</a>
+                        <a href="#" class="social-icon" title="Twitter / X">✖️</a>
+                        <a href="#" class="social-icon" title="GitHub">💻</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-key="footer-game-guide">📜 Game Guide</h3>
+                    <div class="footer-links">
+                        <a href="Oynanış.html" data-key="nav-how-to-play-footer">🩸 How to Play</a>
+                        <a href="Roller.html" data-key="nav-roles-footer">🎭 Roles List</a>
+                        <a href="Bot-Mechanics.html" data-key="nav-bot-mechanics-footer">⚙️ Mechanics</a>
+                        <a href="Gruplar.html" data-key="nav-groups-footer">⚔️ Active Groups</a>
+                        <a href="Güncellemeler.html" data-key="nav-news-footer">📰 Patch Notes</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-key="footer-legal">⚖️ Support & Legal</h3>
+                    <div class="footer-links legal-links">
+                        <a href="SSS.html" data-key="link-faq-footer">❓ FAQ / Help</a>
+                        <a href="Hakkımızda.html" data-key="nav-about-footer">👥 About Team</a>
+                        <a href="İletişim.html" data-key="nav-contact-footer">📞 Support Center</a>
+                        <a href="Gizlilik.html" data-key="link-privacy-footer">🔒 Privacy Policy</a>
+                        <a href="Kullanim.html" data-key="link-terms-footer">📝 Terms of Service</a>
+                        <a href="Cerezler.html" data-key="link-cookies-footer">🍪 Cookie Policy</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-key="footer-join">🌕 Start Hunt</h3>
+                    <p data-key="footer-join-desc">
+                        The village is waiting for you. Add the bot to your group or join the community right away.
+                    </p>
+                    <a href="https://t.me/wolfbloodbot" target="_blank" class="footer-btn" data-key="footer-btn">
+                        ➕ Add to Telegram
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p data-key="footer-copyright">&copy; 2026 Wolfblood Bot Team. All rights reserved. | Designed with 🩸 and 🌙</p>
+            </div>
+        </footer>
+    </div>
+    <script src="Loader.js" defer></script>
+    <script src="Translate.js" defer></script>
+    <script src="Theme-Manager.js"></script>
+</body>
+</html>

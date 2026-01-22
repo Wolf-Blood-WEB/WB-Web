@@ -1,0 +1,498 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="page-title-terms">Wolfblood - Terms of Service</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="image/WB-Kopya.png">    
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji" rel="stylesheet">    
+    <link rel="stylesheet" href="Loader.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #1a202c;
+            --card-color: rgba(45, 55, 72, 0.85);
+            --text-color: #e2e8f0;
+            --header-color: #ffffff;
+            --accent-color: #e53e3e;
+            --accent-hover-color: #fc8181;
+            --cyan: #06b6d4;
+            --font-header: 'Lora', serif;
+            --font-body: 'Nunito Sans', 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-forest.png');
+            color: var(--text-color);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 101;
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 1002;
+        }
+        .dropdown-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1003;
+        }
+        .dropdown-toggle:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--header-color);
+        }
+        .dropdown-toggle .arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+        .language-dropdown.open .dropdown-toggle .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-height: 300px;
+            overflow-y: auto;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            z-index: 1000;
+        }
+        .language-dropdown.open .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .dropdown-menu a:hover {
+            background-color: var(--accent-color);
+            color: var(--header-color);
+        }
+        header h1 {
+            font-family: var(--font-header);
+            font-size: 3rem;
+            color: var(--header-color);
+            text-shadow: 0 0 10px rgba(229, 62, 62, 0.5);
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #a0aec0;
+        }
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav a:hover, nav a:focus {
+            background-color: var(--accent-color);
+            color: var(--header-color);
+        }
+        .character-art {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            width: 20vw;
+            object-fit: cover;
+            opacity: 0.45;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .character-art.left { left: 0; }
+        .character-art.right { right: 0; transform: scaleX(-1); }
+        @media (max-width: 1400px) {
+            .character-art { display: none; }
+        }
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--card-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        .page-title {
+            text-align: center;
+            font-family: var(--font-header);
+            color: var(--header-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--accent-color);
+        }
+        .last-updated {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        .section-title {
+            color: var(--accent-color);
+            font-family: var(--font-header);
+            font-size: 1.5rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title::before {
+            content: '§';
+            display: inline-block;
+            margin-right: 12px;
+            color: var(--cyan);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        p { margin-bottom: 20px; color: #cbd5e0; }
+        ul { margin-bottom: 20px; padding-left: 20px; color: #cbd5e0; }
+        li { margin-bottom: 10px; }
+        strong { color: var(--header-color); }
+        .highlight { color: var(--cyan); font-weight: bold; }
+
+        .warning-box {
+            background: rgba(229, 62, 62, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+            color: var(--text-color);
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.85);
+            border-top: 3px solid var(--accent-color);
+            color: #a0aec0;
+            padding: 50px 20px 20px;
+            margin-top: 80px;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: var(--cyan);
+            border-color: var(--cyan);
+            color: #fff;
+            transform: translateY(-3px) rotate(10deg);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+        .footer-section h3 {
+            color: var(--header-color);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 10px;
+            font-family: var(--font-header);
+        }
+        .footer-links a {
+            display: block;
+            color: #a0aec0;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+        .footer-links a:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+        .footer-links a.active {
+            color: var(--cyan);
+            font-weight: bold;
+            pointer-events: none;
+        }
+        .footer-btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .footer-btn:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(229, 62, 62, 0.4);
+            transform: translateY(-2px);
+        }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+        .footer-decor {
+            position: absolute;
+            bottom: 0;
+            font-size: 8rem;
+            opacity: 0.05;
+            pointer-events: none;
+            filter: grayscale(100%);
+            z-index: 1;
+        }
+        .footer-bat { right: -10px; bottom: 10px; transform: rotate(15deg); }
+        .footer-cat { left: -10px; bottom: 10px; transform: scaleX(-1) rotate(15deg); }
+        .emoji { font-family: 'Noto Color Emoji', sans-serif !important; }
+
+        @media (max-width: 768px) {
+            header { padding-top: 80px; }
+            .language-dropdown { top: 15px; right: 15px; }
+            main { padding: 30px 20px; margin: 20px 10px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content-wrapper">
+
+        <img src="image/alpha_wolf.jpg" class="character-art left" alt="Alpha Wolf">
+        <img src="image/cultist_hunter.jpg" class="character-art right" alt="Cultist Hunter">
+
+        <header>
+            <div class="language-dropdown">
+                <button class="dropdown-toggle">
+                    <span id="selected-lang-flag">🇬🇧</span>
+                    <span id="selected-lang-code">EN</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" data-lang="en">🇬🇧 English</a>
+                    <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+                    <a href="#" data-lang="de">🇩🇪 Deutsch</a>
+                    <a href="#" data-lang="az">🇦🇿 Azərbaycanca</a>
+                    <a href="#" data-lang="uz">🇺🇿 O'zbek</a>
+                    <a href="#" data-lang="es">🇪🇸 Español</a>
+                    <a href="#" data-lang="pt">🇧🇷/🇵🇹 Brasileiro/Português</a>
+                    <a href="#" data-lang="fr">🇫🇷 Français</a>
+                    <a href="#" data-lang="it">🇮🇹 Italiano</a>
+                    <a href="#" data-lang="id">🇮🇩 Bahasa Indonesia</a>
+                    <a href="#" data-lang="ph">🇵🇭 Filipino</a>
+                    <a href="#" data-lang="hr">🇭🇷 Hrvatski</a>
+                    <a href="#" data-lang="ar">🇸🇦 العربية</a>
+                    <a href="#" data-lang="ru">🇷🇺 Русский</a>
+                    <a href="#" data-lang="jp">🇯🇵 日本語</a>
+                    <a href="#" data-lang="cn">🇨🇳 简体中文</a>
+                </div>
+            </div>
+            <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
+            <p data-key="header-subtitle">Terms of Service</p>
+        </header>
+
+        <nav>
+            <a href="index.html" data-key="nav-home">Home</a>
+            <a href="Oynanış.html" data-key="nav-how-to-play">How to Play?</a>
+            <a href="Roller.html" data-key="nav-roles">Roles</a>
+            <a href="Bot-Mechanics.html" data-key="nav-bot-mechanics">Bot Mechanics</a>
+            <a href="Güncellemeler.html" data-key="nav-news">News & Updates</a>
+            <a href="Gruplar.html" data-key="nav-groups">Groups</a>
+            <a href="Hakkımızda.html" data-key="nav-about">About Us</a>
+            <a href="İletişim.html" data-key="nav-contact">Contact with Us</a>
+        </nav>
+
+        <main>
+            <h2 class="page-title" data-key="terms-title">Terms of Service</h2>
+            <div class="last-updated" data-key="terms-date">Effective Date: January 26, 2026</div>
+
+            <p data-key="terms-intro">By using the <strong>Wolfblood</strong> Telegram bot (@wolfbloodbot) and its associated services, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you must discontinue your use of the bot immediately.</p>
+
+            <h3 class="section-title" data-key="terms-sec-1-title">1. Code of Conduct & Fair Play</h3>
+            <p data-key="terms-sec-1-desc">Wolfblood is a game of strategy, deception, and social deduction. However, to ensure a fun environment for everyone, the following actions are strictly prohibited and may result in a <span class="highlight">Global Ban</span>:</p>
+            <ul>
+                <li data-key="terms-rule-cheating"><strong>Cheating:</strong> Using multiple accounts (multi-accounting) to gain an unfair advantage or farming stats.</li>
+                <li data-key="terms-rule-metagaming"><strong>Meta-Gaming:</strong> Sharing screenshots of private bot messages (PMs) or role information outside of the game mechanics to prove innocence.</li>
+                <li data-key="terms-rule-hatespeech"><strong>Hate Speech:</strong> The use of racist, sexist, homophobic, or otherwise hateful language in usernames, custom names, or game chat.</li>
+                <li data-key="terms-rule-botting"><strong>Botting:</strong> Using automated scripts or userbots to interact with Wolfblood.</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong data-key="terms-warning-title">⚠️ Zero Tolerance Policy:</strong> <span data-key="terms-warning-desc">We reserve the right to ban any user from the service at any time, for any reason, without prior notice. Global Bans are generally permanent.</span>
+            </div>
+
+            <h3 class="section-title" data-key="terms-sec-2-title">2. Virtual Currency & Items</h3>
+            <p data-key="terms-sec-2-desc">Wolfblood allows users to earn or purchase virtual currency (Mints, Tokens) and virtual items (Skins, Tags).</p>
+            <ul>
+                <li data-key="terms-eco-1"><strong>No Real World Value:</strong> Virtual items and currency have no real-world monetary value and cannot be exchanged for fiat currency.</li>
+                <li data-key="terms-eco-2"><strong>Non-Transferable:</strong> Selling accounts or in-game items for real money (RMT) is strictly prohibited.</li>
+                <li data-key="terms-eco-3"><strong>Revocation:</strong> We reserve the right to modify, remove, or reset virtual currency balances in the event of a bug, exploit, or economy rebalancing.</li>
+            </ul>
+
+            <h3 class="section-title" data-key="terms-sec-3-title">3. Platform Dependency (Telegram)</h3>
+            <p data-key="terms-sec-3-desc">Wolfblood operates entirely within the Telegram ecosystem. We are not affiliated with Telegram FZ-LLC.</p>
+            <ul>
+                <li data-key="terms-plat-1">We are not responsible for downtime caused by Telegram API outages or rate limits.</li>
+                <li data-key="terms-plat-2">If your Telegram account is deleted or banned by Telegram, your Wolfblood data may be irretrievable.</li>
+            </ul>
+
+            <h3 class="section-title" data-key="terms-sec-4-title">4. User Generated Content</h3>
+            <p data-key="terms-sec-4-desc">By using Wolfblood, you acknowledge that your Telegram Name and Profile Picture will be displayed to other players in game lobbies, death messages, and leaderboards. You agree not to use offensive or illegal imagery in your profile while interacting with the bot.</p>
+
+            <h3 class="section-title" data-key="terms-sec-5-title">5. Disclaimer of Warranties</h3>
+            <p data-key="terms-sec-5-desc">The service is provided "AS IS" and "AS AVAILABLE" without warranties of any kind. We do not guarantee that the bot will be error-free, secure, or available at all times. Use of the bot is at your own risk.</p>
+
+            <h3 class="section-title" data-key="terms-sec-6-title">6. Changes to Terms</h3>
+            <p data-key="terms-sec-6-desc">We may update these terms from time to time. Continued use of the bot after any changes constitutes acceptance of the new terms. Significant changes will be announced via our official news channel.</p>
+
+            <h3 class="section-title" data-key="terms-sec-7-title">7. Contact & Appeals</h3>
+            <p data-key="terms-sec-7-desc">If you believe you have been banned in error or have questions regarding these terms, please contact our support team.</p>
+            <p><em data-key="terms-contact-info">Contact: Support Group via <span class="highlight">/support</span> command.</em></p>
+
+        </main>
+
+        <footer>
+            <div class="footer-decor footer-bat">🦇</div>
+            <div class="footer-decor footer-cat">🐈‍⬛</div>
+
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🐺 Wolf Blood</h3>
+                    <p data-key="footer-about">
+                        Telegram's most advanced Werewolf experience. A strategy game based on deception and survival.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon" title="Telegram Channel">📢</a>
+                        <a href="#" class="social-icon" title="Support Group">💬</a>
+                        <a href="#" class="social-icon" title="Twitter / X">✖️</a>
+                        <a href="#" class="social-icon" title="GitHub">💻</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-key="footer-game-guide">📜 Game Guide</h3>
+                    <div class="footer-links">
+                        <a href="Oynanış.html" data-key="nav-how-to-play-footer">🩸 How to Play</a>
+                        <a href="Roller.html" data-key="nav-roles-footer">🎭 Roles List</a>
+                        <a href="Bot-Mechanics.html" data-key="nav-bot-mechanics-footer">⚙️ Mechanics</a>
+                        <a href="Gruplar.html" data-key="nav-groups-footer">⚔️ Active Groups</a>
+                        <a href="Güncellemeler.html" data-key="nav-news-footer">📰 Patch Notes</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-key="footer-legal">⚖️ Support & Legal</h3>
+                    <div class="footer-links legal-links">
+                        <a href="SSS.html" data-key="link-faq-footer">❓ FAQ / Help</a>
+                        <a href="Hakkımızda.html" data-key="nav-about-footer">👥 About Team</a>
+                        <a href="İletişim.html" data-key="nav-contact-footer">📞 Support Center</a>
+                        <a href="Gizlilik.html" data-key="link-privacy-footer">🔒 Privacy Policy</a>
+                        <a href="Kullanim.html" data-key="link-terms-footer">📝 Terms of Service</a>
+                        <a href="Cerezler.html" data-key="link-cookies-footer">🍪 Cookie Policy</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 data-key="footer-join">🌕 Start Hunt</h3>
+                    <p data-key="footer-join-desc">
+                        The village is waiting for you. Add the bot to your group or join the community right away.
+                    </p>
+                    <a href="https://t.me/wolfbloodbot" target="_blank" class="footer-btn" data-key="footer-btn">
+                        ➕ Add to Telegram
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p data-key="footer-copyright">&copy; 2026 Wolfblood Bot Team. All rights reserved. | Designed with 🩸 and 🌙</p>
+            </div>
+        </footer>
+    </div>
+    <script src="Loader.js" defer></script>
+    <script src="Translate.js" defer></script>
+    <script src="Theme-Manager.js"></script>
+</body>
+</html>
