@@ -415,6 +415,14 @@
                 </div>
             </div>
 
+            <div class="role-card experimental village modal-trigger" data-modal-target="depressiveModal">
+                <div class="role-emoji">😨</div>
+                <div class="role-name">Depressive</div>
+                <div style="margin-top:10px;">
+                    <span class="badge village">Village</span>
+                </div>
+            </div>
+            
             <div class="role-card experimental wolf modal-trigger" data-modal-target="successorWolfModal">
                 <div class="role-emoji">🐺🕸</div>
                 <div class="role-name">Successor Wolf</div>
@@ -764,6 +772,23 @@
         </div>
     </div>
 
+    <div id="depressiveModal" class="modal-overlay">
+        <div class="modal-content village">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <div style="font-size:3rem;">😨</div>
+                <div>
+                    <h2 style="margin:0; color:#8a0303;">Depressive</h2>
+                    <span style="color:#888;">Experimental Design</span>
+                </div>
+            </div>
+            <div class="modal-section">
+                <p style="color:#ccc; line-height:1.6;">Burdened by high-level anxiety and extreme stress, this player is unaware of their true condition and believes they are just an ordinary Villager. If they die by normal means, nothing happens. However, if another player is lynched but this player still received votes during the trial, they suffer a severe panic attack. In a blind frenzy, they will inadvertently cause the death of a random player who voted for them. Consumed by paranoia after the incident, they will succumb to the unbearable stress and take their own life the following day. 😔</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
+            </div>
+        </div>
+    </div>
+    
     <div id="successorWolfModal" class="modal-overlay">
         <div class="modal-content wolf">
             <span class="close-modal">&times;</span>
@@ -927,7 +952,7 @@
                 </div>
             </div>
             <div class="modal-section">
-                <p style="color:#ccc; line-height:1.6;">A mystical village elder protected by fate itself. When attacked, the outcome is determined by luck:<br>• Against Werewolf:<br>60% survive, 30% retaliate, 10% die<br>• Against Serial Killer:<br>50% survive, 30% retaliate, 20% die<br>• Against Arsonist (burn night):<br>50% survive, 50% die<br><br>This role is a defensive tank with the rare ability to punish killers—but fate is a double-edged sword. Investigators will always see you as "mystic but powerless," making trust a luxury.</p>
+                <p style="color:#ccc; line-height:1.6;">A mystical village elder protected by fate itself. When attacked, the outcome is determined by luck:<br>• Against Werewolf:<br>60% survive, 30% retaliate, 10% die<br>• Against Serial Killer:<br>50% survive, 30% retaliate, 20% die<br>• Against Arsonist (burn night):<br>50% survive, 50% die<br><br>This role is a defensive tank with the rare ability to punish killers but fate is a double-edged sword. Investigators will always see you as "mystic but powerless," making trust a luxury.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 30%</div>
             </div>
         </div>
@@ -944,7 +969,7 @@
                 </div>
             </div>
             <div class="modal-section">
-                <p style="color:#ccc; line-height:1.6;">A deceptive and manipulative entity that thrives on confusion. Every night, it marks one player:<br>That target appears as False Face to all vision roles (Seer, Sorcerer, etc.)<br>When a new target is marked, the previous one dies immediately.<br>All actions (investigations, protections, attacks) targeting False Face are redirected randomly—including possibly back to the source.<br><br>This role has no direct kill ability but eliminates indirectly and causes chaos among vision and power roles.</p>
+                <p style="color:#ccc; line-height:1.6;">A deceptive and manipulative entity that thrives on confusion. Every night, it marks one player:<br>That target appears as False Face to all vision roles (Seer, Sorcerer, etc.)<br>When a new target is marked, the previous one dies immediately.<br>All actions (investigations, protections, attacks) targeting False Face are redirected randomly including possibly back to the source.<br><br>This role has no direct kill ability but eliminates indirectly and causes chaos among vision and power roles.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
             </div>
         </div>
@@ -1089,5 +1114,6 @@
 </body>
 
 </html>
+
 
 
