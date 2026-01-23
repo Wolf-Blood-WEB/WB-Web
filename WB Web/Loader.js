@@ -5,14 +5,15 @@ const galaxyColors = [
     new THREE.Color(0x415a77),
     new THREE.Color(0x63b3ed)
 ];
+
 function initGalaxy() {
     try {
+        const canvas = document.getElementById('galaxy-bg');
+        if (!canvas) return;
+
         scene = new THREE.Scene();
         camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 50;
-
-        const canvas = document.getElementById('galaxy-bg');
-        if (!canvas) return;
 
         renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -48,13 +49,14 @@ function initGalaxy() {
 
         window.addEventListener('resize', onWindowResize, false);
     } catch (e) {
-        console.error("THREE.js animasyonu başlatılamadı. Kütüphane HTML'de mi?", e);
+        console.error("THREE.js hatası:", e);
         const canvas = document.getElementById('galaxy-bg');
         if (canvas) canvas.style.backgroundColor = "#1a202c";
     }
 }
+
 function animateGalaxy() {
-    if (renderer) {
+    if (renderer && document.getElementById('galaxy-bg')) {
         animationId = requestAnimationFrame(animateGalaxy);
         if (points) {
             points.rotation.y += 0.0002;
@@ -63,6 +65,7 @@ function animateGalaxy() {
         renderer.render(scene, camera);
     }
 }
+
 function onWindowResize() {
     if (camera && renderer) {
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -70,6 +73,7 @@ function onWindowResize() {
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
 }
+
 function stopGalaxy() {
     if (animationId) cancelAnimationFrame(animationId);
     if (points) {
@@ -79,14 +83,20 @@ function stopGalaxy() {
             scene.remove(points);
         } catch (e) { }
     }
-    if (renderer) renderer.dispose();
+    if (renderer) {
+        renderer.dispose();
+        renderer.forceContextLoss();
+        renderer = null;
+    }
     window.removeEventListener('resize', onWindowResize, false);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function baslatLoader() {
+    if (document.getElementById("loader")) return;
 
     const loader = document.createElement("div");
     loader.id = "loader";
+    loader.style.opacity = "1"; 
     loader.innerHTML = `
         <canvas id="galaxy-bg"></canvas>
         <div class="loader-content">
@@ -97,10 +107,16 @@ document.addEventListener("DOMContentLoaded", () => {
             <button id="hint-button">Click for a hint...</button>
         </div>
     `;
+    
     document.body.prepend(loader);
+    
+    const contentWrapper = document.querySelector('.content-wrapper');
+    if (contentWrapper) {
+        contentWrapper.classList.remove('visible');
+    }
+
     const loadingText = document.getElementById("loading-text");
     const hintButton = document.getElementById("hint-button");
-    const contentWrapper = document.querySelector('.content-wrapper');
 
     initGalaxy();
     animateGalaxy();
@@ -125,25 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let loaderTranslations = {};
     const currentLang = localStorage.getItem('lang') || 'en';
 
-    fetch(`./Languages/${currentLang}.json`)
-        .then(response => {
-            if (!response.ok) throw new Error("Lang file not found");
-            return response.json();
-        })
-        .then(data => {
-            loaderTranslations = data;
-            if (hintButton.textContent === "...") {
-                showNewHint();
-            }
-        })
-        .catch(err => {
-            console.error("Loader translation fetch failed:", err);
-            hintButton.textContent = "Loading..."; 
-        });
-
-    let progress = 0;
-    let hintsShown = false;
-
     const showNewHint = (e) => {
         if (e) e.preventDefault();
         const randomKey = hintKeys[Math.floor(Math.random() * hintKeys.length)];
@@ -153,21 +150,41 @@ document.addEventListener("DOMContentLoaded", () => {
             hintButton.textContent = "..."; 
         }
     };
-    showNewHint();
+
+    fetch(`./Languages/${currentLang}.json`)
+        .then(response => {
+            if (!response.ok) throw new Error("Lang file not found");
+            return response.json();
+        })
+        .then(data => {
+            loaderTranslations = data;
+            if (hintButton.textContent === "..." || hintButton.textContent === "Click for a hint...") {
+                showNewHint();
+            }
+        })
+        .catch(err => {
+            console.error("Loader translation fetch failed:", err);
+            hintButton.textContent = "Loading..."; 
+        });
+
     hintButton.addEventListener('click', showNewHint);
+
+    let progress = 0;
     const fakeProgress = setInterval(() => {
-        if (progress < 100) {
+        if (progress < 90) {
             progress += Math.random() * 1.5;
             loadingText.textContent = `Loading... ${Math.floor(progress)}%`;
         }
     }, 350);
-
-    window.addEventListener("load", () => {
+        
+    function finishLoading() {
         clearInterval(fakeProgress);
         loadingText.textContent = `Loading... 100%`;
+        
         if (contentWrapper) {
             contentWrapper.classList.add('visible');
         }
+        
         setTimeout(() => {
             if (loader) {
                 loader.style.opacity = "0";
@@ -177,26 +194,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 }, 800);
             }
         }, 600);
+    }
 
-        hintsShown = true;
-    });
+    if (document.readyState === "complete") {
+        setTimeout(finishLoading, 1000); 
+    } else {
+        window.addEventListener("load", finishLoading, { once: true });
+    }
+}
 
-    setTimeout(() => {
-        if (hintsShown === false) {
-            hintsShown = true;
-            let i = 0;
-            const showHintInterval = setInterval(() => {
-                if (i < hints.length && hintButton && loader.style.opacity !== "0") {
-                    hintButton.style.opacity = 1;
-                    const key = hintKeys[i++];
-                    if (loaderTranslations[key]) {
-                        hintButton.textContent = loaderTranslations[key];
-                    }
-                } else {
-                    clearInterval(showHintInterval);
-                }
-            }, 5000);
-        }
-    }, 30000);
+document.addEventListener("DOMContentLoaded", baslatLoader);
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        stopGalaxy();
+        const oldLoader = document.getElementById("loader");
+        if(oldLoader) oldLoader.remove();
+        baslatLoader();
+    }
 });
-
