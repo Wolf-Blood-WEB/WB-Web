@@ -319,6 +319,67 @@
                     border-bottom: 1px solid var(--wolf-red);
                 }
         }
+        .vote-btn-container {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+        }
+        .wolf-btn {
+            background: linear-gradient(145deg, #1e1e1e, #252525);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 10px 25px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+            .wolf-btn:hover {
+                background: var(--accent-gold);
+                color: #000;
+                box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+                transform: translateY(-2px);
+            }
+
+        .role-card.approved-card {
+            border-color: #00ff88;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.15) inset;
+        }
+        .status-badge {
+            display: none;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-top: 8px;
+            border: 1px solid #444;
+            background: #222;
+            color: #666;
+        }
+            .status-badge.approved {
+                display: inline-block;
+                background: #00ff88;
+                color: #000;
+                font-weight: 800;
+                border: 1px solid #00ff88;
+                box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+                animation: pulse-life 2s infinite;
+            }
+
+        @keyframes pulse-life {
+            0% {
+                box-shadow: 0 0 5px rgba(0, 255, 136, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 255, 136, 0.9);
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(0, 255, 136, 0.6);
+            }
+        }
     </style>
 </head>
 <body>
@@ -453,6 +514,30 @@
             <div class="role-card experimental village modal-trigger" data-modal-target="depressiveModal">
                 <div class="role-emoji">😨</div>
                 <div class="role-name">Depressive</div>
+                <div style="margin-top:10px;">
+                    <span class="badge village">Village</span>
+                </div>
+            </div>
+
+            <div class="role-card experimental village modal-trigger" data-modal-target="kronosModal">
+                <div class="role-emoji">⏱️</div>
+                <div class="role-name">Kronos</div>
+                <div style="margin-top:10px;">
+                    <span class="badge village">Village</span>
+                </div>
+            </div>
+
+            <div class="role-card experimental village modal-trigger" data-modal-target="astronomerModal">
+                <div class="role-emoji">🔭</div>
+                <div class="role-name">Astronomer</div>
+                <div style="margin-top:10px;">
+                    <span class="badge village">Village</span>
+                </div>
+            </div>
+
+            <div class="role-card experimental village modal-trigger" data-modal-target="executionerModal">
+                <div class="role-emoji">🦸‍♂️</div>
+                <div class="role-name">Executioner</div>
                 <div style="margin-top:10px;">
                     <span class="badge village">Village</span>
                 </div>
@@ -611,12 +696,18 @@
                 <h3>(VILLAGE)</h3>
                 <p style="color:#ccc; line-height:1.6;">You're a top soldier. A new version, like version 2.0 of the peasant. Every night you will visit someone. If the player you visit has any kind of homicidal tendencies, you will self-destruct them and everyone who is there at that moment will be unrecognizable. At the same time, if someone tries to kill someone you visit, you will also self-destruct. If you go to the target of a serial killer, he won't die, but he will be injured by the explosion and won't be able to attack the next night. If the Wolves and the Serial Killer attack you, they will kill you.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0 [💀]</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Bio-Soldier">
+                    🗳️ Vote for Official
+                </button>
             </div>
             <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
             <div class="modal-section">
                 <h3>(SOLO)</h3>
                 <p style="color:#ccc; line-height:1.6;">You're a top soldier. A new version, like version 2.0 of the peasant. Every night you will visit someone and you will cause of an explosion and everyone who is there at that moment will be unrecognizable. At the same time, if someone tries to kill someone you visit, you will also cause an explosion. If you go to the target of a serial killer or they visit you, there might be winner but also can be drawn too. Under the drawn condition you both can not attack next night because of an injury. Against the werewolves, it depends on the pack number.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0 [💀]</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Bio-Soldier">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -634,6 +725,9 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">You are the original wolf, superior to the alpha and even the first werewolf to give him the curse of infection! You wander apart from the pack and you can't attack every night because you're a very old wolf. If you attack, there is nothing to stop you. On the first try you will kill the wise elder, the serial killer, the arsonist, even the cursed. If you have visitors, they will either die or be infected and turn into werewolves the next day. If they lynch you, you will cause someone else to die. If the soldier lynches you to save someone else, you will die.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0 [🐺]</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Wolf Blood">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -650,6 +744,9 @@
             </div>
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">You are the supreme leader, the head of the cultists. First of all, you act independently of the Cultists and recruit people who are different from them into your sect. You can protect yourself from the attacks of a Cult Hunter, Werewolves, Alchemist or Serial Killer with a vodoo spell. You will also have as many votes as the population of all the cultists for one time.</p>
+                <button class="wolf-btn vote-trigger" data-vote-target="Shaman">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -667,6 +764,9 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">He is no different from an ordinary villager, but if he tries to be killed in any way, he will reveal the role of a random player and he will survive. If a villager tries to kill him, he will reveal someone's role to the person trying to kill him and will survive thanks to this deal. No deal if he is lynched. He will do the same thing to survive the wolves. This can only happen once, so the second time he risks being killed he will die. The serial killer will kill him outright.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 50%</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Dealbreaker">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -684,6 +784,9 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">The village's angriest citizen. He tries to curb his anger by chopping wood in the forest. From the night after the woodcutter dies until the end of the day, everyone will double their action. Because the woodcutter's anger will spread all over the village after his death.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 50%</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Lumberjack">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -701,6 +804,9 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">He is an ordinary villager like everyone else. However, if there is a disagreement during the lynching (a tie in the lynching), the villagers will be outraged and will choose the Goat/Whipping Boy as their sacrifice. Even if there is a tie in the lynching, there is still a 50% chance that they will hang the Goat/Whipping Boy.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Scapegoat">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -718,6 +824,9 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">He is an ordinary villager like everyone else. However, if there is a disagreement during the lynching (a tie in the lynching), the villagers will be outraged and will choose the Goat/Whipping Boy as their sacrifice. Even if there is a tie in the lynching, there is still a 50% chance that they will hang the Goat/Whipping Boy.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Whipping Boy">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -736,6 +845,11 @@
                 <p style="color:#ccc; line-height:1.6;">At night he can notice the actions of the villagers. Every night he will choose one player, and if that player has an action, he will be able to clearly see what they are doing.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 70%</div>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Raven">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -752,6 +866,11 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">A neutral role in his own right. He will only team up with whoever visits him first. If one of the roles in the village visits him, he will slaughter the villagers like a serial killer. If one of the evil roles visits him, he will have no kill function and will be re-teamed with him. He will aim for absolute victory with his partner. They can either finish last together and win or not win at all.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Hybrid">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -770,6 +889,11 @@
                 <p style="color:#ccc; line-height:1.6;">Every night he digs tunnels to the villagers' houses. Thanks to the tunnels he digs, the night action players will always miss their target and end up in a different house. They also won't realize it.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 80%</div>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Miner">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -786,6 +910,11 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">An honorable soldier dedicated to the king's service. The pawn will sacrifice himself if the person he is protecting is visited by wolves. But if he wants to protect the serial killer's visitor, both he and the person he wants to protect will die.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 60%</div>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Pawn">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -804,6 +933,11 @@
                 <p style="color:#ccc; line-height:1.6;">At the night, she will try to switch an alive player role with the dead player role. If their team are same, the ritual will be succeed. But if they are not at the same team, ritualist will die because of breaking the balance of nature.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 60%</div>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Ritualist">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -820,6 +954,77 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">Burdened by high-level anxiety and extreme stress, this player is unaware of their true condition and believes they are just an ordinary Villager. If they die by normal means, nothing happens. However, if another player is lynched but this player still received votes during the trial, they suffer a severe panic attack. In a blind frenzy, they will inadvertently cause the death of a random player who voted for them. Consumed by paranoia after the incident, they will succumb to the unbearable stress and take their own life the following day. 😔</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Depressive">
+                    🗳️ Vote for Official
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="kronosModal" class="modal-overlay">
+        <div class="modal-content village">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <div style="font-size:3rem;">⏱️</div>
+                <div>
+                    <h2 style="margin:0; color:#8a0303;">Kronos</h2>
+                    <span style="color:#888;">Experimental Design</span>
+                </div>
+            </div>
+            <div class="modal-section">
+                <p style="color:#ccc; line-height:1.6;">Kronos, the master of time, can accelerate the game by limiting the night and lynching phases to 20 seconds, forcing players to make quick decisions. (6 players and >)</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 40%</div>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Kronos">
+                    🗳️ Vote for Official
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="astronomerModal" class="modal-overlay">
+        <div class="modal-content village">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <div style="font-size:3rem;">🔭</div>
+                <div>
+                    <h2 style="margin:0; color:#8a0303;">Astronomer</h2>
+                    <span style="color:#888;">Experimental Design</span>
+                </div>
+            </div>
+            <div class="modal-section">
+                <p style="color:#ccc; line-height:1.6;">The Astronomer watches over the village at night noting how many villagers are awake. By day, he reports any unusual nocturnal activity to the villagers. (7 players and >)</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 50%</div>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Astronomer">
+                    🗳️ Vote for Official
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="executionerModal" class="modal-overlay">
+        <div class="modal-content village">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <div style="font-size:3rem;">🦸‍♂️</div>
+                <div>
+                    <h2 style="margin:0; color:#8a0303;">Executioner</h2>
+                    <span style="color:#888;">Experimental Design</span>
+                </div>
+            </div>
+            <div class="modal-section">
+                <p style="color:#ccc; line-height:1.6;">The Executioner controls the lynching process and can target a villager for execution. The villagers must then vote "Yes" or "No" to carry out the execution. (8 players and >)</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 60%</div>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Executioner">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -838,6 +1043,11 @@
                 <p style="color:#ccc; line-height:1.6;">You have a excellent curse. Thanks your ability you can create another successor wolf but for this, you have to die too. At 2. night you will choose a victim for yourself and he became successor, at the same time you will die. After 3 night, your victim will choose another victim for himself and this endless loop will continue until the successor wolf dead with any type of death.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Successor Wolf">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -854,6 +1064,11 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">If you die, after the night no one can use their action for once and only werewolves/allies can perform action.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Spirit Wolf">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -872,6 +1087,11 @@
                 <p style="color:#ccc; line-height:1.6;">Choose 2 players. During those players, you can choose one player to make him unable to vote in the next voting phase and mark a target for the other player. That player can still vote but the village will see him voting for the marked player.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Sheep Wolf">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -889,6 +1109,11 @@
                 <p style="color:#ccc; line-height:1.6;">If he manages to survive until half of players are dead, he will explode himself and kill half of the remaining players. He will win if he can explode himself.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Bomber">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -904,6 +1129,11 @@
             </div>
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">This is not a role; it is an ability. The myth will be around every single player’s body every day. Players will get notified about it and if the werewolves can catch a player who carry the myth, they get 100% infection. This thing will not appear every game but if it appears, it will not go until someone gets bitten.</p>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Myth">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -922,6 +1152,11 @@
                 <p style="color:#ccc; line-height:1.6;">At first night you have two choices; you can prefer to hide from incoming attacks, or you can possess someone’s body. If they have any night action you will take over their role entire game and your target will die as “devoured”. From that moment you cannot defend yourself and you can only use the role ability, or you must back your pure form. If your targets do not have any night action, they will die, and you will look for new prey. You will win if you succeed in being the last player in the game.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Shadow Master">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -938,6 +1173,11 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">On the 2nd night, you will choose someone to take as a reference. The following night you will choose someone and after the night you will see their DNA result (if they are on the same team or not). Analyses’ results always be true but all villagers’ DNA are not same so the result can be confusing.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 60%</div>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="DNA Sampler">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -956,6 +1196,11 @@
                 <p style="color:#ccc; line-height:1.6;">At daytime when he decides he will announce someone’s night action. It might be seer action, wolf, CH or SK action… Who knows.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Announcer">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -972,6 +1217,11 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">You are responsible for field and workers. You will know exactly how many villagers are in the game. But you are not perfect at your job because you also count roles at below; <br>Lycan – Traitor – Cursed – Wild Child – Depressive</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Farmer">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -990,6 +1240,11 @@
                 <p style="color:#ccc; line-height:1.6;">A mystical village elder protected by fate itself. When attacked, the outcome is determined by luck:<br>• Against Werewolf:<br>60% survive, 30% retaliate, 10% die<br>• Against Serial Killer:<br>50% survive, 30% retaliate, 20% die<br>• Against Arsonist (burn night):<br>50% survive, 50% die<br><br>This role is a defensive tank with the rare ability to punish killers but fate is a double-edged sword. Investigators will always see you as "mystic but powerless," making trust a luxury.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 30%</div>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Fate bound Elder">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1007,6 +1262,11 @@
                 <p style="color:#ccc; line-height:1.6;">A deceptive and manipulative entity that thrives on confusion. Every night, it marks one player:<br>That target appears as False Face to all vision roles (Seer, Sorcerer, etc.)<br>When a new target is marked, the previous one dies immediately.<br>All actions (investigations, protections, attacks) targeting False Face are redirected randomly including possibly back to the source.<br><br>This role has no direct kill ability but eliminates indirectly and causes chaos among vision and power roles.</p>
                 <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="False Face">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1022,6 +1282,11 @@
             </div>
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">Every night, you can choose to hide from visitors. During your hide, if someone visits you they will not find you. BUT! You will recognize them as a potential threat and you will kill them!<br>If you choose to hide, Seer will be confused about it and they will see you as Werewolf!<br>You can't hide 2 times in a row.</p>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Ninja">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -1039,6 +1304,11 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">You are different from ordinary mailman's. You deliver the news at night. That's why you are not at home at all.</p>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Mailman">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1054,6 +1324,11 @@
             </div>
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">You have a secret ability. For once, you can pull all night actions on yourself.<br>Who knows, maybe you will be slaughtered by all bad roles or maybe all saviors will be on at the same time 👀</p>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Magneto">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -1071,6 +1346,11 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">When you die somehow, the following night all lights will be out. And everyone takes their actions blindly.</p>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Janitor">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1087,6 +1367,11 @@
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">You are a scientist specializing in earthquakes and earth sciences. Your belief in science makes your role independent of all the players. In case of lynching, there will be a big earthquake in the village! Living players:<br><br>↳25% will die under rubble due to earthquake<br>↳25% will be trapped under the rubble and unable to act for 1 day<br>↳The 25% will only feel the tremor and realize it<br>↳The remaining 25% will be safe and sound and will feel nothing.</p>
             </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Sismolog">
+                    🗳️ Vote for Official
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1102,6 +1387,11 @@
             </div>
             <div class="modal-section">
                 <p style="color:#ccc; line-height:1.6;">You only work for the highest price. At the first night a role will be told you for hunting them. But your target will be also aware of it! They tried to hide but you must detect them. You will have chance to hunt them for every night! If you hunt them successfully, you will win the game!</p>
+            </div>
+            <div class="vote-btn-container">
+                <button class="wolf-btn vote-trigger" data-vote-target="Bounty Hunter">
+                    🗳️ Vote for Official
+                </button>
             </div>
         </div>
     </div>
@@ -1153,6 +1443,44 @@
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
+
+    <script>
+        function markAsApproved(roleModalIds) {
+            roleModalIds.forEach(id => {
+                const card = document.querySelector(`.role-card[data-modal-target="${id}"]`);
+
+                if (card) {
+                    card.classList.add('approved-card');
+
+                    let badge = card.querySelector('.status-badge');
+                    if (!badge) {
+                        badge = document.createElement('span');
+                        badge.classList.add('status-badge');
+                        const roleNameDiv = card.querySelector('.role-name');
+                        roleNameDiv.after(badge);
+                    }
+                    badge.classList.add('approved');
+                    badge.innerHTML = "✅ APPROVED";
+                }
+            });
+        }
+
+        document.addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('vote-trigger')) {
+                const roleName = e.target.getAttribute('data-vote-target');
+                alert("Thanks for voting! You voted for: " + roleName + "\n(This helps us decide official roles!)");
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const approvedRoles = [
+                'executionerModal',
+                'minerModal',
+                'pawnModal',
+            ];
+            markAsApproved(approvedRoles);
+        });
+    </script>
 
     <script src="script.js"></script>
     <script src="loader.js"></script>
