@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\ismtu\\OneDrive\\Desktop\\WB-Web\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ismtu\\OneDrive\\Desktop\\WB-Web\\WB Web\\Languages\\en.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WB Web\\Languages\\en.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ismtu\\OneDrive\\Desktop\\WB-Web\\WB Web\\Hakk\u0131m\u0131zda.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WB Web\\Hakk\u0131m\u0131zda.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "en.json",
-              "DocumentMoniker": "C:\\Users\\ismtu\\OneDrive\\Desktop\\WB-Web\\WB Web\\Languages\\en.json",
-              "RelativeDocumentMoniker": "WB Web\\Languages\\en.json",
-              "ToolTip": "C:\\Users\\ismtu\\OneDrive\\Desktop\\WB-Web\\WB Web\\Languages\\en.json",
-              "RelativeToolTip": "WB Web\\Languages\\en.json",
-              "ViewState": "AgIAAAcFAAAAAAAAAADgvxMFAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-01-22T20:41:02.815Z",
+              "Title": "Hakk\u0131m\u0131zda.html",
+              "DocumentMoniker": "C:\\Users\\ismtu\\OneDrive\\Desktop\\WB-Web\\WB Web\\Hakk\u0131m\u0131zda.html",
+              "RelativeDocumentMoniker": "WB Web\\Hakk\u0131m\u0131zda.html",
+              "ToolTip": "C:\\Users\\ismtu\\OneDrive\\Desktop\\WB-Web\\WB Web\\Hakk\u0131m\u0131zda.html",
+              "RelativeToolTip": "WB Web\\Hakk\u0131m\u0131zda.html",
+              "ViewState": "AgIAABcEAAAAAAAAAAAAAC0EAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-01-24T21:29:06.677Z",
               "EditorCaption": ""
             }
           ]
