@@ -325,7 +325,7 @@
   "roles-c-10-desc1": "✔️Boss 🎩",
   "roles-c-0immune-title": "%0 Conversion (Immune)",
   "roles-c-0immune-desc1": "✔️Doppelganger 🎭<br>✔️Thief 😈<br>✔️Cultist hunter 💂<br>✔️Serial killer 🔪<br>✔️Arsonist 🔥<br>Werewolves 🐺❓",
-  "roles-c-0immune-note": "Immune rollerin (Doppelganger, Cultist Hunter, SK, Arsonist, Werewolves) tamamının özel notları vardır. Detaylar için ilgili rolün kartına bakınız (bazıları burada listelenmiştir).",
+  "roles-c-0immune-note": "All immune roles (Doppelganger, Cultist Hunter, SK, Arsonist, Werewolves) have special notes. For details, see the card for the relevant role (some are listed here).",
   "roles-c-0doppel-title": "%0 Conversion (Doppelganger 🎭)",
   "roles-c-0doppel-desc1": "✔️Doppelganger 🎭",
   "roles-c-0doppel-note": "Note: The Doppelganger is immune to Cultists until their role model dies and they take on a new role. After taking on a new role, their conversion rate changes based on that role.",
@@ -1498,6 +1498,7 @@
   "loader_hint_54": "👶 Hint: Guard the role model well. If they die, the innocent Wild Child becomes a savage beast.",
   "loader_hint_55": "🙇 Hint: The student becomes the master. When the Seer falls, the Apprentice takes up the crystal ball."
 }
+
 
 
 
