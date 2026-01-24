@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Blood | FAQ</title>
+    <link rel="icon" type="image/jpg" href="WB-Idea.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="loader.css">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --wolf-red: #8a0303;
+            --moon-blue: #4a6fa5;
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --accent-gold: #d4af37;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+        }
+        .wolf-nav {
+            display: flex;
+            justify-content: center;
+            background-color: #000;
+            border-bottom: 3px solid var(--wolf-red);
+            padding: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            overflow-x: auto;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dim);
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: block;
+            white-space: nowrap;
+        }
+        .nav-link:hover {
+            color: var(--wolf-red);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--wolf-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(138, 3, 3, 0.5);
+        }
+        .hero p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+        .faq-item {
+            background-color: var(--bg-card);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            border-color: var(--moon-blue);
+            box-shadow: 0 0 10px rgba(74, 111, 165, 0.2);
+        }        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            background: linear-gradient(to right, rgba(255,255,255,0.02), transparent);
+        }
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--wolf-red);
+            transition: transform 0.3s;
+        }        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+            color: var(--accent-gold);
+        }
+        .faq-item.active .faq-question {
+            color: var(--accent-gold);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: rgba(0,0,0,0.2);
+        }
+        .faq-answer p {
+            padding: 20px;
+            margin: 0;
+            color: #ccc;
+            line-height: 1.6;
+            border-top: 1px solid #333;
+        }
+        .highlight {
+            color: var(--wolf-red);
+            font-weight: bold;
+        }
+        footer {
+            background-color: #000;
+            border-top: 3px solid var(--wolf-red);
+            color: var(--text-dim);
+            padding: 50px 20px 20px;
+            margin-top: 80px;
+            font-size: 0.9rem;
+        }
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .footer-section h3 {
+            color: var(--text-main);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            border-left: 3px solid var(--wolf-red);
+            padding-left: 10px;
+        }
+        .footer-links a {
+            display: block;
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+        .footer-links a:hover {
+            color: var(--wolf-red);
+            transform: translateX(5px);
+        }
+        .footer-btn {
+            display: inline-block;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+            .footer-btn:hover {
+                background: var(--wolf-red);
+                border-color: var(--wolf-red);
+                box-shadow: 0 0 10px rgba(138, 3, 3, 0.4);
+            }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <script src="loader.js"></script>
+
+    <nav class="wolf-nav">
+        <a href="index.html" class="nav-link">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+    </nav>
+
+    <div class="container">
+        
+        <div class="hero">
+            <h1>Frequently Asked Questions</h1>
+            <p>Knowledge is power. Ignorance is death.</p>
+        </div>
+
+        <h2 style="color:var(--text-dim); border-bottom:1px solid #333; padding-bottom:10px; margin-top:40px;">📂 Submissions & Ideas</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">How do I get my role idea into the game?</div>
+            <div class="faq-answer">
+                <p>Simple. Go to the Home page and fill out the "Suggest a Role" form. If the <span class="highlight">Alpha Developers</span> like it, it will be added to the "Test Designs" page for the community to vote on.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">I submitted an idea, but I don't see it. Why?</div>
+            <div class="faq-answer">
+                <p>The wolves are picky. We receive hundreds of ideas. If your idea is too similar to an existing role, breaks the game balance, or isn't detailed enough, it might be discarded. Check the <span class="highlight">Graveyard (Removed)</span> page just in case.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What happens if two people submit the same idea?</div>
+            <div class="faq-answer">
+                <p>Great minds think alike. We usually credit the first person who submitted it, or we may combine elements from both suggestions into one ultimate role.</p>
+            </div>
+        </div>
+
+        <h2 style="color:var(--text-dim); border-bottom:1px solid #333; padding-bottom:10px; margin-top:40px;">⚙️ Game Mechanics</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">What in the dark arts is "Cult Rate"?</div>
+            <div class="faq-answer">
+                <p><strong>What is the Cult Rate?</strong><br>The Cult Rate is a metric that determines the relative strength, weakness, or faith level of each specific role within the game. We strive for balance; however, if you believe the current rates are unfair or could be improved, you are encouraged to submit your suggestions for adjustments to ensure a more balanced gameplay experience.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Are the "Test Designs" balanced?</div>
+            <div class="faq-answer">
+                <p>Not always! That's why they are in testing. Use them at your own risk. If a role is too overpowered (OP), the community will vote to nerf it in the next patch.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What is the "Evo Mod"?</div>
+            <div class="faq-answer">
+                <p><strong>What is Evo Mod?</strong><br>Evo Mod (Evolution Modification) is an advanced game mode designed for those who thrive in chaos. In this mode, roles evolve into significantly more powerful, unpredictable, and unbalanced versions of themselves. It is specifically crafted for experienced players seeking a high stakes, high-impact gameplay experience. For a full breakdown of these chaotic evolutions, visit the <a href="evo_mod.html" style="color:var(--wolf-red)">Evo Mod page</a>.</p>
+            </div>
+        </div>
+
+        <h2 style="color:var(--text-dim); border-bottom:1px solid #333; padding-bottom:10px; margin-top:40px;">📜 Meta & Community</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">Is this an official update from the original developers?</div>
+            <div class="faq-answer">
+                <p>This project is a community-driven expansion developed with the knowledge of the Bot Developer. The core vision and creative direction are led by our Web Designer, <strong>@Halfcelse</strong>. It serves as a collaborative hub where players can vote on concepts, find inspiration, and share their own ideas to help shape the future of the game.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">I found a bug in a Test Design. Who do I tell?</div>
+            <div class="faq-answer">
+                <p>Don't keep it to yourself. Join our <a href="#" style="color:var(--accent-gold)">Telegram Community</a> and report it in the "Bug Hunt" channel.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+
+            <div class="footer-section">
+                <h3>🐺 Wolf Blood</h3>
+                <p>
+                    The ultimate hub for experimental roles, game modes, and community chaos.
+                    From the forest to the tabletop, we evolve the game.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <div class="footer-links">
+                    <a href="index.html">🏠 Home</a>
+                    <a href="test_designs.html">🧪 Test Designs</a>
+                    <a href="removed.html">♻️ Graveyard</a>
+                    <a href="board_game.html">🎲 Board Game</a>
+                    <a href="evo_mod.html">🧬 Evo Mod</a>
+                    <a href="achievements.html">🏆 Achievements</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Legal & Help</h3>
+                <div class="footer-links">
+                    <a href="faq.html">❓ FAQ</a>
+                    <a href="policy.html">🛡️ Privacy Policy</a>
+                    <a href="terms.html">📜 Terms of Service</a>
+                    <a href="cookies.html">🍪 Cookie Usage</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Join the Pack</h3>
+                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                    ✈️ Open Telegram
+                </a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = item.parentElement;                
+                parent.classList.toggle('active');
+                const answer = item.nextElementSibling;
+                if (parent.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                } else {
+                    answer.style.maxHeight = 0;
+                }
+                document.querySelectorAll('.faq-item').forEach(other => {
+                    if (other !== parent && other.classList.contains('active')) {
+                        other.classList.remove('active');
+                        other.querySelector('.faq-answer').style.maxHeight = 0;
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

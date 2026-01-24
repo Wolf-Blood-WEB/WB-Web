@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Blood | Terms of Service</title>
+    <link rel="icon" type="image/jpg" href="WB-Idea.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="loader.css">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --wolf-red: #8a0303;
+            --moon-blue: #4a6fa5;
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --accent-gold: #d4af37;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+        .wolf-nav {
+            display: flex;
+            justify-content: center;
+            background-color: #000;
+            border-bottom: 3px solid var(--wolf-red);
+            padding: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            overflow-x: auto;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dim);
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: block;
+            white-space: nowrap;
+        }
+        .nav-link:hover {
+            color: var(--wolf-red);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--wolf-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            color: var(--text-dim);
+            font-style: italic;
+        }
+        .terms-section {
+            background-color: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-gold);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }       
+        .terms-section h2 {
+            color: var(--text-main);
+            margin-top: 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }        
+        .terms-section p {
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+        .terms-section ul {
+            padding-left: 20px;
+            color: #bbb;
+        }
+        .terms-section li {
+            margin-bottom: 10px;
+        }
+        strong {
+            color: var(--wolf-red);
+        }
+        footer {
+            background-color: #000;
+            border-top: 3px solid var(--wolf-red);
+            color: var(--text-dim);
+            padding: 50px 20px 20px;
+            margin-top: 80px;
+            font-size: 0.9rem;
+        }
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .footer-section h3 {
+            color: var(--text-main);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            border-left: 3px solid var(--wolf-red);
+            padding-left: 10px;
+        }
+        .footer-links a {
+            display: block;
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+        .footer-links a:hover {
+            color: var(--wolf-red);
+            transform: translateX(5px);
+        }
+        .footer-btn {
+            display: inline-block;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .footer-btn:hover {
+            background: var(--wolf-red);
+            border-color: var(--wolf-red);
+            box-shadow: 0 0 10px rgba(138, 3, 3, 0.4);
+        }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <script src="loader.js"></script>
+
+    <nav class="wolf-nav">
+        <a href="index.html" class="nav-link">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+    </nav>
+
+    <div class="container">
+        
+        <div class="hero">
+            <h1>Terms of Service</h1>
+            <p>Effective Date: January 24, 2026</p>
+            <p>Read the rules before you join the hunt.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or using the Wolf Blood Workshop, you agree to be bound by these Terms. If you do not agree to abide by these rules, you must leave the pack immediately (close the tab).</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>2. User Submissions & Ideas</h2>
+            <p>The core of this workshop is community creativity. By submitting a role, game mode, or modification idea via our forms:</p>
+            <ul>
+                <li>You grant the Wolf Blood Community a <strong>perpetual, royalty-free license</strong> to use, modify, display, and distribute your idea.</li>
+                <li>You acknowledge that your idea may be edited for balance (e.g., nerfing a "God Role") before being published to the <strong>Test Designs</strong> page.</li>
+                <li>You waive any claim to intellectual property rights over the mechanics you suggest. We do this to prevent legal disputes if we decide to implement your idea in the Board Game or Evo Mod.</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>3. Community Conduct</h2>
+            <p>We are a chaotic community, but we have standards. The following behavior is strictly prohibited:</p>
+            <ul>
+                <li>Submitting hate speech, harassment, or explicit content via the suggestion forms.</li>
+                <li>Spamming the system with identical role suggestions.</li>
+                <li>Impersonating developers or admins in the Telegram group.</li>
+            </ul>
+            <p>Violators will be banned from the community channels and their suggestions sent to the void.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>4. Disclaimer of Warranty</h2>
+            <p>This website and its contents (especially the <strong>Test Designs</strong>) are provided "as is."</p>
+            <p>We do not guarantee that the roles on this site are balanced, fair, or fun. Using experimental roles in your games may result in chaos, arguments, or friendship-ending betrayals. <strong>Use at your own risk.</strong></p>
+        </div>
+
+        <div class="terms-section">
+            <h2>5. Fan Project Status</h2>
+            <p>Wolf Blood Workshop is an unofficial fan project. We are not affiliated with the original developers of the base game (if applicable). All original assets remain property of their respective owners.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>6. Changes to Terms</h2>
+            <p>We reserve the right to modify these terms at any time. If we make major changes, we will notify the pack via our Telegram channel. Continued use of the site constitutes acceptance of the new terms.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+    
+            <div class="footer-section">
+                <h3>🐺 Wolf Blood</h3>
+                <p>
+                    The ultimate hub for experimental roles, game modes, and community chaos.
+                    From the forest to the tabletop, we evolve the game.
+                </p>
+            </div>
+    
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <div class="footer-links">
+                    <a href="index.html">🏠 Home</a>
+                    <a href="test_designs.html">🧪 Test Designs</a>
+                    <a href="removed.html">♻️ Graveyard</a>
+                    <a href="board_game.html">🎲 Board Game</a>
+                    <a href="evo_mod.html">🧬 Evo Mod</a>
+                    <a href="achievements.html">🏆 Achievements</a>
+                </div>
+            </div>
+    
+            <div class="footer-section">
+                <h3>Legal & Help</h3>
+                <div class="footer-links">
+                    <a href="faq.html">❓ FAQ</a>
+                    <a href="policy.html">🛡️ Privacy Policy</a>
+                    <a href="terms.html">📜 Terms of Service</a>
+                    <a href="cookies.html">🍪 Cookie Usage</a>
+                </div>
+            </div>
+    
+            <div class="footer-section">
+                <h3>Join the Pack</h3>
+                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                    ✈️ Open Telegram
+                </a>
+            </div>
+    
+        </div>
+    
+        <div class="footer-bottom">
+            &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
+        </div>
+    </footer>
+
+</body>
+</html>

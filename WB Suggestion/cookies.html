@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Blood | Cookie Usage</title>
+    <link rel="icon" type="image/jpg" href="WB-Idea.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="loader.css">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --wolf-red: #8a0303;
+            --moon-blue: #4a6fa5;
+            --text-main: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --accent-gold: #d4af37;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+        .wolf-nav {
+            display: flex;
+            justify-content: center;
+            background-color: #000;
+            border-bottom: 3px solid var(--wolf-red);
+            padding: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            overflow-x: auto;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dim);
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: block;
+            white-space: nowrap;
+        }
+        .nav-link:hover {
+            color: var(--wolf-red);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--wolf-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+        .cookie-section {
+            background-color: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-gold);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }        
+        .cookie-section h2 {
+            color: var(--text-main);
+            margin-top: 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            color: #ccc;
+        }
+        .cookie-table th {
+            text-align: left;
+            background-color: rgba(138, 3, 3, 0.2);
+            color: var(--accent-gold);
+            padding: 12px;
+            border-bottom: 2px solid var(--wolf-red);
+        }
+        .cookie-table td {
+            padding: 12px;
+            border-bottom: 1px solid #333;
+        }
+        .cookie-table tr:hover {
+            background-color: rgba(255,255,255,0.02);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        footer {
+            background-color: #000;
+            border-top: 3px solid var(--wolf-red);
+            color: var(--text-dim);
+            padding: 50px 20px 20px;
+            margin-top: 80px;
+            font-size: 0.9rem;
+        }
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .footer-section h3 {
+            color: var(--text-main);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            border-left: 3px solid var(--wolf-red);
+            padding-left: 10px;
+        }
+        .footer-links a {
+            display: block;
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+        .footer-links a:hover {
+            color: var(--wolf-red);
+            transform: translateX(5px);
+        }
+        .footer-btn {
+            display: inline-block;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .footer-btn:hover {
+            background: var(--wolf-red);
+            border-color: var(--wolf-red);
+            box-shadow: 0 0 10px rgba(138, 3, 3, 0.4);
+        }
+        .footer-btn {
+            display: inline-block;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+            .footer-btn:hover {
+                background: var(--wolf-red);
+                border-color: var(--wolf-red);
+                box-shadow: 0 0 10px rgba(138, 3, 3, 0.4);
+            }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <script src="loader.js"></script>
+
+    <nav class="wolf-nav">
+        <a href="index.html" class="nav-link">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+    </nav>
+
+    <div class="container">
+        
+        <div class="hero">
+            <span class="hero-icon">🍪</span>
+            <h1>Cookie Usage</h1>
+            <p>We use digital cookies. Sadly, you cannot eat them.</p>
+        </div>
+
+        <div class="cookie-section">
+            <h2>1. What are Cookies?</h2>
+            <p>Cookies (and Local Storage) are small pieces of text sent to your browser by a website you visit. They help the site remember information about your visit, which makes it easier to visit the site again and makes the site more useful to you.</p>
+            <p>At <strong>Wolf Blood Workshop</strong>, we keep it simple. We don't use invasive tracking cookies to sell your data to the highest bidder.</p>
+        </div>
+
+        <div class="cookie-section">
+            <h2>2. The Cookie Jar (What we store)</h2>
+            <p>We primarily use <strong>Local Storage</strong>, which stays on your device and isn't sent to our servers. Here is exactly what we store:</p>
+            
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>wb_theme_pref</code></td>
+                        <td>Local Storage</td>
+                        <td>Remembers if you prefer Dark Mode (Default) or... well, there is only Dark Mode.</td>
+                    </tr>
+                    <tr>
+                        <td><code>wb_read_roles</code></td>
+                        <td>Local Storage</td>
+                        <td>Remembers which "New" roles you have clicked on so the notification dot disappears.</td>
+                    </tr>
+                    <tr>
+                        <td><code>wb_votes</code></td>
+                        <td>Local Storage</td>
+                        <td>Prevents you from voting on the same role multiple times (Basic spam protection).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cookie-section">
+            <h2>3. Third-Party Services</h2>
+            <p>We use some external tools that might place their own cookies. We don't control these, but they are standard for the web:</p>
+            <ul>
+                <li><strong>Loader Animation (Three.js):</strong> Loads graphics libraries from CDNs (Content Delivery Networks) which may cache files for faster loading.</li>
+                <li><strong>Telegram Links:</strong> Clicking "Join the Pack" takes you to Telegram. They have their own cookie policy, which is probably much longer than ours.</li>
+            </ul>
+        </div>
+
+        <div class="cookie-section">
+            <h2>4. How to Manage Cookies</h2>
+            <p>If you really hate these helpful little files, you can delete them.</p>
+            <p>Go to your browser settings (Chrome, Firefox, Edge, Safari) -> <strong>Privacy & Security</strong> -> <strong>Clear Browsing Data</strong>. Select "Cookies and other site data."</p>
+            <p><em>Warning: If you do this, the site might forget which roles you've already voted for.</em></p>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+    
+            <div class="footer-section">
+                <h3>🐺 Wolf Blood</h3>
+                <p>
+                    The ultimate hub for experimental roles, game modes, and community chaos.
+                    From the forest to the tabletop, we evolve the game.
+                </p>
+            </div>
+    
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <div class="footer-links">
+                    <a href="index.html">🏠 Home</a>
+                    <a href="test_designs.html">🧪 Test Designs</a>
+                    <a href="removed.html">♻️ Graveyard</a>
+                    <a href="board_game.html">🎲 Board Game</a>
+                    <a href="evo_mod.html">🧬 Evo Mod</a>
+                    <a href="achievements.html">🏆 Achievements</a>
+                </div>
+            </div>
+    
+            <div class="footer-section">
+                <h3>Legal & Help</h3>
+                <div class="footer-links">
+                    <a href="faq.html">❓ FAQ</a>
+                    <a href="policy.html">🛡️ Privacy Policy</a>
+                    <a href="terms.html">📜 Terms of Service</a>
+                    <a href="cookies.html">🍪 Cookie Usage</a>
+                </div>
+            </div>
+    
+            <div class="footer-section">
+                <h3>Join the Pack</h3>
+                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                    ✈️ Open Telegram
+                </a>
+            </div>
+    
+        </div>
+    
+        <div class="footer-bottom">
+            &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
+        </div>
+    </footer>
+
+</body>
+</html>
