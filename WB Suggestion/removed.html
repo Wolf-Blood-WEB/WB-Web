@@ -275,7 +275,30 @@
             padding-top: 20px;
             color: #555;
             font-size: 0.8rem;
-        }        
+        }
+        .status-badge.returned {
+            background: #00ff88;
+            color: #000;
+            font-weight: 800;
+            border: 1px solid #00ff88;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+            animation: pulse-life 2s infinite;
+        }
+        .role-card.returned-card {
+            border-color: #00ff88;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2) inset;
+        }
+        @keyframes pulse-life {
+            0% {
+                box-shadow: 0 0 5px rgba(0, 255, 136, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 255, 136, 0.9);
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(0, 255, 136, 0.6);
+            }
+        }
     </style>
 </head>
 <body>
@@ -538,12 +561,23 @@
                 <div style="font-size:3rem;">🦜</div>
                 <h2>Snitch</h2>
             </div>
-            <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">The Snitch is a simple villager. It can choose a player during the first night and has the ability to reveal the role of the player to everyone if the snitch dies. But if the chosen player dies before the snitch, it will only be a simple villager.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Conversion Chance: 100%</div>
-                <p style="color:#888; font-size:0.8rem; margin-top:5px;">Note: It is not a 120 second role, and can appear in an 8 player game.</p>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+            <div class="comparison-container">
+                <div class="comp-col old">
+                    <span class="comp-title">❌ Old Version</span>
+                    <p style="color:#aaa; font-size:0.9rem;">The Snitch is a simple villager. It can choose a player during the first night and has the ability to reveal the role of the player to everyone if the snitch dies. But if the chosen player dies before the snitch, it will only be a simple villager.</p>
+                    <div style="background:#444; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;">Cult Conversion Chance: 100%</div>
+                    <p style="color:#666; font-size:0.7rem; margin-top:5px; font-style:italic;">Note: It is not a 120 second role, and can appear in an 8 player game.</p>
+                </div>
+
+                <div class="comp-col new">
+                    <span class="comp-title">✨ New Version</span>
+                    <p style="color:#ddd; font-size:0.9rem;">Snitch is the nosiest resident in the entire village. His passion for gossip has led him to learn everyone’s hidden truths. On his final breath, snitch can make any player reveal their identity by snitching on their deepest darkest secret. Additionally, if the wolves dare to attack Snitch, there’s a 25% chance that one wolf’s identity gets revealed.</p>
+                    <div style="text-align:center; margin-top:15px;">
+                        <button class="btn vote-trigger" data-vote-target="Snitch Rework">
+                            🗳️ Vote for this Rework
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1103,6 +1137,31 @@
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
+
+    <script>
+        function markAsReturned(roleModalIds) {
+            roleModalIds.forEach(id => {
+                const card = document.querySelector(`.role-card[data-modal-target="${id}"]`);
+
+                if (card) {
+                    card.classList.add('returned-card');
+                    const badge = card.querySelector('.status-badge');
+
+                    if (badge) {
+                        badge.classList.add('returned');
+                        badge.innerHTML = "♻️ RETURNED";
+                    }
+                }
+            });
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const returnedRoles = [
+                'snitchModal',
+                'illusionistWolfModal'
+            ];
+            markAsReturned(returnedRoles);
+        });
+    </script>
 
     <script src="script.js"></script>
     <script src="loader.js"></script>
