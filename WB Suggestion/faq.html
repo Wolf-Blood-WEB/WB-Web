@@ -180,6 +180,39 @@
             color: #555;
             font-size: 0.8rem;
         }
+        @media (max-width: 768px) {
+            .wolf-nav {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                height: auto;
+                overflow-x: hidden;
+                white-space: normal;
+                padding: 0;
+                border-bottom: 3px solid var(--wolf-red);
+            }
+            .nav-link {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                border-bottom: 1px solid #333;
+                border-right: 1px solid #333;
+                padding: 15px 5px;
+                font-size: 14px;
+                width: auto;
+            }
+                .nav-link:nth-child(even) {
+                    border-right: none;
+                }
+                .nav-link:nth-last-child(1),
+                .nav-link:nth-last-child(2) {
+                    border-bottom: none;
+                }
+                .nav-link.active {
+                    background: linear-gradient(to top, rgba(138, 3, 3, 0.4), transparent);
+                    border-bottom: 1px solid var(--wolf-red);
+                }
+        }
     </style>
 </head>
 <body>
