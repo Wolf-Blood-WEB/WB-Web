@@ -1997,32 +1997,10 @@
         </footer>
     </div>
 
-
-
-    <script>
-        const modalOverlay = document.getElementById('modalOverlay');
-        const modalBody = document.getElementById('modalBody');
-
-        function openModal(cardElement) {
-            const contentStorage = cardElement.nextElementSibling;
-            if (contentStorage) {
-                modalBody.innerHTML = contentStorage.innerHTML;
-                modalOverlay.classList.add('visible');
-            }
-        }
-        function closeModal() {
-            modalOverlay.classList.remove('visible');
-        }
-        modalOverlay.addEventListener('click', (event) => {
-            if (event.target === modalOverlay) {
-                closeModal();
-            }
-        });
-    </script>
+    <script src="script.js"></script>
     <script src="Loader.js" defer></script>
     <script src="Translate.js" defer></script>
     <script src="Theme-Manager.js"></script>
-</body>
 </html>
 
 
