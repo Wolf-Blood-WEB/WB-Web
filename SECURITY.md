@@ -19,7 +19,7 @@ I take security seriously. If you discover a vulnerability (e.g., XSS, dependenc
 
 Please **do not** report security vulnerabilities through public GitHub issues. Instead, strictly follow these steps:
 
-1.  **Email**: Send a detailed description of the issue to **[Insert Your Email Address Here]**.
+1.  **Telegram**: Send a detailed description of the issue to **[@kediben & @Halfcelse]**.
 2.  **Subject Line**: Please use `[SECURITY] - Vulnerability Report` as your subject.
 3.  **Details**: Include the steps to reproduce the issue, the browser/environment used, and the potential impact.
 
