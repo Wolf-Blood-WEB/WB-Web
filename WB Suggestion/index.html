@@ -6,257 +6,348 @@
     <title>Wolf Blood | Role Workshop</title>
     <link rel="icon" type="image/jpg" href="WB-Idea.jpg">
     <link rel="stylesheet" href="loader.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>    
     <style>
         :root {
-            --bg-dark: #121212;
-            --bg-card: #1e1e1e;
-            --wolf-red: #8a0303;
+            --bg-dark: #050505;
+            --bg-glass: rgba(20, 20, 20, 0.75);
+            --bg-glass-hover: rgba(30, 30, 30, 0.85);
+            --wolf-red: #ff0f0f;
+            --wolf-red-dim: #8a0303;
             --moon-blue: #4a6fa5;
-            --text-main: #e0e0e0;
+            --text-main: #f0f0f0;
             --text-dim: #a0a0a0;
-            --accent-gold: #d4af37;
+            --accent-gold: #ffd700;
+            --shadow-red: 0 0 20px rgba(138, 3, 3, 0.4);
+            --border-glow: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        * {
+            box-sizing: border-box;
         }
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.8;
         }
         h1, h2, h3 {
             margin: 0;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         .wolf-nav {
             display: flex;
             justify-content: center;
-            background-color: #000;
-            border-bottom: 3px solid var(--wolf-red);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--wolf-red-dim);
             padding: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
             overflow-x: auto;
         }
         .nav-link {
             text-decoration: none;
             color: var(--text-dim);
-            padding: 15px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: 0.3s;
+            padding: 18px 25px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
             display: block;
             white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
         }
-            .nav-link:hover {
-                color: var(--wolf-red);
-                background-color: rgba(255, 255, 255, 0.05);
-            }
-            .nav-link.active {
-                color: var(--text-main);
-                background: linear-gradient(to top, rgba(138, 3, 3, 0.2), transparent);
-                border-bottom: 3px solid var(--wolf-red);
-            }
-
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+        .nav-link:hover::before {
+            left: 100%;
+        }
+        .nav-link:hover {
+            color: white;
+            text-shadow: 0 0 8px var(--wolf-red);
+        }
+        .nav-link.active {
+            color: white;
+            background: linear-gradient(to top, rgba(138, 3, 3, 0.3), transparent);
+            border-bottom: 3px solid var(--wolf-red);
+            box-shadow: 0 -10px 20px rgba(138, 3, 3, 0.2) inset;
+        }
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
         }
         .hero {
             text-align: center;
-            padding: 60px 20px;
-            background: radial-gradient(circle at center, #2a0a0a, var(--bg-dark));
-            border-radius: 10px;
-            margin-bottom: 30px;
-            border: 1px solid #333;
+            padding: 80px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            border-radius: 16px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease-out;
         }
-            .hero h1 {
-                font-size: 3rem;
-                color: var(--wolf-red);
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                text-shadow: 0 0 10px rgba(138, 3, 3, 0.7);
-            }
-            .hero p {
-                font-size: 1.2rem;
-                color: var(--text-dim);
-                margin-top: 10px;
-                max-width: 600px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to bottom, #fff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            filter: drop-shadow(0 0 15px rgba(138, 3, 3, 0.6));
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
         .dashboard-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 20px;
-        }
-        @media (max-width: 768px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
+            gap: 30px;
         }
         .card {
-            background-color: var(--bg-card);
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid var(--wolf-red);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            margin-bottom: 20px;
+            background-color: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-left: 4px solid var(--wolf-red-dim);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-            .card h2 {
-                font-size: 1.5rem;
-                margin-bottom: 15px;
-                border-bottom: 1px solid #333;
-                padding-bottom: 10px;
-            }
-
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(138, 3, 3, 0.2);
+            border-color: rgba(255,255,255,0.2);
+        }
+        .card h2 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            color: #fff;
+        }
         .card-blue {
             border-left-color: var(--moon-blue);
-        }
+        }        
         .card-gold {
             border-left-color: var(--accent-gold);
+            background: linear-gradient(145deg, rgba(30,30,30,0.8), rgba(212, 175, 55, 0.05));
         }
         .role-highlight {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
+            margin-top: 15px;
         }
         .role-icon {
-            font-size: 4rem;
-            background: #000;
-            padding: 10px;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #1a1a1a, #000);
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 50%;
-            border: 2px solid var(--wolf-red);
+            border: 2px solid var(--wolf-red-dim);
+            box-shadow: 0 0 20px rgba(138, 3, 3, 0.4);
+            animation: pulseGlow 3s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px rgba(138, 3, 3, 0.2); border-color: var(--wolf-red-dim); }
+            100% { box-shadow: 0 0 25px rgba(255, 15, 15, 0.5); border-color: var(--wolf-red); }
         }
         .btn {
-            background-color: var(--wolf-red);
+            background: linear-gradient(45deg, var(--wolf-red-dim), #600202);
             color: white;
-            padding: 10px 20px;
+            padding: 14px 24px;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-weight: 600;
             display: inline-block;
-            margin-top: 10px;
-            border: none;
+            margin-top: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
             cursor: pointer;
             width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
         }
-            .btn:hover {
-                background-color: #a80404;
-            }
-
+        .btn:hover {
+            background: linear-gradient(45deg, var(--wolf-red), #8a0303);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+            transform: scale(1.02);
+        }
         input, textarea, select {
             width: 100%;
-            padding: 10px;
-            margin: 5px 0 15px 0;
-            background-color: #000;
-            border: 1px solid #444;
+            padding: 12px 15px;
+            margin: 8px 0 20px 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             color: white;
-            border-radius: 4px;
+            border-radius: 6px;
             box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--wolf-red);
+            background-color: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 0 10px rgba(138, 3, 3, 0.3);
+        }
+        label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            font-weight: 700;
         }
         footer {
-            background-color: #000;
-            border-top: 3px solid var(--wolf-red);
+            background: linear-gradient(to top, #000, #0a0a0a);
+            border-top: 1px solid var(--wolf-red-dim);
             color: var(--text-dim);
-            padding: 50px 20px 20px;
+            padding: 60px 20px 20px;
             margin-top: 80px;
             font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
         }
         .footer-content {
             max-width: 1280px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
+            gap: 40px;
             margin-bottom: 40px;
         }
         .footer-section h3 {
-            color: var(--text-main);
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             border-left: 3px solid var(--wolf-red);
-            padding-left: 10px;
-        }
-        .footer-section p {
-            line-height: 1.6;
-            color: #888;
+            padding-left: 15px;
+            background: linear-gradient(90deg, rgba(138, 3, 3, 0.2), transparent);
         }
         .footer-links a {
             display: block;
-            color: var(--text-dim);
+            color: #888;
             text-decoration: none;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             transition: all 0.2s ease;
+            position: relative;
+            padding-left: 0;
         }
-            .footer-links a:hover {
-                color: var(--wolf-red);
-                transform: translateX(5px);
-            }
-
+        .footer-links a:hover {
+            color: var(--wolf-red);
+            padding-left: 10px;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
         .footer-btn {
             display: inline-block;
-            background: #1e1e1e;
-            border: 1px solid #333;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             text-decoration: none;
             border-radius: 4px;
             margin-top: 10px;
             transition: 0.3s;
             font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
         }
-            .footer-btn:hover {
-                background: var(--wolf-red);
-                border-color: var(--wolf-red);
-                box-shadow: 0 0 10px rgba(138, 3, 3, 0.4);
-            }
+        .footer-btn:hover {
+            background: var(--wolf-red);
+            border-color: var(--wolf-red);
+            box-shadow: 0 0 15px rgba(138, 3, 3, 0.6);
+        }
 
         .footer-bottom {
             text-align: center;
-            border-top: 1px solid #222;
-            padding-top: 20px;
-            color: #555;
+            border-top: 1px solid #1a1a1a;
+            padding-top: 30px;
+            color: #444;
             font-size: 0.8rem;
         }
         @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .role-highlight {
+                flex-direction: column;
+                text-align: center;
+            }
             .wolf-nav {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                height: auto;
-                overflow-x: hidden;
                 white-space: normal;
-                padding: 0;
-                border-bottom: 3px solid var(--wolf-red);
+                position: relative;
             }
             .nav-link {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                border-bottom: 1px solid #333;
-                border-right: 1px solid #333;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+                border-right: 1px solid rgba(255,255,255,0.05);
                 padding: 15px 5px;
-                font-size: 14px;
-                width: auto;
+                font-size: 13px;
+                text-align: center;
             }
-                .nav-link:nth-child(even) {
-                    border-right: none;
-                }
-                .nav-link:nth-last-child(1),
-                .nav-link:nth-last-child(2) {
-                    border-bottom: none;
-                }
-                .nav-link.active {
-                    background: linear-gradient(to top, rgba(138, 3, 3, 0.4), transparent);
-                    border-bottom: 1px solid var(--wolf-red);
-                }
         }
     </style>
 </head>
 <body>
+    <div id="bg-canvas"></div>
 
     <nav class="wolf-nav">
         <a href="index.html" class="nav-link active">🏠 Home</a>
@@ -278,25 +369,25 @@
 
             <div class="main-content">
                 <div class="card card-gold">
-                    <div style="display:flex; justify-content:space-between;">
-                        <span style="color:var(--accent-gold); font-weight:bold;">🔥 ROLE OF THE WEEK</span>
-                        <span style="color:#666;">By Kadir Bayar</span>
+                    <div style="display:flex; justify-content:space-between; align-items: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 10px; margin-bottom: 15px;">
+                        <span style="color:var(--accent-gold); font-weight:bold; letter-spacing: 1px;">🔥 ROLE OF THE WEEK</span>
+                        <span style="color:#888; font-size: 0.9rem;">By Kadir Bayar</span>
                     </div>
                     <div class="role-highlight">
                         <div class="role-icon">🧛‍♂️</div>
                         <div>
-                            <h2>The Blood Mage</h2>
-                            <p><strong>Ability:</strong> Can sacrifice 10% of their Cult Rate to revive a dead player as a Ghoul.</p>
-                            <p><em>"Power comes at a price..."</em></p>
+                            <h2 style="border:none; margin-bottom: 5px; color: var(--accent-gold);">The Blood Mage</h2>
+                            <p style="color: #ddd;"><strong>Ability:</strong> Can sacrifice 10% of their Cult Rate to revive a dead player as a Ghoul.</p>
+                            <p style="color: #aaa; font-style: italic; margin-top: 10px;">"Power comes at a price..."</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="card card-blue">
                     <h2>📘 How This Workshop Works</h2>
-                    <ul style="line-height: 1.8; color: #ccc;">
-                        <li><strong>Browse Ideas:</strong> Click "Test Designs" above to see experimental roles.</li>
-                        <li><strong>Give Feedback:</strong> Upvote roles you want to see in the game.</li>
+                    <ul style="line-height: 1.8; color: #ccc; padding-left: 20px;">
+                        <li style="margin-bottom: 10px;"><strong>Browse Ideas:</strong> Click "Test Designs" above to see experimental roles.</li>
+                        <li style="margin-bottom: 10px;"><strong>Give Feedback:</strong> Upvote roles you want to see in the game.</li>
                         <li><strong>Submit Your Own:</strong> Use the form on the right to send ideas directly to the Dev Team.</li>
                     </ul>
                 </div>
@@ -305,11 +396,11 @@
             <div class="sidebar">
                 <div class="card">
                     <h2>📝 Suggest a Role</h2>
-                    <p style="font-size: 0.9rem; color: #aaa;">Got a crazy idea? Send it here.</p>
+                    <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 20px;">Got a crazy idea? Send it here.</p>
 
                     <form id="suggestionForm">
                         <label>Role Name & Emoji</label>
-                        <input type="text" id="roleName" placeholder="e.g., 👺 The Traitor" required>
+                        <input type="text" id="roleName" placeholder="e.g., 👺 Tanner" required>
 
                         <label>Category</label>
                         <select id="roleCategory">
@@ -384,4 +475,3 @@
     <script src="loader.js"></script>
 </body>
 </html>
-

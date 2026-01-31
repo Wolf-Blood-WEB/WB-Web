@@ -6,335 +6,451 @@
     <title>Wolf Blood | EVO MOD</title>
     <link rel="icon" type="image/jpg" href="WB-Idea.jpg">
     <link rel="stylesheet" href="loader.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Share+Tech+Mono&family=Inter:wght@300;400;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>    
     <style>
         :root {
-            --bg-dark: #121212;
-            --bg-card: #1e1e1e;
-            --wolf-red: #8a0303;
-            --text-main: #e0e0e0;
-            --text-dim: #a0a0a0;
-            --accent-gold: #d4af37;
+            --bg-dark: #020202;
             --toxic-green: #39ff14;
             --toxic-dim: #1a4d0f;
+            --warning-red: #ff003c;
+            --card-bg: rgba(10, 20, 10, 0.85);
+            --glitch-offset: 2px;
         }
+        * { box-sizing: border-box; }
         body {
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
+            padding: 0;
+            font-family: 'Share Tech Mono', monospace;
             background-color: var(--bg-dark);
-            color: var(--text-main);
+            color: #e0e0e0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+            filter: contrast(1.2) brightness(0.8);
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.3;
+        }
+        h1, h2, h3 {
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
         .wolf-nav {
             display: flex;
             justify-content: center;
-            background-color: #000;
-            border-bottom: 3px solid var(--wolf-red);
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 2px solid var(--toxic-dim);
             padding: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
             overflow-x: auto;
         }
         .nav-link {
             text-decoration: none;
-            color: var(--text-dim);
-            padding: 15px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: 0.3s;
+            color: #666;
+            padding: 18px 25px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s ease;
             display: block;
             white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Inter', sans-serif;
+        }        
+        .nav-link:hover {
+            color: var(--toxic-green);
+            text-shadow: 0 0 8px var(--toxic-green);
+            background: rgba(57, 255, 20, 0.05);
         }
-            .nav-link:hover {
-                color: var(--wolf-red);
-                background-color: rgba(255, 255, 255, 0.05);
-            }
-            .nav-link.active {
-                color: var(--text-main);
-                background: linear-gradient(to top, rgba(138, 3, 3, 0.2), transparent);
-                border-bottom: 3px solid var(--wolf-red);
-            }
-
+        .nav-link.active {
+            color: var(--toxic-green);
+            background: linear-gradient(to top, var(--toxic-dim), transparent);
+            border-bottom: 3px solid var(--toxic-green);
+            box-shadow: 0 -5px 15px rgba(57, 255, 20, 0.2) inset;
+        }
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
         }
         .evo-header {
             text-align: center;
-            margin: 40px 0;
-            border-bottom: 1px solid #333;
-            padding-bottom: 30px;
+            margin: 60px 0;
+            position: relative;
         }
-            .evo-header h1 {
-                font-size: 3rem;
-                color: var(--text-main);
-                text-transform: uppercase;
-                letter-spacing: 4px;
-                text-shadow: 0 0 10px var(--toxic-green);
-            }
-
+        .evo-title-glitch {
+            font-size: 4rem;
+            color: #fff;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            text-shadow: 2px 2px var(--warning-red), -2px -2px var(--toxic-green);
+            animation: glitch-skew 3s infinite linear alternate-reverse;
+        }
+        .evo-title-glitch::before,
+        .evo-title-glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+        }
+        .evo-title-glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 var(--warning-red);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .evo-title-glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 var(--toxic-green);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(33px, 9999px, 11px, 0); }
+            20% { clip: rect(89px, 9999px, 99px, 0); }
+            40% { clip: rect(3px, 9999px, 36px, 0); }
+            60% { clip: rect(65px, 9999px, 12px, 0); }
+            80% { clip: rect(12px, 9999px, 56px, 0); }
+            100% { clip: rect(95px, 9999px, 4px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(2px, 9999px, 87px, 0); }
+            20% { clip: rect(45px, 9999px, 2px, 0); }
+            40% { clip: rect(12px, 9999px, 67px, 0); }
+            60% { clip: rect(98px, 9999px, 12px, 0); }
+            80% { clip: rect(34px, 9999px, 82px, 0); }
+            100% { clip: rect(56px, 9999px, 34px, 0); }
+        }
+        @keyframes glitch-skew {
+            0% { transform: skew(1deg); }
+            10% { transform: skew(-1deg); }
+            20% { transform: skew(-3deg); }
+            30% { transform: skew(2deg); }
+            40% { transform: skew(0deg); }
+            100% { transform: skew(0deg); }
+        }
         .evo-subtitle {
             color: var(--toxic-green);
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-family: 'Share Tech Mono', monospace;
             font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-top: 10px;
+            text-shadow: 0 0 10px var(--toxic-green);
         }
         .chaos-box {
-            background: linear-gradient(145deg, #111, #0a1a0a);
+            background: rgba(10, 20, 10, 0.9);
             border: 1px solid var(--toxic-green);
-            color: #ccc;
-            padding: 20px;
-            margin: 20px auto;
+            color: #ddd;
+            padding: 25px;
+            margin: 40px auto;
             max-width: 800px;
             text-align: center;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.1);
-        }
-        .role-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 20px;
-            padding-bottom: 50px;
-        }
-        .evo-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 0 15px 0 15px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            color: var(--text-main);
-            display: block;
+            border-radius: 0;
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.15), inset 0 0 50px rgba(0,0,0,0.8);
             position: relative;
             overflow: hidden;
         }
-            .evo-card:hover {
-                transform: scale(1.05);
-                border-color: var(--toxic-green);
-                box-shadow: 0 0 15px var(--toxic-green);
-            }
-
+        .chaos-box::before {
+            content: "SYSTEM_UNSTABLE";
+            position: absolute;
+            top: 5px; right: 10px;
+            font-size: 0.7rem;
+            color: var(--warning-red);
+            font-weight: bold;
+            opacity: 0.7;
+            animation: pulse-red 1s infinite;
+        }
+        @keyframes pulse-red {
+            0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; }
+        }
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 25px;
+            padding-bottom: 80px;
+        }
+        .evo-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(57, 255, 20, 0.2);
+            clip-path: polygon(
+                10px 0, 100% 0, 
+                100% calc(100% - 10px), calc(100% - 10px) 100%, 
+                0 100%, 0 10px
+            );
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.1, 0.7, 1.0, 0.1);
+            color: #fff;
+            position: relative;
+            overflow: visible;
+        }
+        .evo-card::after {
+            content: "";
+            position: absolute;
+            bottom: 5px; right: 5px;
+            width: 10px; height: 10px;
+            border-right: 2px solid var(--toxic-green);
+            border-bottom: 2px solid var(--toxic-green);
+        }
+        .evo-card:hover {
+            background: #000;
+            border-color: var(--toxic-green);
+            box-shadow: 0 0 20px var(--toxic-green), inset 0 0 20px var(--toxic-green);
+            transform: scale(1.05) rotate(1deg);
+            z-index: 10;
+        }
+        .evo-card:hover .role-emoji {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) infinite;
+            filter: hue-rotate(90deg) contrast(1.5);
+        }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
         .role-emoji {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 10px;
+            transition: 0.3s;
+            filter: grayscale(0.5);
         }
         .role-name {
-            font-weight: bold;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 700;
             font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            color: var(--toxic-green);
         }
         .dna-mark {
             position: absolute;
             top: 5px;
-            right: 5px;
+            left: 5px;
             font-size: 0.8rem;
-            opacity: 0.5;
+            color: var(--toxic-green);
+            opacity: 0.7;
+            animation: spin 10s linear infinite;
         }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
         .modal-overlay {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 2000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.95);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px) grayscale(0.8);
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
+        .modal-overlay.show { opacity: 1; }
         .modal-content {
-            background-color: #000;
+            background-color: #050505;
             border: 2px solid var(--toxic-green);
+            box-shadow: 0 0 50px rgba(57, 255, 20, 0.4), inset 0 0 100px rgba(0,0,0,0.8);
             padding: 0;
             width: 95%;
-            max-width: 800px;
-            border-radius: 10px;
+            max-width: 900px;
             position: relative;
-            box-shadow: 0 0 50px rgba(57, 255, 20, 0.3);
             max-height: 90vh;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
+            transform: scale(0.9);
+            transition: transform 0.2s;
+            clip-path: polygon(
+                20px 0, 100% 0, 
+                100% calc(100% - 20px), calc(100% - 20px) 100%, 
+                0 100%, 0 20px
+            );
         }
+        .modal-overlay.show .modal-content { transform: scale(1); }
         .close-modal {
             position: absolute;
-            top: 10px;
+            top: 15px;
             right: 20px;
             font-size: 30px;
-            color: var(--toxic-green);
+            color: #666;
             cursor: pointer;
-            z-index: 10;
+            z-index: 100;
+            transition: 0.3s;
         }
+        .close-modal:hover { color: var(--warning-red); text-shadow: 0 0 10px var(--warning-red); }
         .evo-stage-container {
             display: flex;
             flex-wrap: wrap;
+            position: relative;
         }
         .stage-base {
             flex: 1;
-            padding: 30px;
-            background: #111;
-            border-right: 1px solid #333;
-            min-width: 250px;
-            opacity: 0.7;
+            padding: 40px;
+            background: rgba(20, 20, 20, 0.8);
+            border-right: 2px dashed #333;
+            min-width: 300px;
+            color: #aaa;
         }
         .stage-evo {
-            flex: 1;
-            padding: 30px;
-            background: linear-gradient(135deg, #051a05, #000);
-            min-width: 250px;
+            flex: 1.2;
+            padding: 40px;
+            background: radial-gradient(circle at center, #0a200a, #000);
+            min-width: 300px;
+            color: #fff;
             position: relative;
+            overflow: hidden;
         }
-        .evo-arrow {
+        .stage-evo::before {
+            content: "";
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: #000;
-            border: 1px solid var(--toxic-green);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 5;
+            top: 0; left: 0; width: 200%; height: 200%;
+            background: 
+                linear-gradient(rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57, 255, 20, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: grid-move 20s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes grid-move { 0% { transform: translate(0,0); } 100% { transform: translate(-40px, -40px); } }
+        .role-title {
             font-size: 1.5rem;
-            color: var(--toxic-green);
-        }
-        @media (max-width: 600px) {
-            .evo-stage-container {
-                flex-direction: column;
-            }
-            .stage-base {
-                border-right: none;
-                border-bottom: 1px solid #333;
-            }
-        }
-        h2 {
+            margin: 10px 0;
             text-transform: uppercase;
-            margin-bottom: 5px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+        .stage-evo .role-title {
+            color: var(--toxic-green);
+            text-shadow: 0 0 10px var(--toxic-green);
         }
         .evo-tag {
             background: var(--toxic-green);
             color: #000;
-            padding: 2px 8px;
-            font-weight: bold;
+            padding: 4px 10px;
+            font-weight: 800;
             font-size: 0.8rem;
-            border-radius: 4px;
             display: inline-block;
             margin-bottom: 15px;
+            box-shadow: 0 0 10px var(--toxic-green);
+            animation: blink-tag 2s infinite;
         }
-        ul {
-            padding-left: 20px;
-            line-height: 1.6;
-            color: #ccc;
-        }
-        li {
-            margin-bottom: 8px;
+        @keyframes blink-tag { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        ul { padding-left: 20px; line-height: 1.6; color: #ccc; }
+        li { margin-bottom: 8px; }
+        @media (max-width: 700px) {
+            .evo-stage-container { flex-direction: column; }
+            .stage-base { border-right: none; border-bottom: 2px dashed #333; }
+            .evo-arrow { top: auto; bottom: -25px; transform: translate(-50%, 0) rotate(45deg); }
         }
         footer {
-            background-color: #000;
-            border-top: 3px solid var(--wolf-red);
-            color: var(--text-dim);
-            padding: 50px 20px 20px;
+            background: #000;
+            border-top: 2px solid var(--toxic-dim);
+            color: #666;
+            padding: 60px 20px 20px;
             margin-top: 80px;
             font-size: 0.9rem;
-        }
+            position: relative;
+            z-index: 1;
+        }        
         .footer-content {
             max-width: 1280px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
+            gap: 40px;
             margin-bottom: 40px;
-        }
+        }        
         .footer-section h3 {
-            color: var(--text-main);
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-left: 3px solid var(--wolf-red);
-            padding-left: 10px;
-        }
-        .footer-section p {
-            line-height: 1.6;
-            color: #888;
-        }
+            border-left: 3px solid var(--toxic-green);
+            padding-left: 15px;
+            text-shadow: 0 0 5px var(--toxic-green);
+        }        
         .footer-links a {
             display: block;
-            color: var(--text-dim);
+            color: #888;
             text-decoration: none;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
         }
-            .footer-links a:hover {
-                color: var(--wolf-red);
-                transform: translateX(5px);
-            }
-
+        .footer-links a:hover {
+            color: var(--toxic-green);
+            padding-left: 10px;
+            text-shadow: 0 0 5px var(--toxic-green);
+        }        
         .footer-btn {
             display: inline-block;
-            background: #1e1e1e;
-            border: 1px solid #333;
-            color: white;
-            padding: 10px 20px;
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid var(--toxic-green);
+            color: var(--toxic-green);
+            padding: 12px 25px;
             text-decoration: none;
-            border-radius: 4px;
+            font-weight: bold;
             margin-top: 10px;
             transition: 0.3s;
-            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-            .footer-btn:hover {
-                background: var(--wolf-red);
-                border-color: var(--wolf-red);
-                box-shadow: 0 0 10px rgba(138, 3, 3, 0.4);
-            }
-
+        .footer-btn:hover {
+            background: var(--toxic-green);
+            color: #000;
+            box-shadow: 0 0 20px var(--toxic-green);
+        }        
         .footer-bottom {
             text-align: center;
-            border-top: 1px solid #222;
-            padding-top: 20px;
-            color: #555;
+            border-top: 1px solid #1a1a1a;
+            padding-top: 30px;
+            color: #444;
             font-size: 0.8rem;
-        }
-        @media (max-width: 768px) {
-            .wolf-nav {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                height: auto;
-                overflow-x: hidden;
-                white-space: normal;
-                padding: 0;
-                border-bottom: 3px solid var(--wolf-red);
-            }
-            .nav-link {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                border-bottom: 1px solid #333;
-                border-right: 1px solid #333;
-                padding: 15px 5px;
-                font-size: 14px;
-                width: auto;
-            }
-                .nav-link:nth-child(even) {
-                    border-right: none;
-                }
-                .nav-link:nth-last-child(1),
-                .nav-link:nth-last-child(2) {
-                    border-bottom: none;
-                }
-                .nav-link.active {
-                    background: linear-gradient(to top, rgba(138, 3, 3, 0.4), transparent);
-                    border-bottom: 1px solid var(--wolf-red);
-                }
         }
     </style>
 </head>
 <body>
+    <div id="bg-canvas"></div>
 
     <nav class="wolf-nav">
         <a href="index.html" class="nav-link">🏠 Home</a>
@@ -348,11 +464,11 @@
     <div class="container">
 
         <div class="evo-header">
-            <h1>EVO MOD</h1>
+            <h1 class="evo-title-glitch" data-text="EVO MOD">EVO MOD</h1>
             <p class="evo-subtitle">🧬 They grow. They change. They ruin everything. 🔥</p>
 
             <div class="chaos-box">
-                <strong>Forget balance. Forget mercy.</strong><br>
+                <strong style="color:var(--toxic-green); font-size:1.2rem; text-transform:uppercase;">Forget balance. Forget mercy.</strong><br><br>
                 EVO MOD is about upgrading classic roles into monstrous versions of themselves.<br>
                 This is for chaotic thrill-seekers who want to watch their game spiral into beautiful madness.
             </div>
@@ -557,8 +673,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🍻</div><div class="role-title">The Drunk</div>
-                    <p style="font-size:0.9rem;">Congrats! You're the village drunk! (and really, everyone knows it...). Usually just a villager, but if Wolves eat you, they miss their kill the next night.</p>
-                </div>
+                    <p>Congrats! You're the village drunk! (and really, everyone knows it...). Usually just a villager, but if Wolves eat you, they miss their kill the next night.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Drunk</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🍻</div>
@@ -568,15 +684,15 @@
             </div>
         </div>
     </div>
-
+    
     <div id="evoApprenticeModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🙇</div><div class="role-title">Apprentice Seer</div>
-                    <p style="font-size:0.9rem;">You are the apprentice seer. If the (real) seer dies, you will take their place as the seer.</p>
-                </div>
+                    <p>You are the apprentice seer. If the (real) seer dies, you will take their place as the seer.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Apprentice</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🙇</div>
@@ -593,8 +709,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🧪</div><div class="role-title">Chemist</div>
-                    <p style="font-size:0.9rem;">You are the Chemist, a mad scientist experimenting on living beings. On the first night, you prepare 4 potions (2 poison, 2 harmless). You can choose a target to give one of each. If a bad role dies from poison, you get 2 extra potions. Must wait 1 day before visiting another player.</p>
-                </div>
+                    <p>You are the Chemist, a mad scientist experimenting on living beings. On the first night, you prepare 4 potions (2 poison, 2 harmless). You can choose a target to give one of each.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Chemist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪</div>
@@ -604,20 +720,20 @@
             </div>
         </div>
     </div>
-
+    
     <div id="evoMayorModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🎖</div><div class="role-title">Mayor</div>
-                    <p style="font-size:0.9rem;">You are the Mayor. Your vote counts as two during the day once revealed.</p>
-                </div>
+                    <p>You are the Mayor. Your vote counts as two during the day once revealed.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Mayor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎖</div>
                     <p>After revealing himself, if any village role dies by lynching the mayor gets an extra vote.</p>
-                    <ul style="font-size:0.9rem; text-align:left; color:#ccc;">
+                    <ul>
                         <li>If 1 village die, vote will be 3</li>
                         <li>If 2 village die, vote will be 4</li>
                         <li>If 3 village die, vote will be 5 etc.</li>
@@ -633,13 +749,13 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">👷</div><div class="role-title">Mason</div>
-                    <p style="font-size:0.9rem;">You are a Mason. If there are any other masons, you will know who they are. Otherwise, you are a villager.</p>
-                </div>
+                    <p>You are a Mason. If there are any other masons, you will know who they are. Otherwise, you are a villager.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Mason</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👷</div>
                     <p>If you are not alone, for every mason member each all of you gain 10% faith against Cultist.</p>
-                    <ul style="font-size:0.9rem; text-align:left; color:#ccc;">
+                    <ul>
                         <li>2 mason -> 90% CV rate</li>
                         <li>3 mason -> 80% CV rate</li>
                         <li>4 mason -> 70% CV rate</li>
@@ -657,8 +773,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">⚡️</div><div class="role-title">Alpha Wolf</div>
-                    <p style="font-size:0.9rem;">You are the Alpha Wolf; the source of the scourge. Each night, you will choose a human to attack and kill, but as long as you are alive, your victim has a 20% chance of turning into a werewolf.</p>
-                </div>
+                    <p>You are the Alpha Wolf; the source of the scourge. Each night, you will choose a human to attack and kill, but as long as you are alive, your victim has a 20% chance of turning into a werewolf.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Alpha Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">⚡️</div>
@@ -674,8 +790,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🎩</div><div class="role-title">Boss</div>
-                    <p style="font-size:0.9rem;">You have a strong dislike for cultists. Whenever you encounter a cult, you join their ranks by pretending to be one of them. The cultists are unaware of your true identity, and every night you discreetly report the number of cultists to the village team.</p>
-                </div>
+                    <p>You have a strong dislike for cultists. Whenever you encounter a cult, you join their ranks by pretending to be one of them.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Boss</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎩</div>
@@ -691,8 +807,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🦅</div><div class="role-title">Augur</div>
-                    <p style="font-size:0.9rem;">You are the Augur. You have the power to see things, quite different from the seer. You are the only one who can see roles that are not in the village, and not even see one of them twice!</p>
-                </div>
+                    <p>You are the Augur. You are the only one who can see roles that are not in the village!</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Augur</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦅</div>
@@ -708,8 +824,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">👺</div><div class="role-title">Tanner</div>
-                    <p style="font-size:0.9rem;">You are the tanner. If you get lynched, you win automatically!</p>
-                </div>
+                    <p>You are the tanner. If you get lynched, you win automatically!</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Tanner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👺</div>
@@ -725,8 +841,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🔥</div><div class="role-title">Arsonist</div>
-                    <p style="font-size:0.9rem;">You are the Arsonist. Each night, you may either douse a house with kerosene or spark, burning all previously doused houses. You can only win if you are the only survivor.</p>
-                </div>
+                    <p>You are the Arsonist. Each night, you may either douse a house with kerosene or spark, burning all previously doused houses.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Arsonist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔥</div>
@@ -742,8 +858,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🧑🌚</div><div class="role-title">WolfMan</div>
-                    <p style="font-size:0.9rem;">You are the WolfMan! Since you spend most of your time in the woods where there are real wolves, the Seer will get confused and think you are a werewolf! Oh no....</p>
-                </div>
+                    <p>You are the WolfMan! The Seer will get confused and think you are a werewolf!</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Wolfman</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧑🌚</div>
@@ -759,8 +875,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🐺🌝</div><div class="role-title">Lycan</div>
-                    <p style="font-size:0.9rem;">You are the lycan! You are a wolf, but the seer will be confused and see you as a villager :)</p>
-                </div>
+                    <p>You are the lycan! You are a wolf, but the seer will be confused and see you as a villager :)</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Lycan</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🌝</div>
@@ -776,8 +892,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">💂</div><div class="role-title">Cultist Hunter</div>
-                    <p style="font-size:0.9rem;">You are the Cultist Hunter, trying to stop the cult in town from converting everyone! Each night, choose a player. If they are a cultist, they die. If the cult tries to convert you, the cult's newest member dies.</p>
-                </div>
+                    <p>You are the Cultist Hunter. Each night, choose a player. If they are a cultist, they die.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Cultist Hunter</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💂</div>
@@ -793,8 +909,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">👤</div><div class="role-title">Cultist</div>
-                    <p style="font-size:0.9rem;">You are a cultist. Every night, you may choose a player to convert to a cultist. If all remaining living players at the end are cultists, they win.</p>
-                </div>
+                    <p>You are a cultist. Every night, you may choose a player to convert to a cultist.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Cultist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👤</div>
@@ -810,8 +926,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🐺🌚</div><div class="role-title">Shadow Wolf</div>
-                    <p style="font-size:0.9rem;">You are a Shadow Wolf. You can kill someone every night. But you have a shadow ability that is different from all wolves. When you use your abilities, the shadows will hide the villagers' votes showing up as '?' in the bot, but they will remain visible to the group.</p>
-                </div>
+                    <p>You are a Shadow Wolf. When you use your abilities, the shadows will hide the villagers' votes.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Shadow Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🌚</div>
@@ -827,8 +943,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🐺❄️</div><div class="role-title">Snow Wolf</div>
-                    <p style="font-size:0.9rem;">You are the Snow Wolf. Every night, instead of following your pack to hunt someone, you skulk around on your own to freeze someone. A frozen person will be unable to use any night actions.</p>
-                </div>
+                    <p>You are the Snow Wolf. Every night you freeze someone. A frozen person will be unable to use any night actions.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Snow Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺❄️</div>
@@ -844,8 +960,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">👁</div><div class="role-title">Beholder</div>
-                    <p style="font-size:0.9rem;">You are the beholder, you will be told who the (real) seer is - that is your only function.</p>
-                </div>
+                    <p>You are the beholder, you will be told who the (real) seer is - that is your only function.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Beholder</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👁</div>
@@ -861,8 +977,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🎯</div><div class="role-title">Hunter</div>
-                    <p style="font-size:0.9rem;">You are the town Hunter. If you die, you can choose someone else to kill. If you are eaten, you have a chance to take a werewolf down.</p>
-                </div>
+                    <p>You are the town Hunter. If you die, you can choose someone else to kill.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Hunter</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎯</div>
@@ -878,8 +994,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">♟</div><div class="role-title">Pawn</div>
-                    <p style="font-size:0.9rem;">You are the Pawn. Every night you will choose someone to protect. If your target gets attacked, you will sacrifice yourself. If you try to protect a Wolf or Serial Killer, you will die.</p>
-                </div>
+                    <p>Every night you will choose someone to protect. If your target gets attacked, you will sacrifice yourself.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Pawn</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">♟</div>
@@ -895,8 +1011,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">😵‍💫</div><div class="role-title">Slave</div>
-                    <p style="font-size:0.9rem;">You are the Slave. You don't side with any team. Your sole purpose is to deliver the target given to you into the merciless hands of justice. You win if your target is lynched.</p>
-                </div>
+                    <p>You win if your target is lynched.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Slave</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">😵‍💫</div>
@@ -912,8 +1028,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🧜</div><div class="role-title">Poseidon</div>
-                    <p style="font-size:0.9rem;">You are Poseidon. Once per game, you can kill a random player on the village team by unleashing a tsunami.</p>
-                </div>
+                    <p>Once per game, you can kill a random player on the village team by unleashing a tsunami.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Poseidon</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧜</div>
@@ -929,8 +1045,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🔮</div><div class="role-title">Sorcerer</div>
-                    <p style="font-size:0.9rem;">You are the Sorcerer, allying yourself with creatures of the night. At night you will use your power to find the wolves or the Seer. You win only if the wolves win.</p>
-                </div>
+                    <p>At night you will use your power to find the wolves or the Seer. You win only if the wolves win.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Sorcerer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔮</div>
@@ -946,8 +1062,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🕵️‍♂️</div><div class="role-title">Detective</div>
-                    <p style="font-size:0.9rem;">You are the detective. During the day, you may choose a player to reveal their role. However - in doing so, your role could be revealed to the wolves! (40% chance).</p>
-                </div>
+                    <p>During the day, you may choose a player to reveal their role. However in doing so, your role could be revealed to the wolves! (40% chance).</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Detective</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🕵️‍♂️</div>
@@ -963,8 +1079,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">👼</div><div class="role-title">Guardian Angel</div>
-                    <p style="font-size:0.9rem;">You are the Guardian Angel. Each night, you may choose a player to save. However, if you choose a wolf, there is a 50% chance you will die.</p>
-                </div>
+                    <p>You are the Guardian Angel. Each night, you may choose a player to save.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Guardian Angel</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👼</div>
@@ -980,8 +1096,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🤕</div><div class="role-title">Clumsy Guy</div>
-                    <p style="font-size:0.9rem;">You are a regular villager, but your clumsiness sometimes causes you to vote for the wrong person randomly.</p>
-                </div>
+                    <p>You are a regular villager, but your clumsiness sometimes causes you to vote for the wrong person randomly.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Clumsy Guy</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🤕</div>
@@ -997,8 +1113,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">👳</div><div class="role-title">Seer</div>
-                    <p style="font-size:0.9rem;">You are the seer. Each night, you may choose a player to 'see', and reveal their role to you.</p>
-                </div>
+                    <p>You are the seer. Each night, you may choose a player to 'see', and reveal their role to you.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Seer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👳</div>
@@ -1014,8 +1130,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🃏</div><div class="role-title">Fool</div>
-                    <p style="font-size:0.9rem;">The fool is told they are the seer.... when they choose to see someone's role at night, they are told a random role.</p>
-                </div>
+                    <p>The fool is told they are the seer.... when they choose to see someone's role at night, they are told a random role.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Fool</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🃏</div>
@@ -1031,8 +1147,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">💀</div><div class="role-title">Skeleton</div>
-                    <p style="font-size:0.9rem;">You are the Skeleton. After death, your spirit continues to live and you can block the abilities and voting of any player for 1 day. One time use.</p>
-                </div>
+                    <p>You are the Skeleton. After death, your spirit continues to live and you can block the abilities and voting of any player for 1 day. One time use.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Skeleton</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💀</div>
@@ -1048,8 +1164,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🖕</div><div class="role-title">Traitor</div>
-                    <p style="font-size:0.9rem;">Traitor! For now, you are a villager, but once all the wolves die, you will become a werewolf.</p>
-                </div>
+                    <p>Traitor! For now, you are a villager, but once all the wolves die, you will become a werewolf.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Traitor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🖕</div>
@@ -1065,8 +1181,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🔫</div><div class="role-title">Gunner</div>
-                    <p style="font-size:0.9rem;">You are the gunner. You have two bullets. During the day, you may choose to shoot another player.</p>
-                </div>
+                    <p>You are the gunner. You have two bullets. During the day, you may choose to shoot another player.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Gunner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔫</div>
@@ -1082,8 +1198,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">💋</div><div class="role-title">Harlot</div>
-                    <p style="font-size:0.9rem;">You are the Harlot. During the night, you may choose to visit another player. If you visit a wolf or someone killed by wolf, you die.</p>
-                </div>
+                    <p>You are the Harlot. During the night, you may choose to visit another player.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Harlot</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💋</div>
@@ -1099,8 +1215,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">😾</div><div class="role-title">Cursed</div>
-                    <p style="font-size:0.9rem;">You are cursed. You are a villager at this time, but if the wolves choose to kill you, you will become a werewolf yourself.</p>
-                </div>
+                    <p>You are cursed. You are a villager at this time, but if the wolves choose to kill you, you will become a werewolf yourself.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Cursed</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">😾</div>
@@ -1116,8 +1232,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🎭</div><div class="role-title">Doppelgänger</div>
-                    <p style="font-size:0.9rem;">You are a Doppelgänger. Choose a player, when that player dies, you will take on their role.</p>
-                </div>
+                    <p>You are a Doppelgänger. Choose a player, when that player dies, you will take on their role.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Doppelgänger</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎭</div>
@@ -1133,8 +1249,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🏹</div><div class="role-title">Cupid</div>
-                    <p style="font-size:0.9rem;">You are Cupid. You get to choose two players to love each other for eternity. If one of them dies, the other one dies of sorrow.</p>
-                </div>
+                    <p>You are Cupid. You get to choose two players to love each other for eternity. If one of them dies, the other one dies of sorrow.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Cupid</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🏹</div>
@@ -1150,8 +1266,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">📚</div><div class="role-title">Wise Elder</div>
-                    <p style="font-size:0.9rem;">You are the Wise Elder. You can survive a werewolf attack once.</p>
-                </div>
+                    <p>You are the Wise Elder. You can survive a werewolf attack once.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Wise Elder</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">📚</div>
@@ -1167,8 +1283,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">👶</div><div class="role-title">Wild Child</div>
-                    <p style="font-size:0.9rem;">You are a wild child! Pick a player to be your 'role model' - if they die, you become a werewolf.</p>
-                </div>
+                    <p>You are a wild child! Pick a player to be your 'role model' - if they die, you become a werewolf.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Wild Child</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👶</div>
@@ -1184,8 +1300,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🐺🧧</div><div class="role-title">Rogue Wolf</div>
-                    <p style="font-size:0.9rem;">You are the Rogue Wolf. During the first night, you have the opportunity to select one player to impersonate. If you get checked or meet your demise, your role will be seen as your target's.</p>
-                </div>
+                    <p>You are the Rogue Wolf. During the first night, you have the opportunity to select one player to impersonate.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Rogue Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🧧</div>
@@ -1201,8 +1317,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🐺🪄</div><div class="role-title">Illusionist Wolf</div>
-                    <p style="font-size:0.9rem;">At the beginning of the game, you will be told a random villager role. If seer checks you, they’ll see that fake role instead. If you get lynched, the unlucky villager tied to your illusion goes down with you!</p>
-                </div>
+                    <p>If seer checks you, they’ll see that fake role instead. If you get lynched, the unlucky villager tied to your illusion goes down with you!</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Illusionist Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🪄</div>
@@ -1218,8 +1334,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🦜</div><div class="role-title">Snitch</div>
-                    <p style="font-size:0.9rem;">Snitch is the nosiest resident in the entire village. On his final breath, snitch can make any player reveal their identity by snitching on their deepest darkest secret.</p>
-                </div>
+                    <p>On his final breath, snitch can make any player reveal their identity by snitching on their deepest darkest secret.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Snitch</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦜</div>
@@ -1235,8 +1351,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🐺✨</div><div class="role-title">Conjurer Wolf</div>
-                    <p style="font-size:0.9rem;">You are the Conjurer Wolf. When you use your talent, the person with the fewest votes in the lynching vote will die, not the one with the most votes.</p>
-                </div>
+                    <p>You are the Conjurer Wolf. When you use your talent, the person with the fewest votes in the lynching vote will die.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Conjurer Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺✨</div>
@@ -1252,8 +1368,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🦸‍♂️</div><div class="role-title">Executioner</div>
-                    <p style="font-size:0.9rem;">Once the Executioner's true identity is revealed, he turns the tables by accusing someone in the village. Unexpectedly, the villagers are now required to cast their votes for the Executioner's chosen target.</p>
-                </div>
+                    <p>Once revealed, the villagers are now required to cast their votes for the Executioner's chosen target.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Executioner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦸‍♂️</div>
@@ -1269,8 +1385,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🪖</div><div class="role-title">Soldier</div>
-                    <p style="font-size:0.9rem;">When the sun rises, you can choose to save someone from lynching votes. If the chosen player is targeted for lynching and dies, you have a one-time ability to redirect the lynching votes to another player.</p>
-                </div>
+                    <p>When the sun rises, you can choose to save someone from lynching votes.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Soldier</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🪖</div>
@@ -1286,8 +1402,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🛐</div><div class="role-title">Preacher</div>
-                    <p style="font-size:0.9rem;">You are the Preacher. During the night, you can pray for a player. If the player you prayed for is killed, you will learn the identity of their killer and their role.</p>
-                </div>
+                    <p>You are the Preacher. During the night, you can pray for a player.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Preacher</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🛐</div>
@@ -1303,13 +1419,13 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🔪</div><div class="role-title">Serial Killer</div>
-                    <p style="font-size:0.9rem;">You are the serial killer. Recently escaped from the local asylum, your goal is for everyone else to die. Every night, you can add a player's body to your collection.</p>
-                </div>
+                    <p>You are the serial killer. Recently escaped from the local asylum, your goal is for everyone else to die.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Serial Killer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔪</div>
                     <p>Do you want to know what evolution do you have? What can you be more? Simple, every night you get more victim from previous night. You will get a strike!</p>
-                    <ul style="font-size:0.9rem; text-align:left; color:#ccc;">
+                    <ul>
                         <li>N1: Killed 1 player</li>
                         <li>N2: Killed 2 player</li>
                         <li>N3: Killed 3 player</li>
@@ -1327,8 +1443,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">⛏️</div><div class="role-title">Miner</div>
-                    <p style="font-size:0.9rem;">You're a Miner. Every night you dig tunnels into villagers' houses. Thanks to the tunnels you dug, players with night actions will miss their goals and go to a random house.</p>
-                </div>
+                    <p>You're a Miner. Every night you dig tunnels into villagers' houses.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Miner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">⛏️</div>
@@ -1344,8 +1460,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🧑‍⚕️</div><div class="role-title">Doctor</div>
-                    <p style="font-size:0.9rem;">You are the Doctor, with a single touch, you can bring a player back to life, and remember, as the game grows, you can offer the chance of resurrection to more people.</p>
-                </div>
+                    <p>You are the Doctor, with a single touch, you can bring a player back to life.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Doctor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧑‍⚕️</div>
@@ -1361,8 +1477,8 @@
             <div class="evo-stage-container">
                 <div class="stage-base">
                     <h2>Base Form</h2><div style="font-size:3rem;">🐶</div><div class="role-title">Wolf Cub</div>
-                    <p style="font-size:0.9rem;">You are the Wolf Cub. If you happen to be killed, your wolf pack will fly into a rage and attack two people the next night.</p>
-                </div>
+                    <p>If you happen to be killed, your wolf pack will fly into a rage and attack two people the next night.</p>
+                </div>                
                 <div class="stage-evo">
                     <span class="evo-tag">MUTATION DETECTED</span>
                     <h2>EVO Wolf Cub</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐶</div>
@@ -1422,7 +1538,6 @@
 
     <script src="script.js"></script>
     <script src="loader.js"></script>
+
 </body>
 </html>
-
-
