@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-key="page-title-privacy">Wolfblood - Privacy Policy</title>
-    <link rel="icon" type="image/png" href="image/WB-Kopya.png">
+    <title data-key="page-title-license">Wolfblood - License & Copyright</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="image/WB-Kopya.png">    
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji" rel="stylesheet">    
     <link rel="stylesheet" href="Loader.css">
@@ -21,6 +21,7 @@
             --accent-color: #e53e3e;
             --accent-hover-color: #fc8181;
             --cyan: #06b6d4;
+            --green: #48bb78;
             --font-header: 'Lora', serif;
             --font-body: 'Nunito Sans', 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif;
         }
@@ -64,11 +65,20 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 1003;
         }
         .dropdown-toggle:hover {
             background-color: var(--accent-color);
             border-color: var(--accent-color);
             color: var(--header-color);
+        }
+        .dropdown-toggle .arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+        .language-dropdown.open .dropdown-toggle .arrow {
+            transform: rotate(180deg);
         }
         .dropdown-menu {
             display: block;
@@ -184,42 +194,58 @@
             font-style: italic;
         }
         .section-title {
-            color: var(--cyan);
+            color: var(--header-color);
             font-family: var(--font-header);
             font-size: 1.5rem;
             margin-top: 40px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-        }
-        .section-title::before {
-            content: '';
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-color);
-            margin-right: 12px;
-            transform: rotate(45deg);
+            border-left: 4px solid var(--cyan);
+            padding-left: 15px;
+            background: linear-gradient(90deg, rgba(6, 182, 212, 0.1), transparent);
+            padding-top: 5px;
+            padding-bottom: 5px;
         }
         p { margin-bottom: 20px; color: #cbd5e0; }
         ul { margin-bottom: 20px; padding-left: 20px; color: #cbd5e0; }
         li { margin-bottom: 10px; }
         strong { color: var(--header-color); }
-        .highlight { color: var(--accent-color); font-weight: bold; }
+        .highlight { color: var(--cyan); font-weight: bold; }
 
-        .contact-box {
-            background: rgba(0, 0, 0, 0.3);
+        .owner-badge {
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--cyan);
             padding: 20px;
             border-radius: 8px;
-            margin-top: 40px;
             text-align: center;
-            transition: transform 0.2s;
-        }        
-        .contact-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.2);
+            margin-bottom: 30px;
         }
+        .owner-tag {
+            display: inline-block;
+            background: var(--cyan);
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin: 0 5px;
+        }
+
+        .license-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .license-permitted {
+            background: rgba(72, 187, 120, 0.1);
+            border: 1px solid var(--green);
+        }
+        .license-prohibited {
+            background: rgba(229, 62, 62, 0.1);
+            border: 1px solid var(--accent-color);
+        }
+
         footer {
             background-color: rgba(0, 0, 0, 0.85);
             border-top: 3px solid var(--accent-color);
@@ -369,7 +395,7 @@
                 </div>
             </div>
             <h1><span class="emoji">🇹🇷</span> Wolf Blood 🐾</h1>
-            <p data-key="header-subtitle">Official Policy</p>
+            <p data-key="header-subtitle-license">License & Copyright</p>
         </header>
 
         <nav>
@@ -384,61 +410,62 @@
         </nav>
 
         <main>
-            <h2 class="page-title" data-key="privacy-title">Privacy Policy</h2>
-            <div class="last-updated" data-key="privacy-date">Last Updated: January 22, 2026</div>
+            <h2 class="page-title" data-key="license-title">License & Copyright</h2>
+            <div class="last-updated" data-key="license-established">Established: May 20, 2022</div>
 
-            <p data-key="privacy-intro">At <strong>Wolfblood</strong>, we value your privacy. As a game played via the Telegram messaging platform, we are committed to processing your data transparently and securely. This policy explains what information we collect, how we use it, and your rights regarding your data.</p>
-
-            <h3 class="section-title" data-key="privacy-sec1-title">1. Information We Collect</h3>
-            <p data-key="privacy-sec1-desc">When you interact with the Wolfblood bot (@wolfbloodbot), we collect specific data necessary to facilitate the gameplay experience. This information falls into two categories:</p>
-
-            <strong data-key="privacy-sec1-sub1">A. Telegram Public Information:</strong>
-            <ul>
-                <li data-key="privacy-sec1-li1"><strong>Telegram User ID:</strong> A unique numerical identifier provided by Telegram.</li>
-                <li data-key="privacy-sec1-li2"><strong>Username / First Name:</strong> To display your name in game lobbies and death messages.</li>
-                <li data-key="privacy-sec1-li3"><strong>Profile Picture URL:</strong> Used temporarily to generate game avatars or "wanted" posters within the game.</li>
-            </ul>
-
-            <strong data-key="privacy-sec1-sub2">B. Game Data:</strong>
-            <ul>
-                <li data-key="privacy-sec1-li4"><strong>Game Stats:</strong> Wins, losses, roles played, and ranking points (MMR).</li>
-                <li data-key="privacy-sec1-li5"><strong>Inventory:</strong> Items owned (Mints, Tokens, Tickets) and equipped cosmetics.</li>
-                <li data-key="privacy-sec1-li6"><strong>Group Activity:</strong> Logs of games played in specific Telegram groups for leaderboard calculation.</li>
-            </ul>
-
-            <h3 class="section-title" data-key="privacy-sec2-title">2. How We Use Your Data</h3>
-            <p data-key="privacy-sec2-desc">Your data is used strictly for the functionality of the game:</p>
-            <ul>
-                <li data-key="privacy-sec2-li1">To manage game sessions, track roles, and determine winners.</li>
-                <li data-key="privacy-sec2-li2">To maintain global and local leaderboards (Ranked Mode).</li>
-                <li data-key="privacy-sec2-li3">To prevent cheating and multi-accounting (Duplicate Account Detection).</li>
-                <li data-key="privacy-sec2-li4">To enforce our <strong>Community Guidelines</strong> (e.g., detecting spam or automated abuse).</li>
-            </ul>
-
-            <h3 class="section-title" data-key="privacy-sec3-title">3. Data Retention & Moderation</h3>
-            <p data-key="privacy-sec3-p1">We do not store private chat messages. However, gameplay logs (commands sent to the bot, actions taken during the night phase) are stored to ensure fair play.</p>
-            <p data-key="privacy-sec3-p2"><strong>Global Bans:</strong> If a user violates our Terms of Service (e.g., hate speech, botting), their Telegram User ID is added to a blocklist shared across all Wolfblood instances. This is necessary to protect the community.</p>
-
-            <h3 class="section-title" data-key="privacy-sec4-title">4. Third-Party Sharing</h3>
-            <p data-key="privacy-sec4-p1">We do <span class="highlight">not</span> sell, trade, or transfer your personally identifiable information to outside parties. Data is processed solely on our secure servers.</p>
-            <p data-key="privacy-sec4-p2"><em>Note: Since Wolfblood operates on Telegram, your interactions are also subject to Telegram's own Privacy Policy.</em></p>
-
-            <h3 class="section-title" data-key="privacy-sec5-title">5. Your Rights (GDPR & Deletion)</h3>
-            <p data-key="privacy-sec5-intro">You have the right to:</p>
-            <ul>
-                <li data-key="privacy-sec5-li1"><strong>Access:</strong> Request a copy of the data we hold about you (use the <code>/mydata</code> command).</li>
-                <li data-key="privacy-sec5-li2"><strong>Deletion:</strong> You can request the deletion of your account and game stats. This action is irreversible.</li>
-            </ul>
-            <p data-key="privacy-sec5-end">To request data deletion, please contact our support team or use the <code>/deleteaccount</code> command within the bot (requires confirmation).</p>
-
-            <h3 class="section-title" data-key="privacy-sec6-title">6. Security</h3>
-            <p data-key="privacy-sec6-desc">We implement a variety of security measures to maintain the safety of your personal information. Database access is restricted to authorized senior developers only.</p>
-
-            <div class="contact-box">
-                <h3 data-key="privacy-contact-title">Have Questions?</h3>
-                <p data-key="privacy-contact-desc">If you have any questions regarding this privacy policy, you may contact us via our support group.</p>
-                <a href="https://t.me/wolfbloodsupport" style="color: var(--cyan); font-weight: bold; text-decoration: none;" target="_blank" data-key="privacy-contact-link">Join Support Group ➔</a>
+            <div class="owner-badge">
+                <p data-key="license-owners-intro">This project is designed, developed, and maintained by:</p>
+                <div style="margin-top: 10px;">
+                    <span class="owner-tag">@kediben</span>
+                    <span class="owner-tag">@Halfcelse</span>
+                </div>
             </div>
+
+            <p data-key="license-intro">Wolfblood is a proprietary Telegram bot application. While it is inspired by the traditional social deduction game "Werewolf" (Mafia), the specific code, asset implementation, role balancing, and "Evolution" mechanics are the intellectual property of the Wolfblood Team.</p>
+
+            <h3 class="section-title" data-key="license-sec1-title">1. Ownership & Copyright</h3>
+            <p data-key="license-sec1-desc">All original content included in the Wolfblood Bot and on this website, such as text, graphics, logos, button icons, images, and software code, is the property of the Wolfblood Team and is protected by international copyright laws.</p>
+            <ul>
+                <li data-key="license-sec1-li1"><strong>Codebase:</strong> The Python/Telethon source code running the bot.</li>
+                <li data-key="license-sec1-li2"><strong>Assets:</strong> Custom "Wanted" poster templates, badge designs, and website UI.</li>
+                <li data-key="license-sec1-li3"><strong>Brand:</strong> The name "Wolfblood" and its specific stylized presentation within the Telegram ecosystem.</li>
+            </ul>
+
+            <h3 class="section-title" data-key="license-sec2-title">2. Permitted Use (Fan License)</h3>
+            <div class="license-box license-permitted">
+                <p data-key="license-permitted-intro"><strong>✅ You are encouraged to:</strong></p>
+                <ul style="margin-bottom: 0;">
+                    <li data-key="license-permitted-li1">Add the bot to your Telegram groups and play for free.</li>
+                    <li data-key="license-permitted-li2">Create content (YouTube videos, TikToks, Streams) featuring Wolfblood gameplay.</li>
+                    <li data-key="license-permitted-li3">Create community groups or "Support" chats to help other players.</li>
+                </ul>
+            </div>
+
+            <h3 class="section-title" data-key="license-sec3-title">3. Prohibited Actions</h3>
+            <div class="license-box license-prohibited">
+                <p data-key="license-prohibited-intro"><strong>❌ The following actions are strictly prohibited:</strong></p>
+                <ul style="margin-bottom: 0;">
+                    <li data-key="license-prohibited-li1"><strong>Cloning:</strong> Copying the source code or website design to create a competing "Clone" bot.</li>
+                    <li data-key="license-prohibited-li2"><strong>Impersonation:</strong> Claiming to be a developer, admin, or owner of Wolfblood.</li>
+                    <li data-key="license-prohibited-li3"><strong>Commercial Sale:</strong> Selling access to the bot, or selling in-game currency for real-world money (RMT) without authorization.</li>
+                </ul>
+            </div>
+
+            <h3 class="section-title" data-key="license-sec4-title">4. Open Source Acknowledgments</h3>
+            <p data-key="license-sec4-desc">This website and the bot may utilize third-party open-source libraries (e.g., Three.js for animations). These libraries remain subject to their respective licenses (such as the MIT License).</p>
+
+            <h3 class="section-title" data-key="license-sec5-title">5. Contact for Licensing</h3>
+            <p data-key="license-sec5-desc">For inquiries regarding partnerships, sponsorship, or obtaining permission for commercial use, please contact the owners directly via Telegram.</p>
+            
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+                <a href="https://t.me/kediben" target="_blank" class="footer-btn" style="background: var(--cyan); border-color: var(--cyan); color: #000;">
+                    📩 Contact @kediben
+                </a>
+                <a href="https://t.me/Halfcelse" target="_blank" class="footer-btn" style="background: var(--accent-color); border-color: var(--accent-color);">
+                    📩 Contact @Halfcelse
+                </a>
+            </div>
+
         </main>
 
         <footer>
@@ -495,12 +522,12 @@
             </div>
 
             <div class="footer-bottom">
-                <p data-key="footer-copyright">&copy; 2026 Wolfblood Bot Team. All rights reserved. | Designed with 🩸 and 🌙</p>
+                <p data-key="footer-copyright">&copy; 2022-2026 Wolfblood Bot Team. All rights reserved. | Designed with 🩸 and 🌙</p>
             </div>
         </footer>
     </div>
-    <script src="Loader.js"></script>
-    <script src="Translate.js"></script>
+    <script src="Loader.js" defer></script>
+    <script src="Translate.js" defer></script>
     <script src="Theme-Manager.js"></script>
 </body>
 </html>
