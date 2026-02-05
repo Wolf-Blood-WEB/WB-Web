@@ -17,6 +17,91 @@
             --text-dim: #a0a0a0;
             --accent-gold: #d4af37;
         }
+        .language-dropdown {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Inter', sans-serif;
+        }
+        .dropdown-toggle {
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid var(--wolf-red-dim);
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            min-width: 100px;
+            justify-content: space-between;
+        }
+            .dropdown-toggle:hover {
+                border-color: var(--wolf-red);
+                box-shadow: 0 0 15px rgba(138, 3, 3, 0.4);
+                background: rgba(20, 20, 20, 0.95);
+            }
+            .dropdown-toggle .arrow {
+                font-size: 0.7rem;
+                color: var(--text-dim);
+                transition: transform 0.3s ease;
+            }
+
+        .language-dropdown.open .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: rgba(5, 5, 5, 0.95);
+            border: 1px solid var(--wolf-red-dim);
+            border-radius: 6px;
+            width: 140px;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+        .language-dropdown.open .dropdown-menu {
+            display: flex;
+            animation: fadeIn menu 0.3s ease;
+        }
+        .dropdown-menu a {
+            padding: 12px 15px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s ease, color 0.2s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+            .dropdown-menu a:last-child {
+                border-bottom: none;
+            }
+            .dropdown-menu a:hover {
+                background: var(--wolf-red-dim);
+                color: white;
+                padding-left: 20px;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         body {
             margin: 0;
             padding: 0;
@@ -223,82 +308,99 @@
                     background: linear-gradient(to top, rgba(138, 3, 3, 0.4), transparent);
                     border-bottom: 1px solid var(--wolf-red);
                 }
+            .language-dropdown {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <script src="loader.js"></script>
+    <div class="language-dropdown">
+        <button class="dropdown-toggle">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span id="selected-lang-flag">🇺🇸</span>
+                <span id="selected-lang-code">EN</span>
+            </div>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" data-lang="en">🇺🇸 English</a>
+            <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+        </div>
+    </div>
 
     <nav class="wolf-nav">
-        <a href="index.html" class="nav-link">🏠 Home</a>
-        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
-        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
-        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
-        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
-        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+        <a href="index.html" class="nav-link" data-key="nav_home">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link" data-key="nav_test_designs">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link" data-key="nav_removed">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link" data-key="nav_board_game">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link" data-key="nav_evo_mod">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link" data-key="nav_achievements">🏆 Achievements</a>
     </nav>
 
     <div class="container">
 
         <div class="hero">
             <span class="hero-icon">🍪</span>
-            <h1>Cookie Usage</h1>
-            <p>We use digital cookies. Sadly, you cannot eat them.</p>
+            <h1 data-key="cookie_hero_title">Cookie Usage</h1>
+            <p data-key="cookie_hero_desc">We use digital cookies. Sadly, you cannot eat them.</p>
         </div>
 
         <div class="cookie-section">
-            <h2>1. What are Cookies?</h2>
-            <p>Cookies (and Local Storage) are small pieces of text sent to your browser by a website you visit. They help the site remember information about your visit, which makes it easier to visit the site again and makes the site more useful to you.</p>
-            <p>At <strong>Wolf Blood Workshop</strong>, we keep it simple. We don't use invasive tracking cookies to sell your data to the highest bidder.</p>
+            <h2 data-key="cookie_s1_title">1. What are Cookies?</h2>
+            <p data-key="cookie_s1_p1">Cookies (and Local Storage) are small pieces of text sent to your browser by a website you visit. They help the site remember information about your visit, which makes it easier to visit the site again and makes the site more useful to you.</p>
+            <p data-key="cookie_s1_p2">At <strong>Wolf Blood Workshop</strong>, we keep it simple. We don't use invasive tracking cookies to sell your data to the highest bidder.</p>
         </div>
 
         <div class="cookie-section">
-            <h2>2. The Cookie Jar (What we store)</h2>
-            <p>We primarily use <strong>Local Storage</strong>, which stays on your device and isn't sent to our servers. Here is exactly what we store:</p>
+            <h2 data-key="cookie_s2_title">2. The Cookie Jar (What we store)</h2>
+            <p data-key="cookie_s2_desc">We primarily use <strong>Local Storage</strong>, which stays on your device and isn't sent to our servers. Here is exactly what we store:</p>
 
             <table class="cookie-table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Purpose</th>
+                        <th data-key="tbl_name">Name</th>
+                        <th data-key="tbl_type">Type</th>
+                        <th data-key="tbl_purpose">Purpose</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><code>wb_theme_pref</code></td>
                         <td>Local Storage</td>
-                        <td>Remembers if you prefer Dark Mode (Default) or... well, there is only Dark Mode.</td>
+                        <td data-key="cookie_row1_desc">Remembers if you prefer Dark Mode (Default) or... well, there is only Dark Mode.</td>
                     </tr>
                     <tr>
                         <td><code>wb_read_roles</code></td>
                         <td>Local Storage</td>
-                        <td>Remembers which "New" roles you have clicked on so the notification dot disappears.</td>
+                        <td data-key="cookie_row2_desc">Remembers which "New" roles you have clicked on so the notification dot disappears.</td>
                     </tr>
                     <tr>
                         <td><code>wb_votes</code></td>
                         <td>Local Storage</td>
-                        <td>Prevents you from voting on the same role multiple times (Basic spam protection).</td>
+                        <td data-key="cookie_row3_desc">Prevents you from voting on the same role multiple times (Basic spam protection).</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <div class="cookie-section">
-            <h2>3. Third-Party Services</h2>
-            <p>We use some external tools that might place their own cookies. We don't control these, but they are standard for the web:</p>
+            <h2 data-key="cookie_s3_title">3. Third-Party Services</h2>
+            <p data-key="cookie_s3_desc">We use some external tools that might place their own cookies. We don't control these, but they are standard for the web:</p>
             <ul>
-                <li><strong>Loader Animation (Three.js):</strong> Loads graphics libraries from CDNs (Content Delivery Networks) which may cache files for faster loading.</li>
-                <li><strong>Telegram Links:</strong> Clicking "Join the Pack" takes you to Telegram. They have their own cookie policy, which is probably much longer than ours.</li>
+                <li data-key="cookie_s3_li1"><strong>Loader Animation (Three.js):</strong> Loads graphics libraries from CDNs (Content Delivery Networks) which may cache files for faster loading.</li>
+                <li data-key="cookie_s3_li2"><strong>Telegram Links:</strong> Clicking "Join the Pack" takes you to Telegram. They have their own cookie policy, which is probably much longer than ours.</li>
             </ul>
         </div>
 
         <div class="cookie-section">
-            <h2>4. How to Manage Cookies</h2>
-            <p>If you really hate these helpful little files, you can delete them.</p>
-            <p>Go to your browser settings (Chrome, Firefox, Edge, Safari) -> <strong>Privacy & Security</strong> -> <strong>Clear Browsing Data</strong>. Select "Cookies and other site data."</p>
-            <p><em>Warning: If you do this, the site might forget which roles you've already voted for.</em></p>
+            <h2 data-key="cookie_s4_title">4. How to Manage Cookies</h2>
+            <p data-key="cookie_s4_p1">If you really hate these helpful little files, you can delete them.</p>
+            <p data-key="cookie_s4_p2">Go to your browser settings (Chrome, Firefox, Edge, Safari) -> <strong>Privacy & Security</strong> -> <strong>Clear Browsing Data</strong>. Select "Cookies and other site data."</p>
+            <p><em data-key="cookie_s4_warning">Warning: If you do this, the site might forget which roles you've already voted for.</em></p>
         </div>
 
     </div>
@@ -308,49 +410,50 @@
 
             <div class="footer-section">
                 <h3>🐺 Wolf Blood</h3>
-                <p>
+                <p data-key="footer_about">
                     The ultimate hub for experimental roles, game modes, and community chaos.
                     From the forest to the tabletop, we evolve the game.
                 </p>
             </div>
 
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3 data-key="footer_nav_title">Navigation</h3>
                 <div class="footer-links">
-                    <a href="index.html">🏠 Home</a>
-                    <a href="test_designs.html">🧪 Test Designs</a>
-                    <a href="removed.html">♻️ Graveyard</a>
-                    <a href="board_game.html">🎲 Board Game</a>
-                    <a href="evo_mod.html">🧬 Evo Mod</a>
-                    <a href="achievements.html">🏆 Achievements</a>
+                    <a href="index.html" data-key="nav_home">🏠 Home</a>
+                    <a href="test_designs.html" data-key="nav_test_designs">🧪 Test Designs</a>
+                    <a href="removed.html" data-key="nav_removed">♻️ Graveyard</a>
+                    <a href="board_game.html" data-key="nav_board_game">🎲 Board Game</a>
+                    <a href="evo_mod.html" data-key="nav_evo_mod">🧬 Evo Mod</a>
+                    <a href="achievements.html" data-key="nav_achievements">🏆 Achievements</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Legal & Help</h3>
+                <h3 data-key="footer_legal_title">Legal & Help</h3>
                 <div class="footer-links">
-                    <a href="faq.html">❓ FAQ</a>
-                    <a href="policy.html">🛡️ Privacy Policy</a>
-                    <a href="terms.html">📜 Terms of Service</a>
-                    <a href="cookies.html">🍪 Cookie Usage</a>
-                    <a href="license.html">⚖️ License</a>
+                    <a href="faq.html" data-key="link_faq">❓ FAQ</a>
+                    <a href="policy.html" data-key="link_privacy">🛡️ Privacy Policy</a>
+                    <a href="terms.html" data-key="link_terms">📜 Terms of Service</a>
+                    <a href="cookies.html" data-key="link_cookies">🍪 Cookie Usage</a>
+                    <a href="license.html" data-key="link_license">⚖️ License</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Join the Pack</h3>
-                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
-                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                <h3 data-key="footer_join_title">Join the Pack</h3>
+                <p data-key="footer_join_desc">Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/+QW8C1WwdSCQ3NmRl" target="_blank" class="footer-btn" data-key="btn_telegram">
                     ✈️ Open Telegram
                 </a>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-key="footer_copyright">
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
     <script src="loader.js"></script>
+    <script src="translate.js"></script>
 </body>
 </html>

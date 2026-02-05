@@ -527,29 +527,43 @@
 
     <div id="bg-canvas"></div>
 
+    <div class="language-dropdown">
+        <button class="dropdown-toggle">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span id="selected-lang-flag">🇺🇸</span>
+                <span id="selected-lang-code">EN</span>
+            </div>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" data-lang="en">🇺🇸 English</a>
+            <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+        </div>
+    </div>
+
     <nav class="wolf-nav">
-        <a href="index.html" class="nav-link">🏠 Home</a>
-        <a href="test_designs.html" class="nav-link active">🧪 Test Designs</a>
-        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
-        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
-        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
-        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+        <a href="index.html" class="nav-link" data-key="nav_home">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link active" data-key="nav_test_designs">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link" data-key="nav_removed">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link" data-key="nav_board_game">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link" data-key="nav_evo_mod">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link" data-key="nav_achievements">🏆 Achievements</a>
     </nav>
 
     <div class="container">
         <div class="lab-header">
-            <h1>Test Designs</h1>
-            <p class="lab-subtitle">Where experiments become experiences.</p>
+            <h1 data-key="lab_header_title">Test Designs</h1>
+            <p class="lab-subtitle" data-key="lab_header_subtitle">Where experiments become experiences.</p>
 
             <div class="warning-box">
                 <span style="font-size:2rem; filter: drop-shadow(0 0 5px gold);">⚠️</span>
                 <div>
-                    <strong style="color:var(--accent-gold); letter-spacing:1px;">WARNING: UNSTABLE CONTENT</strong><br>
-                    Use in casual matches or playtesting only. Not recommended for official games... unless you like chaos.
+                    <strong style="color:var(--accent-gold); letter-spacing:1px;" data-key="lab_warn_title">WARNING: UNSTABLE CONTENT</strong><br>
+                    <span data-key="lab_warn_text">Use in casual matches or playtesting only. Not recommended for official games... unless you like chaos.</span>
                 </div>
             </div>
 
-            <p style="color:#aaa; margin-top:20px; font-style: italic;">
+            <p style="color:#aaa; margin-top:20px; font-style: italic;" data-key="lab_intro">
                 Try them. Break them. Rebuild them.<br>
                 We're in test lab mode, and your feedback is the fuel.
             </p>
@@ -559,339 +573,335 @@
 
             <div class="role-card village modal-trigger" data-modal-target="bioModal">
                 <div class="role-emoji">🤖</div>
-                <div class="role-name">Bio-Soldier</div>
+                <div class="role-name" data-key="role_bio_soldier">Bio-Soldier</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
-                    <span class="badge solo">Solo</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
+                    <span class="badge solo" data-key="badge_solo">Solo</span>
                 </div>
             </div>
 
             <div class="role-card wolf modal-trigger" data-modal-target="wolfBloodModal">
                 <div class="role-emoji">🐺🩸</div>
-                <div class="role-name">Wolf Blood</div>
+                <div class="role-name" data-key="role_wolf_blood">Wolf Blood</div>
                 <div style="margin-top:10px;">
-                    <span class="badge wolf">Wolf</span>
+                    <span class="badge wolf" data-key="badge_wolf">Wolf</span>
                 </div>
             </div>
 
             <div class="role-card cult modal-trigger" data-modal-target="shamanModal">
                 <div class="role-emoji">🀄️</div>
-                <div class="role-name">Shaman</div>
+                <div class="role-name" data-key="role_shaman">Shaman</div>
                 <div style="margin-top:10px;">
-                    <span class="badge cult">Cult</span>
+                    <span class="badge cult" data-key="badge_cult">Cult</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="dealbreakerModal">
                 <div class="role-emoji">🤝</div>
-                <div class="role-name">Dealbreaker</div>
+                <div class="role-name" data-key="role_dealbreaker">Dealbreaker</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="lumberjackModal">
                 <div class="role-emoji">🪵</div>
-                <div class="role-name">Lumberjack</div>
+                <div class="role-name" data-key="role_lumberjack">Lumberjack</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="scapegoatModal">
                 <div class="role-emoji">🐐</div>
-                <div class="role-name">Scapegoat</div>
+                <div class="role-name" data-key="role_scapegoat">Scapegoat</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="whippingBoyModal">
                 <div class="role-emoji">😩</div>
-                <div class="role-name">Whipping Boy</div>
+                <div class="role-name" data-key="role_whipping_boy">Whipping Boy</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="ravenModal">
                 <div class="role-emoji">🐦‍⬛️</div>
-                <div class="role-name">Raven</div>
+                <div class="role-name" data-key="role_raven">Raven</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card solo modal-trigger" data-modal-target="hybridModal">
                 <div class="role-emoji">🔁</div>
-                <div class="role-name">Hybrid</div>
+                <div class="role-name" data-key="role_hybrid">Hybrid</div>
                 <div style="margin-top:10px;">
-                    <span class="badge solo">Solo</span>
+                    <span class="badge solo" data-key="badge_solo">Solo</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="minerModal">
                 <div class="role-emoji">⛏️</div>
-                <div class="role-name">Miner</div>
+                <div class="role-name" data-key="role_miner">Miner</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="pawnModal">
                 <div class="role-emoji">♟</div>
-                <div class="role-name">Pawn</div>
+                <div class="role-name" data-key="role_pawn">Pawn</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="ritualistModal">
                 <div class="role-emoji">🪬</div>
-                <div class="role-name">Ritualist</div>
+                <div class="role-name" data-key="role_ritualist">Ritualist</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="depressiveModal">
                 <div class="role-emoji">😨</div>
-                <div class="role-name">Depressive</div>
+                <div class="role-name" data-key="role_depressive">Depressive</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="kronosModal">
                 <div class="role-emoji">⏱️</div>
-                <div class="role-name">Kronos</div>
+                <div class="role-name" data-key="role_kronos">Kronos</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="astronomerModal">
                 <div class="role-emoji">🔭</div>
-                <div class="role-name">Astronomer</div>
+                <div class="role-name" data-key="role_astronomer">Astronomer</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="executionerModal">
                 <div class="role-emoji">🦸‍♂️</div>
-                <div class="role-name">Executioner</div>
+                <div class="role-name" data-key="role_executioner">Executioner</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card wolf modal-trigger" data-modal-target="successorWolfModal">
                 <div class="role-emoji">🐺🕸</div>
-                <div class="role-name">Successor Wolf</div>
+                <div class="role-name" data-key="role_successor_wolf">Successor Wolf</div>
                 <div style="margin-top:10px;">
-                    <span class="badge wolf">Wolf</span>
+                    <span class="badge wolf" data-key="badge_wolf">Wolf</span>
                 </div>
             </div>
 
             <div class="role-card wolf modal-trigger" data-modal-target="spiritWolfModal">
                 <div class="role-emoji">🐺🌀</div>
-                <div class="role-name">Spirit Wolf</div>
+                <div class="role-name" data-key="role_spirit_wolf">Spirit Wolf</div>
                 <div style="margin-top:10px;">
-                    <span class="badge wolf">Wolf</span>
+                    <span class="badge wolf" data-key="badge_wolf">Wolf</span>
                 </div>
             </div>
 
             <div class="role-card wolf modal-trigger" data-modal-target="sheepWolfModal">
                 <div class="role-emoji">🐺🐑</div>
-                <div class="role-name">Sheep Wolf</div>
+                <div class="role-name" data-key="role_sheep_wolf">Sheep Wolf</div>
                 <div style="margin-top:10px;">
-                    <span class="badge wolf">Wolf</span>
+                    <span class="badge wolf" data-key="badge_wolf">Wolf</span>
                 </div>
             </div>
 
             <div class="role-card solo modal-trigger" data-modal-target="bomberModal">
                 <div class="role-emoji">💣</div>
-                <div class="role-name">Bomber</div>
+                <div class="role-name" data-key="role_bomber">Bomber</div>
                 <div style="margin-top:10px;">
-                    <span class="badge solo">Solo</span>
+                    <span class="badge solo" data-key="badge_solo">Solo</span>
                 </div>
             </div>
 
             <div class="role-card solo modal-trigger" data-modal-target="mythModal">
                 <div class="role-emoji">📜</div>
-                <div class="role-name">Myth</div>
+                <div class="role-name" data-key="role_myth">Myth</div>
                 <div style="margin-top:10px;">
-                    <span class="badge" style="background:#444; color:#fff;">Ability</span>
+                    <span class="badge" style="background:#444; color:#fff;" data-key="badge_ability">Ability</span>
                 </div>
             </div>
 
             <div class="role-card solo modal-trigger" data-modal-target="shadowMasterModal">
                 <div class="role-emoji">🥷</div>
-                <div class="role-name">Shadow Master</div>
+                <div class="role-name" data-key="role_shadow_master">Shadow Master</div>
                 <div style="margin-top:10px;">
-                    <span class="badge solo">Solo</span>
+                    <span class="badge solo" data-key="badge_solo">Solo</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="dnaSamplerModal">
                 <div class="role-emoji">🧬</div>
-                <div class="role-name">DNA Sampler</div>
+                <div class="role-name" data-key="role_dna_sampler">DNA Sampler</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="announcerModal">
                 <div class="role-emoji">📢</div>
-                <div class="role-name">Announcer</div>
+                <div class="role-name" data-key="role_announcer">Announcer</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="farmerModal">
                 <div class="role-emoji">🌾</div>
-                <div class="role-name">Farmer</div>
+                <div class="role-name" data-key="role_farmer">Farmer</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="fateBoundModal">
                 <div class="role-emoji">🧓</div>
-                <div class="role-name">Fate bound Elder</div>
+                <div class="role-name" data-key="role_fate_bound">Fate bound Elder</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card solo modal-trigger" data-modal-target="falseFaceModal">
                 <div class="role-emoji">🕷</div>
-                <div class="role-name">False Face</div>
+                <div class="role-name" data-key="role_false_face">False Face</div>
                 <div style="margin-top:10px;">
-                    <span class="badge solo">Solo</span>
+                    <span class="badge solo" data-key="badge_solo">Solo</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="ninjaModal">
                 <div class="role-emoji">🤺</div>
-                <div class="role-name">Ninja</div>
+                <div class="role-name" data-key="role_ninja">Ninja</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="mailmanModal">
                 <div class="role-emoji">🗞</div>
-                <div class="role-name">Mailman</div>
+                <div class="role-name" data-key="role_mailman">Mailman</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="magnetoModal">
                 <div class="role-emoji">🧲</div>
-                <div class="role-name">Magneto</div>
+                <div class="role-name" data-key="role_magneto">Magneto</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="janitorModal">
                 <div class="role-emoji">🧑‍🔧</div>
-                <div class="role-name">Janitor</div>
+                <div class="role-name" data-key="role_janitor">Janitor</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card solo modal-trigger" data-modal-target="sismologModal">
                 <div class="role-emoji">📈</div>
-                <div class="role-name">Sismolog</div>
+                <div class="role-name" data-key="role_sismolog">Sismolog</div>
                 <div style="margin-top:10px;">
-                    <span class="badge solo">Solo</span>
+                    <span class="badge solo" data-key="badge_solo">Solo</span>
                 </div>
             </div>
 
             <div class="role-card solo modal-trigger" data-modal-target="bountyHunterModal">
                 <div class="role-emoji">🦹‍♂️</div>
-                <div class="role-name">Bounty Hunter</div>
+                <div class="role-name" data-key="role_bounty_hunter">Bounty Hunter</div>
                 <div style="margin-top:10px;">
-                    <span class="badge solo">Solo</span>
+                    <span class="badge solo" data-key="badge_solo">Solo</span>
                 </div>
             </div>
 
-            <!-- Purple Ally Category Starts Here -->
-
             <div class="role-card village modal-trigger" data-modal-target="hackerModal">
                 <div class="role-emoji">💻</div>
-                <div class="role-name">Hacker</div>
+                <div class="role-name" data-key="role_hacker">Hacker</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card wolf-ally modal-trigger" data-modal-target="hypnotistModal">
-                <div class="role-emoji">😵‍💫</div>
-                <div class="role-name">Hypnotist</div>
+                <div class="role-emoji">🤹‍♂️</div>
+                <div class="role-name" data-key="role_hypnotist">Hypnotist</div>
                 <div style="margin-top:10px;">
-                    <span class="badge wolf-ally">Wolf Ally</span>
+                    <span class="badge wolf-ally" data-key="badge_wolf_ally">Wolf Ally</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="inquisitorModal">
                 <div class="role-emoji">⚖️</div>
-                <div class="role-name">Inquisitor</div>
+                <div class="role-name" data-key="role_inquisitor">Inquisitor</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card wolf-ally modal-trigger" data-modal-target="morticianModal">
                 <div class="role-emoji">⚰️</div>
-                <div class="role-name">Mortician</div>
+                <div class="role-name" data-key="role_mortician">Mortician</div>
                 <div style="margin-top:10px;">
-                    <span class="badge wolf-ally">Wolf Ally</span>
+                    <span class="badge wolf-ally" data-key="badge_wolf_ally">Wolf Ally</span>
                 </div>
             </div>
 
             <div class="role-card wolf-ally modal-trigger" data-modal-target="gossipModal">
                 <div class="role-emoji">🗣</div>
-                <div class="role-name">Gossip</div>
+                <div class="role-name" data-key="role_gossip">Gossip</div>
                 <div style="margin-top:10px;">
-                    <span class="badge wolf-ally">Wolf Ally</span>
+                    <span class="badge wolf-ally" data-key="badge_wolf_ally">Wolf Ally</span>
                 </div>
             </div>
 
             <div class="role-card wolf-ally modal-trigger" data-modal-target="evilJanitorModal">
                 <div class="role-emoji">🧹</div>
-                <div class="role-name">The Janitor</div>
+                <div class="role-name" data-key="role_evil_janitor">The Janitor</div>
                 <div style="margin-top:10px;">
-                    <span class="badge wolf-ally">Wolf Ally</span>
+                    <span class="badge wolf-ally" data-key="badge_wolf_ally">Wolf Ally</span>
                 </div>
             </div>
 
             <div class="role-card wolf-ally modal-trigger" data-modal-target="transporterModal">
                 <div class="role-emoji">🚛</div>
-                <div class="role-name">Transporter</div>
+                <div class="role-name" data-key="role_transporter">Transporter</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
             <div class="role-card village modal-trigger" data-modal-target="judgeModal">
                 <div class="role-emoji">⚖️</div>
-                <div class="role-name">Judge</div>
+                <div class="role-name" data-key="role_judge">Judge</div>
                 <div style="margin-top:10px;">
-                    <span class="badge village">Village</span>
+                    <span class="badge village" data-key="badge_village">Village</span>
                 </div>
             </div>
 
         </div>
     </div>
-
-    <!-- Modals -->
 
     <div id="bioModal" class="modal-overlay">
         <div class="modal-content village">
@@ -899,26 +909,22 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🤖</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Bio-Soldier</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_bio_soldier">Bio-Soldier</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <h3>(VILLAGE)</h3>
-                <p>You're a top soldier. A new version, like version 2.0 of the peasant. Every night you will visit someone. If the player you visit has any kind of homicidal tendencies, you will self-destruct them and everyone who is there at that moment will be unrecognizable. At the same time, if someone tries to kill someone you visit, you will also self-destruct. If you go to the target of a serial killer, he won't die, but he will be injured by the explosion and won't be able to attack the next night. If the Wolves and the Serial Killer attack you, they will kill you.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0 [💀]</div>
-                <button class="wolf-btn vote-trigger" data-vote-target="Bio-Soldier">
-                    🗳️ Vote for Official
-                </button>
+                <h3 data-key="lbl_village_mode">(VILLAGE)</h3>
+                <p data-key="desc_bio_village">You're a top soldier. A new version, like version 2.0 of the peasant. Every night you will visit someone. If the player you visit has any kind of homicidal tendencies, you will self-destruct them and everyone who is there at that moment will be unrecognizable. At the same time, if someone tries to kill someone you visit, you will also self-destruct. If you go to the target of a serial killer, he won't die, but he will be injured by the explosion and won't be able to attack the next night. If the Wolves and the Serial Killer attack you, they will kill you.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_0">Cult Rate: 0 [💀]</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Bio-Soldier" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
             <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:20px 0;">
             <div class="modal-section">
-                <h3>(SOLO)</h3>
-                <p>You're a top soldier. A new version, like version 2.0 of the peasant. Every night you will visit someone and you will cause of an explosion and everyone who is there at that moment will be unrecognizable. At the same time, if someone tries to kill someone you visit, you will also cause an explosion. If you go to the target of a serial killer or they visit you, there might be winner but also can be drawn too. Under the drawn condition you both can not attack next night because of an injury. Against the werewolves, it depends on the pack number.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0 [💀]</div>
-                <button class="wolf-btn vote-trigger" data-vote-target="Bio-Soldier">
-                    🗳️ Vote for Official
-                </button>
+                <h3 data-key="lbl_solo_mode">(SOLO)</h3>
+                <p data-key="desc_bio_solo">You're a top soldier. A new version, like version 2.0 of the peasant. Every night you will visit someone and you will cause of an explosion and everyone who is there at that moment will be unrecognizable. At the same time, if someone tries to kill someone you visit, you will also cause an explosion. If you go to the target of a serial killer or they visit you, there might be winner but also can be drawn too. Under the drawn condition you both can not attack next night because of an injury. Against the werewolves, it depends on the pack number.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_0">Cult Rate: 0 [💀]</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Bio-Soldier" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -929,16 +935,14 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🐺🩸</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Wolf Blood</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_wolf_blood">Wolf Blood</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are the original wolf, superior to the alpha and even the first werewolf to give him the curse of infection! You wander apart from the pack and you can't attack every night because you're a very old wolf. If you attack, there is nothing to stop you. On the first try you will kill the wise elder, the serial killer, the arsonist, even the cursed. If you have visitors, they will either die or be infected and turn into werewolves the next day. If they lynch you, you will cause someone else to die. If the soldier lynches you to save someone else, you will die.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0 [🐺]</div>
-                <button class="wolf-btn vote-trigger" data-vote-target="Wolf Blood">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_wolf_blood">You are the original wolf, superior to the alpha and even the first werewolf to give him the curse of infection! You wander apart from the pack and you can't attack every night because you're a very old wolf. If you attack, there is nothing to stop you. On the first try you will kill the wise elder, the serial killer, the arsonist, even the cursed. If you have visitors, they will either die or be infected and turn into werewolves the next day. If they lynch you, you will cause someone else to die. If the soldier lynches you to save someone else, you will die.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_0">Cult Rate: 0 [🐺]</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Wolf Blood" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -949,15 +953,13 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🀄️</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Shaman</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_shaman">Shaman</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are the supreme leader, the head of the cultists. First of all, you act independently of the Cultists and recruit people who are different from them into your sect. You can protect yourself from the attacks of a Cult Hunter, Werewolves, Alchemist or Serial Killer with a vodoo spell. You will also have as many votes as the population of all the cultists for one time.</p>
-                <button class="wolf-btn vote-trigger" data-vote-target="Shaman">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_shaman">You are the supreme leader, the head of the cultists. First of all, you act independently of the Cultists and recruit people who are different from them into your sect. You can protect yourself from the attacks of a Cult Hunter, Werewolves, Alchemist or Serial Killer with a vodoo spell. You will also have as many votes as the population of all the cultists for one time.</p>
+                <button class="wolf-btn vote-trigger" data-vote-target="Shaman" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -968,16 +970,14 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🤝</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Dealbreaker</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_dealbreaker">Dealbreaker</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>He is no different from an ordinary villager, but if he tries to be killed in any way, he will reveal the role of a random player and he will survive. If a villager tries to kill him, he will reveal someone's role to the person trying to kill him and will survive thanks to this deal. No deal if he is lynched. He will do the same thing to survive the wolves. This can only happen once, so the second time he risks being killed he will die. The serial killer will kill him outright.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 50%</div>
-                <button class="wolf-btn vote-trigger" data-vote-target="Dealbreaker">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_dealbreaker">He is no different from an ordinary villager, but if he tries to be killed in any way, he will reveal the role of a random player and he will survive. If a villager tries to kill him, he will reveal someone's role to the person trying to kill him and will survive thanks to this deal. No deal if he is lynched. He will do the same thing to survive the wolves. This can only happen once, so the second time he risks being killed he will die. The serial killer will kill him outright.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_50">Cult Rate: 50%</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Dealbreaker" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -988,16 +988,14 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🪵</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Lumberjack</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_lumberjack">Lumberjack</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>The village's angriest citizen. He tries to curb his anger by chopping wood in the forest. From the night after the woodcutter dies until the end of the day, everyone will double their action. Because the woodcutter's anger will spread all over the village after his death.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 50%</div>
-                <button class="wolf-btn vote-trigger" data-vote-target="Lumberjack">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_lumberjack">The village's angriest citizen. He tries to curb his anger by chopping wood in the forest. From the night after the woodcutter dies until the end of the day, everyone will double their action. Because the woodcutter's anger will spread all over the village after his death.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_50">Cult Rate: 50%</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Lumberjack" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1008,16 +1006,14 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🐐</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Scapegoat</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_scapegoat">Scapegoat</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>He is an ordinary villager like everyone else. However, if there is a disagreement during the lynching (a tie in the lynching), the villagers will be outraged and will choose the Goat/Whipping Boy as their sacrifice. Even if there is a tie in the lynching, there is still a 50% chance that they will hang the Goat/Whipping Boy.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
-                <button class="wolf-btn vote-trigger" data-vote-target="Scapegoat">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_scapegoat">He is an ordinary villager like everyone else. However, if there is a disagreement during the lynching (a tie in the lynching), the villagers will be outraged and will choose the Goat/Whipping Boy as their sacrifice. Even if there is a tie in the lynching, there is still a 50% chance that they will hang the Goat/Whipping Boy.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_100">Cult Rate: 100%</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Scapegoat" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1028,16 +1024,14 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">😩</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Whipping Boy</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_whipping_boy">Whipping Boy</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>He is an ordinary villager like everyone else. However, if there is a disagreement during the lynching (a tie in the lynching), the villagers will be outraged and will choose the Goat/Whipping Boy as their sacrifice. Even if there is a tie in the lynching, there is still a 50% chance that they will hang the Goat/Whipping Boy.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
-                <button class="wolf-btn vote-trigger" data-vote-target="Whipping Boy">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_whipping_boy">He is an ordinary villager like everyone else. However, if there is a disagreement during the lynching (a tie in the lynching), the villagers will be outraged and will choose the Goat/Whipping Boy as their sacrifice. Even if there is a tie in the lynching, there is still a 50% chance that they will hang the Goat/Whipping Boy.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_100">Cult Rate: 100%</div>
+                <button class="wolf-btn vote-trigger" data-vote-target="Whipping Boy" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1048,18 +1042,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🐦‍⬛️</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Raven</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_raven">Raven</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>At night he can notice the actions of the villagers. Every night he will choose one player, and if that player has an action, he will be able to clearly see what they are doing.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 70%</div>
+                <p data-key="desc_raven">At night he can notice the actions of the villagers. Every night he will choose one player, and if that player has an action, he will be able to clearly see what they are doing.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_70">Cult Rate: 70%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Raven">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Raven" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1070,18 +1062,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🔁</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Hybrid</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_hybrid">Hybrid</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>A neutral role in his own right. He will only team up with whoever visits him first. If one of the roles in the village visits him, he will slaughter the villagers like a serial killer. If one of the evil roles visits him, he will have no kill function and will be re-teamed with him. He will aim for absolute victory with his partner. They can either finish last together and win or not win at all.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
+                <p data-key="desc_hybrid">A neutral role in his own right. He will only team up with whoever visits him first. If one of the roles in the village visits him, he will slaughter the villagers like a serial killer. If one of the evil roles visits him, he will have no kill function and will be re-teamed with him. He will aim for absolute victory with his partner. They can either finish last together and win or not win at all.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_0">Cult Rate: 0</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Hybrid">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Hybrid" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1092,18 +1082,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">⛏️</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Miner</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_miner">Miner</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>Every night he digs tunnels to the villagers' houses. Thanks to the tunnels he digs, the night action players will always miss their target and end up in a different house. They also won't realize it.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 80%</div>
+                <p data-key="desc_miner">Every night he digs tunnels to the villagers' houses. Thanks to the tunnels he digs, the night action players will always miss their target and end up in a different house. They also won't realize it.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_80">Cult Rate: 80%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Miner">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Miner" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1114,18 +1102,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">♟</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Pawn</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_pawn">Pawn</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>An honorable soldier dedicated to the king's service. The pawn will sacrifice himself if the person he is protecting is visited by wolves. But if he wants to protect the serial killer's visitor, both he and the person he wants to protect will die.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 60%</div>
+                <p data-key="desc_pawn">An honorable soldier dedicated to the king's service. The pawn will sacrifice himself if the person he is protecting is visited by wolves. But if he wants to protect the serial killer's visitor, both he and the person he wants to protect will die.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_60">Cult Rate: 60%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Pawn">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Pawn" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1136,18 +1122,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🪬</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Ritualist</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_ritualist">Ritualist</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>At the night, she will try to switch an alive player role with the dead player role. If their team are same, the ritual will be succeed. But if they are not at the same team, ritualist will die because of breaking the balance of nature.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 60%</div>
+                <p data-key="desc_ritualist">At the night, she will try to switch an alive player role with the dead player role. If their team are same, the ritual will be succeed. But if they are not at the same team, ritualist will die because of breaking the balance of nature.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_60">Cult Rate: 60%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Ritualist">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Ritualist" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1158,18 +1142,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">😨</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Depressive</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_depressive">Depressive</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>Burdened by high-level anxiety and extreme stress, this player is unaware of their true condition and believes they are just an ordinary Villager. If they die by normal means, nothing happens. However, if another player is lynched but this player still received votes during the trial, they suffer a severe panic attack. In a blind frenzy, they will inadvertently cause the death of a random player who voted for them. Consumed by paranoia after the incident, they will succumb to the unbearable stress and take their own life the following day. 😔</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
+                <p data-key="desc_depressive">Burdened by high-level anxiety and extreme stress, this player is unaware of their true condition and believes they are just an ordinary Villager. If they die by normal means, nothing happens. However, if another player is lynched but this player still received votes during the trial, they suffer a severe panic attack. In a blind frenzy, they will inadvertently cause the death of a random player who voted for them. Consumed by paranoia after the incident, they will succumb to the unbearable stress and take their own life the following day. 😔</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_100">Cult Rate: 100%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Depressive">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Depressive" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1180,18 +1162,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">⏱️</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Kronos</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_kronos">Kronos</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>Kronos, the master of time, can accelerate the game by limiting the night and lynching phases to 20 seconds, forcing players to make quick decisions. (6 players and >)</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 40%</div>
+                <p data-key="desc_kronos">Kronos, the master of time, can accelerate the game by limiting the night and lynching phases to 20 seconds, forcing players to make quick decisions. (6 players and >)</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_40">Cult Rate: 40%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Kronos">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Kronos" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1202,18 +1182,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🔭</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Astronomer</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_astronomer">Astronomer</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>The Astronomer watches over the village at night noting how many villagers are awake. By day, he reports any unusual nocturnal activity to the villagers. (7 players and >)</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 50%</div>
+                <p data-key="desc_astronomer">The Astronomer watches over the village at night noting how many villagers are awake. By day, he reports any unusual nocturnal activity to the villagers. (7 players and >)</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_50">Cult Rate: 50%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Astronomer">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Astronomer" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1224,18 +1202,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🦸‍♂️</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Executioner</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_executioner">Executioner</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>The Executioner controls the lynching process and can target a villager for execution. The villagers must then vote "Yes" or "No" to carry out the execution. (8 players and >)</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 60%</div>
+                <p data-key="desc_executioner">The Executioner controls the lynching process and can target a villager for execution. The villagers must then vote "Yes" or "No" to carry out the execution. (8 players and >)</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_60">Cult Rate: 60%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Executioner">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Executioner" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1246,18 +1222,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🐺🕸</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Successor Wolf</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_successor_wolf">Successor Wolf</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You have a excellent curse. Thanks your ability you can create another successor wolf but for this, you have to die too. At 2. night you will choose a victim for yourself and he became successor, at the same time you will die. After 3 night, your victim will choose another victim for himself and this endless loop will continue until the successor wolf dead with any type of death.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
+                <p data-key="desc_successor_wolf">You have a excellent curse. Thanks your ability you can create another successor wolf but for this, you have to die too. At 2. night you will choose a victim for yourself and he became successor, at the same time you will die. After 3 night, your victim will choose another victim for himself and this endless loop will continue until the successor wolf dead with any type of death.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_0">Cult Rate: 0</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Successor Wolf">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Successor Wolf" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1268,18 +1242,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🐺🌀</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Spirit wolf</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_spirit_wolf">Spirit wolf</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>If you die, after the night no one can use their action for once and only werewolves/allies can perform action.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
+                <p data-key="desc_spirit_wolf">If you die, after the night no one can use their action for once and only werewolves/allies can perform action.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_0">Cult Rate: 0</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Spirit Wolf">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Spirit Wolf" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1290,18 +1262,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🐺🐑</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Sheep Wolf</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_sheep_wolf">Sheep Wolf</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>Choose 2 players. During those players, you can choose one player to make him unable to vote in the next voting phase and mark a target for the other player. That player can still vote but the village will see him voting for the marked player.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
+                <p data-key="desc_sheep_wolf">Choose 2 players. During those players, you can choose one player to make him unable to vote in the next voting phase and mark a target for the other player. That player can still vote but the village will see him voting for the marked player.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_0">Cult Rate: 0</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Sheep Wolf">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Sheep Wolf" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1312,18 +1282,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">💣</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Bomber</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_bomber">Bomber</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>If he manages to survive until half of players are dead, he will explode himself and kill half of the remaining players. He will win if he can explode himself.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
+                <p data-key="desc_bomber">If he manages to survive until half of players are dead, he will explode himself and kill half of the remaining players. He will win if he can explode himself.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_100">Cult Rate: 100%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Bomber">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Bomber" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1334,17 +1302,15 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">📜</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Myth</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_myth">Myth</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>This is not a role; it is an ability. The myth will be around every single player’s body every day. Players will get notified about it and if the werewolves can catch a player who carry the myth, they get 100% infection. This thing will not appear every game but if it appears, it will not go until someone gets bitten.</p>
+                <p data-key="desc_myth">This is not a role; it is an ability. The myth will be around every single player’s body every day. Players will get notified about it and if the werewolves can catch a player who carry the myth, they get 100% infection. This thing will not appear every game but if it appears, it will not go until someone gets bitten.</p>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Myth">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Myth" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1355,18 +1321,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🥷</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Shadow Master</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_shadow_master">Shadow Master</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>At first night you have two choices; you can prefer to hide from incoming attacks, or you can possess someone’s body. If they have any night action you will take over their role entire game and your target will die as “devoured”. From that moment you cannot defend yourself and you can only use the role ability, or you must back your pure form. If your targets do not have any night action, they will die, and you will look for new prey. You will win if you succeed in being the last player in the game.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
+                <p data-key="desc_shadow_master">At first night you have two choices; you can prefer to hide from incoming attacks, or you can possess someone’s body. If they have any night action you will take over their role entire game and your target will die as “devoured”. From that moment you cannot defend yourself and you can only use the role ability, or you must back your pure form. If your targets do not have any night action, they will die, and you will look for new prey. You will win if you succeed in being the last player in the game.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_0">Cult Rate: 0</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Shadow Master">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Shadow Master" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1377,18 +1341,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🧬</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">DNA Sampler</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_dna_sampler">DNA Sampler</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>On the 2nd night, you will choose someone to take as a reference. The following night you will choose someone and after the night you will see their DNA result (if they are on the same team or not). Analyses’ results always be true but all villagers’ DNA are not same so the result can be confusing.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 60%</div>
+                <p data-key="desc_dna_sampler">On the 2nd night, you will choose someone to take as a reference. The following night you will choose someone and after the night you will see their DNA result (if they are on the same team or not). Analyses’ results always be true but all villagers’ DNA are not same so the result can be confusing.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_60">Cult Rate: 60%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="DNA Sampler">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="DNA Sampler" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1399,18 +1361,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">📢</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Announcer</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_announcer">Announcer</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>At daytime when he decides he will announce someone’s night action. It might be seer action, wolf, CH or SK action… Who knows.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
+                <p data-key="desc_announcer">At daytime when he decides he will announce someone’s night action. It might be seer action, wolf, CH or SK action… Who knows.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_100">Cult Rate: 100%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Announcer">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Announcer" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1421,18 +1381,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🌾</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Farmer</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_farmer">Farmer</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are responsible for field and workers. You will know exactly how many villagers are in the game. But you are not perfect at your job because you also count roles at below; <br>Lycan – Traitor – Cursed – Wild Child – Depressive</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 100%</div>
+                <p data-key="desc_farmer">You are responsible for field and workers. You will know exactly how many villagers are in the game. But you are not perfect at your job because you also count roles at below; <br>Lycan – Traitor – Cursed – Wild Child – Depressive</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_100">Cult Rate: 100%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Farmer">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Farmer" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1443,18 +1401,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🧓</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Fate bound Elder</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_fate_bound">Fate bound Elder</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>A mystical village elder protected by fate itself. When attacked, the outcome is determined by luck:<br>• Against Werewolf:<br>60% survive, 30% retaliate, 10% die<br>• Against Serial Killer:<br>50% survive, 30% retaliate, 20% die<br>• Against Arsonist (burn night):<br>50% survive, 50% die<br><br>This role is a defensive tank with the rare ability to punish killers but fate is a double-edged sword. Investigators will always see you as "mystic but powerless," making trust a luxury.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 30%</div>
+                <p data-key="desc_fate_bound">A mystical village elder protected by fate itself. When attacked, the outcome is determined by luck:<br>• Against Werewolf:<br>60% survive, 30% retaliate, 10% die<br>• Against Serial Killer:<br>50% survive, 30% retaliate, 20% die<br>• Against Arsonist (burn night):<br>50% survive, 50% die<br><br>This role is a defensive tank with the rare ability to punish killers but fate is a double-edged sword. Investigators will always see you as "mystic but powerless," making trust a luxury.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_30">Cult Rate: 30%</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Fate bound Elder">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Fate bound Elder" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1465,18 +1421,16 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🕷</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">False Face</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_false_face">False Face</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>A deceptive and manipulative entity that thrives on confusion. Every night, it marks one player:<br>That target appears as False Face to all vision roles (Seer, Sorcerer, etc.)<br>When a new target is marked, the previous one dies immediately.<br>All actions (investigations, protections, attacks) targeting False Face are redirected randomly including possibly back to the source.<br><br>This role has no direct kill ability but eliminates indirectly and causes chaos among vision and power roles.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult Rate: 0</div>
+                <p data-key="desc_false_face">A deceptive and manipulative entity that thrives on confusion. Every night, it marks one player:<br>That target appears as False Face to all vision roles (Seer, Sorcerer, etc.)<br>When a new target is marked, the previous one dies immediately.<br>All actions (investigations, protections, attacks) targeting False Face are redirected randomly including possibly back to the source.<br><br>This role has no direct kill ability but eliminates indirectly and causes chaos among vision and power roles.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_rate_0">Cult Rate: 0</div>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="False Face">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="False Face" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1487,17 +1441,15 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🤺</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Ninja</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_ninja">Ninja</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>Every night, you can choose to hide from visitors. During your hide, if someone visits you they will not find you. BUT! You will recognize them as a potential threat and you will kill them!<br>If you choose to hide, Seer will be confused about it and they will see you as Werewolf!<br>You can't hide 2 times in a row.</p>
+                <p data-key="desc_ninja">Every night, you can choose to hide from visitors. During your hide, if someone visits you they will not find you. BUT! You will recognize them as a potential threat and you will kill them!<br>If you choose to hide, Seer will be confused about it and they will see you as Werewolf!<br>You can't hide 2 times in a row.</p>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Ninja">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Ninja" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1508,17 +1460,15 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🗞</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Mailman</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_mailman">Mailman</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are different from ordinary mailman's. You deliver the news at night. That's why you are not at home at all.</p>
+                <p data-key="desc_mailman">You are different from ordinary mailman's. You deliver the news at night. That's why you are not at home at all.</p>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Mailman">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Mailman" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1529,17 +1479,15 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🧲</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Magneto</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_magneto">Magneto</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You have a secret ability. For once, you can pull all night actions on yourself.<br>Who knows, maybe you will be slaughtered by all bad roles or maybe all saviors will be on at the same time 👀</p>
+                <p data-key="desc_magneto">You have a secret ability. For once, you can pull all night actions on yourself.<br>Who knows, maybe you will be slaughtered by all bad roles or maybe all saviors will be on at the same time 👀</p>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Magneto">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Magneto" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1550,17 +1498,15 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🧑‍🔧</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Janitor</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_janitor">Janitor</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>When you die somehow, the following night all lights will be out. And everyone takes their actions blindly.</p>
+                <p data-key="desc_janitor">When you die somehow, the following night all lights will be out. And everyone takes their actions blindly.</p>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Janitor">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Janitor" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1571,17 +1517,15 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">📈</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Sismolog</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_sismolog">Sismolog</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are a scientist specializing in earthquakes and earth sciences. Your belief in science makes your role independent of all the players. In case of lynching, there will be a big earthquake in the village! Living players:<br><br>↳25% will die under rubble due to earthquake<br>↳25% will be trapped under the rubble and unable to act for 1 day<br>↳The 25% will only feel the tremor and realize it<br>↳The remaining 25% will be safe and sound and will feel nothing.</p>
+                <p data-key="desc_sismolog">You are a scientist specializing in earthquakes and earth sciences. Your belief in science makes your role independent of all the players. In case of lynching, there will be a big earthquake in the village! Living players:<br><br>↳25% will die under rubble due to earthquake<br>↳25% will be trapped under the rubble and unable to act for 1 day<br>↳The 25% will only feel the tremor and realize it<br>↳The remaining 25% will be safe and sound and will feel nothing.</p>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Sismolog">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Sismolog" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1592,17 +1536,15 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🦹‍♂️</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Bounty Hunter</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_bounty_hunter">Bounty Hunter</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You only work for the highest price. At the first night a role will be told you for hunting them. But your target will be also aware of it! They tried to hide but you must detect them. You will have chance to hunt them for every night! If you hunt them successfully, you will win the game!</p>
+                <p data-key="desc_bounty_hunter">You only work for the highest price. At the first night a role will be told you for hunting them. But your target will be also aware of it! They tried to hide but you must detect them. You will have chance to hunt them for every night! If you hunt them successfully, you will win the game!</p>
             </div>
             <div class="vote-btn-container">
-                <button class="wolf-btn vote-trigger" data-vote-target="Bounty Hunter">
-                    🗳️ Vote for Official
-                </button>
+                <button class="wolf-btn vote-trigger" data-vote-target="Bounty Hunter" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1613,15 +1555,13 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">💻</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Hacker</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_hacker">Hacker</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are the Hacker, capable of bypassing the system's firewall while others sleep. Each night, you can perform a system query to receive specific statistics, such as how many evil roles are alive or how many abilities were triggered, allowing you to deduce the game state from the meta-data.</p>
-                <button class="wolf-btn vote-trigger" data-vote-target="Hacker">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_hacker">You are the Hacker, capable of bypassing the system's firewall while others sleep. Each night, you can perform a system query to receive specific statistics, such as how many evil roles are alive or how many abilities were triggered, allowing you to deduce the game state from the meta-data.</p>
+                <button class="wolf-btn vote-trigger" data-vote-target="Hacker" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1630,17 +1570,15 @@
         <div class="modal-content wolf-ally">
             <span class="close-modal">&times;</span>
             <div class="modal-header">
-                <div style="font-size:3rem;">😵‍💫</div>
+                <div style="font-size:3rem;">🤹‍♂️</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Hypnotist</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_hypnotist">Hypnotist</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are the Hypnotist, and reality is whatever you say it is. Each night, you will select a player to plant a false memory in their mind, causing them to receive a fake bot notification that confuses them about what actually happened during the night.</p>
-                <button class="wolf-btn vote-trigger" data-vote-target="Hypnotist">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_hypnotist">You are the Hypnotist, and reality is whatever you say it is. Each night, you will select a player to plant a false memory in their mind, causing them to receive a fake bot notification that confuses them about what actually happened during the night.</p>
+                <button class="wolf-btn vote-trigger" data-vote-target="Hypnotist" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1651,15 +1589,13 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">⚖️</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Inquisitor</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_inquisitor">Inquisitor</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are the Inquisitor, sent to punish those who remain silent when duty calls. If any player failed to vote during the previous day, you gain the ability to interrogate them the following night, choosing to either learn their true role or execute them immediately for their passivity.</p>
-                <button class="wolf-btn vote-trigger" data-vote-target="Inquisitor">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_inquisitor">You are the Inquisitor, sent to punish those who remain silent when duty calls. If any player failed to vote during the previous day, you gain the ability to interrogate them the following night, choosing to either learn their true role or execute them immediately for their passivity.</p>
+                <button class="wolf-btn vote-trigger" data-vote-target="Inquisitor" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1670,15 +1606,13 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">⚰️</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Mortician</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_mortician">Mortician</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are the Mortician, and while the dead tell you their secrets, you decide what the living hear. Each night, you will inspect the victims to see their true role and you have the power to tamper with the public announcement, either hiding the role completely or disguising it as something else.</p>
-                <button class="wolf-btn vote-trigger" data-vote-target="Mortician">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_mortician">You are the Mortician, and while the dead tell you their secrets, you decide what the living hear. Each night, you will inspect the victims to see their true role and you have the power to tamper with the public announcement, either hiding the role completely or disguising it as something else.</p>
+                <button class="wolf-btn vote-trigger" data-vote-target="Mortician" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1689,15 +1623,13 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🗣</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Gossip</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_gossip">Gossip</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are the Gossip, knowing that a whisper in the dark can be louder than a scream. Each night, you can send an anonymous message to a specific player via the bot, allowing you to manipulate the village or spread fear without ever revealing your identity.</p>
-                <button class="wolf-btn vote-trigger" data-vote-target="Gossip">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_gossip">You are the Gossip, knowing that a whisper in the dark can be louder than a scream. Each night, you can send an anonymous message to a specific player via the bot, allowing you to manipulate the village or spread fear without ever revealing your identity.</p>
+                <button class="wolf-btn vote-trigger" data-vote-target="Gossip" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1708,15 +1640,13 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🧹</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">The Janitor</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_evil_janitor">The Janitor</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are the Janitor, and you make sure there is no evidence left behind. When your team kills a player, you can choose to clean the body so that the victim's role and last will are not revealed to the village upon the death announcement.</p>
-                <button class="wolf-btn vote-trigger" data-vote-target="Janitor">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_evil_janitor">You are the Janitor, and you make sure there is no evidence left behind. When your team kills a player, you can choose to clean the body so that the victim's role and last will are not revealed to the village upon the death announcement.</p>
+                <button class="wolf-btn vote-trigger" data-vote-target="Janitor" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1727,15 +1657,13 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">🚛</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Transporter</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_transporter">Transporter</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are the Transporter, deciding where people sleep at night to control the flow of chaos. Each night, you will choose two players to swap their locations, ensuring that any action targeted at one player will land on the other instead.</p>
-                <button class="wolf-btn vote-trigger" data-vote-target="Transporter">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_transporter">You are the Transporter, deciding where people sleep at night to control the flow of chaos. Each night, you will choose two players to swap their locations, ensuring that any action targeted at one player will land on the other instead.</p>
+                <button class="wolf-btn vote-trigger" data-vote-target="Transporter" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1746,15 +1674,13 @@
             <div class="modal-header">
                 <div style="font-size:3rem;">⚖️</div>
                 <div>
-                    <h2 style="margin:0; color:#8a0303;">Judge</h2>
-                    <span style="color:#888;">Experimental Design</span>
+                    <h2 style="margin:0; color:#8a0303;" data-key="role_judge">Judge</h2>
+                    <span style="color:#888;" data-key="lbl_experimental">Experimental Design</span>
                 </div>
             </div>
             <div class="modal-section">
-                <p>You are the Judge, and your gavel strikes the final blow when the mob hesitates. During the day, you have the power to immediately end the voting phase, instantly lynching the player with the current majority of votes without further discussion.</p>
-                <button class="wolf-btn vote-trigger" data-vote-target="Judge">
-                    🗳️ Vote for Official
-                </button>
+                <p data-key="desc_judge">You are the Judge, and your gavel strikes the final blow when the mob hesitates. During the day, you have the power to immediately end the voting phase, instantly lynching the player with the current majority of votes without further discussion.</p>
+                <button class="wolf-btn vote-trigger" data-vote-target="Judge" data-key="btn_vote_official">🗳️ Vote for Official</button>
             </div>
         </div>
     </div>
@@ -1763,41 +1689,41 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>🐺 Wolf Blood</h3>
-                <p>
+                <p data-key="footer_about">
                     The ultimate hub for experimental roles, game modes, and community chaos.
                     From the forest to the tabletop, we evolve the game.
                 </p>
             </div>
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3 data-key="footer_nav_title">Navigation</h3>
                 <div class="footer-links">
-                    <a href="index.html">🏠 Home</a>
-                    <a href="test_designs.html">🧪 Test Designs</a>
-                    <a href="removed.html">♻️ Graveyard</a>
-                    <a href="board_game.html">🎲 Board Game</a>
-                    <a href="evo_mod.html">🧬 Evo Mod</a>
-                    <a href="achievements.html">🏆 Achievements</a>
+                    <a href="index.html" data-key="nav_home">🏠 Home</a>
+                    <a href="test_designs.html" data-key="nav_test_designs">🧪 Test Designs</a>
+                    <a href="removed.html" data-key="nav_removed">♻️ Graveyard</a>
+                    <a href="board_game.html" data-key="nav_board_game">🎲 Board Game</a>
+                    <a href="evo_mod.html" data-key="nav_evo_mod">🧬 Evo Mod</a>
+                    <a href="achievements.html" data-key="nav_achievements">🏆 Achievements</a>
                 </div>
             </div>
             <div class="footer-section">
-                <h3>Legal & Help</h3>
+                <h3 data-key="footer_legal_title">Legal & Help</h3>
                 <div class="footer-links">
-                    <a href="faq.html">❓ FAQ</a>
-                    <a href="policy.html">🛡️ Privacy Policy</a>
-                    <a href="terms.html">📜 Terms of Service</a>
-                    <a href="cookies.html">🍪 Cookie Usage</a>
-                    <a href="license.html">⚖️ License</a>
+                    <a href="faq.html" data-key="link_faq">❓ FAQ</a>
+                    <a href="policy.html" data-key="link_privacy">🛡️ Privacy Policy</a>
+                    <a href="terms.html" data-key="link_terms">📜 Terms of Service</a>
+                    <a href="cookies.html" data-key="link_cookies">🍪 Cookie Usage</a>
+                    <a href="license.html" data-key="link_license">⚖️ License</a>
                 </div>
             </div>
             <div class="footer-section">
-                <h3>Join the Pack</h3>
-                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
-                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                <h3 data-key="footer_join_title">Join the Pack</h3>
+                <p data-key="footer_join_desc">Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/+QW8C1WwdSCQ3NmRl" target="_blank" class="footer-btn" data-key="btn_telegram">
                     ✈️ Open Telegram
                 </a>
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-key="footer_copyright">
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
@@ -1890,6 +1816,7 @@
                     }
                     badge.classList.add('approved');
                     badge.innerHTML = "✅ APPROVED";
+                    badge.setAttribute('data-key', 'status_approved');
                 }
             });
         }
@@ -1933,6 +1860,7 @@
 
     <script src="script.js"></script>
     <script src="loader.js"></script>
+    <script src="translate.js"></script>
 
 </body>
 </html>

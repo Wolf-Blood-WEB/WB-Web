@@ -19,6 +19,91 @@
             --card-bg: rgba(10, 20, 10, 0.85);
             --glitch-offset: 2px;
         }
+        .language-dropdown {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Inter', sans-serif;
+        }
+        .dropdown-toggle {
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid var(--wolf-red-dim);
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            min-width: 100px;
+            justify-content: space-between;
+        }
+            .dropdown-toggle:hover {
+                border-color: var(--wolf-red);
+                box-shadow: 0 0 15px rgba(138, 3, 3, 0.4);
+                background: rgba(20, 20, 20, 0.95);
+            }
+            .dropdown-toggle .arrow {
+                font-size: 0.7rem;
+                color: var(--text-dim);
+                transition: transform 0.3s ease;
+            }
+
+        .language-dropdown.open .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: rgba(5, 5, 5, 0.95);
+            border: 1px solid var(--wolf-red-dim);
+            border-radius: 6px;
+            width: 140px;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+        .language-dropdown.open .dropdown-menu {
+            display: flex;
+            animation: fadeIn menu 0.3s ease;
+        }
+        .dropdown-menu a {
+            padding: 12px 15px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s ease, color 0.2s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+            .dropdown-menu a:last-child {
+                border-bottom: none;
+            }
+            .dropdown-menu a:hover {
+                background: var(--wolf-red-dim);
+                color: white;
+                padding-left: 20px;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         * { box-sizing: border-box; }
         body {
             margin: 0;
@@ -447,223 +532,99 @@
             color: #444;
             font-size: 0.8rem;
         }
+        .language-dropdown {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
     </style>
 </head>
 <body>
     <div id="bg-canvas"></div>
 
+    <div class="language-dropdown">
+        <button class="dropdown-toggle">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span id="selected-lang-flag">🇺🇸</span>
+                <span id="selected-lang-code">EN</span>
+            </div>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" data-lang="en">🇺🇸 English</a>
+            <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+        </div>
+    </div>
+
     <nav class="wolf-nav">
-        <a href="index.html" class="nav-link">🏠 Home</a>
-        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
-        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
-        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
-        <a href="evo_mod.html" class="nav-link active">🧬 Evo Mod</a>
-        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+        <a href="index.html" class="nav-link" data-key="nav_home">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link" data-key="nav_test_designs">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link" data-key="nav_removed">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link" data-key="nav_board_game">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link active" data-key="nav_evo_mod">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link" data-key="nav_achievements">🏆 Achievements</a>
     </nav>
 
     <div class="container">
 
         <div class="evo-header">
-            <h1 class="evo-title-glitch" data-text="EVO MOD">EVO MOD</h1>
-            <p class="evo-subtitle">🧬 They grow. They change. They ruin everything. 🔥</p>
+            <h1 class="evo-title-glitch" data-text="EVO MOD" data-key="evo_main_title">EVO MOD</h1>
+            <p class="evo-subtitle" data-key="evo_main_subtitle">🧬 They grow. They change. They ruin everything. 🔥</p>
 
             <div class="chaos-box">
-                <strong style="color:var(--toxic-green); font-size:1.2rem; text-transform:uppercase;">Forget balance. Forget mercy.</strong><br><br>
-                EVO MOD is about upgrading classic roles into monstrous versions of themselves.<br>
-                This is for chaotic thrill-seekers who want to watch their game spiral into beautiful madness.
+                <strong style="color:var(--toxic-green); font-size:1.2rem; text-transform:uppercase;" data-key="evo_intro_bold">Forget balance. Forget mercy.</strong><br><br>
+                <span data-key="evo_intro_text">EVO MOD is about upgrading classic roles into monstrous versions of themselves. This is for chaotic thrill-seekers who want to watch their game spiral into beautiful madness.</span>
             </div>
         </div>
 
         <div class="role-grid">
-
-            <div class="evo-card modal-trigger" data-modal-target="evoDrunkModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🍻</div><div class="role-name">EVO Drunk</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoApprenticeModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🙇</div><div class="role-name">EVO Apprentice</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoChemistModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🧪</div><div class="role-name">EVO Chemist</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoMayorModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🎖</div><div class="role-name">EVO Mayor</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoMasonModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">👷</div><div class="role-name">EVO Mason</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoAlphaWolfModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">⚡️</div><div class="role-name">EVO Alpha Wolf</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoBossModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🎩</div><div class="role-name">EVO Boss</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoAugurModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🦅</div><div class="role-name">EVO Augur</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoTannerModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">👺</div><div class="role-name">EVO Tanner</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoArsonistModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🔥</div><div class="role-name">EVO Arsonist</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoWolfmanModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🧑🌚</div><div class="role-name">EVO Wolfman</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoLycanModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🐺🌝</div><div class="role-name">EVO Lycan</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoCultistHunterModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">💂</div><div class="role-name">EVO Cult Hunter</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoCultistModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">👤</div><div class="role-name">EVO Cultist</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoShadowWolfModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🐺🌚</div><div class="role-name">EVO Shadow Wolf</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoSnowWolfModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🐺❄️</div><div class="role-name">EVO Snow Wolf</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoBeholderModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">👁</div><div class="role-name">EVO Beholder</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoHunterModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🎯</div><div class="role-name">EVO Hunter</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoPawnModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">♟</div><div class="role-name">EVO Pawn</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoSlaveModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">😵‍💫</div><div class="role-name">EVO Slave</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoPoseidonModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🧜</div><div class="role-name">EVO Poseidon</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoSorcererModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🔮</div><div class="role-name">EVO Sorcerer</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoDetectiveModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🕵️‍♂️</div><div class="role-name">EVO Detective</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoGuardianAngelModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">👼</div><div class="role-name">EVO Guardian</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoClumsyGuyModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🤕</div><div class="role-name">EVO Clumsy Guy</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoSeerModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">👳</div><div class="role-name">EVO Seer</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoFoolModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🃏</div><div class="role-name">EVO Fool</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoSkeletonModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">💀</div><div class="role-name">EVO Skeleton</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoTraitorModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🖕</div><div class="role-name">EVO Traitor</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoGunnerModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🔫</div><div class="role-name">EVO Gunner</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoHarlotModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">💋</div><div class="role-name">EVO Harlot</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoCursedModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">😾</div><div class="role-name">EVO Cursed</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoDoppelgangerModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🎭</div><div class="role-name">EVO Doppelgänger</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoCupidModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🏹</div><div class="role-name">EVO Cupid</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoWiseElderModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">📚</div><div class="role-name">EVO Wise Elder</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoWildChildModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">👶</div><div class="role-name">EVO Wild Child</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoRogueWolfModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🐺🧧</div><div class="role-name">EVO Rogue Wolf</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoIllusionistWolfModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🐺🪄</div><div class="role-name">EVO Illusionist</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoSnitchModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🦜</div><div class="role-name">EVO Snitch</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoConjurerWolfModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🐺✨</div><div class="role-name">EVO Conjurer</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoExecutionerModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🦸‍♂️</div><div class="role-name">EVO Executioner</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoSoldierModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🪖</div><div class="role-name">EVO Soldier</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoPreacherModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🛐</div><div class="role-name">EVO Preacher</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoSerialKillerModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🔪</div><div class="role-name">EVO Serial Killer</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoMinerModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">⛏️</div><div class="role-name">EVO Miner</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoDoctorModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🧑‍⚕️</div><div class="role-name">EVO Doctor</div>
-            </div>
-
-            <div class="evo-card modal-trigger" data-modal-target="evoWolfCubModal">
-                <div class="dna-mark">🧬</div><div class="role-emoji">🐶</div><div class="role-name">EVO Wolf Cub</div>
-            </div>
-
+            <div class="evo-card modal-trigger" data-modal-target="evoDrunkModal"><div class="dna-mark">🧬</div><div class="role-emoji">🍻</div><div class="role-name" data-key="role_drunk">EVO Drunk</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoApprenticeModal"><div class="dna-mark">🧬</div><div class="role-emoji">🙇</div><div class="role-name" data-key="role_apprentice">EVO Apprentice</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoChemistModal"><div class="dna-mark">🧬</div><div class="role-emoji">🧪</div><div class="role-name" data-key="role_chemist">EVO Chemist</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoMayorModal"><div class="dna-mark">🧬</div><div class="role-emoji">🎖</div><div class="role-name" data-key="role_mayor">EVO Mayor</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoMasonModal"><div class="dna-mark">🧬</div><div class="role-emoji">👷</div><div class="role-name" data-key="role_mason">EVO Mason</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoAlphaWolfModal"><div class="dna-mark">🧬</div><div class="role-emoji">⚡️</div><div class="role-name" data-key="role_alpha">EVO Alpha Wolf</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoBossModal"><div class="dna-mark">🧬</div><div class="role-emoji">🎩</div><div class="role-name" data-key="role_boss">EVO Boss</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoAugurModal"><div class="dna-mark">🧬</div><div class="role-emoji">🦅</div><div class="role-name" data-key="role_augur">EVO Augur</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoTannerModal"><div class="dna-mark">🧬</div><div class="role-emoji">👺</div><div class="role-name" data-key="role_tanner">EVO Tanner</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoArsonistModal"><div class="dna-mark">🧬</div><div class="role-emoji">🔥</div><div class="role-name" data-key="role_arsonist">EVO Arsonist</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoWolfmanModal"><div class="dna-mark">🧬</div><div class="role-emoji">🧑🌚</div><div class="role-name" data-key="role_wolfman">EVO Wolfman</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoLycanModal"><div class="dna-mark">🧬</div><div class="role-emoji">🐺🌝</div><div class="role-name" data-key="role_lycan">EVO Lycan</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoCultistHunterModal"><div class="dna-mark">🧬</div><div class="role-emoji">💂</div><div class="role-name" data-key="role_cult_hunter">EVO Cult Hunter</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoCultistModal"><div class="dna-mark">🧬</div><div class="role-emoji">👤</div><div class="role-name" data-key="role_cultist">EVO Cultist</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoShadowWolfModal"><div class="dna-mark">🧬</div><div class="role-emoji">🐺🌚</div><div class="role-name" data-key="role_shadow_wolf">EVO Shadow Wolf</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoSnowWolfModal"><div class="dna-mark">🧬</div><div class="role-emoji">🐺❄️</div><div class="role-name" data-key="role_snow_wolf">EVO Snow Wolf</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoBeholderModal"><div class="dna-mark">🧬</div><div class="role-emoji">👁</div><div class="role-name" data-key="role_beholder">EVO Beholder</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoHunterModal"><div class="dna-mark">🧬</div><div class="role-emoji">🎯</div><div class="role-name" data-key="role_hunter">EVO Hunter</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoPawnModal"><div class="dna-mark">🧬</div><div class="role-emoji">♟</div><div class="role-name" data-key="role_pawn">EVO Pawn</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoSlaveModal"><div class="dna-mark">🧬</div><div class="role-emoji">😵‍💫</div><div class="role-name" data-key="role_slave">EVO Slave</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoPoseidonModal"><div class="dna-mark">🧬</div><div class="role-emoji">🧜</div><div class="role-name" data-key="role_poseidon">EVO Poseidon</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoSorcererModal"><div class="dna-mark">🧬</div><div class="role-emoji">🔮</div><div class="role-name" data-key="role_sorcerer">EVO Sorcerer</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoDetectiveModal"><div class="dna-mark">🧬</div><div class="role-emoji">🕵️‍♂️</div><div class="role-name" data-key="role_detective">EVO Detective</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoGuardianAngelModal"><div class="dna-mark">🧬</div><div class="role-emoji">👼</div><div class="role-name" data-key="role_guardian">EVO Guardian</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoClumsyGuyModal"><div class="dna-mark">🧬</div><div class="role-emoji">🤕</div><div class="role-name" data-key="role_clumsy">EVO Clumsy Guy</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoSeerModal"><div class="dna-mark">🧬</div><div class="role-emoji">👳</div><div class="role-name" data-key="role_seer">EVO Seer</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoFoolModal"><div class="dna-mark">🧬</div><div class="role-emoji">🃏</div><div class="role-name" data-key="role_fool">EVO Fool</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoSkeletonModal"><div class="dna-mark">🧬</div><div class="role-emoji">💀</div><div class="role-name" data-key="role_skeleton">EVO Skeleton</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoTraitorModal"><div class="dna-mark">🧬</div><div class="role-emoji">🖕</div><div class="role-name" data-key="role_traitor">EVO Traitor</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoGunnerModal"><div class="dna-mark">🧬</div><div class="role-emoji">🔫</div><div class="role-name" data-key="role_gunner">EVO Gunner</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoHarlotModal"><div class="dna-mark">🧬</div><div class="role-emoji">💋</div><div class="role-name" data-key="role_harlot">EVO Harlot</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoCursedModal"><div class="dna-mark">🧬</div><div class="role-emoji">😾</div><div class="role-name" data-key="role_cursed">EVO Cursed</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoDoppelgangerModal"><div class="dna-mark">🧬</div><div class="role-emoji">🎭</div><div class="role-name" data-key="role_doppelganger">EVO Doppelgänger</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoCupidModal"><div class="dna-mark">🧬</div><div class="role-emoji">🏹</div><div class="role-name" data-key="role_cupid">EVO Cupid</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoWiseElderModal"><div class="dna-mark">🧬</div><div class="role-emoji">📚</div><div class="role-name" data-key="role_wise">EVO Wise Elder</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoWildChildModal"><div class="dna-mark">🧬</div><div class="role-emoji">👶</div><div class="role-name" data-key="role_wild_child">EVO Wild Child</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoRogueWolfModal"><div class="dna-mark">🧬</div><div class="role-emoji">🐺🧧</div><div class="role-name" data-key="role_rogue_wolf">EVO Rogue Wolf</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoIllusionistWolfModal"><div class="dna-mark">🧬</div><div class="role-emoji">🐺🪄</div><div class="role-name" data-key="role_illusionist">EVO Illusionist</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoSnitchModal"><div class="dna-mark">🧬</div><div class="role-emoji">🦜</div><div class="role-name" data-key="role_snitch">EVO Snitch</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoConjurerWolfModal"><div class="dna-mark">🧬</div><div class="role-emoji">🐺✨</div><div class="role-name" data-key="role_conjurer">EVO Conjurer</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoExecutionerModal"><div class="dna-mark">🧬</div><div class="role-emoji">🦸‍♂️</div><div class="role-name" data-key="role_executioner">EVO Executioner</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoSoldierModal"><div class="dna-mark">🧬</div><div class="role-emoji">🪖</div><div class="role-name" data-key="role_soldier">EVO Soldier</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoPreacherModal"><div class="dna-mark">🧬</div><div class="role-emoji">🛐</div><div class="role-name" data-key="role_preacher">EVO Preacher</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoSerialKillerModal"><div class="dna-mark">🧬</div><div class="role-emoji">🔪</div><div class="role-name" data-key="role_serial_killer">EVO Serial Killer</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoMinerModal"><div class="dna-mark">🧬</div><div class="role-emoji">⛏️</div><div class="role-name" data-key="role_miner">EVO Miner</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoDoctorModal"><div class="dna-mark">🧬</div><div class="role-emoji">🧑‍⚕️</div><div class="role-name" data-key="role_doctor">EVO Doctor</div></div>
+            <div class="evo-card modal-trigger" data-modal-target="evoWolfCubModal"><div class="dna-mark">🧬</div><div class="role-emoji">🐶</div><div class="role-name" data-key="role_wolf_cub">EVO Wolf Cub</div></div>
         </div>
     </div>
 
@@ -672,32 +633,32 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🍻</div><div class="role-title">The Drunk</div>
-                    <p>Congrats! You're the village drunk! (and really, everyone knows it...). Usually just a villager, but if Wolves eat you, they miss their kill the next night.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🍻</div><div class="role-title" data-key="role_drunk">The Drunk</div>
+                    <p data-key="desc_base_drunk">Congrats! You're the village drunk! (and really, everyone knows it...). Usually just a villager, but if Wolves eat you, they miss their kill the next night.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Drunk</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🍻</div>
-                    <p>You were simply a drunked villager, only affects werewolf. But now you will also affect your visitors.</p>
-                    <p style="font-size:0.9rem; margin-top:10px;">• Cultist Hunter 💂, Harlot 💋, Guardian Angel 👼, Chemist 🧪, Pawn ♟, Cultist 👤<br>The roles will get drunked and can not perform any action next night. If there are more than 1 cult, one of them will get drunked (newest member) but the other(s) will convert you.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_drunk">EVO Drunk</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🍻</div>
+                    <p data-key="desc_evo_drunk">You were simply a drunked villager, only affects werewolf. But now you will also affect your visitors.</p>
+                    <p style="font-size:0.9rem; margin-top:10px;" data-key="note_evo_drunk">• Cultist Hunter 💂, Harlot 💋, Guardian Angel 👼, Chemist 🧪, Pawn ♟, Cultist 👤<br>The roles will get drunked and can not perform any action next night. If there are more than 1 cult, one of them will get drunked (newest member) but the other(s) will convert you.</p>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div id="evoApprenticeModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🙇</div><div class="role-title">Apprentice Seer</div>
-                    <p>You are the apprentice seer. If the (real) seer dies, you will take their place as the seer.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🙇</div><div class="role-title" data-key="role_apprentice">Apprentice Seer</div>
+                    <p data-key="desc_base_apprentice">You are the apprentice seer. If the (real) seer dies, you will take their place as the seer.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Apprentice</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🙇</div>
-                    <p>Since you are a simple apprentice, when you take the seer place you will be stronger than him. You will learn from his mistakes.</p>
-                    <p style="font-size:0.9rem; margin-top:10px;">• WolfMan 👱🌚, Traitor 🖕, Lycan 🐺🌝<br>These roles will not confuse you anymore. You will see them as who they are. Also you will be aware of Rogue Wolf 🐺🧧 trick. It will not confuse you.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_apprentice">EVO Apprentice</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🙇</div>
+                    <p data-key="desc_evo_apprentice">Since you are a simple apprentice, when you take the seer place you will be stronger than him. You will learn from his mistakes.</p>
+                    <p style="font-size:0.9rem; margin-top:10px;" data-key="note_evo_apprentice">• WolfMan 👱🌚, Traitor 🖕, Lycan 🐺🌝<br>These roles will not confuse you anymore. You will see them as who they are. Also you will be aware of Rogue Wolf 🐺🧧 trick. It will not confuse you.</p>
                 </div>
             </div>
         </div>
@@ -708,32 +669,32 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🧪</div><div class="role-title">Chemist</div>
-                    <p>You are the Chemist, a mad scientist experimenting on living beings. On the first night, you prepare 4 potions (2 poison, 2 harmless). You can choose a target to give one of each.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🧪</div><div class="role-title" data-key="role_chemist">Chemist</div>
+                    <p data-key="desc_base_chemist">You are the Chemist, a mad scientist experimenting on living beings. On the first night, you prepare 4 potions (2 poison, 2 harmless). You can choose a target to give one of each.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Chemist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪</div>
-                    <p>At first night, you prepare your elixir. 1 is poison, the other is just simple iced tea. The next night you will visit 2 people and you will not able to know who took the poison one.</p>
-                    <p style="font-size:0.9rem;">The poison affect takes 2 nights. During that 2 nights if someone visit the poisoned person, they will die with him too. Be careful about Town Hunter 🎯 and Serial Killer 🔪. They might notice and kill you.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_chemist">EVO Chemist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧪</div>
+                    <p data-key="desc_evo_chemist">At first night, you prepare your elixir. 1 is poison, the other is just simple iced tea. The next night you will visit 2 people and you will not able to know who took the poison one.</p>
+                    <p style="font-size:0.9rem;" data-key="note_evo_chemist">The poison affect takes 2 nights. During that 2 nights if someone visit the poisoned person, they will die with him too. Be careful about Town Hunter 🎯 and Serial Killer 🔪. They might notice and kill you.</p>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div id="evoMayorModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🎖</div><div class="role-title">Mayor</div>
-                    <p>You are the Mayor. Your vote counts as two during the day once revealed.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🎖</div><div class="role-title" data-key="role_mayor">Mayor</div>
+                    <p data-key="desc_base_mayor">You are the Mayor. Your vote counts as two during the day once revealed.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Mayor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎖</div>
-                    <p>After revealing himself, if any village role dies by lynching the mayor gets an extra vote.</p>
-                    <ul>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_mayor">EVO Mayor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎖</div>
+                    <p data-key="desc_evo_mayor">After revealing himself, if any village role dies by lynching the mayor gets an extra vote.</p>
+                    <ul data-key="note_evo_mayor">
                         <li>If 1 village die, vote will be 3</li>
                         <li>If 2 village die, vote will be 4</li>
                         <li>If 3 village die, vote will be 5 etc.</li>
@@ -748,14 +709,14 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">👷</div><div class="role-title">Mason</div>
-                    <p>You are a Mason. If there are any other masons, you will know who they are. Otherwise, you are a villager.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">👷</div><div class="role-title" data-key="role_mason">Mason</div>
+                    <p data-key="desc_base_mason">You are a Mason. If there are any other masons, you will know who they are. Otherwise, you are a villager.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Mason</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👷</div>
-                    <p>If you are not alone, for every mason member each all of you gain 10% faith against Cultist.</p>
-                    <ul>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_mason">EVO Mason</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👷</div>
+                    <p data-key="desc_evo_mason">If you are not alone, for every mason member each all of you gain 10% faith against Cultist.</p>
+                    <ul data-key="note_evo_mason">
                         <li>2 mason -> 90% CV rate</li>
                         <li>3 mason -> 80% CV rate</li>
                         <li>4 mason -> 70% CV rate</li>
@@ -772,13 +733,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">⚡️</div><div class="role-title">Alpha Wolf</div>
-                    <p>You are the Alpha Wolf; the source of the scourge. Each night, you will choose a human to attack and kill, but as long as you are alive, your victim has a 20% chance of turning into a werewolf.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">⚡️</div><div class="role-title" data-key="role_alpha">Alpha Wolf</div>
+                    <p data-key="desc_base_alpha">You are the Alpha Wolf; the source of the scourge. Each night, you will choose a human to attack and kill, but as long as you are alive, your victim has a 20% chance of turning into a werewolf.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Alpha Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">⚡️</div>
-                    <p>There is 25% infection chance.<br>Preacher can not detect him.<br>Skeleton will fail if try to block him.<br>Depressive will not manage to kill him.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_alpha">EVO Alpha Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">⚡️</div>
+                    <p data-key="desc_evo_alpha">There is 25% infection chance.<br>Preacher can not detect him.<br>Skeleton will fail if try to block him.<br>Depressive will not manage to kill him.</p>
                 </div>
             </div>
         </div>
@@ -789,13 +750,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🎩</div><div class="role-title">Boss</div>
-                    <p>You have a strong dislike for cultists. Whenever you encounter a cult, you join their ranks by pretending to be one of them.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🎩</div><div class="role-title" data-key="role_boss">Boss</div>
+                    <p data-key="desc_base_boss">You have a strong dislike for cultists. Whenever you encounter a cult, you join their ranks by pretending to be one of them.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Boss</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎩</div>
-                    <p>After the Cultist Hunter is dead, you will become a new one.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_boss">EVO Boss</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎩</div>
+                    <p data-key="desc_evo_boss">After the Cultist Hunter is dead, you will become a new one.</p>
                 </div>
             </div>
         </div>
@@ -806,13 +767,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🦅</div><div class="role-title">Augur</div>
-                    <p>You are the Augur. You are the only one who can see roles that are not in the village!</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🦅</div><div class="role-title" data-key="role_augur">Augur</div>
+                    <p data-key="desc_base_augur">You are the Augur. You are the only one who can see roles that are not in the village!</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Augur</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦅</div>
-                    <p>When any vision roles die, you will be able to know their last vision.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_augur">EVO Augur</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦅</div>
+                    <p data-key="desc_evo_augur">When any vision roles die, you will be able to know their last vision.</p>
                 </div>
             </div>
         </div>
@@ -823,13 +784,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">👺</div><div class="role-title">Tanner</div>
-                    <p>You are the tanner. If you get lynched, you win automatically!</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">👺</div><div class="role-title" data-key="role_tanner">Tanner</div>
+                    <p data-key="desc_base_tanner">You are the tanner. If you get lynched, you win automatically!</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Tanner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👺</div>
-                    <p>If you die, you will win the game. No matter how you die (AFK exception as usual)!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_tanner">EVO Tanner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👺</div>
+                    <p data-key="desc_evo_tanner">If you die, you will win the game. No matter how you die (AFK exception as usual)!</p>
                 </div>
             </div>
         </div>
@@ -840,13 +801,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🔥</div><div class="role-title">Arsonist</div>
-                    <p>You are the Arsonist. Each night, you may either douse a house with kerosene or spark, burning all previously doused houses.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🔥</div><div class="role-title" data-key="role_arsonist">Arsonist</div>
+                    <p data-key="desc_base_arsonist">You are the Arsonist. Each night, you may either douse a house with kerosene or spark, burning all previously doused houses.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Arsonist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔥</div>
-                    <p>You will douse one player every night. But when it is time to burn, you will have a change to also burn another player too which that player is under the victim’s name automatically. Visitors will burned no matter what they are!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_arsonist">EVO Arsonist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔥</div>
+                    <p data-key="desc_evo_arsonist">You will douse one player every night. But when it is time to burn, you will have a change to also burn another player too which that player is under the victim’s name automatically. Visitors will burned no matter what they are!</p>
                 </div>
             </div>
         </div>
@@ -857,13 +818,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🧑🌚</div><div class="role-title">WolfMan</div>
-                    <p>You are the WolfMan! The Seer will get confused and think you are a werewolf!</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🧑🌚</div><div class="role-title" data-key="role_wolfman">WolfMan</div>
+                    <p data-key="desc_base_wolfman">You are the WolfMan! The Seer will get confused and think you are a werewolf!</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Wolfman</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧑🌚</div>
-                    <p>You are a regular villager but as you know, seer confuses about you. They will see you as a werewolf. Meantime, you are side of village. Thus, if any wolf attacks you, you will fight back them! There is a reason for a “wolf” name in your name...</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_wolfman">EVO Wolfman</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧑🌚</div>
+                    <p data-key="desc_evo_wolfman">You are a regular villager but as you know, seer confuses about you. They will see you as a werewolf. Meantime, you are side of village. Thus, if any wolf attacks you, you will fight back them! There is a reason for a “wolf” name in your name...</p>
                 </div>
             </div>
         </div>
@@ -874,13 +835,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🐺🌝</div><div class="role-title">Lycan</div>
-                    <p>You are the lycan! You are a wolf, but the seer will be confused and see you as a villager :)</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🐺🌝</div><div class="role-title" data-key="role_lycan">Lycan</div>
+                    <p data-key="desc_base_lycan">You are the lycan! You are a wolf, but the seer will be confused and see you as a villager :)</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Lycan</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🌝</div>
-                    <p>You are a regular wolf, but seer will recognize you as a villager. You will never harm Harlot/GA too when they visit you. You are not a just pretender. You are a good citizen :D</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_lycan">EVO Lycan</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🌝</div>
+                    <p data-key="desc_evo_lycan">You are a regular wolf, but seer will recognize you as a villager. You will never harm Harlot/GA too when they visit you. You are not a just pretender. You are a good citizen :D</p>
                 </div>
             </div>
         </div>
@@ -891,13 +852,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">💂</div><div class="role-title">Cultist Hunter</div>
-                    <p>You are the Cultist Hunter. Each night, choose a player. If they are a cultist, they die.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">💂</div><div class="role-title" data-key="role_cult_hunter">Cultist Hunter</div>
+                    <p data-key="desc_base_cult_hunter">You are the Cultist Hunter. Each night, choose a player. If they are a cultist, they die.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Cultist Hunter</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💂</div>
-                    <p>Your leadership is beyond the entire village. You will catch and hunt cultist every night. At the daytime all players must obey your lead. Pacifist ☮️, Blacksmith ⚒️, Prince 👑, Troublemaker 🤯 and Sandman 💤 will no exist in game. Because you already have their ability!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_cult_hunter">EVO Cultist Hunter</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💂</div>
+                    <p data-key="desc_evo_cult_hunter">Your leadership is beyond the entire village. You will catch and hunt cultist every night. At the daytime all players must obey your lead. Pacifist ☮️, Blacksmith ⚒️, Prince 👑, Troublemaker 🤯 and Sandman 💤 will no exist in game. Because you already have their ability!</p>
                 </div>
             </div>
         </div>
@@ -908,13 +869,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">👤</div><div class="role-title">Cultist</div>
-                    <p>You are a cultist. Every night, you may choose a player to convert to a cultist.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">👤</div><div class="role-title" data-key="role_cultist">Cultist</div>
+                    <p data-key="desc_base_cultist">You are a cultist. Every night, you may choose a player to convert to a cultist.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Cultist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👤</div>
-                    <p>As a cultist, if you failed to convince your target you will not leave it like that. If the convince percentage fail, then two possibility will appear, you will leave them or retaliate and kill them! Join or die pure!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_cultist">EVO Cultist</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👤</div>
+                    <p data-key="desc_evo_cultist">As a cultist, if you failed to convince your target you will not leave it like that. If the convince percentage fail, then two possibility will appear, you will leave them or retaliate and kill them! Join or die pure!</p>
                 </div>
             </div>
         </div>
@@ -925,13 +886,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🐺🌚</div><div class="role-title">Shadow Wolf</div>
-                    <p>You are a Shadow Wolf. When you use your abilities, the shadows will hide the villagers' votes.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🐺🌚</div><div class="role-title" data-key="role_shadow_wolf">Shadow Wolf</div>
+                    <p data-key="desc_base_shadow_wolf">You are a Shadow Wolf. When you use your abilities, the shadows will hide the villagers' votes.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Shadow Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🌚</div>
-                    <p>Your ability also effects the day and night actions too.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_shadow_wolf">EVO Shadow Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🌚</div>
+                    <p data-key="desc_evo_shadow_wolf">Your ability also effects the day and night actions too.</p>
                 </div>
             </div>
         </div>
@@ -942,13 +903,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🐺❄️</div><div class="role-title">Snow Wolf</div>
-                    <p>You are the Snow Wolf. Every night you freeze someone. A frozen person will be unable to use any night actions.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🐺❄️</div><div class="role-title" data-key="role_snow_wolf">Snow Wolf</div>
+                    <p data-key="desc_base_snow_wolf">You are the Snow Wolf. Every night you freeze someone. A frozen person will be unable to use any night actions.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Snow Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺❄️</div>
-                    <p>Your target will not be able to talk or vote entire day. Perhaps, the cold is vulnerability for them... Maybe they will die as frozen!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_snow_wolf">EVO Snow Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺❄️</div>
+                    <p data-key="desc_evo_snow_wolf">Your target will not be able to talk or vote entire day. Perhaps, the cold is vulnerability for them... Maybe they will die as frozen!</p>
                 </div>
             </div>
         </div>
@@ -959,13 +920,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">👁</div><div class="role-title">Beholder</div>
-                    <p>You are the beholder, you will be told who the (real) seer is - that is your only function.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">👁</div><div class="role-title" data-key="role_beholder">Beholder</div>
+                    <p data-key="desc_base_beholder">You are the beholder, you will be told who the (real) seer is - that is your only function.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Beholder</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👁</div>
-                    <p>Your true vision is beyond all magicians. You will not only know the seer, but you will also see everyone’s night action too. Interface to the game? I don’t think so... You will only be able to talk to your seer. Otherwise, sad for you and hope they will follow your lead during lynch phase.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_beholder">EVO Beholder</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👁</div>
+                    <p data-key="desc_evo_beholder">Your true vision is beyond all magicians. You will not only know the seer, but you will also see everyone’s night action too. Interface to the game? I don’t think so... You will only be able to talk to your seer. Otherwise, sad for you and hope they will follow your lead during lynch phase.</p>
                 </div>
             </div>
         </div>
@@ -976,13 +937,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🎯</div><div class="role-title">Hunter</div>
-                    <p>You are the town Hunter. If you die, you can choose someone else to kill.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🎯</div><div class="role-title" data-key="role_hunter">Hunter</div>
+                    <p data-key="desc_base_hunter">You are the town Hunter. If you die, you can choose someone else to kill.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Hunter</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎯</div>
-                    <p>Your whole life passed with servicing your people, to the citizens. But somehow, with some way they decide to kill you? Ungrateful pity living human! When you die choosing only one simple sinner for killing yourself is not enough! Make the massacre... Kill them all as much as you can... During the lynch, you will have a short time, and you are only able to choose whoever vote for you, and they will die with you!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_hunter">EVO Hunter</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎯</div>
+                    <p data-key="desc_evo_hunter">Your whole life passed with servicing your people, to the citizens. But somehow, with some way they decide to kill you? Ungrateful pity living human! When you die choosing only one simple sinner for killing yourself is not enough! Make the massacre... Kill them all as much as you can... During the lynch, you will have a short time, and you are only able to choose whoever vote for you, and they will die with you!</p>
                 </div>
             </div>
         </div>
@@ -993,13 +954,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">♟</div><div class="role-title">Pawn</div>
-                    <p>Every night you will choose someone to protect. If your target gets attacked, you will sacrifice yourself.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">♟</div><div class="role-title" data-key="role_pawn">Pawn</div>
+                    <p data-key="desc_base_pawn">Every night you will choose someone to protect. If your target gets attacked, you will sacrifice yourself.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Pawn</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">♟</div>
-                    <p>You are not alone in this fight! Like mason and villager, you may also appear in game more than one! 3 pawn built absolute defending, and no sacrifice require.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_pawn">EVO Pawn</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">♟</div>
+                    <p data-key="desc_evo_pawn">You are not alone in this fight! Like mason and villager, you may also appear in game more than one! 3 pawn built absolute defending, and no sacrifice require.</p>
                 </div>
             </div>
         </div>
@@ -1010,13 +971,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">😵‍💫</div><div class="role-title">Slave</div>
-                    <p>You win if your target is lynched.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">😵‍💫</div><div class="role-title" data-key="role_slave">Slave</div>
+                    <p data-key="desc_base_slave">You win if your target is lynched.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Slave</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">😵‍💫</div>
-                    <p>You are a solo role. They thought your purpose is just lynching your target, but no way! When your assigned target will die, next one comes up but hey! No worries... From that the targets will die even they lynch someone else.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_slave">EVO Slave</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">😵‍💫</div>
+                    <p data-key="desc_evo_slave">You are a solo role. They thought your purpose is just lynching your target, but no way! When your assigned target will die, next one comes up but hey! No worries... From that the targets will die even they lynch someone else.</p>
                 </div>
             </div>
         </div>
@@ -1027,13 +988,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🧜</div><div class="role-title">Poseidon</div>
-                    <p>Once per game, you can kill a random player on the village team by unleashing a tsunami.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🧜</div><div class="role-title" data-key="role_poseidon">Poseidon</div>
+                    <p data-key="desc_base_poseidon">Once per game, you can kill a random player on the village team by unleashing a tsunami.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Poseidon</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧜</div>
-                    <p>Your tsunami will drown several players. That could be even your allies!! Or serial killer/arsonist... Even the number of players who drown is also variable.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_poseidon">EVO Poseidon</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧜</div>
+                    <p data-key="desc_evo_poseidon">Your tsunami will drown several players. That could be even your allies!! Or serial killer/arsonist... Even the number of players who drown is also variable.</p>
                 </div>
             </div>
         </div>
@@ -1044,13 +1005,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🔮</div><div class="role-title">Sorcerer</div>
-                    <p>At night you will use your power to find the wolves or the Seer. You win only if the wolves win.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🔮</div><div class="role-title" data-key="role_sorcerer">Sorcerer</div>
+                    <p data-key="desc_base_sorcerer">At night you will use your power to find the wolves or the Seer. You win only if the wolves win.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Sorcerer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔮</div>
-                    <p>You will kill immediately when you detect any helper!!! Your dark magic will absorbe them.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_sorcerer">EVO Sorcerer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔮</div>
+                    <p data-key="desc_evo_sorcerer">You will kill immediately when you detect any helper!!! Your dark magic will absorbe them.</p>
                 </div>
             </div>
         </div>
@@ -1061,13 +1022,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🕵️‍♂️</div><div class="role-title">Detective</div>
-                    <p>During the day, you may choose a player to reveal their role. However in doing so, your role could be revealed to the wolves! (40% chance).</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🕵️‍♂️</div><div class="role-title" data-key="role_detective">Detective</div>
+                    <p data-key="desc_base_detective">During the day, you may choose a player to reveal their role. However in doing so, your role could be revealed to the wolves! (40% chance).</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Detective</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🕵️‍♂️</div>
-                    <p>When you die, you will give a clue about your murderer at the same night!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_detective">EVO Detective</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🕵️‍♂️</div>
+                    <p data-key="desc_evo_detective">When you die, you will give a clue about your murderer at the same night!</p>
                 </div>
             </div>
         </div>
@@ -1078,13 +1039,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">👼</div><div class="role-title">Guardian Angel</div>
-                    <p>You are the Guardian Angel. Each night, you may choose a player to save.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">👼</div><div class="role-title" data-key="role_guardian">Guardian Angel</div>
+                    <p data-key="desc_base_guardian">You are the Guardian Angel. Each night, you may choose a player to save.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Guardian Angel</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👼</div>
-                    <p>You will have a chance to retaliate when they attack your target! Also, be realistic... Number of wolf's matter. You can't beat the entire pack or retaliate to them! Perhaps they will ripe you 😀</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_guardian">EVO Guardian Angel</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👼</div>
+                    <p data-key="desc_evo_guardian">You will have a chance to retaliate when they attack your target! Also, be realistic... Number of wolf's matter. You can't beat the entire pack or retaliate to them! Perhaps they will ripe you 😀</p>
                 </div>
             </div>
         </div>
@@ -1095,13 +1056,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🤕</div><div class="role-title">Clumsy Guy</div>
-                    <p>You are a regular villager, but your clumsiness sometimes causes you to vote for the wrong person randomly.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🤕</div><div class="role-title" data-key="role_clumsy">Clumsy Guy</div>
+                    <p data-key="desc_base_clumsy">You are a regular villager, but your clumsiness sometimes causes you to vote for the wrong person randomly.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Clumsy Guy</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🤕</div>
-                    <p>You... You will literally sabotage all players vote by %50 chance during you are alive!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_clumsy">EVO Clumsy Guy</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🤕</div>
+                    <p data-key="desc_evo_clumsy">You... You will literally sabotage all players vote by %50 chance during you are alive!</p>
                 </div>
             </div>
         </div>
@@ -1112,13 +1073,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">👳</div><div class="role-title">Seer</div>
-                    <p>You are the seer. Each night, you may choose a player to 'see', and reveal their role to you.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">👳</div><div class="role-title" data-key="role_seer">Seer</div>
+                    <p data-key="desc_base_seer">You are the seer. Each night, you may choose a player to 'see', and reveal their role to you.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Seer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👳</div>
-                    <p>When you check someone you will receive 2 different role about your target. One is the correct and the other one will belong to someone else in the game. The hint is 1st role which have been told you is about your target.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_seer">EVO Seer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👳</div>
+                    <p data-key="desc_evo_seer">When you check someone you will receive 2 different role about your target. One is the correct and the other one will belong to someone else in the game. The hint is 1st role which have been told you is about your target.</p>
                 </div>
             </div>
         </div>
@@ -1129,13 +1090,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🃏</div><div class="role-title">Fool</div>
-                    <p>The fool is told they are the seer.... when they choose to see someone's role at night, they are told a random role.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🃏</div><div class="role-title" data-key="role_fool">Fool</div>
+                    <p data-key="desc_base_fool">The fool is told they are the seer.... when they choose to see someone's role at night, they are told a random role.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Fool</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🃏</div>
-                    <p>Your visions are still false, but when you check someone you will receive 2 different role about your target. Who knows, maybe one of them correct, maybe both of the vision are wrong!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_fool">EVO Fool</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🃏</div>
+                    <p data-key="desc_evo_fool">Your visions are still false, but when you check someone you will receive 2 different role about your target. Who knows, maybe one of them correct, maybe both of the vision are wrong!</p>
                 </div>
             </div>
         </div>
@@ -1146,13 +1107,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">💀</div><div class="role-title">Skeleton</div>
-                    <p>You are the Skeleton. After death, your spirit continues to live and you can block the abilities and voting of any player for 1 day. One time use.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">💀</div><div class="role-title" data-key="role_skeleton">Skeleton</div>
+                    <p data-key="desc_base_skeleton">You are the Skeleton. After death, your spirit continues to live and you can block the abilities and voting of any player for 1 day. One time use.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Skeleton</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💀</div>
-                    <p>After you die, you have a chance to block someone's ability and vote right. And then, you will resurrect yourself. If you die again, block someone - resurrect - die again. The loop is infinite. Death is not an end, it just a beggining!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_skeleton">EVO Skeleton</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💀</div>
+                    <p data-key="desc_evo_skeleton">After you die, you have a chance to block someone's ability and vote right. And then, you will resurrect yourself. If you die again, block someone - resurrect - die again. The loop is infinite. Death is not an end, it just a beggining!</p>
                 </div>
             </div>
         </div>
@@ -1163,13 +1124,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🖕</div><div class="role-title">Traitor</div>
-                    <p>Traitor! For now, you are a villager, but once all the wolves die, you will become a werewolf.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🖕</div><div class="role-title" data-key="role_traitor">Traitor</div>
+                    <p data-key="desc_base_traitor">Traitor! For now, you are a villager, but once all the wolves die, you will become a werewolf.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Traitor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🖕</div>
-                    <p>You will take the last werewolf's identity. Regardless of the type of the last wolf that died, you will start hunting directly with its abilities.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_traitor">EVO Traitor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🖕</div>
+                    <p data-key="desc_evo_traitor">You will take the last werewolf's identity. Regardless of the type of the last wolf that died, you will start hunting directly with its abilities.</p>
                 </div>
             </div>
         </div>
@@ -1180,13 +1141,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🔫</div><div class="role-title">Gunner</div>
-                    <p>You are the gunner. You have two bullets. During the day, you may choose to shoot another player.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🔫</div><div class="role-title" data-key="role_gunner">Gunner</div>
+                    <p data-key="desc_base_gunner">You are the gunner. You have two bullets. During the day, you may choose to shoot another player.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Gunner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔫</div>
-                    <p>You have 6 bullets in total. You may use them during the day or the night! You may also cover yourself with your bullets from incoming attacks.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_gunner">EVO Gunner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔫</div>
+                    <p data-key="desc_evo_gunner">You have 6 bullets in total. You may use them during the day or the night! You may also cover yourself with your bullets from incoming attacks.</p>
                 </div>
             </div>
         </div>
@@ -1197,13 +1158,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">💋</div><div class="role-title">Harlot</div>
-                    <p>You are the Harlot. During the night, you may choose to visit another player.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">💋</div><div class="role-title" data-key="role_harlot">Harlot</div>
+                    <p data-key="desc_base_harlot">You are the Harlot. During the night, you may choose to visit another player.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Harlot</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💋</div>
-                    <p>When you visit anyone, your target will not be able to take their night actions since you keep them busy! Bad roles also will be busy, you may die during visit them but still they will be busy with you.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_harlot">EVO Harlot</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">💋</div>
+                    <p data-key="desc_evo_harlot">When you visit anyone, your target will not be able to take their night actions since you keep them busy! Bad roles also will be busy, you may die during visit them but still they will be busy with you.</p>
                 </div>
             </div>
         </div>
@@ -1214,13 +1175,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">😾</div><div class="role-title">Cursed</div>
-                    <p>You are cursed. You are a villager at this time, but if the wolves choose to kill you, you will become a werewolf yourself.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">😾</div><div class="role-title" data-key="role_cursed">Cursed</div>
+                    <p data-key="desc_base_cursed">You are cursed. You are a villager at this time, but if the wolves choose to kill you, you will become a werewolf yourself.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Cursed</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">😾</div>
-                    <p>After you get bitten, you will become a werewolf. Your curse will continue with you in a different way. Your bite has a 25% infection rate for every attack. Yes, you will be the 2nd Alpha Wolf literally!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_cursed">EVO Cursed</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">😾</div>
+                    <p data-key="desc_evo_cursed">After you get bitten, you will become a werewolf. Your curse will continue with you in a different way. Your bite has a 25% infection rate for every attack. Yes, you will be the 2nd Alpha Wolf literally!</p>
                 </div>
             </div>
         </div>
@@ -1231,13 +1192,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🎭</div><div class="role-title">Doppelgänger</div>
-                    <p>You are a Doppelgänger. Choose a player, when that player dies, you will take on their role.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🎭</div><div class="role-title" data-key="role_doppelganger">Doppelgänger</div>
+                    <p data-key="desc_base_doppelganger">You are a Doppelgänger. Choose a player, when that player dies, you will take on their role.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Doppelgänger</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎭</div>
-                    <p>After a point, you will be able to murder your role model. You can't expect waiting for your role model to die in desperate. You are culpable of all your ancestors abilities. That means you can change your role model anytime, even after you get the role! But still you still have to service one team.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_doppelganger">EVO Doppelgänger</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🎭</div>
+                    <p data-key="desc_evo_doppelganger">After a point, you will be able to murder your role model. You can't expect waiting for your role model to die in desperate. You are culpable of all your ancestors abilities. That means you can change your role model anytime, even after you get the role! But still you still have to service one team.</p>
                 </div>
             </div>
         </div>
@@ -1248,13 +1209,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🏹</div><div class="role-title">Cupid</div>
-                    <p>You are Cupid. You get to choose two players to love each other for eternity. If one of them dies, the other one dies of sorrow.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🏹</div><div class="role-title" data-key="role_cupid">Cupid</div>
+                    <p data-key="desc_base_cupid">You are Cupid. You get to choose two players to love each other for eternity. If one of them dies, the other one dies of sorrow.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Cupid</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🏹</div>
-                    <p>You are not an architecture, you are a God. You will decide to bound people to each other. Whenever you want, you will decide to kill the couple immediately and find another proper couple for yourself or goodness of village (who believes that XD)</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_cupid">EVO Cupid</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🏹</div>
+                    <p data-key="desc_evo_cupid">You are not an architecture, you are a God. You will decide to bound people to each other. Whenever you want, you will decide to kill the couple immediately and find another proper couple for yourself or goodness of village (who believes that XD)</p>
                 </div>
             </div>
         </div>
@@ -1265,13 +1226,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">📚</div><div class="role-title">Wise Elder</div>
-                    <p>You are the Wise Elder. You can survive a werewolf attack once.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">📚</div><div class="role-title" data-key="role_wise">Wise Elder</div>
+                    <p data-key="desc_base_wise">You are the Wise Elder. You can survive a werewolf attack once.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Wise Elder</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">📚</div>
-                    <p>You will survive every first attack. Werewolf, serial killer, gunner etc. No matter what it is. With your wisdom you can check players whether they are good or bad.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_wise">EVO Wise Elder</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">📚</div>
+                    <p data-key="desc_evo_wise">You will survive every first attack. Werewolf, serial killer, gunner etc. No matter what it is. With your wisdom you can check players whether they are good or bad.</p>
                 </div>
             </div>
         </div>
@@ -1282,13 +1243,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">👶</div><div class="role-title">Wild Child</div>
-                    <p>You are a wild child! Pick a player to be your 'role model' - if they die, you become a werewolf.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">👶</div><div class="role-title" data-key="role_wild_child">Wild Child</div>
+                    <p data-key="desc_base_wild_child">You are a wild child! Pick a player to be your 'role model' - if they die, you become a werewolf.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Wild Child</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👶</div>
-                    <p>If your role model die, you will become wolfcub.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_wild_child">EVO Wild Child</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">👶</div>
+                    <p data-key="desc_evo_wild_child">If your role model die, you will become wolfcub.</p>
                 </div>
             </div>
         </div>
@@ -1299,13 +1260,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🐺🧧</div><div class="role-title">Rogue Wolf</div>
-                    <p>You are the Rogue Wolf. During the first night, you have the opportunity to select one player to impersonate.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🐺🧧</div><div class="role-title" data-key="role_rogue_wolf">Rogue Wolf</div>
+                    <p data-key="desc_base_rogue_wolf">You are the Rogue Wolf. During the first night, you have the opportunity to select one player to impersonate.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Rogue Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🧧</div>
-                    <p>Until you die, every vision roles see their target as "Rogue Wolf 🐺🧧". Well... Desperately and by luck they must find you immediately for goodness of village.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_rogue_wolf">EVO Rogue Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🧧</div>
+                    <p data-key="desc_evo_rogue_wolf">Until you die, every vision roles see their target as "Rogue Wolf 🐺🧧". Well... Desperately and by luck they must find you immediately for goodness of village.</p>
                 </div>
             </div>
         </div>
@@ -1316,13 +1277,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🐺🪄</div><div class="role-title">Illusionist Wolf</div>
-                    <p>If seer checks you, they’ll see that fake role instead. If you get lynched, the unlucky villager tied to your illusion goes down with you!</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🐺🪄</div><div class="role-title" data-key="role_illusionist">Illusionist Wolf</div>
+                    <p data-key="desc_base_illusionist">If seer checks you, they’ll see that fake role instead. If you get lynched, the unlucky villager tied to your illusion goes down with you!</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Illusionist Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🪄</div>
-                    <p>You are a consumer but separated from the pack. You will eat individually. When they decide to lynch you, you will kill someone else by your choice. You will gain an extra lynch for your pack and eliminate extra citizen.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_illusionist">EVO Illusionist Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺🪄</div>
+                    <p data-key="desc_evo_illusionist">You are a consumer but separated from the pack. You will eat individually. When they decide to lynch you, you will kill someone else by your choice. You will gain an extra lynch for your pack and eliminate extra citizen.</p>
                 </div>
             </div>
         </div>
@@ -1333,13 +1294,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🦜</div><div class="role-title">Snitch</div>
-                    <p>On his final breath, snitch can make any player reveal their identity by snitching on their deepest darkest secret.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🦜</div><div class="role-title" data-key="role_snitch">Snitch</div>
+                    <p data-key="desc_base_snitch">On his final breath, snitch can make any player reveal their identity by snitching on their deepest darkest secret.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Snitch</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦜</div>
-                    <p>You will announce half of alive player's role. You might expose even helpers.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_snitch">EVO Snitch</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦜</div>
+                    <p data-key="desc_evo_snitch">You will announce half of alive player's role. You might expose even helpers.</p>
                 </div>
             </div>
         </div>
@@ -1350,13 +1311,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🐺✨</div><div class="role-title">Conjurer Wolf</div>
-                    <p>You are the Conjurer Wolf. When you use your talent, the person with the fewest votes in the lynching vote will die.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🐺✨</div><div class="role-title" data-key="role_conjurer">Conjurer Wolf</div>
+                    <p data-key="desc_base_conjurer">You are the Conjurer Wolf. When you use your talent, the person with the fewest votes in the lynching vote will die.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Conjurer Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺✨</div>
-                    <p>Votes will be mixed up, and they thought the person get lynch who gets less vote. No matter what condition is, you are the one who will decide to get lynch. You will do that by a single vote. Your vote will be also hidden. All players though you vote someone else.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_conjurer">EVO Conjurer Wolf</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐺✨</div>
+                    <p data-key="desc_evo_conjurer">Votes will be mixed up, and they thought the person get lynch who gets less vote. No matter what condition is, you are the one who will decide to get lynch. You will do that by a single vote. Your vote will be also hidden. All players though you vote someone else.</p>
                 </div>
             </div>
         </div>
@@ -1367,13 +1328,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🦸‍♂️</div><div class="role-title">Executioner</div>
-                    <p>Once revealed, the villagers are now required to cast their votes for the Executioner's chosen target.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🦸‍♂️</div><div class="role-title" data-key="role_executioner">Executioner</div>
+                    <p data-key="desc_base_executioner">Once revealed, the villagers are now required to cast their votes for the Executioner's chosen target.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Executioner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦸‍♂️</div>
-                    <p>Put someone on trial. they will vote for target fate. If your target was innocent, then you will give another decide for who says "Yes" to lynch. Until you find the evil, it will continue.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_executioner">EVO Executioner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🦸‍♂️</div>
+                    <p data-key="desc_evo_executioner">Put someone on trial. they will vote for target fate. If your target was innocent, then you will give another decide for who says "Yes" to lynch. Until you find the evil, it will continue.</p>
                 </div>
             </div>
         </div>
@@ -1384,13 +1345,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🪖</div><div class="role-title">Soldier</div>
-                    <p>When the sun rises, you can choose to save someone from lynching votes.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🪖</div><div class="role-title" data-key="role_soldier">Soldier</div>
+                    <p data-key="desc_base_soldier">When the sun rises, you can choose to save someone from lynching votes.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Soldier</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🪖</div>
-                    <p>You will got your target back as a loyal soldier! Whoever try to hesitate kill your target, you will get them immediately! During day and night or lynch phase, any time you can cover your target back.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_soldier">EVO Soldier</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🪖</div>
+                    <p data-key="desc_evo_soldier">You will got your target back as a loyal soldier! Whoever try to hesitate kill your target, you will get them immediately! During day and night or lynch phase, any time you can cover your target back.</p>
                 </div>
             </div>
         </div>
@@ -1401,13 +1362,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🛐</div><div class="role-title">Preacher</div>
-                    <p>You are the Preacher. During the night, you can pray for a player.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🛐</div><div class="role-title" data-key="role_preacher">Preacher</div>
+                    <p data-key="desc_base_preacher">You are the Preacher. During the night, you can pray for a player.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Preacher</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🛐</div>
-                    <p>You have been gifted by God. You will pray entire night for your target. Might have 50% chance to survive but even your target is die, you will know the murderer identity. Cult is weak against your worship. They will not succeed but they will also become a villager if the newest member try to convert you!</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_preacher">EVO Preacher</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🛐</div>
+                    <p data-key="desc_evo_preacher">You have been gifted by God. You will pray entire night for your target. Might have 50% chance to survive but even your target is die, you will know the murderer identity. Cult is weak against your worship. They will not succeed but they will also become a villager if the newest member try to convert you!</p>
                 </div>
             </div>
         </div>
@@ -1418,14 +1379,14 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🔪</div><div class="role-title">Serial Killer</div>
-                    <p>You are the serial killer. Recently escaped from the local asylum, your goal is for everyone else to die.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🔪</div><div class="role-title" data-key="role_serial_killer">Serial Killer</div>
+                    <p data-key="desc_base_serial_killer">You are the serial killer. Recently escaped from the local asylum, your goal is for everyone else to die.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Serial Killer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔪</div>
-                    <p>Do you want to know what evolution do you have? What can you be more? Simple, every night you get more victim from previous night. You will get a strike!</p>
-                    <ul>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_serial_killer">EVO Serial Killer</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🔪</div>
+                    <p data-key="desc_evo_serial_killer">Do you want to know what evolution do you have? What can you be more? Simple, every night you get more victim from previous night. You will get a strike!</p>
+                    <ul data-key="note_evo_serial_killer">
                         <li>N1: Killed 1 player</li>
                         <li>N2: Killed 2 player</li>
                         <li>N3: Killed 3 player</li>
@@ -1442,13 +1403,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">⛏️</div><div class="role-title">Miner</div>
-                    <p>You're a Miner. Every night you dig tunnels into villagers' houses.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">⛏️</div><div class="role-title" data-key="role_miner">Miner</div>
+                    <p data-key="desc_base_miner">You're a Miner. Every night you dig tunnels into villagers' houses.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Miner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">⛏️</div>
-                    <p>Your diggings will be permanent until you die. You can not dig same person more than once in game. But... Since you may dig everyone's house, someone must die. Well that mean it is your turn and say goodbye to world. You can't dig for your house.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_miner">EVO Miner</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">⛏️</div>
+                    <p data-key="desc_evo_miner">Your diggings will be permanent until you die. You can not dig same person more than once in game. But... Since you may dig everyone's house, someone must die. Well that mean it is your turn and say goodbye to world. You can't dig for your house.</p>
                 </div>
             </div>
         </div>
@@ -1459,13 +1420,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🧑‍⚕️</div><div class="role-title">Doctor</div>
-                    <p>You are the Doctor, with a single touch, you can bring a player back to life.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🧑‍⚕️</div><div class="role-title" data-key="role_doctor">Doctor</div>
+                    <p data-key="desc_base_doctor">You are the Doctor, with a single touch, you can bring a player back to life.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Doctor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧑‍⚕️</div>
-                    <p>Do you remember the oath you took? The Hippocratic Oath. That's why you have to save every life you can. Even the bad guys... You can save life even they don't deserve. For the records, you will win according to how much life did you save from one side. If you save more village roles, you belongs to village. If you save more bad roles, you belongs to any villain</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_doctor">EVO Doctor</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🧑‍⚕️</div>
+                    <p data-key="desc_evo_doctor">Do you remember the oath you took? The Hippocratic Oath. That's why you have to save every life you can. Even the bad guys... You can save life even they don't deserve. For the records, you will win according to how much life did you save from one side. If you save more village roles, you belongs to village. If you save more bad roles, you belongs to any villain</p>
                 </div>
             </div>
         </div>
@@ -1476,13 +1437,13 @@
             <span class="close-modal">&times;</span>
             <div class="evo-stage-container">
                 <div class="stage-base">
-                    <h2>Base Form</h2><div style="font-size:3rem;">🐶</div><div class="role-title">Wolf Cub</div>
-                    <p>If you happen to be killed, your wolf pack will fly into a rage and attack two people the next night.</p>
-                </div>                
+                    <h2 data-key="lbl_base">Base Form</h2><div style="font-size:3rem;">🐶</div><div class="role-title" data-key="role_wolf_cub">Wolf Cub</div>
+                    <p data-key="desc_base_wolf_cub">If you happen to be killed, your wolf pack will fly into a rage and attack two people the next night.</p>
+                </div>
                 <div class="stage-evo">
-                    <span class="evo-tag">MUTATION DETECTED</span>
-                    <h2>EVO Wolf Cub</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐶</div>
-                    <p>When you get killed somehow, next night the Wolf pack attacks 3 times. That furry can't be dodged by silver dust.</p>
+                    <span class="evo-tag" data-key="lbl_mutation">MUTATION DETECTED</span>
+                    <h2 data-key="role_evo_wolf_cub">EVO Wolf Cub</h2><div style="font-size:3rem; text-shadow:0 0 15px var(--toxic-green);">🐶</div>
+                    <p data-key="desc_evo_wolf_cub">When you get killed somehow, next night the Wolf pack attacks 3 times. That furry can't be dodged by silver dust.</p>
                 </div>
             </div>
         </div>
@@ -1493,52 +1454,53 @@
 
             <div class="footer-section">
                 <h3>🐺 Wolf Blood</h3>
-                <p>
+                <p data-key="footer_about">
                     The ultimate hub for experimental roles, game modes, and community chaos.
                     From the forest to the tabletop, we evolve the game.
                 </p>
             </div>
 
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3 data-key="footer_nav_title">Navigation</h3>
                 <div class="footer-links">
-                    <a href="index.html">🏠 Home</a>
-                    <a href="test_designs.html">🧪 Test Designs</a>
-                    <a href="removed.html">♻️ Graveyard</a>
-                    <a href="board_game.html">🎲 Board Game</a>
-                    <a href="evo_mod.html">🧬 Evo Mod</a>
-                    <a href="achievements.html">🏆 Achievements</a>
+                    <a href="index.html" data-key="nav_home">🏠 Home</a>
+                    <a href="test_designs.html" data-key="nav_test_designs">🧪 Test Designs</a>
+                    <a href="removed.html" data-key="nav_removed">♻️ Graveyard</a>
+                    <a href="board_game.html" data-key="nav_board_game">🎲 Board Game</a>
+                    <a href="evo_mod.html" data-key="nav_evo_mod">🧬 Evo Mod</a>
+                    <a href="achievements.html" data-key="nav_achievements">🏆 Achievements</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Legal & Help</h3>
+                <h3 data-key="footer_legal_title">Legal & Help</h3>
                 <div class="footer-links">
-                    <a href="faq.html">❓ FAQ</a>
-                    <a href="policy.html">🛡️ Privacy Policy</a>
-                    <a href="terms.html">📜 Terms of Service</a>
-                    <a href="cookies.html">🍪 Cookie Usage</a>
-                    <a href="license.html">⚖️ License</a>
+                    <a href="faq.html" data-key="link_faq">❓ FAQ</a>
+                    <a href="policy.html" data-key="link_privacy">🛡️ Privacy Policy</a>
+                    <a href="terms.html" data-key="link_terms">📜 Terms of Service</a>
+                    <a href="cookies.html" data-key="link_cookies">🍪 Cookie Usage</a>
+                    <a href="license.html" data-key="link_license">⚖️ License</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Join the Pack</h3>
-                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
-                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                <h3 data-key="footer_join_title">Join the Pack</h3>
+                <p data-key="footer_join_desc">Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/+QW8C1WwdSCQ3NmRl" target="_blank" class="footer-btn" data-key="btn_telegram">
                     ✈️ Open Telegram
                 </a>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-key="footer_copyright">
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
 
     <script src="script.js"></script>
     <script src="loader.js"></script>
+    <script src="translate.js"></script>
 
 </body>
 </html>

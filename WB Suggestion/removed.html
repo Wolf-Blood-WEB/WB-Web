@@ -398,26 +398,40 @@
 
     <div id="bg-canvas"></div>
 
+    <div class="language-dropdown">
+        <button class="dropdown-toggle">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span id="selected-lang-flag">🇺🇸</span>
+                <span id="selected-lang-code">EN</span>
+            </div>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" data-lang="en">🇺🇸 English</a>
+            <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+        </div>
+    </div>
+
     <nav class="wolf-nav">
-        <a href="index.html" class="nav-link">🏠 Home</a>
-        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
-        <a href="removed.html" class="nav-link active">♻️ Removed/Rev</a>
-        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
-        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
-        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+        <a href="index.html" class="nav-link" data-key="nav_home">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link" data-key="nav_test_designs">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link active" data-key="nav_removed">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link" data-key="nav_board_game">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link" data-key="nav_evo_mod">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link" data-key="nav_achievements">🏆 Achievements</a>
     </nav>
 
     <div class="container">
 
         <div class="grave-header">
-            <h1>🪦 Role Graveyard</h1>
-            <p class="grave-subtitle">Removed from Bot & Revision Center</p>
+            <h1 data-key="grave_header_title">🪦 Role Graveyard</h1>
+            <p class="grave-subtitle" data-key="grave_header_subtitle">Removed from Bot & Revision Center</p>
 
             <div class="warning-box">
                 <span style="font-size:2rem; filter: grayscale(1);">🛠️</span>
                 <div>
-                    <strong style="color:#aaa; letter-spacing:1px;">WORK IN PROGRESS</strong><br>
-                    Roles here are either removed or undergoing heavy reconstruction.
+                    <strong style="color:#aaa; letter-spacing:1px;" data-key="grave_wip_title">WORK IN PROGRESS</strong><br>
+                    <span data-key="grave_wip_text">Roles here are either removed or undergoing heavy reconstruction.</span>
                 </div>
             </div>
         </div>
@@ -426,182 +440,182 @@
 
             <div class="role-card modal-trigger" data-modal-target="wizardModal">
                 <div class="role-emoji">🧙</div>
-                <div class="role-name">Wizard</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_wizard">Wizard</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="communistModal">
                 <div class="role-emoji">☭</div>
-                <div class="role-name">Communist</div>
-                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);">Reworked</span>
+                <div class="role-name" data-key="role_communist">Communist</div>
+                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);" data-key="status_reworked">Reworked</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="snitchModal">
                 <div class="role-emoji">🦜</div>
-                <div class="role-name">Snitch</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_snitch">Snitch</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="travelerModal">
                 <div class="role-emoji">👲</div>
-                <div class="role-name">Traveler</div>
-                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);">Reworked</span>
+                <div class="role-name" data-key="role_traveler">Traveler</div>
+                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);" data-key="status_reworked">Reworked</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="timeLordModal">
                 <div class="role-emoji">⏱️</div>
-                <div class="role-name">Time Lord</div>
-                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);">Reworked</span>
+                <div class="role-name" data-key="role_timelord">Time Lord</div>
+                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);" data-key="status_reworked">Reworked</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="spyModal">
                 <div class="role-emoji">🤵🏻‍♂️</div>
-                <div class="role-name">Spy</div>
-                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);">Reworked</span>
+                <div class="role-name" data-key="role_spy">Spy</div>
+                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);" data-key="status_reworked">Reworked</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="terroristModal">
                 <div class="role-emoji">💣</div>
-                <div class="role-name">Terrorist</div>
-                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);">Renamed</span>
+                <div class="role-name" data-key="role_terrorist">Terrorist</div>
+                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);" data-key="status_renamed">Renamed</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="pandaModal">
                 <div class="role-emoji">🐼</div>
-                <div class="role-name">Panda</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_panda">Panda</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="gorillaModal">
                 <div class="role-emoji">🦍</div>
-                <div class="role-name">Gorilla</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_gorilla">Gorilla</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="missionaryModal">
                 <div class="role-emoji">👨🏻‍💼</div>
-                <div class="role-name">Missionary</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_missionary">Missionary</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="agentModal">
                 <div class="role-emoji">📡</div>
-                <div class="role-name">Agent</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_agent">Agent</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="naughtyBoyModal">
                 <div class="role-emoji">🧒🏻</div>
-                <div class="role-name">Naughty Boy</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_naughty">Naughty Boy</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="preacherModal">
                 <div class="role-emoji">🤲</div>
-                <div class="role-name">Preacher</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_preacher">Preacher</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="morticianModal">
                 <div class="role-emoji">👴🏻</div>
-                <div class="role-name">Mortician</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_mortician">Mortician</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="idiotModal">
                 <div class="role-emoji">😵‍💫</div>
-                <div class="role-name">Idiot</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_idiot">Idiot</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="spiritualistModal">
                 <div class="role-emoji">🪬</div>
-                <div class="role-name">Spiritualist</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_spiritualist">Spiritualist</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="juniorWolfModal">
                 <div class="role-emoji">🐺👦🏻</div>
-                <div class="role-name">Junior Wolf</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_junior_wolf">Junior Wolf</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="goatModal">
                 <div class="role-emoji">🐐</div>
-                <div class="role-name">Goat</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_goat">Goat</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="mageModal">
                 <div class="role-emoji">🧙</div>
-                <div class="role-name">Mage</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_mage">Mage</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="messengerModal">
                 <div class="role-emoji">📖</div>
-                <div class="role-name">Messenger</div>
-                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);">Reworked</span>
+                <div class="role-name" data-key="role_messenger">Messenger</div>
+                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);" data-key="status_reworked">Reworked</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="barbarianModal">
                 <div class="role-emoji">💪</div>
-                <div class="role-name">Barbarian</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_barbarian">Barbarian</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="trapperModal">
                 <div class="role-emoji">👾</div>
-                <div class="role-name">Trapper</div>
-                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);">Reworked</span>
+                <div class="role-name" data-key="role_trapper">Trapper</div>
+                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);" data-key="status_reworked">Reworked</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="criminalModal">
                 <div class="role-emoji">🔨</div>
-                <div class="role-name">Criminal</div>
-                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);">Reworked</span>
+                <div class="role-name" data-key="role_criminal">Criminal</div>
+                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);" data-key="status_reworked">Reworked</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="gamblerModal">
                 <div class="role-emoji">🎲</div>
-                <div class="role-name">Gambler</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_gambler">Gambler</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="protesterModal">
                 <div class="role-emoji">📣</div>
-                <div class="role-name">Protester</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_protester">Protester</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="sacrificeModal">
                 <div class="role-emoji">🛐</div>
-                <div class="role-name">Sacrifice</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_sacrifice">Sacrifice</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="listenerModal">
                 <div class="role-emoji">👂</div>
-                <div class="role-name">Listener</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_listener">Listener</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="guardianWolfModal">
                 <div class="role-emoji">🐺🛡</div>
-                <div class="role-name">Guardian Wolf</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_guardian_wolf">Guardian Wolf</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="analystModal">
                 <div class="role-emoji">🔬</div>
-                <div class="role-name">Analyst</div>
-                <span class="status-badge">No Revision</span>
+                <div class="role-name" data-key="role_analyst">Analyst</div>
+                <span class="status-badge" data-key="status_no_rev">No Revision</span>
             </div>
 
             <div class="role-card modal-trigger" data-modal-target="illusionistWolfModal">
                 <div class="role-emoji">🐺🪄</div>
-                <div class="role-name">Illusionist Wolf</div>
-                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);">Reworked</span>
+                <div class="role-name" data-key="role_illusionist">Illusionist Wolf</div>
+                <span class="status-badge" style="background:var(--color-reworked); color:#fff; border-color:var(--color-reworked);" data-key="status_reworked">Reworked</span>
             </div>
 
         </div>
@@ -612,14 +626,12 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🧙</div>
-                <div>
-                    <h2 style="margin:0; color:#8a0303;">Wizard</h2>
-                </div>
+                <div><h2 style="margin:0; color:#8a0303;" data-key="role_wizard">Wizard</h2></div>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p>Wizard : It is a neutral role until one dies from the spells. However, if a role from the village dies as a result of the spells, you will join the wolf team. It is recommended that you keep this role. During 1 day of voting, you will secretly confuse everyone and cause the death of a random person. If a villager dies as a result of random votes, you make an alliance with the wolves or you become a simple villager.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p data-key="desc_wizard_old">Wizard : It is a neutral role until one dies from the spells. However, if a role from the village dies as a result of the spells, you will join the wolf team. It is recommended that you keep this role. During 1 day of voting, you will secretly confuse everyone and cause the death of a random person. If a villager dies as a result of random votes, you make an alliance with the wolves or you become a simple villager.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -629,20 +641,18 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">☭</div>
-                <h2>Communist</h2>
+                <h2 data-key="role_communist">Communist</h2>
             </div>
             <div class="comparison-container">
                 <div class="comp-col old">
-                    <span class="comp-title">❌ Old Version</span>
-                    <p style="color:#aaa; font-size:0.9rem;">Communist. He wins only in the event of a tied lynching.</p>
+                    <span class="comp-title" data-key="ver_old">❌ Old Version</span>
+                    <p style="color:#aaa; font-size:0.9rem;" data-key="desc_communist_old">Communist. He wins only in the event of a tied lynching.</p>
                 </div>
                 <div class="comp-col new">
-                    <span class="comp-title">✨ New Version</span>
-                    <p style="color:#ddd; font-size:0.9rem;">If the lynch ties, you will be one who decide to lynch someone for once.</p>
+                    <span class="comp-title" data-key="ver_new">✨ New Version</span>
+                    <p style="color:#ddd; font-size:0.9rem;" data-key="desc_communist_new">If the lynch ties, you will be one who decide to lynch someone for once.</p>
                     <div style="text-align:center; margin-top:15px;">
-                        <button class="btn vote-trigger" data-vote-target="Communist Rework">
-                            🗳️ Vote for this Rework
-                        </button>
+                        <button class="btn vote-trigger" data-vote-target="Communist Rework" data-key="btn_vote_rework">🗳️ Vote for this Rework</button>
                     </div>
                 </div>
             </div>
@@ -654,23 +664,20 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🦜</div>
-                <h2>Snitch</h2>
+                <h2 data-key="role_snitch">Snitch</h2>
             </div>
             <div class="comparison-container">
                 <div class="comp-col old">
-                    <span class="comp-title">❌ Old Version</span>
-                    <p style="color:#aaa; font-size:0.9rem;">The Snitch is a simple villager. It can choose a player during the first night and has the ability to reveal the role of the player to everyone if the snitch dies. But if the chosen player dies before the snitch, it will only be a simple villager.</p>
-                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;">Cult Conversion Chance: 100%</div>
-                    <p style="color:#666; font-size:0.7rem; margin-top:5px; font-style:italic;">Note: It is not a 120 second role, and can appear in an 8 player game.</p>
+                    <span class="comp-title" data-key="ver_old">❌ Old Version</span>
+                    <p style="color:#aaa; font-size:0.9rem;" data-key="desc_snitch_old">The Snitch is a simple villager. It can choose a player during the first night and has the ability to reveal the role of the player to everyone if the snitch dies. But if the chosen player dies before the snitch, it will only be a simple villager.</p>
+                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;" data-key="cult_100">Cult Conversion Chance: 100%</div>
+                    <p style="color:#666; font-size:0.7rem; margin-top:5px; font-style:italic;" data-key="note_snitch">Note: It is not a 120 second role, and can appear in an 8 player game.</p>
                 </div>
-
                 <div class="comp-col new">
-                    <span class="comp-title">✨ New Version</span>
-                    <p style="color:#ddd; font-size:0.9rem;">Snitch is the nosiest resident in the entire village. His passion for gossip has led him to learn everyone’s hidden truths. On his final breath, snitch can make any player reveal their identity by snitching on their deepest darkest secret. Additionally, if the wolves dare to attack Snitch, there’s a 25% chance that one wolf’s identity gets revealed.</p>
+                    <span class="comp-title" data-key="ver_new">✨ New Version</span>
+                    <p style="color:#ddd; font-size:0.9rem;" data-key="desc_snitch_new">Snitch is the nosiest resident in the entire village. His passion for gossip has led him to learn everyone’s hidden truths. On his final breath, snitch can make any player reveal their identity by snitching on their deepest darkest secret. Additionally, if the wolves dare to attack Snitch, there’s a 25% chance that one wolf’s identity gets revealed.</p>
                     <div style="text-align:center; margin-top:15px;">
-                        <button class="btn vote-trigger" data-vote-target="Snitch Rework">
-                            🗳️ Vote for this Rework
-                        </button>
+                        <button class="btn vote-trigger" data-vote-target="Snitch Rework" data-key="btn_vote_rework">🗳️ Vote for this Rework</button>
                     </div>
                 </div>
             </div>
@@ -682,21 +689,19 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">👲</div>
-                <h2>Traveler</h2>
+                <h2 data-key="role_traveler">Traveler</h2>
             </div>
             <div class="comparison-container">
                 <div class="comp-col old">
-                    <span class="comp-title">❌ Old Version</span>
-                    <p style="color:#aaa; font-size:0.9rem;">Traveler : A traveler is a peasant who loves to travel. During his travels, he discovers a merchant and the merchant offers him the remaining 4 roles. The traveler chooses which role he wants to take and transforms into that role. If he doesn't like the roles, he can continue playing as a traveler.</p>
-                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;">Cult conversion chance: 60%</div>
+                    <span class="comp-title" data-key="ver_old">❌ Old Version</span>
+                    <p style="color:#aaa; font-size:0.9rem;" data-key="desc_traveler_old">Traveler : A traveler is a peasant who loves to travel. During his travels, he discovers a merchant and the merchant offers him the remaining 4 roles. The traveler chooses which role he wants to take and transforms into that role. If he doesn't like the roles, he can continue playing as a traveler.</p>
+                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;" data-key="cult_60">Cult conversion chance: 60%</div>
                 </div>
                 <div class="comp-col new">
-                    <span class="comp-title">✨ New Version</span>
-                    <p style="color:#ddd; font-size:0.9rem;">You are on the road at the day time. You will visit players and you will make them an offer about if they want to change their roles against your offer. If they accept, you can sold that role another player. If they not, you will continue the searching.<br>Note: Players can choose bad roles too, only thing is you are not able to know what did you offer.</p>
+                    <span class="comp-title" data-key="ver_new">✨ New Version</span>
+                    <p style="color:#ddd; font-size:0.9rem;" data-key="desc_traveler_new">You are on the road at the day time. You will visit players and you will make them an offer about if they want to change their roles against your offer. If they accept, you can sold that role another player. If they not, you will continue the searching.<br>Note: Players can choose bad roles too, only thing is you are not able to know what did you offer.</p>
                     <div style="text-align:center; margin-top:15px;">
-                        <button class="btn vote-trigger" data-vote-target="Traveler Rework">
-                            🗳️ Vote for this Rework
-                        </button>
+                        <button class="btn vote-trigger" data-vote-target="Traveler Rework" data-key="btn_vote_rework">🗳️ Vote for this Rework</button>
                     </div>
                 </div>
             </div>
@@ -708,21 +713,19 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">⏱️</div>
-                <h2>Time Lord</h2>
+                <h2 data-key="role_timelord">Time Lord</h2>
             </div>
             <div class="comparison-container">
                 <div class="comp-col old">
-                    <span class="comp-title">❌ Old Version</span>
-                    <p style="color:#aaa; font-size:0.9rem;">Time Lord : If the Time Lord dies, the day and night timers are significantly reduced. The day is reduced to a total of 60 seconds and the night to 30 seconds. Its effect will only last for 1 day.</p>
-                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;">Cult conversion chance: 50%</div>
+                    <span class="comp-title" data-key="ver_old">❌ Old Version</span>
+                    <p style="color:#aaa; font-size:0.9rem;" data-key="desc_timelord_old">Time Lord : If the Time Lord dies, the day and night timers are significantly reduced. The day is reduced to a total of 60 seconds and the night to 30 seconds. Its effect will only last for 1 day.</p>
+                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;" data-key="cult_50">Cult conversion chance: 50%</div>
                 </div>
                 <div class="comp-col new">
-                    <span class="comp-title">✨ New Version</span>
-                    <p style="color:#ddd; font-size:0.9rem;">You can reveal yourself during the day per once in game. If you do that, from the next night until the end of the lynch, all periods time will be limited as 30 second.</p>
+                    <span class="comp-title" data-key="ver_new">✨ New Version</span>
+                    <p style="color:#ddd; font-size:0.9rem;" data-key="desc_timelord_new">You can reveal yourself during the day per once in game. If you do that, from the next night until the end of the lynch, all periods time will be limited as 30 second.</p>
                     <div style="text-align:center; margin-top:15px;">
-                        <button class="btn vote-trigger" data-vote-target="Time Lord Rework">
-                            🗳️ Vote for this Rework
-                        </button>
+                        <button class="btn vote-trigger" data-vote-target="Time Lord Rework" data-key="btn_vote_rework">🗳️ Vote for this Rework</button>
                     </div>
                 </div>
             </div>
@@ -734,20 +737,18 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🤵🏻‍♂️</div>
-                <h2>Spy</h2>
+                <h2 data-key="role_spy">Spy</h2>
             </div>
             <div class="comparison-container">
                 <div class="comp-col old">
-                    <span class="comp-title">❌ Old Version</span>
-                    <p style="color:#aaa; font-size:0.9rem;">Spy. Each night he researches a player and determines whether that person has a good role or a bad role. However that information is only 30% accurate, because he lack of reliable sources.<br><br>OR<br><br>Spy. He researches two players every night and determine if they belong to the same team. However, when he sees 2 players on the same team, he cannot use his skills the next night.</p>
+                    <span class="comp-title" data-key="ver_old">❌ Old Version</span>
+                    <p style="color:#aaa; font-size:0.9rem;" data-key="desc_spy_old">Spy. Each night he researches a player and determines whether that person has a good role or a bad role. However that information is only 30% accurate, because he lack of reliable sources.<br><br>OR<br><br>Spy. He researches two players every night and determine if they belong to the same team. However, when he sees 2 players on the same team, he cannot use his skills the next night.</p>
                 </div>
                 <div class="comp-col new">
-                    <span class="comp-title">✨ New Version</span>
-                    <p style="color:#ddd; font-size:0.9rem;">At the beggining of the day time, they will be told to you have many players have night action.</p>
+                    <span class="comp-title" data-key="ver_new">✨ New Version</span>
+                    <p style="color:#ddd; font-size:0.9rem;" data-key="desc_spy_new">At the beggining of the day time, they will be told to you have many players have night action.</p>
                     <div style="text-align:center; margin-top:15px;">
-                        <button class="btn vote-trigger" data-vote-target="Spy Rework">
-                            🗳️ Vote for this Rework
-                        </button>
+                        <button class="btn vote-trigger" data-vote-target="Spy Rework" data-key="btn_vote_rework">🗳️ Vote for this Rework</button>
                     </div>
                 </div>
             </div>
@@ -759,21 +760,19 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">💣</div>
-                <h2>Terrorist</h2>
+                <h2 data-key="role_terrorist">Terrorist</h2>
             </div>
             <div class="comparison-container">
                 <div class="comp-col old">
-                    <span class="comp-title">❌ Old Version</span>
-                    <p style="color:#aaa; font-size:0.9rem;">Terrorist. This crazy guy blinded by his own twisted beliefs, puts mines on players at night without being seen. If he gets murdered by a serial killer or a wolf at night, all the mines will explode and will take their lives with him. Loses when lynched.</p>
-                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;">Cult conversion chance: 40%</div>
+                    <span class="comp-title" data-key="ver_old">❌ Old Version</span>
+                    <p style="color:#aaa; font-size:0.9rem;" data-key="desc_terrorist_old">Terrorist. This crazy guy blinded by his own twisted beliefs, puts mines on players at night without being seen. If he gets murdered by a serial killer or a wolf at night, all the mines will explode and will take their lives with him. Loses when lynched.</p>
+                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;" data-key="cult_40">Cult conversion chance: 40%</div>
                 </div>
                 <div class="comp-col new">
-                    <span class="comp-title">✨ Suicider (NEW)</span>
-                    <p style="color:#ddd; font-size:0.9rem;">Your purpose as named to suicide. You will plant a bomb every night to the house. You will do this twice per night. If you die with any way, the bombs will be exposed.<br>Note: If you could not plant any bomb before your death, you will be lose. You must kill someone at least.<br><br>If you get a bullet from Town Hunter/Gunner, you will expose yourself and randomly players will die (amount of numbers and targets are random). If they lynch you, you will only kil ¼ players in current game.</p>
+                    <span class="comp-title" data-key="ver_suicider">✨ Suicider (NEW)</span>
+                    <p style="color:#ddd; font-size:0.9rem;" data-key="desc_suicider_new">Your purpose as named to suicide. You will plant a bomb every night to the house. You will do this twice per night. If you die with any way, the bombs will be exposed.<br>Note: If you could not plant any bomb before your death, you will be lose. You must kill someone at least.<br><br>If you get a bullet from Town Hunter/Gunner, you will expose yourself and randomly players will die (amount of numbers and targets are random). If they lynch you, you will only kil ¼ players in current game.</p>
                     <div style="text-align:center; margin-top:15px;">
-                        <button class="btn vote-trigger" data-vote-target="Suicider Rework">
-                            🗳️ Vote for this Rework
-                        </button>
+                        <button class="btn vote-trigger" data-vote-target="Suicider Rework" data-key="btn_vote_rework">🗳️ Vote for this Rework</button>
                     </div>
                 </div>
             </div>
@@ -785,13 +784,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🐼</div>
-                <h2>Panda</h2>
+                <h2 data-key="role_panda">Panda</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Panda. If he is killed in any way, he'll blow up before he dies and freeze all the villagers around him. The villagers cannot perform night-time actions for a day. He must be protected at all costs.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 75%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_panda_old">Panda. If he is killed in any way, he'll blow up before he dies and freeze all the villagers around him. The villagers cannot perform night-time actions for a day. He must be protected at all costs.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_75">Cult conversion chance: 75%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -801,13 +800,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🦍</div>
-                <h2>Gorilla</h2>
+                <h2 data-key="role_gorilla">Gorilla</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Gorilla. It is the strongest and most durable role in the village. When wolves attack the Gorilla, they could hurt it but they can’t kill it. The gorilla dies 1 day after being attacked.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 30%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_gorilla_old">Gorilla. It is the strongest and most durable role in the village. When wolves attack the Gorilla, they could hurt it but they can’t kill it. The gorilla dies 1 day after being attacked.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_30">Cult conversion chance: 30%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -817,12 +816,12 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">👨🏻‍💼</div>
-                <h2>Missionary</h2>
+                <h2 data-key="role_missionary">Missionary</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Missionary. [Cultist Team] He's been the most respected member of the cult for a long time. Since he's been with the cult for a long time, he can now convince 1 person to enter the cult by 100%. He can only do this once, and the player he chooses will turn into a 100% cult. This is a good opportunity to transform people with a 0% conversion percentage that never believes. Still, he can't convert bad roles.</p>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_missionary_old">Missionary. [Cultist Team] He's been the most respected member of the cult for a long time. Since he's been with the cult for a long time, he can now convince 1 person to enter the cult by 100%. He can only do this once, and the player he chooses will turn into a 100% cult. This is a good opportunity to transform people with a 0% conversion percentage that never believes. Still, he can't convert bad roles.</p>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -832,12 +831,12 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">📡</div>
-                <h2>Agent</h2>
+                <h2 data-key="role_agent">Agent</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Agent. [Cultist Team] The cult brainwashed him and made him serve them now. Before the cults converts, they'll ask him which player has what percentage of turning into a cult. Every night, his job is to find out what percentage a player has to join the cult and then inform the cult.</p>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_agent_old">Agent. [Cultist Team] The cult brainwashed him and made him serve them now. Before the cults converts, they'll ask him which player has what percentage of turning into a cult. Every night, his job is to find out what percentage a player has to join the cult and then inform the cult.</p>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -847,13 +846,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🧒🏻</div>
-                <h2>Naughty Boy</h2>
+                <h2 data-key="role_naughty">Naughty Boy</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Naughty Boy. He's a very spoiled and prankish child. On the first night in the game you can choose 2 players to change their roles and their roles change. If he does not change anyone's role, he will continue to play as a normal villager.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 60%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_naughty_old">Naughty Boy. He's a very spoiled and prankish child. On the first night in the game you can choose 2 players to change their roles and their roles change. If he does not change anyone's role, he will continue to play as a normal villager.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_60">Cult conversion chance: 60%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -863,13 +862,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🤲</div>
-                <h2>Preacher</h2>
+                <h2 data-key="role_preacher">Preacher</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Preacher. He is someone who loves the villagers a lot and prays for them when they die. When one person from the village team is lynched and dies, the preacher gets an extra vote. When he chooses to use his talent, he apply all his voting rights during the lynching. This can only be done 1 time.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 30%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_preacher_old">Preacher. He is someone who loves the villagers a lot and prays for them when they die. When one person from the village team is lynched and dies, the preacher gets an extra vote. When he chooses to use his talent, he apply all his voting rights during the lynching. This can only be done 1 time.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_30">Cult conversion chance: 30%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -879,13 +878,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">👴🏻</div>
-                <h2>Mortician</h2>
+                <h2 data-key="role_mortician">Mortician</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Mortician. He deals with the villagers funerals. Night after night, he can choose a player who was killed and reveals 2 possible suspects. If he chooses a player who was killed by a serial killer, 3 suspects will appear.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 40%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_mortician_old">Mortician. He deals with the villagers funerals. Night after night, he can choose a player who was killed and reveals 2 possible suspects. If he chooses a player who was killed by a serial killer, 3 suspects will appear.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_40">Cult conversion chance: 40%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -895,13 +894,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">😵‍💫</div>
-                <h2>Idiot</h2>
+                <h2 data-key="role_idiot">Idiot</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Idiot. If the villagers choose to lynch him, he doesn’t  die and his role will be revealed. His votes after this point will be considered invalid.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 70%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_idiot_old">Idiot. If the villagers choose to lynch him, he doesn’t  die and his role will be revealed. His votes after this point will be considered invalid.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_70">Cult conversion chance: 70%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -911,13 +910,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🪬</div>
-                <h2>Spiritualist</h2>
+                <h2 data-key="role_spiritualist">Spiritualist</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Spiritualist. The spiritualist can communicate with the spirits. Thus, he can bring a dead player to life, but when he does, he dies, like a sacrifice. He only can change places with dead players. It can only be done once per game.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 50%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_spiritualist_old">Spiritualist. The spiritualist can communicate with the spirits. Thus, he can bring a dead player to life, but when he does, he dies, like a sacrifice. He only can change places with dead players. It can only be done once per game.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_50">Cult conversion chance: 50%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -927,13 +926,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🐺👦🏻</div>
-                <h2>Junior Wolf</h2>
+                <h2 data-key="role_junior_wolf">Junior Wolf</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Junior Wolf. The Junior Wolf can choose the player he wants to die with, at any night of the game. So, when the young wolf dies, that person will also die.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 0%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_junior_wolf_old">Junior Wolf. The Junior Wolf can choose the player he wants to die with, at any night of the game. So, when the young wolf dies, that person will also die.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_0">Cult conversion chance: 0%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -943,13 +942,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🐐</div>
-                <h2>Goat</h2>
+                <h2 data-key="role_goat">Goat</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Goat. The Goat is a neutral role. He is assigned a role from the players living in the village and he must to lynch that role until the end of the game. Only roles of the village team are showed. If there are 2 of the same role, he can lynch any 1 of them. If he can't get his target lynched, he loses.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 70%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_goat_old">Goat. The Goat is a neutral role. He is assigned a role from the players living in the village and he must to lynch that role until the end of the game. Only roles of the village team are showed. If there are 2 of the same role, he can lynch any 1 of them. If he can't get his target lynched, he loses.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_70">Cult conversion chance: 70%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -959,13 +958,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🧙</div>
-                <h2>Mage</h2>
+                <h2 data-key="role_mage">Mage</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Mage. The mage is in the team of wolves. He has 2 spells and can only use 1 of them. 1.Magic: It can make the village skip the lynching time. 2.Magic: Randomly causes the death of 1 player during a lynching.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 20%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_mage_old">Mage. The mage is in the team of wolves. He has 2 spells and can only use 1 of them. 1.Magic: It can make the village skip the lynching time. 2.Magic: Randomly causes the death of 1 player during a lynching.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_20">Cult conversion chance: 20%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -975,21 +974,19 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">📖</div>
-                <h2>Messenger</h2>
+                <h2 data-key="role_messenger">Messenger</h2>
             </div>
             <div class="comparison-container">
                 <div class="comp-col old">
-                    <span class="comp-title">❌ Old Version</span>
-                    <p style="color:#aaa; font-size:0.9rem;">Messenger. He can set 1 person as a target every 2 nights. When the messenger dies, the role of his target will be shown to a random person in the game. This person could also be a werewolf.</p>
-                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;">Cult conversion chance: 60%</div>
+                    <span class="comp-title" data-key="ver_old">❌ Old Version</span>
+                    <p style="color:#aaa; font-size:0.9rem;" data-key="desc_messenger_old">Messenger. He can set 1 person as a target every 2 nights. When the messenger dies, the role of his target will be shown to a random person in the game. This person could also be a werewolf.</p>
+                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;" data-key="cult_60">Cult conversion chance: 60%</div>
                 </div>
                 <div class="comp-col new">
-                    <span class="comp-title">✨ New Version</span>
-                    <p style="color:#ddd; font-size:0.9rem;">When he dies, at the day time 2 players role will reveal. One player will be village side the another one will be any bad rol. Their rol shown as diverted. You must figure out who is real.<br><br>When he dies, at the day time 2 players role will reveal as Werewolf. One of them is real werewolf but the other one will be randomly innocent villager.</p>
+                    <span class="comp-title" data-key="ver_new">✨ New Version</span>
+                    <p style="color:#ddd; font-size:0.9rem;" data-key="desc_messenger_new">When he dies, at the day time 2 players role will reveal. One player will be village side the another one will be any bad rol. Their rol shown as diverted. You must figure out who is real.<br><br>When he dies, at the day time 2 players role will reveal as Werewolf. One of them is real werewolf but the other one will be randomly innocent villager.</p>
                     <div style="text-align:center; margin-top:15px;">
-                        <button class="btn vote-trigger" data-vote-target="Messenger Rework">
-                            🗳️ Vote for this Rework
-                        </button>
+                        <button class="btn vote-trigger" data-vote-target="Messenger Rework" data-key="btn_vote_rework">🗳️ Vote for this Rework</button>
                     </div>
                 </div>
             </div>
@@ -1001,13 +998,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">💪</div>
-                <h2>Barbarian</h2>
+                <h2 data-key="role_barbarian">Barbarian</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Barbarian. He is quite irritable because of his anger against wolves. He can show his rage to everyone at any moment. When the barbarian shows this ability, the daytime phase will be skipped to be able to lynch the wolves immediately, and the lynching phase will last 15 seconds.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 30%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_barbarian_old">Barbarian. He is quite irritable because of his anger against wolves. He can show his rage to everyone at any moment. When the barbarian shows this ability, the daytime phase will be skipped to be able to lynch the wolves immediately, and the lynching phase will last 15 seconds.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_30">Cult conversion chance: 30%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -1017,21 +1014,19 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">👾</div>
-                <h2>Trapper</h2>
+                <h2 data-key="role_trapper">Trapper</h2>
             </div>
             <div class="comparison-container">
                 <div class="comp-col old">
-                    <span class="comp-title">❌ Old Version</span>
-                    <p style="color:#aaa; font-size:0.9rem;">Trapper. He sets up traps for villagers and execute them. But if the executed player belongs to the village team, the trapper will be executed with him. If he does not belong to the village team, the player dies. This ability can only be used 2 times.</p>
-                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;">Cult conversion chance: 80%</div>
+                    <span class="comp-title" data-key="ver_old">❌ Old Version</span>
+                    <p style="color:#aaa; font-size:0.9rem;" data-key="desc_trapper_old">Trapper. He sets up traps for villagers and execute them. But if the executed player belongs to the village team, the trapper will be executed with him. If he does not belong to the village team, the player dies. This ability can only be used 2 times.</p>
+                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;" data-key="cult_80">Cult conversion chance: 80%</div>
                 </div>
                 <div class="comp-col new">
-                    <span class="comp-title">✨ New Version (VILLAGE)</span>
-                    <p style="color:#ddd; font-size:0.9rem;">You will set up some traps at night into the house. If you set up on the night action role houses, they will die when they try to go outside. If you set up on Serial Killer house, he will survive but can not attack next night. You can only set up the traps once for every house, can not twice at the same house. If you try the Town hunter house, as you know he always awake and he will see you as a threat and shoot you immediately.<br>or<br>If he set up a trap into an house and if they don’t have action, trapper will not set up another one until the target die. Because trapper only have 1 trap. The target must die for using one more time the same trap.</p>
+                    <span class="comp-title" data-key="ver_new_village">✨ New Version (VILLAGE)</span>
+                    <p style="color:#ddd; font-size:0.9rem;" data-key="desc_trapper_new">You will set up some traps at night into the house. If you set up on the night action role houses, they will die when they try to go outside. If you set up on Serial Killer house, he will survive but can not attack next night. You can only set up the traps once for every house, can not twice at the same house. If you try the Town hunter house, as you know he always awake and he will see you as a threat and shoot you immediately.<br>or<br>If he set up a trap into an house and if they don’t have action, trapper will not set up another one until the target die. Because trapper only have 1 trap. The target must die for using one more time the same trap.</p>
                     <div style="text-align:center; margin-top:15px;">
-                        <button class="btn vote-trigger" data-vote-target="Trapper Rework">
-                            🗳️ Vote for this Rework
-                        </button>
+                        <button class="btn vote-trigger" data-vote-target="Trapper Rework" data-key="btn_vote_rework">🗳️ Vote for this Rework</button>
                     </div>
                 </div>
             </div>
@@ -1043,21 +1038,19 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🔨</div>
-                <h2>Criminal</h2>
+                <h2 data-key="role_criminal">Criminal</h2>
             </div>
             <div class="comparison-container">
                 <div class="comp-col old">
-                    <span class="comp-title">❌ Old Version</span>
-                    <p style="color:#aaa; font-size:0.9rem;">Criminal. A regular villager, but when the Serial Killer attacks he, he kill them and take their knife, becoming the new Serial Killer.</p>
-                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;">Cult conversion chance: 20%</div>
+                    <span class="comp-title" data-key="ver_old">❌ Old Version</span>
+                    <p style="color:#aaa; font-size:0.9rem;" data-key="desc_criminal_old">Criminal. A regular villager, but when the Serial Killer attacks he, he kill them and take their knife, becoming the new Serial Killer.</p>
+                    <div style="background:#333; color:#aaa; padding:2px 5px; border-radius:3px; font-size:0.7rem; margin-top:5px;" data-key="cult_20">Cult conversion chance: 20%</div>
                 </div>
                 <div class="comp-col new">
-                    <span class="comp-title">✨ New Version (SOLO ALLY)</span>
-                    <p style="color:#ddd; font-size:0.9rem;">You are an evil ally. You can cooperate with any bad roles. Your goal is manage to beat village team. Like poseidon you will take an action on day time but the players will not be notified. After the night, all prisoners will be free for a night and any village role will not go outside. Only bad roles can take action that time. And don’t forget that they can kill/convert you too but as a pure form you can cooperate with them.<br>or<br>When it reveals, every bad roles action will be doubled.</p>
+                    <span class="comp-title" data-key="ver_new_solo">✨ New Version (SOLO ALLY)</span>
+                    <p style="color:#ddd; font-size:0.9rem;" data-key="desc_criminal_new">You are an evil ally. You can cooperate with any bad roles. Your goal is manage to beat village team. Like poseidon you will take an action on day time but the players will not be notified. After the night, all prisoners will be free for a night and any village role will not go outside. Only bad roles can take action that time. And don’t forget that they can kill/convert you too but as a pure form you can cooperate with them.<br>or<br>When it reveals, every bad roles action will be doubled.</p>
                     <div style="text-align:center; margin-top:15px;">
-                        <button class="btn vote-trigger" data-vote-target="Criminal Rework">
-                            🗳️ Vote for this Rework
-                        </button>
+                        <button class="btn vote-trigger" data-vote-target="Criminal Rework" data-key="btn_vote_rework">🗳️ Vote for this Rework</button>
                     </div>
                 </div>
             </div>
@@ -1069,13 +1062,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🎲</div>
-                <h2>Gambler</h2>
+                <h2 data-key="role_gambler">Gambler</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Gambler. Gambler is a solo player. At night, he tries to predict who will be lynched the next day. If he correctly predicts two lynchings, he wins the game.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 10%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_gambler_old">Gambler. Gambler is a solo player. At night, he tries to predict who will be lynched the next day. If he correctly predicts two lynchings, he wins the game.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_10">Cult conversion chance: 10%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -1085,13 +1078,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">📣</div>
-                <h2>Protester</h2>
+                <h2 data-key="role_protester">Protester</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Protester. You don't like the presence of bad roles in the village and can start a protest once in the game. As a result, all votes for the day will be hidden, and the votes of the bad roles will be considered invalid.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 20%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_protester_old">Protester. You don't like the presence of bad roles in the village and can start a protest once in the game. As a result, all votes for the day will be hidden, and the votes of the bad roles will be considered invalid.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_20">Cult conversion chance: 20%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -1101,13 +1094,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🛐</div>
-                <h2>Sacrifice</h2>
+                <h2 data-key="role_sacrifice">Sacrifice</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Sacrifice. You sacrifice yourself for the sake of the villagers. You can choose to redirect all attacks towards yourself for one night. This means that if a player was supposed to die that night, you will die instead. This ability can only be used once per game. If there are no attacks, the ability is wasted.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 70%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_sacrifice_old">Sacrifice. You sacrifice yourself for the sake of the villagers. You can choose to redirect all attacks towards yourself for one night. This means that if a player was supposed to die that night, you will die instead. This ability can only be used once per game. If there are no attacks, the ability is wasted.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_70">Cult conversion chance: 70%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -1117,13 +1110,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">👂</div>
-                <h2>Listener</h2>
+                <h2 data-key="role_listener">Listener</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Listener. You are the Listener. Your ears can pick up sounds around you very well, and you can hear what other players are saying to each other.  <br>You can hear what the Wolf or Cult team are talking about.  <br>However, you cannot hear who said what and what the Alpha Wolf said.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 65%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_listener_old">Listener. You are the Listener. Your ears can pick up sounds around you very well, and you can hear what other players are saying to each other.  <br>You can hear what the Wolf or Cult team are talking about.  <br>However, you cannot hear who said what and what the Alpha Wolf said.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_65">Cult conversion chance: 65%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -1133,13 +1126,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🐺🛡</div>
-                <h2>Guardian Wolf</h2>
+                <h2 data-key="role_guardian_wolf">Guardian Wolf</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Guardian Wolf. You are the Guardian Wolf. You can protect the werewolves on your team from being lynched. At night you can choose a teammate and the wolf you choose will be protected from being lynched the next day. This can only be done 2 times per game, but if you successfully protect 1 teammate, your ability will not be used again.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 0%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_guardian_wolf_old">Guardian Wolf. You are the Guardian Wolf. You can protect the werewolves on your team from being lynched. At night you can choose a teammate and the wolf you choose will be protected from being lynched the next day. This can only be done 2 times per game, but if you successfully protect 1 teammate, your ability will not be used again.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_0">Cult conversion chance: 0%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -1149,13 +1142,13 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🔬</div>
-                <h2>Analyst</h2>
+                <h2 data-key="role_analyst">Analyst</h2>
             </div>
             <div class="modal-section">
-                <h3>(OLD)</h3>
-                <p style="color:#ccc; line-height:1.6;">Analyst. You are the Analyst. Through your research in the village, you have discovered an ability. Now you can instantly restore any ability used by a player. This can be done once per game and cannot be used on the first night. You should be careful because this ability also works on werewolves.</p>
-                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;">Cult conversion chance: 40%</div>
-                <div style="margin-top:15px; color:#ff5555; font-weight:bold;">NO REVISATION HAS BEEN APPLIED.</div>
+                <h3 data-key="lbl_old">(OLD)</h3>
+                <p style="color:#ccc; line-height:1.6;" data-key="desc_analyst_old">Analyst. You are the Analyst. Through your research in the village, you have discovered an ability. Now you can instantly restore any ability used by a player. This can be done once per game and cannot be used on the first night. You should be careful because this ability also works on werewolves.</p>
+                <div style="background:#300; padding:5px 10px; border-radius:4px; display:inline-block; margin-top:10px; color:#ff5555;" data-key="cult_40">Cult conversion chance: 40%</div>
+                <div style="margin-top:15px; color:#ff5555; font-weight:bold;" data-key="msg_no_revision">NO REVISATION HAS BEEN APPLIED.</div>
             </div>
         </div>
     </div>
@@ -1165,20 +1158,18 @@
             <span class="close-modal">&times;</span>
             <div class="modal-header">
                 <div style="font-size:3rem;">🐺🪄</div>
-                <h2>Illusionist Wolf</h2>
+                <h2 data-key="role_illusionist">Illusionist Wolf</h2>
             </div>
             <div class="comparison-container">
                 <div class="comp-col old">
-                    <span class="comp-title">❌ Old Version [0%]</span>
-                    <p style="color:#aaa; font-size:0.9rem;">You are a wolf with magical abilities. When you are about to die by lynching, you can use your dark magic to redirect the lynch vote to another player. However, you only have 20 seconds to cast your spells before your death so you must hurry, and when you do, your true identity will be revealed to everyone.</p>
+                    <span class="comp-title" data-key="ver_old_0">❌ Old Version [0%]</span>
+                    <p style="color:#aaa; font-size:0.9rem;" data-key="desc_illusionist_old">You are a wolf with magical abilities. When you are about to die by lynching, you can use your dark magic to redirect the lynch vote to another player. However, you only have 20 seconds to cast your spells before your death so you must hurry, and when you do, your true identity will be revealed to everyone.</p>
                 </div>
                 <div class="comp-col new">
-                    <span class="comp-title">✨ New Version</span>
-                    <p style="color:#ddd; font-size:0.9rem;">You have magnificant skills. An incredible consumer wolf. When seer or detective check you, they will see you as another village role and that role will be exist in game. Also that role will have been told you at the beggining of the game.<br>If they lynch you, you will kill that role with yourself too. If that role died before you, random player will die with you.</p>
+                    <span class="comp-title" data-key="ver_new">✨ New Version</span>
+                    <p style="color:#ddd; font-size:0.9rem;" data-key="desc_illusionist_new">You have magnificant skills. An incredible consumer wolf. When seer or detective check you, they will see you as another village role and that role will be exist in game. Also that role will have been told you at the beggining of the game.<br>If they lynch you, you will kill that role with yourself too. If that role died before you, random player will die with you.</p>
                     <div style="text-align:center; margin-top:15px;">
-                        <button class="btn vote-trigger" data-vote-target="Illusionist Wolf Rework">
-                            🗳️ Vote for this Rework
-                        </button>
+                        <button class="btn vote-trigger" data-vote-target="Illusionist Wolf Rework" data-key="btn_vote_rework">🗳️ Vote for this Rework</button>
                     </div>
                 </div>
             </div>
@@ -1190,46 +1181,46 @@
 
             <div class="footer-section">
                 <h3>🐺 Wolf Blood</h3>
-                <p>
+                <p data-key="footer_about">
                     The ultimate hub for experimental roles, game modes, and community chaos.
                     From the forest to the tabletop, we evolve the game.
                 </p>
             </div>
 
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3 data-key="footer_nav_title">Navigation</h3>
                 <div class="footer-links">
-                    <a href="index.html">🏠 Home</a>
-                    <a href="test_designs.html">🧪 Test Designs</a>
-                    <a href="removed.html">♻️ Graveyard</a>
-                    <a href="board_game.html">🎲 Board Game</a>
-                    <a href="evo_mod.html">🧬 Evo Mod</a>
-                    <a href="achievements.html">🏆 Achievements</a>
+                    <a href="index.html" data-key="nav_home">🏠 Home</a>
+                    <a href="test_designs.html" data-key="nav_test_designs">🧪 Test Designs</a>
+                    <a href="removed.html" data-key="nav_removed">♻️ Graveyard</a>
+                    <a href="board_game.html" data-key="nav_board_game">🎲 Board Game</a>
+                    <a href="evo_mod.html" data-key="nav_evo_mod">🧬 Evo Mod</a>
+                    <a href="achievements.html" data-key="nav_achievements">🏆 Achievements</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Legal & Help</h3>
+                <h3 data-key="footer_legal_title">Legal & Help</h3>
                 <div class="footer-links">
-                    <a href="faq.html">❓ FAQ</a>
-                    <a href="policy.html">🛡️ Privacy Policy</a>
-                    <a href="terms.html">📜 Terms of Service</a>
-                    <a href="cookies.html">🍪 Cookie Usage</a>
-                    <a href="license.html">⚖️ License</a>
+                    <a href="faq.html" data-key="link_faq">❓ FAQ</a>
+                    <a href="policy.html" data-key="link_privacy">🛡️ Privacy Policy</a>
+                    <a href="terms.html" data-key="link_terms">📜 Terms of Service</a>
+                    <a href="cookies.html" data-key="link_cookies">🍪 Cookie Usage</a>
+                    <a href="license.html" data-key="link_license">⚖️ License</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Join the Pack</h3>
-                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
-                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                <h3 data-key="footer_join_title">Join the Pack</h3>
+                <p data-key="footer_join_desc">Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/+QW8C1WwdSCQ3NmRl" target="_blank" class="footer-btn" data-key="btn_telegram">
                     ✈️ Open Telegram
                 </a>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-key="footer_copyright">
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
@@ -1245,7 +1236,7 @@
 
                     if (badge) {
                         badge.classList.add('returned');
-                        badge.innerHTML = "♻️ RETURNED";
+                        badge.setAttribute('data-key', 'status_returned');
                         badge.style.background = "rgba(0, 255, 136, 0.1)";
                         badge.style.color = "#00ff88";
                         badge.style.borderColor = "#00ff88";
@@ -1253,7 +1244,7 @@
                 }
             });
         }
-        
+
         document.addEventListener('click', function (e) {
             if (e.target && e.target.classList.contains('vote-trigger')) {
                 const roleName = e.target.getAttribute('data-vote-target');
@@ -1287,13 +1278,13 @@
                 'illusionistWolfModal'
             ];
             markAsReturned(returnedRoles);
-            
+
             const container = document.getElementById('bg-canvas');
             const scene = new THREE.Scene();
             scene.fog = new THREE.FogExp2(0x050505, 0.002);
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            
+
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
@@ -1302,11 +1293,11 @@
             const particlesCount = 1500;
             const posArray = new Float32Array(particlesCount * 3);
             const sizeArray = new Float32Array(particlesCount);
-            
-            for(let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 20; 
+
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 20;
             }
-            for(let i = 0; i < particlesCount; i++) {
+            for (let i = 0; i < particlesCount; i++) {
                 sizeArray[i] = Math.random();
             }
 
@@ -1356,6 +1347,7 @@
 
     <script src="script.js"></script>
     <script src="loader.js"></script>
+    <script src="translate.js"></script>
 
 </body>
 </html>

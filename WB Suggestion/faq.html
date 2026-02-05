@@ -217,82 +217,94 @@
 </head>
 <body>
 
-    <script src="loader.js"></script>
+    <div class="language-dropdown">
+        <button class="dropdown-toggle">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span id="selected-lang-flag">🇺🇸</span>
+                <span id="selected-lang-code">EN</span>
+            </div>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" data-lang="en">🇺🇸 English</a>
+            <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+        </div>
+    </div>
 
     <nav class="wolf-nav">
-        <a href="index.html" class="nav-link">🏠 Home</a>
-        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
-        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
-        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
-        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
-        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+        <a href="index.html" class="nav-link" data-key="nav_home">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link" data-key="nav_test_designs">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link" data-key="nav_removed">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link" data-key="nav_board_game">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link" data-key="nav_evo_mod">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link" data-key="nav_achievements">🏆 Achievements</a>
     </nav>
 
     <div class="container">
 
         <div class="hero">
-            <h1>Frequently Asked Questions</h1>
-            <p>Knowledge is power. Ignorance is death.</p>
+            <h1 data-key="faq_hero_title">Frequently Asked Questions</h1>
+            <p data-key="faq_hero_desc">Knowledge is power. Ignorance is death.</p>
         </div>
 
-        <h2 style="color:var(--text-dim); border-bottom:1px solid #333; padding-bottom:10px; margin-top:40px;">📂 Submissions & Ideas</h2>
+        <h2 style="color:var(--text-dim); border-bottom:1px solid #333; padding-bottom:10px; margin-top:40px;" data-key="faq_sec_submissions">📂 Submissions & Ideas</h2>
 
         <div class="faq-item">
-            <div class="faq-question">How do I get my role idea into the game?</div>
-            <div class="faq-answer">
+            <div class="faq-question" data-key="faq_q_idea">How do I get my role idea into the game?</div>
+            <div class="faq-answer" data-key="faq_a_idea">
                 <p>Simple. Go to the Home page and fill out the "Suggest a Role" form. If the <span class="highlight">Alpha Developers</span> like it, it will be added to the "Test Designs" page for the community to vote on.</p>
             </div>
         </div>
 
         <div class="faq-item">
-            <div class="faq-question">I submitted an idea, but I don't see it. Why?</div>
-            <div class="faq-answer">
+            <div class="faq-question" data-key="faq_q_missing">I submitted an idea, but I don't see it. Why?</div>
+            <div class="faq-answer" data-key="faq_a_missing">
                 <p>The wolves are picky. We receive hundreds of ideas. If your idea is too similar to an existing role, breaks the game balance, or isn't detailed enough, it might be discarded. Check the <span class="highlight">Graveyard (Removed)</span> page just in case.</p>
             </div>
         </div>
 
         <div class="faq-item">
-            <div class="faq-question">What happens if two people submit the same idea?</div>
-            <div class="faq-answer">
+            <div class="faq-question" data-key="faq_q_duplicate">What happens if two people submit the same idea?</div>
+            <div class="faq-answer" data-key="faq_a_duplicate">
                 <p>Great minds think alike. We usually credit the first person who submitted it, or we may combine elements from both suggestions into one ultimate role.</p>
             </div>
         </div>
 
-        <h2 style="color:var(--text-dim); border-bottom:1px solid #333; padding-bottom:10px; margin-top:40px;">⚙️ Game Mechanics</h2>
+        <h2 style="color:var(--text-dim); border-bottom:1px solid #333; padding-bottom:10px; margin-top:40px;" data-key="faq_sec_mechanics">⚙️ Game Mechanics</h2>
 
         <div class="faq-item">
-            <div class="faq-question">What in the dark arts is "Cult Rate"?</div>
-            <div class="faq-answer">
+            <div class="faq-question" data-key="faq_q_cultrate">What in the dark arts is "Cult Rate"?</div>
+            <div class="faq-answer" data-key="faq_a_cultrate">
                 <p><strong>What is the Cult Rate?</strong><br>The Cult Rate is a metric that determines the relative strength, weakness, or faith level of each specific role within the game. We strive for balance; however, if you believe the current rates are unfair or could be improved, you are encouraged to submit your suggestions for adjustments to ensure a more balanced gameplay experience.</p>
             </div>
         </div>
 
         <div class="faq-item">
-            <div class="faq-question">Are the "Test Designs" balanced?</div>
-            <div class="faq-answer">
+            <div class="faq-question" data-key="faq_q_balance">Are the "Test Designs" balanced?</div>
+            <div class="faq-answer" data-key="faq_a_balance">
                 <p>Not always! That's why they are in testing. Use them at your own risk. If a role is too overpowered (OP), the community will vote to nerf it in the next patch.</p>
             </div>
         </div>
 
         <div class="faq-item">
-            <div class="faq-question">What is the "Evo Mod"?</div>
-            <div class="faq-answer">
+            <div class="faq-question" data-key="faq_q_evomod">What is the "Evo Mod"?</div>
+            <div class="faq-answer" data-key="faq_a_evomod">
                 <p><strong>What is Evo Mod?</strong><br>Evo Mod (Evolution Modification) is an advanced game mode designed for those who thrive in chaos. In this mode, roles evolve into significantly more powerful, unpredictable, and unbalanced versions of themselves. It is specifically crafted for experienced players seeking a high stakes, high-impact gameplay experience. For a full breakdown of these chaotic evolutions, visit the <a href="evo_mod.html" style="color:var(--wolf-red)">Evo Mod page</a>.</p>
             </div>
         </div>
 
-        <h2 style="color:var(--text-dim); border-bottom:1px solid #333; padding-bottom:10px; margin-top:40px;">📜 Meta & Community</h2>
+        <h2 style="color:var(--text-dim); border-bottom:1px solid #333; padding-bottom:10px; margin-top:40px;" data-key="faq_sec_meta">📜 Meta & Community</h2>
 
         <div class="faq-item">
-            <div class="faq-question">Is this an official update from the original developers?</div>
-            <div class="faq-answer">
+            <div class="faq-question" data-key="faq_q_official">Is this an official update from the original developers?</div>
+            <div class="faq-answer" data-key="faq_a_official">
                 <p>This project is a community-driven expansion developed with the knowledge of the Bot Developer. The core vision and creative direction are led by our Web Designer, <strong>@Halfcelse</strong>. It serves as a collaborative hub where players can vote on concepts, find inspiration, and share their own ideas to help shape the future of the game.</p>
             </div>
         </div>
 
         <div class="faq-item">
-            <div class="faq-question">I found a bug in a Test Design. Who do I tell?</div>
-            <div class="faq-answer">
+            <div class="faq-question" data-key="faq_q_bug">I found a bug in a Test Design. Who do I tell?</div>
+            <div class="faq-answer" data-key="faq_a_bug">
                 <p>Don't keep it to yourself. Join our <a href="#" style="color:var(--accent-gold)">Telegram Community</a> and report it in the "Bug Hunt" channel.</p>
             </div>
         </div>
@@ -304,46 +316,46 @@
 
             <div class="footer-section">
                 <h3>🐺 Wolf Blood</h3>
-                <p>
+                <p data-key="footer_about">
                     The ultimate hub for experimental roles, game modes, and community chaos.
                     From the forest to the tabletop, we evolve the game.
                 </p>
             </div>
 
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3 data-key="footer_nav_title">Navigation</h3>
                 <div class="footer-links">
-                    <a href="index.html">🏠 Home</a>
-                    <a href="test_designs.html">🧪 Test Designs</a>
-                    <a href="removed.html">♻️ Graveyard</a>
-                    <a href="board_game.html">🎲 Board Game</a>
-                    <a href="evo_mod.html">🧬 Evo Mod</a>
-                    <a href="achievements.html">🏆 Achievements</a>
+                    <a href="index.html" data-key="nav_home">🏠 Home</a>
+                    <a href="test_designs.html" data-key="nav_test_designs">🧪 Test Designs</a>
+                    <a href="removed.html" data-key="nav_removed">♻️ Graveyard</a>
+                    <a href="board_game.html" data-key="nav_board_game">🎲 Board Game</a>
+                    <a href="evo_mod.html" data-key="nav_evo_mod">🧬 Evo Mod</a>
+                    <a href="achievements.html" data-key="nav_achievements">🏆 Achievements</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Legal & Help</h3>
+                <h3 data-key="footer_legal_title">Legal & Help</h3>
                 <div class="footer-links">
-                    <a href="faq.html">❓ FAQ</a>
-                    <a href="policy.html">🛡️ Privacy Policy</a>
-                    <a href="terms.html">📜 Terms of Service</a>
-                    <a href="cookies.html">🍪 Cookie Usage</a>
-                    <a href="license.html">⚖️ License</a>
+                    <a href="faq.html" data-key="link_faq">❓ FAQ</a>
+                    <a href="policy.html" data-key="link_privacy">🛡️ Privacy Policy</a>
+                    <a href="terms.html" data-key="link_terms">📜 Terms of Service</a>
+                    <a href="cookies.html" data-key="link_cookies">🍪 Cookie Usage</a>
+                    <a href="license.html" data-key="link_license">⚖️ License</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Join the Pack</h3>
-                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
-                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                <h3 data-key="footer_join_title">Join the Pack</h3>
+                <p data-key="footer_join_desc">Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/+QW8C1WwdSCQ3NmRl" target="_blank" class="footer-btn" data-key="btn_telegram">
                     ✈️ Open Telegram
                 </a>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-key="footer_copyright">
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
@@ -369,5 +381,7 @@
         });
     </script>
     <script src="loader.js"></script>
+    <script src="translate.js"></script>
+
 </body>
 </html>

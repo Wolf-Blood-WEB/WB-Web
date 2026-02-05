@@ -28,6 +28,91 @@
             --legendary: #ffd700;
             --chaos: #ff5722;
         }
+        .language-dropdown {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Inter', sans-serif;
+        }
+        .dropdown-toggle {
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid var(--wolf-red-dim);
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            min-width: 100px;
+            justify-content: space-between;
+        }
+            .dropdown-toggle:hover {
+                border-color: var(--wolf-red);
+                box-shadow: 0 0 15px rgba(138, 3, 3, 0.4);
+                background: rgba(20, 20, 20, 0.95);
+            }
+            .dropdown-toggle .arrow {
+                font-size: 0.7rem;
+                color: var(--text-dim);
+                transition: transform 0.3s ease;
+            }
+
+        .language-dropdown.open .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: rgba(5, 5, 5, 0.95);
+            border: 1px solid var(--wolf-red-dim);
+            border-radius: 6px;
+            width: 140px;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+        .language-dropdown.open .dropdown-menu {
+            display: flex;
+            animation: fadeIn menu 0.3s ease;
+        }
+        .dropdown-menu a {
+            padding: 12px 15px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s ease, color 0.2s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+            .dropdown-menu a:last-child {
+                border-bottom: none;
+            }
+            .dropdown-menu a:hover {
+                background: var(--wolf-red-dim);
+                color: white;
+                padding-left: 20px;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         * { box-sizing: border-box; }
         body {
             margin: 0;
@@ -370,6 +455,11 @@
             }
             .achv-card:hover { transform: translateY(-5px); }
             .trophy-header h1 { font-size: 2.2rem; }
+            .language-dropdown {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>
@@ -377,33 +467,45 @@
 
     <div id="bg-canvas"></div>
 
+    <div class="language-dropdown">
+        <button class="dropdown-toggle">
+            <span id="selected-lang-flag">🇺🇸</span>
+            <span id="selected-lang-code">EN</span>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" data-lang="en">🇺🇸 English</a>
+            <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+        </div>
+    </div>
+
     <nav class="wolf-nav">
-        <a href="index.html" class="nav-link">🏠 Home</a>
-        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
-        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
-        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
-        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
-        <a href="achievements.html" class="nav-link active">🏆 Achievements</a>
+        <a href="index.html" class="nav-link" data-key="nav_home">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link" data-key="nav_test_designs">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link" data-key="nav_removed">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link" data-key="nav_board_game">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link" data-key="nav_evo_mod">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link active" data-key="nav_achievements">🏆 Achievements</a>
     </nav>
 
     <div class="container">
 
         <div class="trophy-header">
-            <h1>Hall of Glory</h1>
-            <p class="trophy-subtitle">🏅 Because dying horribly isn't the only way to be remembered. 🪦</p>
+            <h1 data-key="ach_hero_title">Hall of Glory</h1>
+            <p class="trophy-subtitle" data-key="ach_hero_subtitle">🏅 Because dying horribly isn't the only way to be remembered. 🪦</p>
 
             <div class="intro-box">
                 <p>
-                    <strong>Unlock rare conditions. Get medals. Earn bragging rights.</strong><br>
-                    This is where we honor the weird, the wild, and the downright ridiculous moments.<br>
-                    <em style="color:var(--accent-gold);">Dying is temporary. Achievements are forever.</em>
+                    <span data-key="ach_intro_bold">Unlock rare conditions. Get medals. Earn bragging rights.</span><br>
+                    <span data-key="ach_intro_text">This is where we honor the weird, the wild, and the downright ridiculous moments.</span><br>
+                    <em style="color:var(--accent-gold);" data-key="ach_intro_italic">Dying is temporary. Achievements are forever.</em>
                 </p>
             </div>
         </div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">
-            <h2 style="font-size:1.5rem; color:var(--text-main);">🏆 Collection</h2>
-            <span style="font-size:0.9rem; color:#666;">Total: 38 Badges</span>
+            <h2 style="font-size:1.5rem; color:var(--text-main);" data-key="ach_collection_title">🏆 Collection</h2>
+            <span style="font-size:0.9rem; color:#666;" data-key="ach_total_badges">Total: 38 Badges</span>
         </div>
 
         <div id="achievementList" class="achievement-list"></div>
@@ -417,90 +519,90 @@
 
             <div class="footer-section">
                 <h3>🐺 Wolf Blood</h3>
-                <p>
+                <p data-key="footer_about">
                     The ultimate hub for experimental roles, game modes, and community chaos.
                     From the forest to the tabletop, we evolve the game.
                 </p>
             </div>
 
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3 data-key="footer_nav_title">Navigation</h3>
                 <div class="footer-links">
-                    <a href="index.html">🏠 Home</a>
-                    <a href="test_designs.html">🧪 Test Designs</a>
-                    <a href="removed.html">♻️ Graveyard</a>
-                    <a href="board_game.html">🎲 Board Game</a>
-                    <a href="evo_mod.html">🧬 Evo Mod</a>
-                    <a href="achievements.html">🏆 Achievements</a>
+                    <a href="index.html" data-key="nav_home">🏠 Home</a>
+                    <a href="test_designs.html" data-key="nav_test_designs">🧪 Test Designs</a>
+                    <a href="removed.html" data-key="nav_removed">♻️ Graveyard</a>
+                    <a href="board_game.html" data-key="nav_board_game">🎲 Board Game</a>
+                    <a href="evo_mod.html" data-key="nav_evo_mod">🧬 Evo Mod</a>
+                    <a href="achievements.html" data-key="nav_achievements">🏆 Achievements</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Legal & Help</h3>
+                <h3 data-key="footer_legal_title">Legal & Help</h3>
                 <div class="footer-links">
-                    <a href="faq.html">❓ FAQ</a>
-                    <a href="policy.html">🛡️ Privacy Policy</a>
-                    <a href="terms.html">📜 Terms of Service</a>
-                    <a href="cookies.html">🍪 Cookie Usage</a>
-                    <a href="license.html">⚖️ License</a>
+                    <a href="faq.html" data-key="link_faq">❓ FAQ</a>
+                    <a href="policy.html" data-key="link_privacy">🛡️ Privacy Policy</a>
+                    <a href="terms.html" data-key="link_terms">📜 Terms of Service</a>
+                    <a href="cookies.html" data-key="link_cookies">🍪 Cookie Usage</a>
+                    <a href="license.html" data-key="link_license">⚖️ License</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Join the Pack</h3>
-                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
-                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                <h3 data-key="footer_join_title">Join the Pack</h3>
+                <p data-key="footer_join_desc">Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/+QW8C1WwdSCQ3NmRl" target="_blank" class="footer-btn" data-key="btn_telegram">
                     ✈️ Open Telegram
                 </a>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-key="footer_copyright">
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
 
     <script>
         const allAchievements = [
-            { emoji: "💊", name: "Antidepressant", desc: "As a Cultist Hunter, die because of voting depressive.", badge: "Rare" },
-            { emoji: "😈", name: "Heretic", desc: "As a Boss, convert into a Cultist at the first try and by an original Cult.", badge: "Epic" },
-            { emoji: "🤝", name: "Unexpected Alliance", desc: "As a Doctor, revive the Traitor!", badge: "Common" },
-            { emoji: "⛏️", name: "Dead End", desc: "As a Miner, dig into a WW/SK target and get killed by accident.", badge: "Unlucky" },
-            { emoji: "🎖️", name: "Rank Superiority", desc: "As a Soldier, save the Executioner's target and lynch the Executioner!", badge: "Legendary" },
-            { emoji: "🦭", name: "Non-functional Seal", desc: "As a Mayor, get lynched because of Executioner decide...", badge: "Unlucky" },
-            { emoji: "🌊", name: "Furious Waves", desc: "As Poseidon, drown the Serial Killer, Arsonist, or Tanner.", badge: "Epic" },
-            { emoji: "😰", name: "Close Call", desc: "As Executioner, choose Alpha Wolf for lynch but village decides not to lynch him.", badge: "Rare" },
-            { emoji: "⚫", name: "Void", desc: "As an Astronomer, get 0 (zero) night action number.", badge: "Common" },
-            { emoji: "😺", name: "Future Cat", desc: "At the last 3, be with @kediben and win with him at the last lynch.", badge: "Special" },
-            { emoji: "⚔️", name: "Internal Conflict", desc: "As Seer, check Cultist Hunter or Helpers switched by Rogue Wolf and cause their death.", badge: "Glitch" },
-            { emoji: "👺", name: "Few but Effective", desc: "As a Tanner, get lynched when Conjurer Wolf acted.", badge: "Rare" },
-            { emoji: "♟️", name: "Unnoble Sacrifice", desc: "As a Pawn, sacrifice yourself for an Arsonist, Tanner, or Cultist.", badge: "Common" },
-            { emoji: "🤕", name: "Awkward Death", desc: "As Clumsy Guy, vote the Depressive by accident and die.", badge: "Funny" },
-            { emoji: "🪞", name: "Beyond the Line", desc: "As a Seer, see yourself!", badge: "Glitch" },
-            { emoji: "🌫️", name: "Trickster", desc: "As Fog Wolf, at the last 3, vote the Town Hunter by fake vote and tie the lynch!", badge: "Legendary" },
-            { emoji: "🙈", name: "Blind Bandage", desc: "As Augur, see that all vision roles (seer, detective, etc.) don't exist in game.", badge: "Rare" },
-            { emoji: "📝", name: "Blacklist", desc: "As a regular player, stabbed at night 1 by any mod/dev of Wolfblood Community.", badge: "Unlucky" },
-            { emoji: "➿", name: "Loop Mayhem", desc: "As Miner, dig for someone and all action roles go to them with different targets.", badge: "Chaos" },
-            { emoji: "💀", name: "After Death", desc: "As Skeleton, dodge the Cultist Hunter when they visit the Serial Killer.", badge: "Epic" },
-            { emoji: "🤢", name: "Unnoble", desc: "Be the Mayor at the last 2 and dodged by Skeleton. Disgusting!", badge: "Rare" },
-            { emoji: "⚔️", name: "Double-edged Sword", desc: "As Skeleton, block 2 different bad roles (regular wolves don't count).", badge: "Epic" },
-            { emoji: "🛐", name: "El-Mumin", desc: "Be the pure Preacher in Cultist game when CH is dead, and win the game alive.", badge: "Legendary" },
-            { emoji: "🚪", name: "Red Door", desc: "As Cultist Hunter, visit the Serial Killer twice and die. You never learn, do you?", badge: "Common" },
-            { emoji: "💔", name: "Betrayal Lover", desc: "As a couple, win the game alive when your partner is dead.", badge: "Cruel" },
-            { emoji: "🚢", name: "Submarine", desc: "As Poseidon, drown the Depressive before they suicide.", badge: "Timing" },
-            { emoji: "😈", name: "Hypocrite Devil", desc: "As Slave, lose your target, make top 3 with Tanner, and win despite it.", badge: "Legendary" },
-            { emoji: "🫡", name: "Back-up", desc: "As a Pawn, sacrifice yourself for Soldier.", badge: "Honor" },
-            { emoji: "😵‍💫", name: "Awkward Conflict", desc: "As Clumsy Wolf, reveal ability and everyone votes wrong (except pack).", badge: "Chaos" },
-            { emoji: "💉", name: "Immortal She", desc: "As a Doctor, get revived by another Doctor.", badge: "Rare" },
-            { emoji: "💰", name: "S.O.E.", desc: "As a Thief, steal from Cultist Hunter (Time to get hierarchy).", badge: "Epic" },
-            { emoji: "🛡️", name: "Rusty Iron", desc: "As a Blacksmith, reveal yourself after a drunk death by Werewolves. (No need that Belhanda)", badge: "Funny" },
-            { emoji: "👼", name: "Holy Save", desc: "As a Guardian Angel, save the Cursed's life from a Werewolf attack!", badge: "Epic" },
-            { emoji: "🧟", name: "Anemic", desc: "As a Tanner, get infected by Wolves and subsequently lynched.", badge: "Epic" },
-            { emoji: "🦵", name: "Meniscus Tear", desc: "As Serial Killer, get injured by Grave Digger, but survive to kill him the next night.", badge: "Vengeance" },
-            { emoji: "💪", name: "Hercules", desc: "As a Guardian Angel, successfully defend your target from at least 3 intruders.", badge: "Legendary" },
-            { emoji: "🃏", name: "Jester", desc: "As a Fool, receive a Seer vision check. (Excuse me but, what the hell!)", badge: "Glitch" },
-            { emoji: "📜", name: "Plot Twist", desc: "As a Seer, check both the Wolfman and the Lycan in the same game.", badge: "Rare" }
+            { id: "antidepressant", emoji: "💊", name: "Antidepressant", desc: "As a Cultist Hunter, die because of voting depressive.", badge: "Rare" },
+            { id: "heretic", emoji: "😈", name: "Heretic", desc: "As a Boss, convert into a Cultist at the first try and by an original Cult.", badge: "Epic" },
+            { id: "alliance", emoji: "🤝", name: "Unexpected Alliance", desc: "As a Doctor, revive the Traitor!", badge: "Common" },
+            { id: "deadend", emoji: "⛏️", name: "Dead End", desc: "As a Miner, dig into a WW/SK target and get killed by accident.", badge: "Unlucky" },
+            { id: "rank", emoji: "🎖️", name: "Rank Superiority", desc: "As a Soldier, save the Executioner's target and lynch the Executioner!", badge: "Legendary" },
+            { id: "seal", emoji: "🦭", name: "Non-functional Seal", desc: "As a Mayor, get lynched because of Executioner decide...", badge: "Unlucky" },
+            { id: "waves", emoji: "🌊", name: "Furious Waves", desc: "As Poseidon, drown the Serial Killer, Arsonist, or Tanner.", badge: "Epic" },
+            { id: "closecall", emoji: "😰", name: "Close Call", desc: "As Executioner, choose Alpha Wolf for lynch but village decides not to lynch him.", badge: "Rare" },
+            { id: "void", emoji: "⚫", name: "Void", desc: "As an Astronomer, get 0 (zero) night action number.", badge: "Common" },
+            { id: "cat", emoji: "😺", name: "Future Cat", desc: "At the last 3, be with @kediben and win with him at the last lynch.", badge: "Special" },
+            { id: "internal", emoji: "⚔️", name: "Internal Conflict", desc: "As Seer, check Cultist Hunter or Helpers switched by Rogue Wolf and cause their death.", badge: "Glitch" },
+            { id: "few", emoji: "👺", name: "Few but Effective", desc: "As a Tanner, get lynched when Conjurer Wolf acted.", badge: "Rare" },
+            { id: "pawn", emoji: "♟️", name: "Unnoble Sacrifice", desc: "As a Pawn, sacrifice yourself for an Arsonist, Tanner, or Cultist.", badge: "Common" },
+            { id: "awkward", emoji: "🤕", name: "Awkward Death", desc: "As Clumsy Guy, vote the Depressive by accident and die.", badge: "Funny" },
+            { id: "line", emoji: "🪞", name: "Beyond the Line", desc: "As a Seer, see yourself!", badge: "Glitch" },
+            { id: "trickster", emoji: "🌫️", name: "Trickster", desc: "As Fog Wolf, at the last 3, vote the Town Hunter by fake vote and tie the lynch!", badge: "Legendary" },
+            { id: "blind", emoji: "🙈", name: "Blind Bandage", desc: "As Augur, see that all vision roles (seer, detective, etc.) don't exist in game.", badge: "Rare" },
+            { id: "blacklist", emoji: "📝", name: "Blacklist", desc: "As a regular player, stabbed at night 1 by any mod/dev of Wolfblood Community.", badge: "Unlucky" },
+            { id: "loop", emoji: "➿", name: "Loop Mayhem", desc: "As Miner, dig for someone and all action roles go to them with different targets.", badge: "Chaos" },
+            { id: "afterdeath", emoji: "💀", name: "After Death", desc: "As Skeleton, dodge the Cultist Hunter when they visit the Serial Killer.", badge: "Epic" },
+            { id: "unnoble", emoji: "🤢", name: "Unnoble", desc: "Be the Mayor at the last 2 and dodged by Skeleton. Disgusting!", badge: "Rare" },
+            { id: "doubleedged", emoji: "⚔️", name: "Double-edged Sword", desc: "As Skeleton, block 2 different bad roles (regular wolves don't count).", badge: "Epic" },
+            { id: "mumin", emoji: "🛐", name: "El-Mumin", desc: "Be the pure Preacher in Cultist game when CH is dead, and win the game alive.", badge: "Legendary" },
+            { id: "reddoor", emoji: "🚪", name: "Red Door", desc: "As Cultist Hunter, visit the Serial Killer twice and die. You never learn, do you?", badge: "Common" },
+            { id: "betrayal", emoji: "💔", name: "Betrayal Lover", desc: "As a couple, win the game alive when your partner is dead.", badge: "Cruel" },
+            { id: "submarine", emoji: "🚢", name: "Submarine", desc: "As Poseidon, drown the Depressive before they suicide.", badge: "Timing" },
+            { id: "hypocrite", emoji: "😈", name: "Hypocrite Devil", desc: "As Slave, lose your target, make top 3 with Tanner, and win despite it.", badge: "Legendary" },
+            { id: "backup", emoji: "🫡", name: "Back-up", desc: "As a Pawn, sacrifice yourself for Soldier.", badge: "Honor" },
+            { id: "awkconflict", emoji: "😵‍💫", name: "Awkward Conflict", desc: "As Clumsy Wolf, reveal ability and everyone votes wrong (except pack).", badge: "Chaos" },
+            { id: "immortal", emoji: "💉", name: "Immortal She", desc: "As a Doctor, get revived by another Doctor.", badge: "Rare" },
+            { id: "soe", emoji: "💰", name: "S.O.E.", desc: "As a Thief, steal from Cultist Hunter (Time to get hierarchy).", badge: "Epic" },
+            { id: "rusty", emoji: "🛡️", name: "Rusty Iron", desc: "As a Blacksmith, reveal yourself after a drunk death by Werewolves. (No need that Belhanda)", badge: "Funny" },
+            { id: "holy", emoji: "👼", name: "Holy Save", desc: "As a Guardian Angel, save the Cursed's life from a Werewolf attack!", badge: "Epic" },
+            { id: "anemic", emoji: "🧟", name: "Anemic", desc: "As a Tanner, get infected by Wolves and subsequently lynched.", badge: "Epic" },
+            { id: "meniscus", emoji: "🦵", name: "Meniscus Tear", desc: "As Serial Killer, get injured by Grave Digger, but survive to kill him the next night.", badge: "Vengeance" },
+            { id: "hercules", emoji: "💪", name: "Hercules", desc: "As a Guardian Angel, successfully defend your target from at least 3 intruders.", badge: "Legendary" },
+            { id: "jester", emoji: "🃏", name: "Jester", desc: "As a Fool, receive a Seer vision check. (Excuse me but, what the hell!)", badge: "Glitch" },
+            { id: "plottwist", emoji: "📜", name: "Plot Twist", desc: "As a Seer, check both the Wolfman and the Lycan in the same game.", badge: "Rare" }
         ];
 
         const itemsPerPage = 6;
@@ -569,8 +671,8 @@
                     card.innerHTML = `
                             <div class="achv-icon">${achv.emoji}</div>
                             <div class="achv-details">
-                                <div class="achv-name">${achv.name}</div>
-                                <div class="achv-desc">${achv.desc}</div>
+                                <div class="achv-name" data-key="ach_${achv.id}_name">${achv.name}</div>
+                                <div class="achv-desc" data-key="ach_${achv.id}_desc">${achv.desc}</div>
                             </div>
                             <div class="xp-badge" data-rarity="${achv.badge}">${achv.badge}</div>
                         `;
@@ -578,6 +680,7 @@
                 });
 
                 container.style.opacity = '1';
+                const currentLang = localStorage.getItem('lang') || 'en';
             }, 200);
         }
 
@@ -656,5 +759,6 @@
 
     <script src="script.js"></script>
     <script src="loader.js"></script>
+    <script src="translate.js"></script>
 </body>
 </html>

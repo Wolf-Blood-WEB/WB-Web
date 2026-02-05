@@ -23,6 +23,91 @@
             --table-green: #1a2a1a;
             --card-border: rgba(212, 175, 55, 0.3);
         }
+        .language-dropdown {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Inter', sans-serif;
+        }
+        .dropdown-toggle {
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid var(--wolf-red-dim);
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            min-width: 100px;
+            justify-content: space-between;
+        }
+            .dropdown-toggle:hover {
+                border-color: var(--wolf-red);
+                box-shadow: 0 0 15px rgba(138, 3, 3, 0.4);
+                background: rgba(20, 20, 20, 0.95);
+            }
+            .dropdown-toggle .arrow {
+                font-size: 0.7rem;
+                color: var(--text-dim);
+                transition: transform 0.3s ease;
+            }
+
+        .language-dropdown.open .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: rgba(5, 5, 5, 0.95);
+            border: 1px solid var(--wolf-red-dim);
+            border-radius: 6px;
+            width: 140px;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+        .language-dropdown.open .dropdown-menu {
+            display: flex;
+            animation: fadeIn menu 0.3s ease;
+        }
+        .dropdown-menu a {
+            padding: 12px 15px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s ease, color 0.2s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+            .dropdown-menu a:last-child {
+                border-bottom: none;
+            }
+            .dropdown-menu a:hover {
+                background: var(--wolf-red-dim);
+                color: white;
+                padding-left: 20px;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         * { box-sizing: border-box; }
         body {
             margin: 0;
@@ -378,31 +463,49 @@
             }
             .role-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .table-header h1 { font-size: 2rem; }
+            .language-dropdown {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>
 <body>
     <div id="bg-canvas"></div>
 
+    <div class="language-dropdown">
+        <button class="dropdown-toggle">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span id="selected-lang-flag">🇺🇸</span>
+                <span id="selected-lang-code">EN</span>
+            </div>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" data-lang="en">🇺🇸 English</a>
+            <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+        </div>
+    </div>
+
     <nav class="wolf-nav">
-        <a href="index.html" class="nav-link">🏠 Home</a>
-        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
-        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
-        <a href="board_game.html" class="nav-link active">🎲 Board Game</a>
-        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
-        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+        <a href="index.html" class="nav-link" data-key="nav_home">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link" data-key="nav_test_designs">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link" data-key="nav_removed">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link active" data-key="nav_board_game">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link" data-key="nav_evo_mod">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link" data-key="nav_achievements">🏆 Achievements</a>
     </nav>
 
     <div class="container">
 
         <div class="table-header">
-            <h1>Board Game Suggestions</h1>
-            <p class="table-subtitle">🎲 From the forest to the tabletop 🎲</p>
+            <h1 data-key="bg_header_title">Board Game Suggestions</h1>
+            <p class="table-subtitle" data-key="bg_header_subtitle">🎲 From the forest to the tabletop 🎲</p>
 
             <div class="info-box">
-                <strong style="color:var(--accent-gold); font-size:1.1rem;">Physical Format Concepts</strong><br><br>
-                Card layouts, tokens, player boards.<br>
-                Perfect for fans of IRL play, printing prototypes, or just imagining the village on a game board.
+                <strong style="color:var(--accent-gold); font-size:1.1rem;" data-key="bg_info_title">Physical Format Concepts</strong><br><br>
+                <span data-key="bg_info_text">Card layouts, tokens, player boards. Perfect for fans of IRL play, printing prototypes, or just imagining the village on a game board.</span>
             </div>
         </div>
 
@@ -410,74 +513,74 @@
 
             <div class="playing-card modal-trigger" data-modal-target="angelModal">
                 <div class="card-emoji">🪽</div>
-                <div class="card-title">Fallen Angel</div>
-                <div class="card-type">Special Role</div>
+                <div class="card-title" data-key="bg_angel_title">Fallen Angel</div>
+                <div class="card-type" data-key="bg_type_special">Special Role</div>
             </div>
 
             <div class="playing-card modal-trigger" data-modal-target="virginModal">
                 <div class="card-emoji">🕯️</div>
-                <div class="card-title">The Virgin</div>
-                <div class="card-type">Sacrificial</div>
+                <div class="card-title" data-key="bg_virgin_title">The Virgin</div>
+                <div class="card-type" data-key="bg_type_sacrificial">Sacrificial</div>
             </div>
 
             <div class="playing-card modal-trigger" data-modal-target="damselModal">
                 <div class="card-emoji">💃</div>
-                <div class="card-title">Damsel</div>
-                <div class="card-type">Chaos Role</div>
+                <div class="card-title" data-key="bg_damsel_title">Damsel</div>
+                <div class="card-type" data-key="bg_type_chaos">Chaos Role</div>
             </div>
 
             <div class="playing-card modal-trigger" data-modal-target="flirtModal">
                 <div class="card-emoji">💋</div>
-                <div class="card-title">The Flirt</div>
-                <div class="card-type">Disruption</div>
+                <div class="card-title" data-key="bg_flirt_title">The Flirt</div>
+                <div class="card-type" data-key="bg_type_disruption">Disruption</div>
             </div>
 
             <div class="playing-card modal-trigger" data-modal-target="natureModal">
                 <div class="card-emoji">🌿</div>
-                <div class="card-title">Mother Nature</div>
-                <div class="card-type">Protector</div>
+                <div class="card-title" data-key="bg_nature_title">Mother Nature</div>
+                <div class="card-type" data-key="bg_type_protector">Protector</div>
             </div>
 
             <div class="playing-card modal-trigger" data-modal-target="shifterModal">
                 <div class="card-emoji">🎭</div>
-                <div class="card-title">Shape Shifter</div>
-                <div class="card-type">Deception</div>
+                <div class="card-title" data-key="bg_shifter_title">Shape Shifter</div>
+                <div class="card-type" data-key="bg_type_deception">Deception</div>
             </div>
 
             <div class="playing-card modal-trigger" data-modal-target="fairyModal">
                 <div class="card-emoji">🧚‍♀️</div>
-                <div class="card-title">The Fairy</div>
-                <div class="card-type">Stun</div>
+                <div class="card-title" data-key="bg_fairy_title">The Fairy</div>
+                <div class="card-type" data-key="bg_type_stun">Stun</div>
             </div>
 
             <div class="playing-card modal-trigger" data-modal-target="storyModal">
                 <div class="card-emoji">📖</div>
-                <div class="card-title">Storyteller</div>
-                <div class="card-type">Game Altering</div>
+                <div class="card-title" data-key="bg_story_title">Storyteller</div>
+                <div class="card-type" data-key="bg_type_altering">Game Altering</div>
             </div>
 
             <div class="playing-card modal-trigger" data-modal-target="miracleModal">
                 <div class="card-emoji">✨</div>
-                <div class="card-title">The Miracle</div>
-                <div class="card-type">Resurrection</div>
+                <div class="card-title" data-key="bg_miracle_title">The Miracle</div>
+                <div class="card-type" data-key="bg_type_resurrection">Resurrection</div>
             </div>
 
             <div class="playing-card modal-trigger" data-modal-target="infectedModal">
                 <div class="card-emoji">🦠</div>
-                <div class="card-title">The Infected</div>
-                <div class="card-type">Transformation</div>
+                <div class="card-title" data-key="bg_infected_title">The Infected</div>
+                <div class="card-type" data-key="bg_type_transform">Transformation</div>
             </div>
 
             <div class="playing-card modal-trigger" data-modal-target="hitmanModal">
                 <div class="card-emoji">🕶️</div>
-                <div class="card-title">Hitman</div>
-                <div class="card-type">Versus Mode</div>
+                <div class="card-title" data-key="bg_hitman_title">Hitman</div>
+                <div class="card-type" data-key="bg_type_versus">Versus Mode</div>
             </div>
 
             <div class="playing-card modal-trigger" data-modal-target="rebirthModal">
                 <div class="card-emoji">🐣</div>
-                <div class="card-title">Rebirth</div>
-                <div class="card-type">Wildcard</div>
+                <div class="card-title" data-key="bg_rebirth_title">Rebirth</div>
+                <div class="card-type" data-key="bg_type_wildcard">Wildcard</div>
             </div>
 
         </div>
@@ -486,11 +589,11 @@
     <div id="angelModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>🪽 The Fallen Angel</h2></div>
+            <div class="modal-header"><h2 data-key="bg_angel_full_title">🪽 The Fallen Angel</h2></div>
             <div class="modal-body">
-                <p><strong>Ability:</strong> Bring back a dead player, but at the sacrifice of another player of your choosing.</p>
-                <p><em>Condition:</em> This can only happen once per game.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Fallen Angel">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_ability">Ability:</strong> <span data-key="bg_angel_ability">Bring back a dead player, but at the sacrifice of another player of your choosing.</span></p>
+                <p><em data-key="lbl_condition">Condition:</em> <span data-key="bg_angel_condition">This can only happen once per game.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Fallen Angel" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -498,11 +601,11 @@
     <div id="virginModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>🕯️ The Virgin</h2></div>
+            <div class="modal-header"><h2 data-key="bg_virgin_full_title">🕯️ The Virgin</h2></div>
             <div class="modal-body">
-                <p><strong>Ability:</strong> When killed in the night, choose another player to sacrifice themselves to keep you alive.</p>
-                <p><em>Condition:</em> This can only happen once.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: The Virgin">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_ability">Ability:</strong> <span data-key="bg_virgin_ability">When killed in the night, choose another player to sacrifice themselves to keep you alive.</span></p>
+                <p><em data-key="lbl_condition">Condition:</em> <span data-key="bg_virgin_condition">This can only happen once.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: The Virgin" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -510,10 +613,10 @@
     <div id="damselModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>💃 Damsel in Distress</h2></div>
+            <div class="modal-header"><h2 data-key="bg_damsel_full_title">💃 Damsel in Distress</h2></div>
             <div class="modal-body">
-                <p><strong>Ability:</strong> When in danger of being eliminated, the Damsel becomes desperate and picks two players that must switch roles immediately.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Damsel">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_ability">Ability:</strong> <span data-key="bg_damsel_ability">When in danger of being eliminated, the Damsel becomes desperate and picks two players that must switch roles immediately.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Damsel" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -521,11 +624,11 @@
     <div id="flirtModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>💋 The Flirt</h2></div>
+            <div class="modal-header"><h2 data-key="bg_flirt_full_title">💋 The Flirt</h2></div>
             <div class="modal-body">
-                <p><strong>Ability:</strong> Picks one player per night and distracts them from using their ability.</p>
-                <p><em>Condition:</em> Each player can only be flirted with once per game.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: The Flirt">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_ability">Ability:</strong> <span data-key="bg_flirt_ability">Picks one player per night and distracts them from using their ability.</span></p>
+                <p><em data-key="lbl_condition">Condition:</em> <span data-key="bg_flirt_condition">Each player can only be flirted with once per game.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: The Flirt" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -533,11 +636,11 @@
     <div id="natureModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>🌿 Mother Nature</h2></div>
+            <div class="modal-header"><h2 data-key="bg_nature_full_title">🌿 Mother Nature</h2></div>
             <div class="modal-body">
-                <p><strong>Ability:</strong> Is aware of who has the Seer role. They must protect that player at all costs.</p>
-                <p><em>Condition:</em> Must sacrifice themselves after a successful vote has been placed on the Seer to keep them in the game.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Mother Nature">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_ability">Ability:</strong> <span data-key="bg_nature_ability">Is aware of who has the Seer role. They must protect that player at all costs.</span></p>
+                <p><em data-key="lbl_condition">Condition:</em> <span data-key="bg_nature_condition">Must sacrifice themselves after a successful vote has been placed on the Seer to keep them in the game.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Mother Nature" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -545,12 +648,12 @@
     <div id="shifterModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>🎭 Shape Shifter / Faceless</h2></div>
+            <div class="modal-header"><h2 data-key="bg_shifter_full_title">🎭 Shape Shifter / Faceless</h2></div>
             <div class="modal-body">
-                <p><strong>Ability:</strong> Can take the form of any one role during the night. This becomes your identity for the game but is powerless.</p>
-                <p><strong>Strategic Use:</strong> Helpful for the Werewolf team to confuse Villagers, forcing them to choose between two people claiming the same role.</p>
-                <p><em>Note:</em> The card artwork looks like a Villager, but it’s an illusion.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Shape Shifter">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_ability">Ability:</strong> <span data-key="bg_shifter_ability">Can take the form of any one role during the night. This becomes your identity for the game but is powerless.</span></p>
+                <p><strong data-key="lbl_strategic">Strategic Use:</strong> <span data-key="bg_shifter_strategic">Helpful for the Werewolf team to confuse Villagers, forcing them to choose between two people claiming the same role.</span></p>
+                <p><em data-key="lbl_note">Note:</em> <span data-key="bg_shifter_note">The card artwork looks like a Villager, but it’s an illusion.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Shape Shifter" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -558,10 +661,10 @@
     <div id="fairyModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>🧚‍♀️ The Fairy / Sandman</h2></div>
+            <div class="modal-header"><h2 data-key="bg_fairy_full_title">🧚‍♀️ The Fairy / Sandman</h2></div>
             <div class="modal-body">
-                <p><strong>Ability:</strong> Sprinkles fairy dust (or sand) on a player in the night. That player sleeps in and cannot talk during the next day phase.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Fairy">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_ability">Ability:</strong> <span data-key="bg_fairy_ability">Sprinkles fairy dust (or sand) on a player in the night. That player sleeps in and cannot talk during the next day phase.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Fairy" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -569,11 +672,11 @@
     <div id="storyModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>📖 The Storyteller / Vision</h2></div>
+            <div class="modal-header"><h2 data-key="bg_story_full_title">📖 The Storyteller / Vision</h2></div>
             <div class="modal-body">
-                <p><strong>Ability:</strong> The ability alters the moderator's story for one round.</p>
-                <p><em>Note:</em> A unique mechanic that changes the narrative flow of the game.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Storyteller">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_ability">Ability:</strong> <span data-key="bg_story_ability">The ability alters the moderator's story for one round.</span></p>
+                <p><em data-key="lbl_note">Note:</em> <span data-key="bg_story_note">A unique mechanic that changes the narrative flow of the game.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Storyteller" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -581,10 +684,10 @@
     <div id="miracleModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>✨ The Miracle</h2></div>
+            <div class="modal-header"><h2 data-key="bg_miracle_full_title">✨ The Miracle</h2></div>
             <div class="modal-body">
-                <p><strong>Ability:</strong> If eliminated first, becomes reborn as soon as a Villager role vote passes to be burned.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Miracle">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_ability">Ability:</strong> <span data-key="bg_miracle_ability">If eliminated first, becomes reborn as soon as a Villager role vote passes to be burned.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Miracle" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -592,11 +695,11 @@
     <div id="infectedModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>🦠 The Infected</h2></div>
+            <div class="modal-header"><h2 data-key="bg_infected_full_title">🦠 The Infected</h2></div>
             <div class="modal-body">
-                <p><strong>Start:</strong> Starts off as a Villager.</p>
-                <p><strong>Trigger:</strong> If the Werewolves pick you in the night, you become a Werewolf and replace another wolf of your choice. The selected werewolf dies.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Infected">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_start">Start:</strong> <span data-key="bg_infected_start">Starts off as a Villager.</span></p>
+                <p><strong data-key="lbl_trigger">Trigger:</strong> <span data-key="bg_infected_trigger">If the Werewolves pick you in the night, you become a Werewolf and replace another wolf of your choice. The selected werewolf dies.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Infected" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -604,11 +707,11 @@
     <div id="hitmanModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>🕶️ Hitman</h2></div>
+            <div class="modal-header"><h2 data-key="bg_hitman_full_title">🕶️ Hitman</h2></div>
             <div class="modal-body">
-                <p><strong>Setup:</strong> Two Hitmen exist (similar to Masons).</p>
-                <p><strong>Objective:</strong> Each Hitman has to outlast the other. The last Hitman standing must continue playing until all Werewolves are revealed.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Hitman">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_setup">Setup:</strong> <span data-key="bg_hitman_setup">Two Hitmen exist (similar to Masons).</span></p>
+                <p><strong data-key="lbl_objective">Objective:</strong> <span data-key="bg_hitman_objective">Each Hitman has to outlast the other. The last Hitman standing must continue playing until all Werewolves are revealed.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Hitman" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -616,10 +719,10 @@
     <div id="rebirthModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <div class="modal-header"><h2>🐣 Rebirth</h2></div>
+            <div class="modal-header"><h2 data-key="bg_rebirth_full_title">🐣 Rebirth</h2></div>
             <div class="modal-body">
-                <p><strong>Ability:</strong> If killed, comes back as a random character from the characters who have already been killed.</p>
-                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Rebirth">🗳️ Vote for this Concept</button>
+                <p><strong data-key="lbl_ability">Ability:</strong> <span data-key="bg_rebirth_ability">If killed, comes back as a random character from the characters who have already been killed.</span></p>
+                <button class="btn-vote vote-trigger" data-vote-target="Board Game: Rebirth" data-key="btn_vote_concept">🗳️ Vote for this Concept</button>
             </div>
         </div>
     </div>
@@ -629,52 +732,53 @@
 
             <div class="footer-section">
                 <h3>🐺 Wolf Blood</h3>
-                <p>
+                <p data-key="footer_about">
                     The ultimate hub for experimental roles, game modes, and community chaos.
                     From the forest to the tabletop, we evolve the game.
                 </p>
             </div>
 
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3 data-key="footer_nav_title">Navigation</h3>
                 <div class="footer-links">
-                    <a href="index.html">🏠 Home</a>
-                    <a href="test_designs.html">🧪 Test Designs</a>
-                    <a href="removed.html">♻️ Graveyard</a>
-                    <a href="board_game.html">🎲 Board Game</a>
-                    <a href="evo_mod.html">🧬 Evo Mod</a>
-                    <a href="achievements.html">🏆 Achievements</a>
+                    <a href="index.html" data-key="nav_home">🏠 Home</a>
+                    <a href="test_designs.html" data-key="nav_test_designs">🧪 Test Designs</a>
+                    <a href="removed.html" data-key="nav_removed">♻️ Graveyard</a>
+                    <a href="board_game.html" data-key="nav_board_game">🎲 Board Game</a>
+                    <a href="evo_mod.html" data-key="nav_evo_mod">🧬 Evo Mod</a>
+                    <a href="achievements.html" data-key="nav_achievements">🏆 Achievements</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Legal & Help</h3>
+                <h3 data-key="footer_legal_title">Legal & Help</h3>
                 <div class="footer-links">
-                    <a href="faq.html">❓ FAQ</a>
-                    <a href="policy.html">🛡️ Privacy Policy</a>
-                    <a href="terms.html">📜 Terms of Service</a>
-                    <a href="cookies.html">🍪 Cookie Usage</a>
-                    <a href="license.html">⚖️ License</a>
+                    <a href="faq.html" data-key="link_faq">❓ FAQ</a>
+                    <a href="policy.html" data-key="link_privacy">🛡️ Privacy Policy</a>
+                    <a href="terms.html" data-key="link_terms">📜 Terms of Service</a>
+                    <a href="cookies.html" data-key="link_cookies">🍪 Cookie Usage</a>
+                    <a href="license.html" data-key="link_license">⚖️ License</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Join the Pack</h3>
-                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
-                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                <h3 data-key="footer_join_title">Join the Pack</h3>
+                <p data-key="footer_join_desc">Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/+QW8C1WwdSCQ3NmRl" target="_blank" class="footer-btn" data-key="btn_telegram">
                     ✈️ Open Telegram
                 </a>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-key="footer_copyright">
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
 
     <script src="script.js"></script>
     <script src="loader.js"></script>
+    <script src="translate.js"></script>
 
 </body>
 </html>

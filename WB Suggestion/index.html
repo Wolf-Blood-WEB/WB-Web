@@ -24,6 +24,83 @@
             --shadow-red: 0 0 20px rgba(138, 3, 3, 0.4);
             --border-glow: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .language-dropdown {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Inter', sans-serif;
+        }
+        .dropdown-toggle {
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid var(--wolf-red-dim);
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            min-width: 100px;
+            justify-content: space-between;
+        }
+        .dropdown-toggle:hover {
+            border-color: var(--wolf-red);
+            box-shadow: 0 0 15px rgba(138, 3, 3, 0.4);
+            background: rgba(20, 20, 20, 0.95);
+        }
+        .dropdown-toggle .arrow {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            transition: transform 0.3s ease;
+        }
+        .language-dropdown.open .arrow {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: rgba(5, 5, 5, 0.95);
+            border: 1px solid var(--wolf-red-dim);
+            border-radius: 6px;
+            width: 140px;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+        .language-dropdown.open .dropdown-menu {
+            display: flex;
+            animation: fadeIn menu 0.3s ease;
+        }
+        .dropdown-menu a {
+            padding: 12px 15px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s ease, color 0.2s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+        .dropdown-menu a:hover {
+            background: var(--wolf-red-dim);
+            color: white;
+            padding-left: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         * {
             box-sizing: border-box;
         }
@@ -319,6 +396,9 @@
             color: #444;
             font-size: 0.8rem;
         }
+        .emoji {
+            font-family: 'Noto Color Emoji', 'Segoe UI Emoji', sans-serif !important;
+        }
         @media (max-width: 768px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
@@ -343,26 +423,43 @@
                 font-size: 13px;
                 text-align: center;
             }
+            .language-dropdown {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>
 <body>
     <div id="bg-canvas"></div>
 
+    <div class="language-dropdown">
+        <button class="dropdown-toggle">
+            <span id="selected-lang-flag">🇺🇸</span>
+            <span id="selected-lang-code">EN</span>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" data-lang="en">🇺🇸 English</a>
+            <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+        </div>
+    </div>
+
     <nav class="wolf-nav">
-        <a href="index.html" class="nav-link active">🏠 Home</a>
-        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
-        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
-        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
-        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
-        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+        <a href="index.html" class="nav-link active" data-key="nav_home">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link" data-key="nav_test_designs">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link" data-key="nav_removed">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link" data-key="nav_board_game">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link" data-key="nav_evo_mod">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link" data-key="nav_achievements">🏆 Achievements</a>
     </nav>
 
     <div class="container">
 
         <div class="hero">
-            <h1>Wolf Blood Workshop</h1>
-            <p>The official hub for role suggestions, feedback, and game evolution.</p>
+            <h1 data-key="hero_title">Wolf Blood Workshop</h1>
+            <p data-key="hero_desc">The official hub for role suggestions, feedback, and game evolution.</p>
         </div>
 
         <div class="dashboard-grid">
@@ -370,52 +467,52 @@
             <div class="main-content">
                 <div class="card card-gold">
                     <div style="display:flex; justify-content:space-between; align-items: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 10px; margin-bottom: 15px;">
-                        <span style="color:var(--accent-gold); font-weight:bold; letter-spacing: 1px;">🔥 ROLE OF THE WEEK</span>
-                        <span style="color:#888; font-size: 0.9rem;">By Kadir Bayar</span>
+                        <span style="color:var(--accent-gold); font-weight:bold; letter-spacing: 1px;" data-key="role_week_title">🔥 ROLE OF THE WEEK</span>
+                        <span style="color:#888; font-size: 0.9rem;" data-key="role_week_author">By Kadir Bayar</span>
                     </div>
                     <div class="role-highlight">
                         <div class="role-icon">🧛‍♂️</div>
                         <div>
-                            <h2 style="border:none; margin-bottom: 5px; color: var(--accent-gold);">The Blood Mage</h2>
-                            <p style="color: #ddd;"><strong>Ability:</strong> Can sacrifice 10% of their Cult Rate to revive a dead player as a Ghoul.</p>
-                            <p style="color: #aaa; font-style: italic; margin-top: 10px;">"Power comes at a price..."</p>
+                            <h2 style="border:none; margin-bottom: 5px; color: var(--accent-gold);" data-key="role_name">The Blood Mage</h2>
+                            <p style="color: #ddd;"><strong data-key="role_ability_label">Ability:</strong> <span data-key="role_ability_text">Can sacrifice 10% of their Cult Rate to revive a dead player as a Ghoul.</span></p>
+                            <p style="color: #aaa; font-style: italic; margin-top: 10px;" data-key="role_flavor">"Power comes at a price..."</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="card card-blue">
-                    <h2>📘 How This Workshop Works</h2>
+                    <h2 data-key="how_title">📘 How This Workshop Works</h2>
                     <ul style="line-height: 1.8; color: #ccc; padding-left: 20px;">
-                        <li style="margin-bottom: 10px;"><strong>Browse Ideas:</strong> Click "Test Designs" above to see experimental roles.</li>
-                        <li style="margin-bottom: 10px;"><strong>Give Feedback:</strong> Upvote roles you want to see in the game.</li>
-                        <li><strong>Submit Your Own:</strong> Use the form on the right to send ideas directly to the Dev Team.</li>
+                        <li style="margin-bottom: 10px;" data-key="how_step_1"><strong>Browse Ideas:</strong> Click "Test Designs" above to see experimental roles.</li>
+                        <li style="margin-bottom: 10px;" data-key="how_step_2"><strong>Give Feedback:</strong> Upvote roles you want to see in the game.</li>
+                        <li data-key="how_step_3"><strong>Submit Your Own:</strong> Use the form on the right to send ideas directly to the Dev Team.</li>
                     </ul>
                 </div>
             </div>
 
             <div class="sidebar">
                 <div class="card">
-                    <h2>📝 Suggest a Role</h2>
-                    <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 20px;">Got a crazy idea? Send it here.</p>
+                    <h2 data-key="form_title">📝 Suggest a Role</h2>
+                    <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 20px;" data-key="form_desc">Got a crazy idea? Send it here.</p>
 
                     <form id="suggestionForm">
-                        <label>Role Name & Emoji</label>
-                        <input type="text" id="roleName" placeholder="e.g., 👺 Tanner" required>
+                        <label data-key="label_role_name">Role Name & Emoji</label>
+                        <input type="text" id="roleName" data-key-ph="ph_role_name" placeholder="e.g., 👺 Tanner" required>
 
-                        <label>Category</label>
+                        <label data-key="label_category">Category</label>
                         <select id="roleCategory">
-                            <option>Test Design</option>
-                            <option>Evo Mod</option>
-                            <option>Achievement</option>
-                            <option>Board Game</option>
-                            <option>Revisions</option>
-                            <option>Cult Rate</option>
+                            <option data-key="cat_test">Test Design</option>
+                            <option data-key="cat_evo">Evo Mod</option>
+                            <option data-key="cat_ach">Achievement</option>
+                            <option data-key="cat_board">Board Game</option>
+                            <option data-key="cat_rev">Revisions</option>
+                            <option data-key="cat_cult">Cult Rate</option>
                         </select>
 
-                        <label>Short Description</label>
-                        <textarea id="roleAbility" rows="3" placeholder="What does it do?" required></textarea>
+                        <label data-key="label_desc">Short Description</label>
+                        <textarea id="roleAbility" rows="3" data-key-ph="ph_desc" placeholder="What does it do?" required></textarea>
 
-                        <button type="submit" class="btn">Submit to Bot</button>
+                        <button type="submit" class="btn" data-key="btn_submit">Submit to Bot</button>
                     </form>
                 </div>
             </div>
@@ -428,51 +525,52 @@
 
             <div class="footer-section">
                 <h3>🐺 Wolf Blood</h3>
-                <p>
+                <p data-key="footer_about">
                     The ultimate hub for experimental roles, game modes, and community chaos.
                     From the forest to the tabletop, we evolve the game.
                 </p>
             </div>
 
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3 data-key="footer_nav_title">Navigation</h3>
                 <div class="footer-links">
-                    <a href="index.html">🏠 Home</a>
-                    <a href="test_designs.html">🧪 Test Designs</a>
-                    <a href="removed.html">♻️ Graveyard</a>
-                    <a href="board_game.html">🎲 Board Game</a>
-                    <a href="evo_mod.html">🧬 Evo Mod</a>
-                    <a href="achievements.html">🏆 Achievements</a>
+                    <a href="index.html" data-key="nav_home">🏠 Home</a>
+                    <a href="test_designs.html" data-key="nav_test_designs">🧪 Test Designs</a>
+                    <a href="removed.html" data-key="nav_removed">♻️ Graveyard</a>
+                    <a href="board_game.html" data-key="nav_board_game">🎲 Board Game</a>
+                    <a href="evo_mod.html" data-key="nav_evo_mod">🧬 Evo Mod</a>
+                    <a href="achievements.html" data-key="nav_achievements">🏆 Achievements</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Legal & Help</h3>
+                <h3 data-key="footer_legal_title">Legal & Help</h3>
                 <div class="footer-links">
-                    <a href="faq.html">❓ FAQ</a>
-                    <a href="policy.html">🛡️ Privacy Policy</a>
-                    <a href="terms.html">📜 Terms of Service</a>
-                    <a href="cookies.html">🍪 Cookie Usage</a>
-                    <a href="license.html">⚖️ License</a>
+                    <a href="faq.html" data-key="link_faq">❓ FAQ</a>
+                    <a href="policy.html" data-key="link_privacy">🛡️ Privacy Policy</a>
+                    <a href="terms.html" data-key="link_terms">📜 Terms of Service</a>
+                    <a href="cookies.html" data-key="link_cookies">🍪 Cookie Usage</a>
+                    <a href="license.html" data-key="link_license">⚖️ License</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Join the Pack</h3>
-                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
-                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                <h3 data-key="footer_join_title">Join the Pack</h3>
+                <p data-key="footer_join_desc">Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/+QW8C1WwdSCQ3NmRl" target="_blank" class="footer-btn" data-key="btn_telegram">
                     ✈️ Open Telegram
                 </a>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-key="footer_copyright">
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
 
     <script src="script.js"></script>
     <script src="loader.js"></script>
+    <script src="translate.js"></script>
 </body>
 </html>

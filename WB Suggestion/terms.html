@@ -195,60 +195,72 @@
 </head>
 <body>
 
-    <script src="loader.js"></script>
+    <div class="language-dropdown">
+        <button class="dropdown-toggle">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span id="selected-lang-flag">🇺🇸</span>
+                <span id="selected-lang-code">EN</span>
+            </div>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" data-lang="en">🇺🇸 English</a>
+            <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+        </div>
+    </div>
 
     <nav class="wolf-nav">
-        <a href="index.html" class="nav-link">🏠 Home</a>
-        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
-        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
-        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
-        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
-        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+        <a href="index.html" class="nav-link" data-key="nav_home">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link" data-key="nav_test_designs">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link" data-key="nav_removed">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link" data-key="nav_board_game">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link" data-key="nav_evo_mod">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link" data-key="nav_achievements">🏆 Achievements</a>
     </nav>
 
     <div class="container">
 
         <div class="hero">
-            <h1>Terms of Service</h1>
-            <p>Effective Date: January 24, 2026</p>
-            <p>Read the rules before you join the hunt.</p>
+            <h1 data-key="terms_hero_title">Terms of Service</h1>
+            <p data-key="terms_hero_date">Effective Date: January 24, 2026</p>
+            <p data-key="terms_hero_desc">Read the rules before you join the hunt.</p>
         </div>
 
         <div class="terms-section">
-            <h2>1. Acceptance of Terms</h2>
-            <p>By accessing or using the Wolf Blood Workshop, you agree to be bound by these Terms. If you do not agree to abide by these rules, you must leave the pack immediately (close the tab).</p>
+            <h2 data-key="terms_sec1_title">1. Acceptance of Terms</h2>
+            <p data-key="terms_sec1_text">By accessing or using the Wolf Blood Workshop, you agree to be bound by these Terms. If you do not agree to abide by these rules, you must leave the pack immediately (close the tab).</p>
         </div>
 
         <div class="terms-section">
-            <h2>2. User Submissions & Ideas</h2>
-            <p>The core of this workshop is community creativity. By submitting a role, game mode, or modification idea via our forms:</p>
+            <h2 data-key="terms_sec2_title">2. User Submissions & Ideas</h2>
+            <p data-key="terms_sec2_text">The core of this workshop is community creativity. By submitting a role, game mode, or modification idea via our forms:</p>
             <ul>
-                <li>You grant the Wolf Blood Community a <strong>perpetual, royalty-free license</strong> to use, modify, display, and distribute your idea.</li>
-                <li>You acknowledge that your idea may be edited for balance (e.g., nerfing a "God Role") before being published to the <strong>Test Designs</strong> page.</li>
-                <li>You waive any claim to intellectual property rights over the mechanics you suggest. We do this to prevent legal disputes if we decide to implement your idea in the Board Game or Evo Mod.</li>
+                <li data-key="terms_sec2_li1">You grant the Wolf Blood Community a <strong>perpetual, royalty-free license</strong> to use, modify, display, and distribute your idea.</li>
+                <li data-key="terms_sec2_li2">You acknowledge that your idea may be edited for balance (e.g., nerfing a "God Role") before being published to the <strong>Test Designs</strong> page.</li>
+                <li data-key="terms_sec2_li3">You waive any claim to intellectual property rights over the mechanics you suggest. We do this to prevent legal disputes if we decide to implement your idea in the Board Game or Evo Mod.</li>
             </ul>
         </div>
 
         <div class="terms-section">
-            <h2>3. Community Conduct</h2>
-            <p>We are a chaotic community, but we have standards. The following behavior is strictly prohibited:</p>
+            <h2 data-key="terms_sec3_title">3. Community Conduct</h2>
+            <p data-key="terms_sec3_text1">We are a chaotic community, but we have standards. The following behavior is strictly prohibited:</p>
             <ul>
-                <li>Submitting hate speech, harassment, or explicit content via the suggestion forms.</li>
-                <li>Spamming the system with identical role suggestions.</li>
-                <li>Impersonating developers or admins in the Telegram group.</li>
+                <li data-key="terms_sec3_li1">Submitting hate speech, harassment, or explicit content via the suggestion forms.</li>
+                <li data-key="terms_sec3_li2">Spamming the system with identical role suggestions.</li>
+                <li data-key="terms_sec3_li3">Impersonating developers or admins in the Telegram group.</li>
             </ul>
-            <p>Violators will be banned from the community channels and their suggestions sent to the void.</p>
+            <p data-key="terms_sec3_text2">Violators will be banned from the community channels and their suggestions sent to the void.</p>
         </div>
 
         <div class="terms-section">
-            <h2>4. Disclaimer of Warranty</h2>
-            <p>This website and its contents (especially the <strong>Test Designs</strong>) are provided "as is."</p>
-            <p>We do not guarantee that the roles on this site are balanced, fair, or fun. Using experimental roles in your games may result in chaos, arguments, or friendship-ending betrayals. <strong>Use at your own risk.</strong></p>
+            <h2 data-key="terms_sec4_title">4. Disclaimer of Warranty</h2>
+            <p data-key="terms_sec4_text1">This website and its contents (especially the <strong>Test Designs</strong>) are provided "as is."</p>
+            <p data-key="terms_sec4_text2">We do not guarantee that the roles on this site are balanced, fair, or fun. Using experimental roles in your games may result in chaos, arguments, or friendship-ending betrayals. <strong>Use at your own risk.</strong></p>
         </div>
 
         <div class="terms-section">
-            <h2>5. Project Status & Community Contributions</h2>
-            <p>
+            <h2 data-key="terms_sec5_title">5. Project Status & Community Contributions</h2>
+            <p data-key="terms_sec5_text">
                 Wolf Blood Workshop is a recognized project developed with the knowledge of the original game owners.
                 The website design and core concepts are the intellectual property of <strong>@Halfcelse</strong>.
                 We actively encourage users to pitch new role ideas and creative mechanics;
@@ -257,8 +269,8 @@
         </div>
 
         <div class="terms-section">
-            <h2>6. Changes to Terms</h2>
-            <p>We reserve the right to modify these terms at any time. If we make major changes, we will notify the pack via our Telegram channel. Continued use of the site constitutes acceptance of the new terms.</p>
+            <h2 data-key="terms_sec6_title">6. Changes to Terms</h2>
+            <p data-key="terms_sec6_text">We reserve the right to modify these terms at any time. If we make major changes, we will notify the pack via our Telegram channel. Continued use of the site constitutes acceptance of the new terms.</p>
         </div>
 
     </div>
@@ -268,49 +280,50 @@
 
             <div class="footer-section">
                 <h3>🐺 Wolf Blood</h3>
-                <p>
+                <p data-key="footer_about">
                     The ultimate hub for experimental roles, game modes, and community chaos.
                     From the forest to the tabletop, we evolve the game.
                 </p>
             </div>
 
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3 data-key="footer_nav_title">Navigation</h3>
                 <div class="footer-links">
-                    <a href="index.html">🏠 Home</a>
-                    <a href="test_designs.html">🧪 Test Designs</a>
-                    <a href="removed.html">♻️ Graveyard</a>
-                    <a href="board_game.html">🎲 Board Game</a>
-                    <a href="evo_mod.html">🧬 Evo Mod</a>
-                    <a href="achievements.html">🏆 Achievements</a>
+                    <a href="index.html" data-key="nav_home">🏠 Home</a>
+                    <a href="test_designs.html" data-key="nav_test_designs">🧪 Test Designs</a>
+                    <a href="removed.html" data-key="nav_removed">♻️ Graveyard</a>
+                    <a href="board_game.html" data-key="nav_board_game">🎲 Board Game</a>
+                    <a href="evo_mod.html" data-key="nav_evo_mod">🧬 Evo Mod</a>
+                    <a href="achievements.html" data-key="nav_achievements">🏆 Achievements</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Legal & Help</h3>
+                <h3 data-key="footer_legal_title">Legal & Help</h3>
                 <div class="footer-links">
-                    <a href="faq.html">❓ FAQ</a>
-                    <a href="policy.html">🛡️ Privacy Policy</a>
-                    <a href="terms.html">📜 Terms of Service</a>
-                    <a href="cookies.html">🍪 Cookie Usage</a>
-                    <a href="license.html">⚖️ License</a>
+                    <a href="faq.html" data-key="link_faq">❓ FAQ</a>
+                    <a href="policy.html" data-key="link_privacy">🛡️ Privacy Policy</a>
+                    <a href="terms.html" data-key="link_terms">📜 Terms of Service</a>
+                    <a href="cookies.html" data-key="link_cookies">🍪 Cookie Usage</a>
+                    <a href="license.html" data-key="link_license">⚖️ License</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Join the Pack</h3>
-                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
-                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                <h3 data-key="footer_join_title">Join the Pack</h3>
+                <p data-key="footer_join_desc">Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/+QW8C1WwdSCQ3NmRl" target="_blank" class="footer-btn" data-key="btn_telegram">
                     ✈️ Open Telegram
                 </a>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-key="footer_copyright">
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
     <script src="loader.js"></script>
+    <script src="translate.js"></script>
 </body>
 </html>

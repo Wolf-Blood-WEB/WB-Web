@@ -205,68 +205,80 @@
 </head>
 <body>
 
-    <script src="loader.js"></script>
+    <div class="language-dropdown">
+        <button class="dropdown-toggle">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span id="selected-lang-flag">🇺🇸</span>
+                <span id="selected-lang-code">EN</span>
+            </div>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" data-lang="en">🇺🇸 English</a>
+            <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+        </div>
+    </div>
 
     <nav class="wolf-nav">
-        <a href="index.html" class="nav-link">🏠 Home</a>
-        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
-        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
-        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
-        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
-        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+        <a href="index.html" class="nav-link" data-key="nav_home">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link" data-key="nav_test_designs">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link" data-key="nav_removed">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link" data-key="nav_board_game">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link" data-key="nav_evo_mod">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link" data-key="nav_achievements">🏆 Achievements</a>
     </nav>
 
     <div class="container">
 
         <div class="hero">
-            <h1>License & Copyright</h1>
-            <p>Ownership of the hunt. Read before you copy.</p>
+            <h1 data-key="lic_hero_title">License & Copyright</h1>
+            <p data-key="lic_hero_desc">Ownership of the hunt. Read before you copy.</p>
         </div>
 
         <div class="license-section">
-            <span class="copy-badge">© 2022-2026 Wolf Blood Community</span>
-            <h2>1. Ownership of Content</h2>
-            <p>The <strong>Wolf Blood Workshop</strong> website, including its visual design, HTML/CSS code structure, logo assets, and the written descriptions of custom roles, are the intellectual property of the Wolf Blood Community and its primary architect, <strong>@kediben</strong> and <strong>@Halfcelse</strong>.</p>
-            <p>This "Test Design" platform serves as a creative vault. While the base game mechanics of social deduction are universal, the specific creative expressions, role variants, and "Evolution Mod" concepts found here are original works.</p>
+            <span class="copy-badge" data-key="lic_copy_badge">© 2022-2026 Wolf Blood Community</span>
+            <h2 data-key="lic_sec1_title">1. Ownership of Content</h2>
+            <p data-key="lic_sec1_p1">The <strong>Wolf Blood Workshop</strong> website, including its visual design, HTML/CSS code structure, logo assets, and the written descriptions of custom roles, are the intellectual property of the Wolf Blood Community and its primary architect, <strong>@kediben</strong> and <strong>@Halfcelse</strong>.</p>
+            <p data-key="lic_sec1_p2">This "Test Design" platform serves as a creative vault. While the base game mechanics of social deduction are universal, the specific creative expressions, role variants, and "Evolution Mod" concepts found here are original works.</p>
         </div>
 
         <div class="license-section">
-            <h2>2. Permitted Use (The "Fan" License)</h2>
-            <p>We built this for the players. You are free (and encouraged) to:</p>
+            <h2 data-key="lic_sec2_title">2. Permitted Use (The "Fan" License)</h2>
+            <p data-key="lic_sec2_desc">We built this for the players. You are free (and encouraged) to:</p>
             <ul>
-                <li><strong>Play:</strong> Use these roles and mechanics in your private games (both online and IRL).</li>
-                <li><strong>Stream/Record:</strong> Create content (YouTube, Twitch) featuring our game modes, provided you give verbal or written credit to "Wolf Blood Workshop."</li>
-                <li><strong>Modify for Private Use:</strong> Tweak the roles to fit your specific group's playstyle.</li>
+                <li data-key="lic_sec2_li1"><strong>Play:</strong> Use these roles and mechanics in your private games (both online and IRL).</li>
+                <li data-key="lic_sec2_li2"><strong>Stream/Record:</strong> Create content (YouTube, Twitch) featuring our game modes, provided you give verbal or written credit to "Wolf Blood Workshop."</li>
+                <li data-key="lic_sec2_li3"><strong>Modify for Private Use:</strong> Tweak the roles to fit your specific group's playstyle.</li>
             </ul>
         </div>
 
         <div class="license-section">
-            <h2>3. Restrictions & Prohibitions</h2>
-            <p>To protect the integrity of the project, the following are strictly prohibited without express written permission:</p>
+            <h2 data-key="lic_sec3_title">3. Restrictions & Prohibitions</h2>
+            <p data-key="lic_sec3_desc">To protect the integrity of the project, the following are strictly prohibited without express written permission:</p>
             <ul>
-                <li><strong>Commercial Use:</strong> You may not sell, rent, or license our custom roles, the "Evo Mod" mechanics, or the "Board Game" assets.</li>
-                <li><strong>Website Cloning:</strong> You may not copy the source code (HTML/CSS/JS) of this website to create a competing platform or a "copycat" site.</li>
-                <li><strong>Claiming Ownership:</strong> You may not present the designs found in the "Test Designs" or "Achievements" sections as your own original creation in other communities.</li>
+                <li data-key="lic_sec3_li1"><strong>Commercial Use:</strong> You may not sell, rent, or license our custom roles, the "Evo Mod" mechanics, or the "Board Game" assets.</li>
+                <li data-key="lic_sec3_li2"><strong>Website Cloning:</strong> You may not copy the source code (HTML/CSS/JS) of this website to create a competing platform or a "copycat" site.</li>
+                <li data-key="lic_sec3_li3"><strong>Claiming Ownership:</strong> You may not present the designs found in the "Test Designs" or "Achievements" sections as your own original creation in other communities.</li>
             </ul>
         </div>
 
         <div class="license-section">
-            <h2>4. Relationship to Original Works</h2>
-            <p>Wolf Blood Workshop is an independent modification project. It is not affiliated with, endorsed by, or sponsored by the original creators of the base Werewolf game engine used in the Telegram bot ecosystem.</p>
-            <p>All trademarks and copyrights regarding the underlying game engine belong to their respective owners. We assert copyright only over our unique <strong>modifications, visual assets, and original role concepts</strong>.</p>
+            <h2 data-key="lic_sec4_title">4. Relationship to Original Works</h2>
+            <p data-key="lic_sec4_p1">Wolf Blood Workshop is an independent modification project. It is not affiliated with, endorsed by, or sponsored by the original creators of the base Werewolf game engine used in the Telegram bot ecosystem.</p>
+            <p data-key="lic_sec4_p2">All trademarks and copyrights regarding the underlying game engine belong to their respective owners. We assert copyright only over our unique <strong>modifications, visual assets, and original role concepts</strong>.</p>
         </div>
 
         <div class="license-section">
-            <h2>5. Open Source Components</h2>
-            <p>This website utilizes specific open-source libraries (e.g., <strong>Three.js</strong> for background animations). These components remain subject to their original licenses (MIT License), and our use of them does not imply ownership of the library itself.</p>
+            <h2 data-key="lic_sec5_title">5. Open Source Components</h2>
+            <p data-key="lic_sec5_desc">This website utilizes specific open-source libraries (e.g., <strong>Three.js</strong> for background animations). These components remain subject to their original licenses (MIT License), and our use of them does not imply ownership of the library itself.</p>
         </div>
 
         <div class="license-section">
-            <h2>6. Contact for Licensing</h2>
-            <p>If you wish to use our designs for a commercial project, a tournament with an entry fee, or a public software fork, you must obtain permission first.</p>
-            <p>Contact the administration directly:</p>
+            <h2 data-key="lic_sec6_title">6. Contact for Licensing</h2>
+            <p data-key="lic_sec6_p1">If you wish to use our designs for a commercial project, a tournament with an entry fee, or a public software fork, you must obtain permission first.</p>
+            <p data-key="lic_sec6_p2">Contact the administration directly:</p>
 
-            <a href="https://t.me/wolfbloodhelpbot" target="_blank" class="footer-btn" style="background: var(--wolf-red); border-color: var(--wolf-red); margin-top: 5px;">
+            <a href="https://t.me/wolfbloodhelpbot" target="_blank" class="footer-btn" style="background: var(--wolf-red); border-color: var(--wolf-red); margin-top: 5px;" data-key="btn_contact_admin">
                 📩 Message Administration
             </a>
         </div>
@@ -278,49 +290,50 @@
 
             <div class="footer-section">
                 <h3>🐺 Wolf Blood</h3>
-                <p>
+                <p data-key="footer_about">
                     The ultimate hub for experimental roles, game modes, and community chaos.
                     From the forest to the tabletop, we evolve the game.
                 </p>
             </div>
 
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3 data-key="footer_nav_title">Navigation</h3>
                 <div class="footer-links">
-                    <a href="index.html">🏠 Home</a>
-                    <a href="test_designs.html">🧪 Test Designs</a>
-                    <a href="removed.html">♻️ Graveyard</a>
-                    <a href="board_game.html">🎲 Board Game</a>
-                    <a href="evo_mod.html">🧬 Evo Mod</a>
-                    <a href="achievements.html">🏆 Achievements</a>
+                    <a href="index.html" data-key="nav_home">🏠 Home</a>
+                    <a href="test_designs.html" data-key="nav_test_designs">🧪 Test Designs</a>
+                    <a href="removed.html" data-key="nav_removed">♻️ Graveyard</a>
+                    <a href="board_game.html" data-key="nav_board_game">🎲 Board Game</a>
+                    <a href="evo_mod.html" data-key="nav_evo_mod">🧬 Evo Mod</a>
+                    <a href="achievements.html" data-key="nav_achievements">🏆 Achievements</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Legal & Help</h3>
+                <h3 data-key="footer_legal_title">Legal & Help</h3>
                 <div class="footer-links">
-                    <a href="faq.html">❓ FAQ</a>
-                    <a href="policy.html">🛡️ Privacy Policy</a>
-                    <a href="terms.html">📜 Terms of Service</a>
-                    <a href="cookies.html">🍪 Cookie Usage</a>
-                    <a href="license.html">⚖️ License</a>
+                    <a href="faq.html" data-key="link_faq">❓ FAQ</a>
+                    <a href="policy.html" data-key="link_privacy">🛡️ Privacy Policy</a>
+                    <a href="terms.html" data-key="link_terms">📜 Terms of Service</a>
+                    <a href="cookies.html" data-key="link_cookies">🍪 Cookie Usage</a>
+                    <a href="license.html" data-key="link_license">⚖️ License</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Join the Pack</h3>
-                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
-                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                <h3 data-key="footer_join_title">Join the Pack</h3>
+                <p data-key="footer_join_desc">Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/+QW8C1WwdSCQ3NmRl" target="_blank" class="footer-btn" data-key="btn_telegram">
                     ✈️ Open Telegram
                 </a>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-key="footer_copyright">
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
     <script src="loader.js"></script>
+    <script src="translate.js"></script>
 </body>
 </html>

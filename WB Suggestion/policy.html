@@ -208,62 +208,74 @@
 </head>
 <body>
 
-    <script src="loader.js"></script>
+    <div class="language-dropdown">
+        <button class="dropdown-toggle">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span id="selected-lang-flag">🇺🇸</span>
+                <span id="selected-lang-code">EN</span>
+            </div>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" data-lang="en">🇺🇸 English</a>
+            <a href="#" data-lang="tr">🇹🇷 Türkçe</a>
+        </div>
+    </div>
 
     <nav class="wolf-nav">
-        <a href="index.html" class="nav-link">🏠 Home</a>
-        <a href="test_designs.html" class="nav-link">🧪 Test Designs</a>
-        <a href="removed.html" class="nav-link">♻️ Removed/Rev</a>
-        <a href="board_game.html" class="nav-link">🎲 Board Game</a>
-        <a href="evo_mod.html" class="nav-link">🧬 Evo Mod</a>
-        <a href="achievements.html" class="nav-link">🏆 Achievements</a>
+        <a href="index.html" class="nav-link" data-key="nav_home">🏠 Home</a>
+        <a href="test_designs.html" class="nav-link" data-key="nav_test_designs">🧪 Test Designs</a>
+        <a href="removed.html" class="nav-link" data-key="nav_removed">♻️ Removed/Rev</a>
+        <a href="board_game.html" class="nav-link" data-key="nav_board_game">🎲 Board Game</a>
+        <a href="evo_mod.html" class="nav-link" data-key="nav_evo_mod">🧬 Evo Mod</a>
+        <a href="achievements.html" class="nav-link" data-key="nav_achievements">🏆 Achievements</a>
     </nav>
 
     <div class="container">
 
         <div class="hero">
-            <h1>Privacy Policy</h1>
-            <p>Effective Date: January 24, 2026</p>
-            <p>Your secrets are safe with the pack... mostly.</p>
+            <h1 data-key="pol_hero_title">Privacy Policy</h1>
+            <p data-key="pol_hero_date">Effective Date: January 24, 2026</p>
+            <p data-key="pol_hero_desc">Your secrets are safe with the pack... mostly.</p>
         </div>
 
         <div class="policy-section">
-            <h2>1. Introduction</h2>
-            <p>Welcome to the <strong>Wolf Blood Workshop</strong>. This is a community-run fan project dedicated to the evolution of the game. We value your trust and are committed to protecting your privacy, even though we are just a bunch of wolves playing games.</p>
+            <h2 data-key="pol_sec1_title">1. Introduction</h2>
+            <p data-key="pol_sec1_text">Welcome to the <strong>Wolf Blood Workshop</strong>. This is a community-run fan project dedicated to the evolution of the game. We value your trust and are committed to protecting your privacy, even though we are just a bunch of wolves playing games.</p>
         </div>
 
         <div class="policy-section">
-            <h2>2. Information We Collect</h2>
-            <p>We believe in minimalism. We do not require you to create an account to view the site. However, we collect specific data when you interact with our tools:</p>
+            <h2 data-key="pol_sec2_title">2. Information We Collect</h2>
+            <p data-key="pol_sec2_text">We believe in minimalism. We do not require you to create an account to view the site. However, we collect specific data when you interact with our tools:</p>
             <ul>
-                <li><strong>Role Suggestions:</strong> When you submit a role idea via our forms, the content of that suggestion (Role Name, Ability, Description) becomes public community data. Do not include personal information (names, emails, phone numbers) in these fields.</li>
-                <li><strong>Usage Data:</strong> We may use standard web analytics to see which pages (e.g., "Graveyard" vs "Test Designs") are most popular.</li>
+                <li data-key="pol_sec2_li1"><strong>Role Suggestions:</strong> When you submit a role idea via our forms, the content of that suggestion (Role Name, Ability, Description) becomes public community data. Do not include personal information (names, emails, phone numbers) in these fields.</li>
+                <li data-key="pol_sec2_li2"><strong>Usage Data:</strong> We may use standard web analytics to see which pages (e.g., "Graveyard" vs "Test Designs") are most popular.</li>
             </ul>
         </div>
 
         <div class="policy-section">
-            <h2>3. Cookies & Local Storage</h2>
-            <p>We use local storage technology (similar to cookies) to enhance your experience. This is strictly functional:</p>
+            <h2 data-key="pol_sec3_title">3. Cookies & Local Storage</h2>
+            <p data-key="pol_sec3_text">We use local storage technology (similar to cookies) to enhance your experience. This is strictly functional:</p>
             <ul>
-                <li><strong>Theme Preferences:</strong> Saving your preference for Dark Mode (which is the only mode, let's be honest).</li>
-                <li><strong>Read States:</strong> Remembering which "New" roles you have already clicked on so we don't annoy you with notifications.</li>
+                <li data-key="pol_sec3_li1"><strong>Theme Preferences:</strong> Saving your preference for Dark Mode (which is the only mode, let's be honest).</li>
+                <li data-key="pol_sec3_li2"><strong>Read States:</strong> Remembering which "New" roles you have already clicked on so we don't annoy you with notifications.</li>
             </ul>
-            <p>You can clear this data at any time by clearing your browser cache.</p>
+            <p data-key="pol_sec3_note">You can clear this data at any time by clearing your browser cache.</p>
         </div>
 
         <div class="policy-section">
-            <h2>4. Third-Party Links</h2>
-            <p>Our workshop contains links to external platforms, primarily <strong>Telegram</strong>. Once you click these links, you leave our territory. We are not responsible for the privacy practices of Telegram or any other third-party sites.</p>
+            <h2 data-key="pol_sec4_title">4. Third-Party Links</h2>
+            <p data-key="pol_sec4_text">Our workshop contains links to external platforms, primarily <strong>Telegram</strong>. Once you click these links, you leave our territory. We are not responsible for the privacy practices of Telegram or any other third-party sites.</p>
         </div>
 
         <div class="policy-section">
-            <h2>5. Data Rights</h2>
-            <p>Since we do not store personal accounts, we cannot "delete your account." However, if you accidentally submitted personal information in a Role Suggestion form, please contact us via our Telegram community immediately, and an Admin will scrub the data manually.</p>
+            <h2 data-key="pol_sec5_title">5. Data Rights</h2>
+            <p data-key="pol_sec5_text">Since we do not store personal accounts, we cannot "delete your account." However, if you accidentally submitted personal information in a Role Suggestion form, please contact us via our Telegram community immediately, and an Admin will scrub the data manually.</p>
         </div>
 
         <div class="policy-section">
-            <h2>6. Contact Us</h2>
-            <p>If you have questions about this policy or want to report a privacy concern, summon the admins in our Telegram group.</p>
+            <h2 data-key="pol_sec6_title">6. Contact Us</h2>
+            <p data-key="pol_sec6_text">If you have questions about this policy or want to report a privacy concern, summon the admins in our Telegram group.</p>
         </div>
 
     </div>
@@ -273,49 +285,50 @@
 
             <div class="footer-section">
                 <h3>🐺 Wolf Blood</h3>
-                <p>
+                <p data-key="footer_about">
                     The ultimate hub for experimental roles, game modes, and community chaos.
                     From the forest to the tabletop, we evolve the game.
                 </p>
             </div>
 
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3 data-key="footer_nav_title">Navigation</h3>
                 <div class="footer-links">
-                    <a href="index.html">🏠 Home</a>
-                    <a href="test_designs.html">🧪 Test Designs</a>
-                    <a href="removed.html">♻️ Graveyard</a>
-                    <a href="board_game.html">🎲 Board Game</a>
-                    <a href="evo_mod.html">🧬 Evo Mod</a>
-                    <a href="achievements.html">🏆 Achievements</a>
+                    <a href="index.html" data-key="nav_home">🏠 Home</a>
+                    <a href="test_designs.html" data-key="nav_test_designs">🧪 Test Designs</a>
+                    <a href="removed.html" data-key="nav_removed">♻️ Graveyard</a>
+                    <a href="board_game.html" data-key="nav_board_game">🎲 Board Game</a>
+                    <a href="evo_mod.html" data-key="nav_evo_mod">🧬 Evo Mod</a>
+                    <a href="achievements.html" data-key="nav_achievements">🏆 Achievements</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Legal & Help</h3>
+                <h3 data-key="footer_legal_title">Legal & Help</h3>
                 <div class="footer-links">
-                    <a href="faq.html">❓ FAQ</a>
-                    <a href="policy.html">🛡️ Privacy Policy</a>
-                    <a href="terms.html">📜 Terms of Service</a>
-                    <a href="cookies.html">🍪 Cookie Usage</a>
-                    <a href="license.html">⚖️ License</a>
+                    <a href="faq.html" data-key="link_faq">❓ FAQ</a>
+                    <a href="policy.html" data-key="link_privacy">🛡️ Privacy Policy</a>
+                    <a href="terms.html" data-key="link_terms">📜 Terms of Service</a>
+                    <a href="cookies.html" data-key="link_cookies">🍪 Cookie Usage</a>
+                    <a href="license.html" data-key="link_license">⚖️ License</a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h3>Join the Pack</h3>
-                <p>Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
-                <a href="https://t.me/YourGroupLink" target="_blank" class="footer-btn">
+                <h3 data-key="footer_join_title">Join the Pack</h3>
+                <p data-key="footer_join_desc">Got a better idea? Want to playtest these roles? Join our Telegram community.</p>
+                <a href="https://t.me/+QW8C1WwdSCQ3NmRl" target="_blank" class="footer-btn" data-key="btn_telegram">
                     ✈️ Open Telegram
                 </a>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom" data-key="footer_copyright">
             &copy; 2026 Wolf Blood Community | Fan Project | Designed with 🩸 and ☕
         </div>
     </footer>
     <script src="loader.js"></script>
+    <script src="translate.js"></script>
 </body>
 </html>
