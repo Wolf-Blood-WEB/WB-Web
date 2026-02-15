@@ -20,9 +20,7 @@
     const isHalloween = (month === 10 && day >= 20) || (month === 11 && day <= 1);
     // 3. Ramadan (2026 Estimate: Feb 17 - Mar 19)
     const isRamadan = (month === 2 && day >= 17) || (month === 3 && day <= 19);
-    // 4. Lunar New Year (2026: Feb 17 - Year of Horse)
-    const isLunar = (month === 2 && day >= 10 && day <= 25);
-    // 5. Easter/Pascalya (2026: ~April 5)
+    // 4. Easter/Pascalya (2026: ~April 5)
     const isEaster = (month === 3 && day >= 25) || (month === 4 && day <= 15);
 
     // 2. THEME DISPATCHER (The Traffic Controller)
@@ -146,41 +144,7 @@
             body.theme-ramadan .update-title::before { content: "🕌 "; }
         `);
         startFallingItems(["🌙", "✨", "🏮"]);
-    }
-
-    // --- LUNAR NEW YEAR ---
-    function initLunarTheme() {
-        console.log("🐉 Lunar Protocol: Red & Gold 🧧");
-        document.body.classList.add('theme-lunar');
-        injectCSS(`
-            body.theme-lunar {
-                background-image: url('https://www.transparenttextures.com/patterns/shippo.png') !important;
-                background-color: #2c0a0a; /* Dark Red BG */
-                --theme-primary: #e74c3c; /* Red */
-                --theme-secondary: #f1c40f; /* Gold */
-                --theme-glow: #e67e22;
-            }
-            /* Dragon Icon for Profile */
-            body.theme-lunar .personel-resim-wrapper::after {
-                content: "";
-                background-image: url('https://cdn-icons-png.flaticon.com/512/1973/1973945.png'); /* Dragon/Lantern */
-                background-size: contain; background-repeat: no-repeat;
-                width: 60px; height: 60px; position: absolute; top: -25px; right: -15px; z-index: 20;
-            }
-            @keyframes lunarPulse {
-                0% { box-shadow: 0 0 5px #e74c3c; border-color: #f1c40f; }
-                50% { box-shadow: 0 0 25px #f1c40f; border-color: #e74c3c; }
-                100% { box-shadow: 0 0 5px #e74c3c; border-color: #f1c40f; }
-            }
-            body.theme-lunar .tab-button, body.theme-lunar .button-container button {
-                animation: lunarPulse 2s infinite !important;
-                border: 2px solid var(--theme-secondary) !important;
-                background-color: rgba(139, 0, 0, 0.6) !important;
-            }
-            body.theme-lunar .update-title::before { content: "🐉 "; }
-        `);
-        startFallingItems(["🧧", "🧨", "🐉", "🏮"]);
-    }
+    }    
 
     // --- EASTER / PASCALYA ---
     function initEasterTheme() {
